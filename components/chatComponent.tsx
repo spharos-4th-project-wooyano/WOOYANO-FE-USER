@@ -12,26 +12,31 @@ export default function ChatComponent() {
 
   const checkPrompt =(e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
-    if (input === '청소') return handleSubmit(e)
+    if (input === '청소' || input === '가사도우미') return handleSubmit(e)
     else alert('청소와 관련된 단어를 적어주세요')
     
   }
 
   return (
     <div>
+      <div className='relative left-[25%] h-20 w-full mt-4'>
+        <div className="flex absolute"><p className="text-2xl font-bold">우</p><p className="text-xs leading-10">리들의 문제를</p></div>
+        <div className="flex absolute top-1/3 left-4"><p className="text-2xl font-bold">야</p><p className="text-xs leading-10">무지게 해결해줄</p></div>
+        <div className="flex absolute top-2/3 left-8"><p className="text-2xl font-bold">노</p><p className="text-xs leading-10">련한 전문가를 찾습니다.</p></div>
+      </div>
       {messages.map((message : Message) => {
         return (
-          <div key={message.id}>
+          <div key={message.id} className="pt-4">
             {/*  Name of person talking */}
             {
               message.role === "assistant"
               ?
               <h3 className="text-lg font-semibold mt-2">
-                  GPT-4
+                  우야노 전문가
               </h3>
               :
               <h3 className="text-lg font-semibold mt-2">
-                  User
+                  UserName
               </h3>
             }
             
@@ -59,16 +64,15 @@ export default function ChatComponent() {
         )
       })}
 
-      <form className="mt-12" onSubmit={checkPrompt}>
-        <p>User Message</p>
+      <form className="flex absolute bottom-20" onSubmit={checkPrompt}>
         <textarea
-            className="mt-2 w-full bg-slate-600 p-2"
-            placeholder={"What are data structures and algorithims?"}
+            className="mt-2 w-[82vw] dark:bg-slate-700 p-2 "
+            placeholder={"청소 관련 질문을 주세요."}
             value={input}
             onChange={handleInputChange}
         />
-        <button className="rounded-md bg-blue-600 p-2 mt-2">
-            Send message
+        <button className="rounded-md bg-blue-600 text-white p-2 mt-2">
+            질문
         </button>
       </form>
     </div>
