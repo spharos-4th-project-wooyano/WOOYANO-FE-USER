@@ -18,11 +18,16 @@ export default function ChatComponent() {
   }
 
   return (
-    <div>
-      <div className='relative left-[25%] h-20 w-full mt-4'>
+    <div className='bg-zinc-100 dark:bg-slate-800 p-3 w-full h-[100vh] fixed rounded-md  mx-auto'>
+      {/* <div className='relative left-[25%] h-20 w-full mt-4'>
         <div className="flex absolute"><p className="text-2xl font-bold">우</p><p className="text-xs leading-10">리들의 문제를</p></div>
         <div className="flex absolute top-1/3 left-4"><p className="text-2xl font-bold">야</p><p className="text-xs leading-10">무지게 해결해줄</p></div>
         <div className="flex absolute top-2/3 left-8"><p className="text-2xl font-bold">노</p><p className="text-xs leading-10">련한 전문가를 찾습니다.</p></div>
+      </div> */}
+      <div className='text-center h-20  mt-4'>
+        <div className="flex "><p className="text-2xl font-bold">우</p><p className="text-xs leading-10">리들의 문제를</p></div>
+        <div className="flex  top-1/3 left-4"><p className="text-2xl font-bold">야</p><p className="text-xs leading-10">무지게 해결해줄</p></div>
+        <div className="flex  top-2/3 left-8"><p className="text-2xl font-bold">노</p><p className="text-xs leading-10">련한 전문가를 찾습니다.</p></div>
       </div>
       {messages.map((message : Message) => {
         return (
@@ -64,16 +69,21 @@ export default function ChatComponent() {
         )
       })}
 
-      <form className="flex absolute bottom-20" onSubmit={checkPrompt}>
-        <textarea
-            className="mt-2 w-[82vw] dark:bg-slate-700 p-2 "
-            placeholder={"청소 관련 질문을 주세요."}
-            value={input}
-            onChange={handleInputChange}
-        />
-        <button className="rounded-md bg-blue-600 text-white p-2 mt-2">
-            질문
-        </button>
+      <form className="flex absolute bottom-20 w-[100vw]" onSubmit={checkPrompt}>
+        <div className="w-full">
+          <textarea
+              className="mt-2 w-[96vw] dark:bg-slate-700 p-2"
+              placeholder={"청소 관련 질문을 주세요."}
+              value={input}
+              onChange={handleInputChange}
+          />
+        </div>
+        <div className="absolute right-[calc(4%)] w-[calc(70px)]">
+          <button className="rounded-md bg-blue-600 w-full h-16 text-white p-2 mt-2 whitespace-nowrap ">
+              질문
+          </button>
+        </div>
+        
       </form>
     </div>
   )
