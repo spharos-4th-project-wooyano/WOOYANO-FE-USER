@@ -7,7 +7,7 @@ export default function ChatComponent() {
   const { input, handleInputChange, handleSubmit, isLoading, messages } = useChat();
   // messages -> [user asks a question, gpt-4 response, user asks again, gpt-4 responds]
 
-  console.log(messages);
+  // console.log(messages);
   // console.log(input);
 
   const checkPrompt =(e:React.FormEvent<HTMLFormElement>)=>{
@@ -24,10 +24,10 @@ export default function ChatComponent() {
         <div className="flex absolute top-1/3 left-4"><p className="text-2xl font-bold">야</p><p className="text-xs leading-10">무지게 해결해줄</p></div>
         <div className="flex absolute top-2/3 left-8"><p className="text-2xl font-bold">노</p><p className="text-xs leading-10">련한 전문가를 찾습니다.</p></div>
       </div> */}
-      <div className='text-center h-20  mt-4'>
+      <div className=' h-20 mt-4'>
         <div className="flex "><p className="text-2xl font-bold">우</p><p className="text-xs leading-10">리들의 문제를</p></div>
         <div className="flex  top-1/3 left-4"><p className="text-2xl font-bold">야</p><p className="text-xs leading-10">무지게 해결해줄</p></div>
-        <div className="flex  top-2/3 left-8"><p className="text-2xl font-bold">노</p><p className="text-xs leading-10">련한 전문가를 찾습니다.</p></div>
+        <div className="flex npm top-2/3 left-8"><p className="text-2xl font-bold">노</p><p className="text-xs leading-10">련한 전문가를 찾습니다.</p></div>
       </div>
       {messages.map((message : Message) => {
         return (
