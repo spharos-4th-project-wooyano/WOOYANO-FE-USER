@@ -2,11 +2,11 @@
 import Logo from "@/components/pages/login/Logo";
 import Findinfo from "@/components/pages/login/Findinfo";
 import LoginForm from "@/components/pages/login/LoginForm";
-// import SnsLoginForm from "@/components/pages/login/SnsLoginForm";
+import SnsLoginForm from "@/components/pages/login/SnsLoginForm";
 import React from "react";
 // import { signIn, signOut, useSession } from "next-auth/react";
 
-// const { data: session } = useSession();
+// const { data: session } = useSess ion();
 
 function Loginpage() {
   return (
@@ -14,9 +14,7 @@ function Loginpage() {
       <Logo />
       <LoginForm />
       <Findinfo />
-      {/* <SnsLoginForm />
-      <button onClick={() => signIn()}>Log In</button>
-      <button onClick={() => signOut()}>Log Out</button> */}
+      <SnsLoginForm />
     </div>
   );
 }
