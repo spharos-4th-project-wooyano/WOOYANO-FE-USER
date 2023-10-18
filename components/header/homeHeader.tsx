@@ -8,7 +8,7 @@ function HomeHeader() {
     <div>
       <div className='flex gap-3'>
         <div onClick={()=>router.push('/')}>채팅</div>
-        <div className='justify' onClick={()=>router.push('/selectstore')}>업체찾기</div>
+        <div className='text-slate-500' onClick={()=>router.push('/selectstore')}>업체찾기</div>
       </div>
     </div>
   )
