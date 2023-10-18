@@ -49,7 +49,7 @@ function Sidebar(props:{isOpened:Boolean,setIsOpened:React.Dispatch<React.SetSta
         {/* 사이드바 */}
         <div className=''>
           <div className='flex justify-between border-b-1 border-slate-300 mb-2' onClick={()=>router.push('/')}>
-            <div className='w-[65px] my-2 mx-1'>
+            <div className='w-[65px] my-2 mx-1' onClick={()=>setIsOpened(!isOpened)}>
               <Image
               alt="사이드바 로고"
               src={"/images/Logo/wooyano-logo.png"}
@@ -71,8 +71,8 @@ function Sidebar(props:{isOpened:Boolean,setIsOpened:React.Dispatch<React.SetSta
           <div className=' border-b-1 border-slate-300 mb-4 '>
             <p className='text-[19px] pt-2 pl-2 font-semibold'>로그인해주세요.</p>
             <div className='flex justify-around my-10 px-2 gap-2'>
-              <Button className="w-full bg-gradient-to-tr from-sky-300 to-red-300 text-white shadow-lg rounded-md">로그인 하기</Button>
-              <Button className="w-full bg-gradient-to-tr from-sky-300 to-red-300 text-white shadow-lg rounded-md">회원가입</Button>
+              <Button className="w-full bg-gradient-to-tr from-sky-300 to-red-300 text-white shadow-lg rounded-md" onClick={()=>{setIsOpened(!isOpened);router.push("/login");}}>로그인 하기</Button>
+              <Button className="w-full bg-gradient-to-tr from-sky-300 to-red-300 text-white shadow-lg rounded-md" onClick={()=>{setIsOpened(!isOpened);router.push("/signup");}}>회원가입</Button>
             </div>
           </div>
 

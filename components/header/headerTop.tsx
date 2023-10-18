@@ -21,7 +21,7 @@ function HeaderTop() {
   
 
   return (
-    <div className='flex justify-between px-3 pt-3'>
+    <div className='flex justify-between px-3 py-3 border-b-slate-200 border-b-1 shadow-md'>
       {/* justify-between으로 나눠줘야 되서 위에 (채팅,업체찾기)div랑 Button div를 자기들끼리 묶어서 css적용함 */}
       {pathname==="/"?
       <HomeHeader/>:
