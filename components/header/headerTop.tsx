@@ -2,13 +2,15 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
-import DarkModeSwitch from './darkModeSwitch';
+import HeaderTopRight from './HeaderTopRight';
 import HomeHeader from './homeHeader';
+import RouterBack from './routerBack';
 
-function Header() {
+
+function HeaderTop() {
   const [mounted, setMounted] =useState(false);
   const pathname=usePathname();
-  const router=useRouter();
+  
 
   useEffect(()=>{
     setMounted(true);
@@ -16,17 +18,19 @@ function Header() {
   
   if (!mounted) return null
 
+  
+
   return (
-    <div className='flex justify-between px-2 py-2'>
+    <div className='flex justify-between px-3 pt-3'>
       {/* justify-between으로 나눠줘야 되서 위에 (채팅,업체찾기)div랑 Button div를 자기들끼리 묶어서 css적용함 */}
       {pathname==="/"?
       <HomeHeader/>:
-      <div onClick={()=>router.back()}>{"<"}</div>
+      <RouterBack/>
       }
-      <DarkModeSwitch/>
+      <HeaderTopRight/>
       
     </div>
   )
 }
 
-export default Header
+export default HeaderTop
