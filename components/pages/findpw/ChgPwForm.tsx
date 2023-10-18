@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 function ChgPwForm() {
   const [newPassWord, setNewPassWord] = useState("")
   const [newPassWordCheck, setNewPassWordCheck] = useState("")
-  console.log(`newpw:${newPassWord} | pwchk:${newPassWordCheck}`)
+  // console.log(`newpw:${newPassWord} | pwchk:${newPassWordCheck}`)
 
   return (
     <div className="flex flex-col my-[4vh] mx-[4vh]">
