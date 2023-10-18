@@ -1,4 +1,5 @@
 'use client'
+import ProgressBar from "@/components/ui/ProgressBar";
 import Link from "next/link";
 import React,{useState} from "react";
 
@@ -10,6 +11,7 @@ function SignUpCertForm() {
 
   return (
     <div className="flex flex-col my-[4vh] mx-[4vh]">
+      <ProgressBar completed={1} total={4} />
       <div className="box-border mt-[2vh]">
         <p className="after:content-['*'] after:ml-0.5 after:text-red-500 text-[13px] leading-[3vh] pl-[4px]">이름</p>
         <input

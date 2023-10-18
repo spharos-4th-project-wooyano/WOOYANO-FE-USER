@@ -29,6 +29,14 @@ const PageTopData:PageTopDataType = {
     firstLine: "회원가입 약관동의",
     secondLine: "",
   },
+  signupform: {
+    firstLine: "회원가입 정보입력",
+    secondLine: "",
+  },
+  signupcomplete: {
+    firstLine: "회원가입 완료",
+    secondLine: "",
+  },
 };
 
 export default PageTopData;
