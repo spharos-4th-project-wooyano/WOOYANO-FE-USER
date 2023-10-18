@@ -1,11 +1,11 @@
 import FindIdForm from '@/components/pages/findid/FindIdForm'
-import FindIdTop from '@/components/pages/findid/FindIdTop'
-import React from 'react'
+import PageTop from '@/components/ui/PageTop'
+import React from 'react';
 
 export default function FindIdpage() {
   return (
     <div>
-      <FindIdTop/>
+      <PageTop/>
       <FindIdForm/>
     </div>
   )
