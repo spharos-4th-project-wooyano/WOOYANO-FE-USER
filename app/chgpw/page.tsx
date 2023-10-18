@@ -1,4 +1,4 @@
-import ChgPwTop from '@/components/pages/findpw/chgPwTop'
+import ChgPwTop from '@/components/pages/findpw/ChgPwTop'
 import React from 'react'
 
 export default function ChgPwpage() {
