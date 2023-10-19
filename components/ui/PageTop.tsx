@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { usePathname } from "next/navigation";
-import PageTopData from "@/data/PageTopData";
+import PageTopData from "@/data/pageTopData";
 
 const PageTop = () => {
     const pathname = usePathname().replace(/^\//, "").replace(/\//g, "");

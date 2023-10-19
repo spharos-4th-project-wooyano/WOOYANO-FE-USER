@@ -1,5 +1,5 @@
-import SignUpAgreeForm from '@/components/pages/signUp/SignUpAgreeForm'
-import PageTop from '@/components/ui/PageTop'
+import SignUpAgreeForm from '@/components/pages/signUp/signUpAgreeForm'
+import PageTop from '@/components/ui/pageTop'
 import React from 'react'
 
 function SignUpAgreepage() {

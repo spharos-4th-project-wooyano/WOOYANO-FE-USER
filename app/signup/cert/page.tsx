@@ -1,5 +1,5 @@
-import SignUpCertForm from '@/components/pages/signUp/SignUpCertForm'
-import PageTop from '@/components/ui/PageTop'
+import SignUpCertForm from '@/components/pages/signUp/signUpCertForm'
+import PageTop from '@/components/ui/pageTop'
 import React from 'react'
 
 function SignUpCertpage() {

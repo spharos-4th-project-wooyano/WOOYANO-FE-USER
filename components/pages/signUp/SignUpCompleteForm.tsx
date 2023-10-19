@@ -1,5 +1,5 @@
 'use client'
-import ProgressBar from "@/components/ui/ProgressBar";
+import ProgressBar from "@/components/ui/progressBar";
 import Link from "next/link";
 import React, { useState } from "react";
 

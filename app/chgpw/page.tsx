@@ -1,5 +1,5 @@
-import ChgPwForm from '@/components/pages/findpw/ChgPwForm'
-import PageTop from '@/components/ui/PageTop'
+import ChgPwForm from '@/components/pages/findpw/chgPwForm'
+import PageTop from '@/components/ui/pageTop'
 import React from 'react'
 
 export default function ChgPwpage() {

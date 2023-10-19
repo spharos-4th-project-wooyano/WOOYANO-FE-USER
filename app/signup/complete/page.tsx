@@ -1,5 +1,5 @@
-import SignUpCompleteForm from '@/components/pages/signUp/SignUpCompleteForm'
-import PageTop from '@/components/ui/PageTop'
+import SignUpCompleteForm from '@/components/pages/signUp/signUpCompleteForm'
+import PageTop from '@/components/ui/pageTop'
 import React from 'react'
 
 function SignUpCompletepage() {

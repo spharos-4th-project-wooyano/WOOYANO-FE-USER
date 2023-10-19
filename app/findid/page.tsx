@@ -1,5 +1,5 @@
-import FindIdForm from '@/components/pages/findid/FindIdForm'
-import PageTop from '@/components/ui/PageTop'
+import FindIdForm from '@/components/pages/findid/findIdForm'
+import PageTop from '@/components/ui/pageTop'
 import React from 'react';
 
 export default function FindIdpage() {

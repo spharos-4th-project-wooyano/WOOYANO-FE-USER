@@ -1,5 +1,5 @@
-import FindPwCertForm from '@/components/pages/findpw/FindPwCertForm'
-import PageTop from '@/components/ui/PageTop'
+import FindPwCertForm from '@/components/pages/findpw/findPwCertForm'
+import PageTop from '@/components/ui/pageTop'
 import React from 'react'
 
 function FindPwCertpage() {

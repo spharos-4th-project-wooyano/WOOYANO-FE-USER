@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Link from 'next/link'
 
-function FindIdForm(): React.JSX.Element {
+function FindIdForm(){
   const [name, setName] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
   console.log(`name:${name} | phone:${phoneNumber}`);
