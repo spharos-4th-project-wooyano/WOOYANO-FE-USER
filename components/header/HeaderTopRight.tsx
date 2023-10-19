@@ -17,7 +17,7 @@ function HeaderTopRight() {
   return (
     <>
       <div className='flex gap-6'>
-          <div onClick={()=>router.push('login')}>
+          <div onClick={()=>router.push('/login')}>
             로그인
           </div>
         <div className='pr-1 ' onClick={hadleOpened}>

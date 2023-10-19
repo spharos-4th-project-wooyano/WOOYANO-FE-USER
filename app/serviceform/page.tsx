@@ -3,7 +3,7 @@ import React from 'react'
 
 function page() {
   return (
-    <div><ServiceForm/></div>
+    <div className='pt-12'><ServiceForm/></div>
   )
 }
 
