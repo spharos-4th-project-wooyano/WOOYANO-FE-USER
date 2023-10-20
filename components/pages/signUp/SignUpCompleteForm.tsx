@@ -4,10 +4,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 
 function SignUpCompleteForm() {
-  // const [name,setName] = useState("")
-  // const [id,setId] = useState("")
-  // const [certNumber,setCertNumber] = useState("")
-  // console.log(`name${name} | id:${id} | certNum:${certNumber}`)
+
 
   return (
     <div className="flex flex-col my-[4vh] mx-[4vh]">
@@ -16,7 +13,7 @@ function SignUpCompleteForm() {
       </div>
       <div className="box-border flex flex-col gap-3">
         <div>
-          <p>닉네임({"스**리"})님</p>
+          <p>닉네임({"스**스"})님</p>
           <p>회원가입이 완료되었습니다.</p>
         </div>
         <div>

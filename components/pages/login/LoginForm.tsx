@@ -1,11 +1,29 @@
-import React,{useState} from "react";
+'use client'
+import React, { useState,ChangeEvent } from "react";
 import Link from 'next/link'
 
-function LoginForm() {
-  const [id,setId] = useState("");
-  const [password,setPassWord] = useState("")
-  console.log(`id:${id} | pw:${password}`)
+interface loginForm{
+  id : string,
+  passWord : string
+}
 
+function LoginForm() {
+  const [loginIdForm,setLoginIdForm] = useState<loginForm>(
+    {
+      id : "",
+      passWord : "",
+    }
+  )
+
+  const handleOnChange=(e:ChangeEvent<HTMLInputElement>)=>{
+    e.preventDefault();
+    const value = e.target.value;
+    const id = e.target.id;
+    setLoginIdForm({
+      ...loginIdForm,
+      [id]:value
+    })
+  }
   return (
     <div className="text-center font-Gmarket-mid">
       <p
@@ -19,8 +37,9 @@ function LoginForm() {
         type="text"
         className="text-[14px] mb-[15px] pl-2 border-box border-[1px] border-black rounded-[8px] w-full min-h-[45px]"
         placeholder="아이디(이메일)를 입력해주세요."
-        value={id}
-        onChange={(e)=>setId(e.target.value)}
+        id ="id"
+        value={loginIdForm.id}
+        onChange={handleOnChange}
       />
       <p
         className="text-left pl-1 text-[14px] mb-[4px] after:content-['*'] 
@@ -32,8 +51,9 @@ function LoginForm() {
         type="text"
         className="text-[14px] mb-[15px] pl-2 border-box border-[1px] border-black rounded-[8px] w-full min-h-[45px]"
         placeholder="비밀번호를 입력해주세요."
-        value={password}
-        onChange={(e)=>setPassWord(e.target.value)}
+        id ="passWord"
+        value={loginIdForm.passWord}
+        onChange={handleOnChange}
       />
       <div className="flex flex-col font-Omyu_pretty font-bold items-center mt-20">
         <button className="box-border border-[1px] min-h-[40px] min-w-[30vh] max-w-[50vh] mt-2 rounded-[8px] bg-gradient-to-r from-cyan-300 to-blue-400

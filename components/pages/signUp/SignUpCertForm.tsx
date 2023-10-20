@@ -1,13 +1,31 @@
 'use client'
 import ProgressBar from "@/components/ui/progressBar";
 import Link from "next/link";
-import React,{useState} from "react";
+import React,{useState, ChangeEvent} from "react";
+
+interface signUpCertForm{
+  name : string,
+  id : string,
+}
 
 function SignUpCertForm() {
-  const [name,setName] = useState("")
-  const [id,setId] = useState("")
   const [certNumber,setCertNumber] = useState("")
-  console.log(`name${name} | id:${id} | certNum:${certNumber}`)
+  const [signUpCertForm, setSignUpCertForm] = useState<signUpCertForm>(
+    {
+      name : "",
+      id : ""
+    }
+  )
+
+  const handleOnChange=(e:ChangeEvent<HTMLInputElement>)=>{
+    e.preventDefault();
+    const value = e.target.value;
+    const id = e.target.id;
+    setSignUpCertForm({
+      ...signUpCertForm,
+      [id]:value
+    })
+  }
 
   return (
     <div className="flex flex-col my-[4vh] mx-[4vh]">
@@ -18,8 +36,9 @@ function SignUpCertForm() {
           type="text"
           className="box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
           placeholder="이름을 작성해주세요."
-          value={name}
-          onChange={(e)=>setName(e.target.value)}
+          id = "name"
+          value = {signUpCertForm.name}
+          onChange={handleOnChange}
         />
       </div>
 
@@ -31,8 +50,9 @@ function SignUpCertForm() {
           type="text"
           className="box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
           placeholder="본 서비스에서 사용할 이메일을 입력해주세요"
-          value={id}
-          onChange={(e)=>setId(e.target.value)}
+          id = "id"
+          value = {signUpCertForm.id}
+          onChange={handleOnChange}
         />
       </div>
 

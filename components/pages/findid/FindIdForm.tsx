@@ -1,11 +1,29 @@
 'use client'
-import React, { useState } from "react";
+import React, { useState,ChangeEvent } from "react";
 import Link from 'next/link'
 
-function FindIdForm(){
-  const [name, setName] = useState("")
-  const [phoneNumber, setPhoneNumber] = useState("")
-  console.log(`name:${name} | phone:${phoneNumber}`);
+interface findIdform{
+  name : string,
+  phoneNumber : string
+}
+
+function FindIdForm() {
+  const [findIdForm,setFindIdForm] = useState<findIdform>(
+    {
+      name : "",
+      phoneNumber : "",
+    }
+  )
+
+  const handleOnChange=(e:ChangeEvent<HTMLInputElement>)=>{
+    e.preventDefault();
+    const value = e.target.value;
+    const id = e.target.id;
+    setFindIdForm({
+      ...findIdForm,
+      [id]:value
+    })
+  }
 
   return (
     <div className="flex flex-col my-[4vh] mx-[4vh]">
@@ -17,8 +35,9 @@ function FindIdForm(){
           type="text"
           className="box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
           placeholder="이름을 입력해주세요."
-          value = {name}
-          onChange={(e)=>setName(e.target.value)}
+          id = "name"
+          value = {findIdForm.name}
+          onChange={handleOnChange}
         />
       </div>
 
@@ -30,8 +49,9 @@ function FindIdForm(){
           type="text"
           className="box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
           placeholder='"-"없이 전화번호 11자리를 입력해주세요.'
-          value = {phoneNumber}
-          onChange={(e)=>setPhoneNumber(e.target.value)}
+          id = "phoneNumber"
+          value = {findIdForm.phoneNumber}
+          onChange={handleOnChange}
         />
       </div>
       <Link href="/findidresult">

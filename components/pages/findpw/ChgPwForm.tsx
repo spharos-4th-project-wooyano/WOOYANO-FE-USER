@@ -1,11 +1,28 @@
 'use client'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
+
+interface chgPwForm{
+  newPassWord : string,
+}
 
 function ChgPwForm() {
-  const [newPassWord, setNewPassWord] = useState("")
   const [newPassWordCheck, setNewPassWordCheck] = useState("")
-  // console.log(`newpw:${newPassWord} | pwchk:${newPassWordCheck}`)
+  const [chgPwForm,setChgPwForm] = useState<chgPwForm>(
+    {
+      newPassWord : "",
+    }
+  )
+
+  const handleOnChange=(e:ChangeEvent<HTMLInputElement>)=>{
+    e.preventDefault();
+    const value = e.target.value;
+    const id = e.target.id;
+    setChgPwForm({
+      ...chgPwForm,
+      [id]:value
+    })
+  }
 
   return (
     <div className="flex flex-col my-[4vh] mx-[4vh]">
@@ -17,8 +34,9 @@ function ChgPwForm() {
           type="text"
           className="box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
           placeholder="영문, 숫자 포함 8자리 이상 입력"
-          value={newPassWord}
-          onChange={(e) => setNewPassWord(e.target.value)}
+          id = "newPassWord"
+          value = {chgPwForm.newPassWord}
+          onChange={handleOnChange}
 
         />
       </div>
