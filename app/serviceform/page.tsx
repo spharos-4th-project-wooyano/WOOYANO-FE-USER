@@ -1,9 +1,13 @@
+import ServiceCheck from '@/components/pages/serviceform/serviceCheck'
 import ServiceForm from '@/components/pages/serviceform/serviceForm'
 import React from 'react'
 
 function page() {
   return (
-    <div className='pt-12'><ServiceForm/></div>
+    <div className='pt-12'>
+      <ServiceForm/>
+      {/* <ServiceCheck/> */}
+    </div>
   )
 }
 

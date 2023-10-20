@@ -45,10 +45,10 @@ function Sidebar(props:{isOpened:Boolean,setIsOpened:React.Dispatch<React.SetSta
   return (
     <>
       <div className={`${isOpened?"absolute z-10 top-0 left-0 bg-black opacity-40 w-full h-[100vh]":"hidden"}`} onClick={()=>setIsOpened(!isOpened)}></div>
-      <div className={`sidebar ${isOpened? "translate-x-0 duration-500":"translate-x-[-110%] duration-500"}  absolute z-20 top-0 left-0 bg-white dark:bg-slate-700 w-[80%] h-[100vh] `}>
+      <div className={`sidebar ${isOpened? "translate-x-0 duration-300":"translate-x-[-110%] duration-500"}  absolute z-20 top-0 left-0 bg-white dark:bg-background1 w-[80%] h-[100vh]`}>
         {/* 사이드바 */}
         <div className=''>
-          <div className='flex justify-between border-b-1 border-slate-300 mb-2' onClick={()=>router.push('/')}>
+          <div className='flex justify-between border-b-1 dark:border-white mb-2' onClick={()=>router.push('/')}>
             <div className='w-[65px] my-2 mx-1' onClick={()=>setIsOpened(!isOpened)}>
               <Image
               alt="사이드바 로고"
@@ -68,7 +68,7 @@ function Sidebar(props:{isOpened:Boolean,setIsOpened:React.Dispatch<React.SetSta
             </div>
           
           </div>
-          <div className=' border-b-1 border-slate-300 mb-4 '>
+          <div className=' border-b-1 border-slate-300'>
             <p className='text-[19px] pt-2 pl-2 font-semibold'>로그인해주세요.</p>
             <div className='flex justify-around my-10 px-2 gap-2'>
               <Button className="w-full bg-gradient-to-tr from-sky-300 to-red-300 text-white shadow-lg rounded-md" onClick={()=>{setIsOpened(!isOpened);router.push("/login");}}>로그인 하기</Button>
@@ -79,7 +79,7 @@ function Sidebar(props:{isOpened:Boolean,setIsOpened:React.Dispatch<React.SetSta
           <div>
             {
               menuList.map((item:menuListType)=>(
-                <div key={item.id} className='border w-full border-black h-16 pl-2 pt-4 text-[20px] font-semibold'>
+                <div key={item.id} className='border w-full border-black border-x-white dark:border-r-black dark:border-y-white h-16 pl-2 pt-4 text-[20px] font-semibold'>
                   {item.contents}
                 </div>
               ))
