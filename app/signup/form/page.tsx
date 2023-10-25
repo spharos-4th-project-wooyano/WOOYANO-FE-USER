@@ -1,8 +1,13 @@
+import SignUpForm from '@/components/pages/signUp/signUpForm'
+import PageTop from '@/components/ui/pageTop'
 import React from 'react'
 
 function SignUpFormpage() {
   return (
-    <div>SignUpFormpage</div>
+    <div>
+      <PageTop/>
+      <SignUpForm/>
+    </div>
   )
 }
 

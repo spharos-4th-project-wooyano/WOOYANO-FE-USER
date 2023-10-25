@@ -1,4 +1,4 @@
-import FindIdResult from '@/components/pages/findid/FindIdResult'
+import FindIdResult from '@/components/pages/findid/findIdResult'
 import React from 'react'
 
 export default function FindIdResultpage() {

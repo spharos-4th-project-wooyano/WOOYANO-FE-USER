@@ -1,11 +1,11 @@
-import FindPwCertForm from '@/components/pages/findpw/FindPwCertForm'
-import FindPwCertTop from '@/components/pages/findpw/FindPwCertTop'
+import FindPwCertForm from '@/components/pages/findpw/findPwCertForm'
+import PageTop from '@/components/ui/pageTop'
 import React from 'react'
 
 function FindPwCertpage() {
   return (
     <div>
-      <FindPwCertTop/>
+      <PageTop/>
       <FindPwCertForm />
     </div>
   )

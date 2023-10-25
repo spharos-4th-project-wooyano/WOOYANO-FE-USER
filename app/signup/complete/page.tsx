@@ -1,8 +1,13 @@
+import SignUpCompleteForm from '@/components/pages/signUp/signUpCompleteForm'
+import PageTop from '@/components/ui/pageTop'
 import React from 'react'
 
 function SignUpCompletepage() {
   return (
-    <div>SignUpCompletepage</div>
+    <div>
+      <PageTop />
+      <SignUpCompleteForm />
+    </div>
   )
 }
 

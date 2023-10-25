@@ -12,7 +12,7 @@ function FindIdResult() {
       <Link href="/login">
         <button
           className="mt-[10vh] box-border rounded-[8px] min-h-[35px] w-full bg-black text-white
-      dark:bg-white dark:text-black"
+      dark:bg-slate-700 dark:text-slate-200"
         >
           확인
         </button>
