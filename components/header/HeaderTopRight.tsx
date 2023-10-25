@@ -16,25 +16,16 @@ function HeaderTopRight() {
   
   return (
     <>
-      <div>
-        <div className='pr-1 flex gap-6' onClick={hadleOpened}>
-          <div onClick={()=>router.push('login')}>
+      <div className='flex gap-6'>
+          <div onClick={()=>router.push('/login')}>
             로그인
           </div>
-          { theme==="light"
-          ?
+        <div className='pr-1 ' onClick={hadleOpened}>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill='none'>
-            <path d="M4 5H20" stroke="#121212" strokeWidth="2" strokeLinecap="round"/>
-            <path d="M4 12L20 12" stroke="#121212" strokeWidth="2" strokeLinecap="round"/>
-            <path d="M4 19H20" stroke="#121212" strokeWidth="2" strokeLinecap="round"/>
+            <path d="M4 5H20" stroke={theme==="light"?"#121212":"#ffffff"} strokeWidth="2" strokeLinecap="round"/>
+            <path d="M4 12L20 12" stroke={theme==="light"?"#121212":"#ffffff"} strokeWidth="2" strokeLinecap="round"/>
+            <path d="M4 19H20" stroke={theme==="light"?"#121212":"#ffffff"} strokeWidth="2" strokeLinecap="round"/>
           </svg>
-          :
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill='none'>
-            <path d="M4 5H20" stroke="#ffffff" strokeWidth="2" strokeLinecap="round"/>
-            <path d="M4 12L20 12" stroke="#ffffff" strokeWidth="2" strokeLinecap="round"/>
-            <path d="M4 19H20" stroke="#ffffff" strokeWidth="2" strokeLinecap="round"/>
-          </svg>
-          }
           
         </div>
         
