@@ -17,7 +17,7 @@ const PageTopData:PageTopDataType = {
     firstLine: "새로 사용하실",
     secondLine: "비밀번호를 입력해주세요.",
   },
-  signup: {
+  signupprocess: {
     firstLine: "회원가입 순서",
     secondLine: "",
   },

@@ -5,13 +5,11 @@ import React, { useState } from "react";
 
 function SignUpCompleteForm() {
 
-
   return (
-    <div className="flex flex-col my-[4vh] mx-[4vh]">
+    <div className="flex flex-col my-[4vh]">
       <div className="pb-10">
-        <ProgressBar completed={4} total={4} />
       </div>
-      <div className="box-border flex flex-col gap-3">
+      <div className="box-border flex flex-col mb-10 gap-3">
         <div>
           <p>닉네임({"스**스"})님</p>
           <p>회원가입이 완료되었습니다.</p>
@@ -31,7 +29,7 @@ function SignUpCompleteForm() {
       </div>
       <Link href="/login">
         <button
-          className="mt-[10vh] box-border rounded-[8px] min-h-[35px] w-full bg-black text-white
+          className="box-border rounded-[8px] min-h-[35px] w-full bg-black text-white
           dark:bg-slate-700 dark:text-slate-200"
         >
           WOOYANO 로그인 하러가기

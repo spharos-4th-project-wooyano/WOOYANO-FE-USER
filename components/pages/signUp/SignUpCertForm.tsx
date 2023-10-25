@@ -1,5 +1,4 @@
 'use client'
-import ProgressBar from "@/components/ui/progressBar";
 import Link from "next/link";
 import React,{useState, ChangeEvent} from "react";
 
@@ -28,8 +27,7 @@ function SignUpCertForm() {
   }
 
   return (
-    <div className="flex flex-col my-[4vh] mx-[4vh]">
-      <ProgressBar completed={1} total={4} />
+    <div className="flex flex-col my-[4vh]">
       <div className="box-border mt-[2vh]">
         <p className="after:content-['*'] after:ml-0.5 after:text-red-500 text-[13px] leading-[3vh] pl-[4px]">이름</p>
         <input
@@ -63,7 +61,7 @@ function SignUpCertForm() {
         인증번호 전송
       </button>
 
-      <div className="flex gap-2">
+      <div className="flex gap-2 mb-10">
         <input
           type="text"
           className="mt-2 box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
@@ -80,7 +78,7 @@ function SignUpCertForm() {
       </div>
       <Link href="/signup/agree">
         <button
-          className="mt-[10vh] box-border rounded-[8px] min-h-[35px] w-full bg-black text-white
+          className="box-border rounded-[8px] min-h-[35px] w-full bg-black text-white
       dark:bg-slate-700 dark:text-slate-200"
         >
           다음
