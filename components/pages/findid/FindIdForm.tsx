@@ -26,7 +26,7 @@ function FindIdForm() {
   }
 
   return (
-    <div className="flex flex-col my-[4vh] mx-[4vh]">
+    <div className="flex flex-col my-[4vh]">
       <div className="box-border mt-[2vh]">
         <p className="after:content-['*'] after:ml-0.5 after:text-red-500 text-[13px] leading-[3vh] pl-[4px]">
           이름
@@ -41,7 +41,7 @@ function FindIdForm() {
         />
       </div>
 
-      <div className="box-border mt-[2vh]">
+      <div className="box-border mt-[2vh] mb-10 ">
         <p className="after:content-['*'] after:ml-0.5 after:text-red-500 text-[13px] leading-[3vh] pl-[4px]">
           전화번호
         </p>
@@ -56,7 +56,7 @@ function FindIdForm() {
       </div>
       <Link href="/findidresult">
         <button
-          className="mt-[10vh] box-border rounded-[8px] min-h-[35px] w-full bg-black text-white
+          className="box-border rounded-[8px] min-h-[35px] w-full bg-black text-white
           dark:bg-slate-700 dark:text-slate-200"
         >
           확인
