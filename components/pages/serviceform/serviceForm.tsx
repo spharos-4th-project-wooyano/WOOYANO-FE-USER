@@ -1,5 +1,7 @@
 import React from 'react'
 import ServiceCalender from './serviceCalender'
+import Link from 'next/link'
+
 
 
 const Product=[
@@ -137,8 +139,8 @@ function ServiceForm() {
       
       {/* 결제 수단 */}
       <div className='fixed bottom-0 w-full bg-white dark:bg-background1 left-0 px-4 py-2 border-t-1 rounded-t-lg'>
-        <div className='w-[80%] border mt-2 leading-[48px] bg-sky-300 dark:bg-background3 rounded-lg '>
-          <button className='w-full'>결제하기</button>
+        <div className='w-[80%] border mt-2 leading-[48px] bg-sky-300 dark:bg-background3 rounded-lg ' >
+          <Link href='/order/servicecheck' className='w-full flex justify-center'>결제하기</Link>
         </div>
       </div>
     </div>
