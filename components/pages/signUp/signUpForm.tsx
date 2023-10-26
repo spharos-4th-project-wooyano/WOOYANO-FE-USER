@@ -1,6 +1,6 @@
 "use client";
 import ProgressBar from "@/components/ui/progressBar";
-import PostCodeDaum from "@/components/widget/PostCodeDaum";
+import PostCodeDaum from "@/components/widget/postCodeDaum";
 import { DaumAddressType } from "@/types/DaumAddrssType";
 import Link from "next/link";
 import React, { ChangeEvent,useEffect,useState } from "react";
