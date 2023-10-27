@@ -2,11 +2,8 @@ import React from 'react'
 
 function selectStore() {
   return (
-    <div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+    <div className=' pt-10 '>
+      asdasd
     </div>
   )
 }
