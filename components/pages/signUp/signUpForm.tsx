@@ -1,6 +1,6 @@
 "use client";
 import ProgressBar from "@/components/ui/progressBar";
-import PostCodeDaum from "@/components/widget/PostCodeDaum";
+import PostCodeDaum from "@/components/widget/postCodeDaum";
 import { DaumAddressType } from "@/types/DaumAddrssType";
 import Link from "next/link";
 import React, { ChangeEvent,useEffect,useState } from "react";
@@ -64,8 +64,7 @@ function SignUpForm() {
   },[addressInfo])
 
   return (
-    <div className="flex flex-col my-[4vh] mx-[4vh] gap-2">
-      <ProgressBar completed={3} total={4} />
+    <div className="flex flex-col my-[4vh] gap-2">
       <div className="box-border mt-[2vh]">
         <p className="after:content-['*'] after:ml-0.5 after:text-red-500 text-[13px] leading-[3vh] pl-[4px]">
           이메일(ID)
@@ -182,21 +181,21 @@ function SignUpForm() {
         />
       </div>
       <div
-        className="flex box-border min-h-[20vh] rounded-[8px] bg-slate-200 justify-center items-center
+        className="mb-10 flex box-border min-h-[20vh] rounded-[8px] bg-slate-200 justify-center items-center
       dark:bg-slate-700 dark:text-slate-200"
       >
         <p>약관 내용</p>
       </div>
 
-      {/* <Link href="/signup/complete"> */}
+      <Link href="/signup/complete">
         <button
-          className="mt-[3vh] box-border rounded-[8px] min-h-[35px] w-full bg-black text-white
+          className="box-border rounded-[8px] min-h-[35px] w-full bg-black text-white
         dark:bg-slate-700 dark:text-slate-200"
         onClick={()=>{console.log(signUpForm)}}
         >
           가입하기
         </button>
-      {/* </Link> */}
+      </Link>
       {/* 알럿 추가 */}
     </div>
   );

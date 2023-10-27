@@ -60,7 +60,7 @@ function LoginForm() {
         dark:text-black dark:border-black dark:bg-gradient-to-r dark:from-green-300 dark:to-green-400">
           로그인
         </button>
-        <Link href="/signup">
+        <Link href="/signup/process">
           <button className="box-border border-[1px] min-h-[40px] min-w-[30vh] max-w-[50vh] mt-2 rounded-[8px] bg-gradient-to-r from-cyan-300 to-blue-400 mb-3
           dark:text-black dark:border-black dark:bg-gradient-to-r dark:from-green-300 dark:to-green-400">
             회원가입
