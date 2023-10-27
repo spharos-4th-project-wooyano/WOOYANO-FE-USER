@@ -1,29 +1,66 @@
-'use client'
-import React, { useState,ChangeEvent } from "react";
-import Link from 'next/link'
+"use client";
+import React, { useState, ChangeEvent } from "react";
+import { signIn } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import Swal from "sweetalert2";
 
-interface loginForm{
-  id : string,
-  passWord : string
+// 각 타입 지정
+interface LoginForm {
+  loginId: string;
+  password: string;
 }
 
 function LoginForm() {
-  const [loginIdForm,setLoginIdForm] = useState<loginForm>(
-    {
-      id : "",
-      passWord : "",
-    }
-  )
+  const query = useSearchParams();
+  const callBackUrl = query.get("callbackUrl");
 
-  const handleOnChange=(e:ChangeEvent<HTMLInputElement>)=>{
+  //로그인 폼 기본 설정
+  const [loginForm, setLoginForm] = useState<LoginForm>({
+    loginId: "",
+    password: "",
+  });
+
+  //비밀번호 표시 여부 설정을 위한 타입 선택
+  const [pwType, setPwType] = useState<boolean>(true);
+
+  //loginId, password 값 실시간 적용, 자동로그인 적용, 에러 텍스트 표시
+  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const value = e.target.value;
     const id = e.target.id;
-    setLoginIdForm({
-      ...loginIdForm,
-      [id]:value
-    })
-  }
+    setLoginForm({
+      ...loginForm,
+      [id]: value,
+    });
+    console.log("step1 loginForm", loginForm);
+  };
+
+  //자동로그인 연동 여부 확인 및 로그인 패칭
+  const handleLoginFetch = async () => {
+    if (!loginForm.loginId || !loginForm.password) {
+      Swal.fire({
+        icon: "error",
+        title: "입력 필요",
+        text: "이메일과 비밀번호를 모두 입력하세요.",
+      });
+    } else {
+      console.log("step2 email", loginForm.loginId ,"password", loginForm.password);
+
+      const result = await signIn("credentials", {
+        email: loginForm.loginId,
+        password: loginForm.password,
+        redirect: true,
+        callbackUrl: callBackUrl ? callBackUrl : "/",
+      });
+    }
+  };
+
+  //비밀번호 표시 여부
+  const handlePwType = () => {
+    setPwType(!pwType);
+  };
+
   return (
     <div className="text-center font-Gmarket-mid">
       <p
@@ -37,8 +74,7 @@ function LoginForm() {
         type="text"
         className="text-[14px] mb-[15px] pl-2 border-box border-[1px] border-black rounded-[8px] w-full min-h-[45px]"
         placeholder="아이디(이메일)를 입력해주세요."
-        id ="id"
-        value={loginIdForm.id}
+        id="loginId"
         onChange={handleOnChange}
       />
       <p
@@ -48,21 +84,30 @@ function LoginForm() {
         비밀번호
       </p>
       <input
-        type="text"
+        type={pwType ? "password" : "text"}
         className="text-[14px] mb-[15px] pl-2 border-box border-[1px] border-black rounded-[8px] w-full min-h-[45px]"
         placeholder="비밀번호를 입력해주세요."
-        id ="passWord"
-        value={loginIdForm.passWord}
+        id="password"
         onChange={handleOnChange}
       />
-      <div className="flex flex-col font-Omyu_pretty font-bold items-center mt-20">
-        <button className="box-border border-[1px] min-h-[40px] min-w-[30vh] max-w-[50vh] mt-2 rounded-[8px] bg-gradient-to-r from-cyan-300 to-blue-400
-        dark:text-black dark:border-black dark:bg-gradient-to-r dark:from-green-300 dark:to-green-400">
+      {/* 비밀번호 표시 버튼 */}
+      <button type="button" onClick={handlePwType}>
+        view password
+      </button>
+
+      <div className="flex flex-col font-Omyu_pretty font-bold items-center mt-10">
+        <button
+          className="box-border mb-3 border-[1px] min-h-[40px] min-w-[30vh] max-w-[50vh] mt-2 rounded-[8px] bg-gradient-to-r from-cyan-300 to-blue-400
+        dark:text-black dark:border-black dark:bg-gradient-to-r dark:from-green-300 dark:to-green-400"
+          onClick={handleLoginFetch}
+        >
           로그인
         </button>
         <Link href="/signup/process">
-          <button className="box-border border-[1px] min-h-[40px] min-w-[30vh] max-w-[50vh] mt-2 rounded-[8px] bg-gradient-to-r from-cyan-300 to-blue-400 mb-3
-          dark:text-black dark:border-black dark:bg-gradient-to-r dark:from-green-300 dark:to-green-400">
+          <button
+            className="box-border border-[1px] min-h-[40px] min-w-[30vh] max-w-[50vh] rounded-[8px] bg-gradient-to-r from-cyan-300 to-blue-400 mb-3
+          dark:text-black dark:border-black dark:bg-gradient-to-r dark:from-green-300 dark:to-green-400"
+          >
             회원가입
           </button>
         </Link>
