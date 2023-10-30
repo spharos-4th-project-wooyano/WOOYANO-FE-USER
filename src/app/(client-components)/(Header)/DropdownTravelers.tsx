@@ -16,26 +16,26 @@ interface SolutionItem {
 
 const solutions: SolutionItem[] = [
   {
-    name: "Stays",
-    description: "Stays rental description ",
-    href: "/listing-stay",
+    name: "가사도우미",
+    description: "House keeper",
+    href: "/house-keeper",
     active: true,
     icon: IconOne,
   },
   {
-    name: "Real Estate",
+    name: "입주/이사 청소",
     description: "Real Estate description",
     href: "/listing-real-estate",
     icon: IconTwo,
   },
   {
-    name: "Cars",
+    name: "사무실 청소",
     description: "Car rental description",
     href: "/listing-car",
     icon: IconThree,
   },
   {
-    name: "Experiences",
+    name: "가전 청소",
     description: "Tour and experiences",
     href: "/listing-experiences",
     icon: IconFour,
@@ -52,7 +52,7 @@ export default function DropdownTravelers() {
                 group self-center py-2 h-10 sm:h-12 rounded-md text-sm sm:text-base font-medium hover:text-opacity-100 focus:outline-none`}
           >
             <div className={` inline-flex items-center `} role="button">
-              <span>Travelers</span>
+              <span>업체찾기</span>
               <ChevronDownIcon
                 className={`${open ? "-rotate-180" : "text-opacity-70 "}
                   ml-2 h-5 w-5 text-neutral-700 group-hover:text-opacity-80 transition ease-in-out duration-150 `}
@@ -92,22 +92,6 @@ export default function DropdownTravelers() {
                       </div>
                     </Link>
                   ))}
-                </div>
-                {/* FOOTER */}
-                <div className="p-4 bg-neutral-50 dark:bg-neutral-700">
-                  <Link
-                    href="/"
-                    className="flow-root px-2 py-2 space-y-0.5 transition duration-150 ease-in-out rounded-md focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                  >
-                    <span className="flex items-center">
-                      <span className="text-sm font-medium ">
-                        Documentation
-                      </span>
-                    </span>
-                    <span className="block text-sm text-gray-500 dark:text-neutral-400">
-                      Start integrating products and tools
-                    </span>
-                  </Link>
                 </div>
               </div>
             </Popover.Panel>

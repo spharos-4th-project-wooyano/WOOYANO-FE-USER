@@ -1,8 +1,10 @@
 "use client";
 
 import React, { Fragment, useState, FC } from "react";
+import { PathName } from "@/routers/types";
 import { Popover, Transition } from "@headlessui/react";
 import { CalendarIcon } from "@heroicons/react/24/outline";
+import ButtonSubmit from "../ButtonSubmit";
 import DatePickerCustomHeaderTwoMonth from "@/components/DatePickerCustomHeaderTwoMonth";
 import DatePickerCustomDay from "@/components/DatePickerCustomDay";
 import DatePicker from "react-datepicker";
@@ -11,11 +13,15 @@ import ClearDataButton from "../ClearDataButton";
 export interface StayDatesRangeInputProps {
   className?: string;
   fieldClassName?: string;
+  buttonSubmitHref?: PathName;
+  hasButtonSubmit?: boolean;
 }
 
 const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
   className = "[ lg:nc-flex-2 ]",
   fieldClassName = "[ nc-hero-field-padding ]",
+  buttonSubmitHref = "/listing-stay-map",
+  hasButtonSubmit = true,
 }) => {
   const [startDate, setStartDate] = useState<Date | null>(
     new Date("2023/02/06")
@@ -61,6 +67,11 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
     <Popover className={`StayDatesRangeInput z-10 relative flex ${className}`}>
       {({ open }) => (
         <>
+        <div
+            className={`flex-1 z-10 flex items-center focus:outline-none ${
+              open ? "nc-hero-field-focused" : ""
+            }`}
+          >
           <Popover.Button
             className={`flex-1 z-10 flex relative ${fieldClassName} items-center space-x-3 focus:outline-none ${
               open ? "nc-hero-field-focused" : ""
@@ -71,7 +82,13 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
               <ClearDataButton onClick={() => onChangeDate([null, null])} />
             )}
           </Popover.Button>
-
+           {/* BUTTON SUBMIT OF FORM */}
+           {hasButtonSubmit && (
+              <div className="pr-2 xl:pr-4">
+                <ButtonSubmit href={buttonSubmitHref} />
+              </div>
+            )}
+          </div>
           {open && (
             <div className="h-8 absolute self-center top-1/2 -translate-y-1/2 z-0 -inset-x-0.5 bg-white dark:bg-neutral-800"></div>
           )}
