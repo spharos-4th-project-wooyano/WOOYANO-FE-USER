@@ -28,7 +28,9 @@ export default function SignUpCertForm() {
   //todo: 이메일 중복확인 및 인증번호 요청 -> CORS
   const handleEmailCheckCert = async () => {
     try {
-      const res = await fetch(`${process.env.BASE_API_URL}/api/v1/users/email/check?email=${signUpCertForm.email}`);
+      console.log(process.env)
+      // const res = await fetch(`${process.env.BASE_API_URL}/api/v1/users/email/check?email=${signUpCertForm.email}`);
+      const res = await fetch(`http://localhost:65316/api/v1/users/email/check?email=${signUpCertForm.email}`);
       if (res.ok) {
         const data = await res.json();
         if (data === true) {
@@ -39,10 +41,10 @@ export default function SignUpCertForm() {
           });
         } else if (data === false) {
           const certres = await fetch(
-            `${process.env.BASE_API_URL}/api/v1/users/email/auth?name=${signUpCertForm.name}&email=${signUpCertForm.email}`
+            // `${process.env.BASE_API_URL}/api/v1/users/email/auth?name=${signUpCertForm.name}&email=${signUpCertForm.email}`
+            `http://localhost:65316/api/v1/users/email/auth?name=${signUpCertForm.name}&email=${signUpCertForm.email}`
           );
-          const certData = await certres.json();
-          if (certData === true) {
+          if (certres.ok === true) {
             //인증번호 요청 성공 유무에 대한 서버측 응답 없음
             Swal.fire({
               icon: "success",
@@ -67,10 +69,12 @@ export default function SignUpCertForm() {
   const handleEmailNumCheck = async () => {
     try {
       const res = await fetch(
-        `${process.env.BASE_API_URL}/api/v1/users/certnum/check?email=${signUpCertForm.email}&code=${certNumber}`
+        // `${process.env.BASE_API_URL}/api/v1/users/certnum/check?email=${signUpCertForm.email}&code=${certNumber}`
+        `http://localhost:65316/api/v1/users/certnum/check?email=${signUpCertForm.email}&code=${certNumber}`
       );
       if (res.ok) {
         const data = await res.json();
+        console.log(data)
         if (data === true) {
           Swal.fire({
             icon: "success",

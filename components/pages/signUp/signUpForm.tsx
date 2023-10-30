@@ -6,6 +6,7 @@ import Link from "next/link";
 import React, { ChangeEvent,useEffect,useState } from "react";
 import Swal from "sweetalert2";
 
+
 interface signUpform{
   name : string,
   email : string,
@@ -49,6 +50,39 @@ export default function SignUpForm() {
     setIsView(true);
   };
 
+  const handleNickNameCheck = async () => {
+    try {
+      const res = await fetch(
+        // `${process.env.BASE_API_URL}/api/v1/users/certnum/check?email=${signUpCertForm.email}&code=${certNumber}`
+        `http://localhost:65316/api/v1/users/nickname/check?nickname=${signUpForm.nickName}`
+      );
+      if (res.ok) {
+        const data = await res.json();
+        console.log(data)
+        if (data === true) {
+          Swal.fire({
+            icon: "warning",
+            text: "이미 사용중인 닉네임입니다",
+          });
+        } else if (data === false) {
+          Swal.fire({
+            icon: "success",
+            text: "사용가능한 닉네임입니다.",
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "실패",
+            text: "요청에 실패했습니다.",
+          });
+        }
+      }
+    } catch (error) {
+      console.error("오류 발생:", error);
+    }
+  };
+
+
   //회원가입 입력 유효성 검사 및 POST 요청
   const handleSignUpPost = async () => {
     if(!signUpForm.name || !signUpForm.email || !signUpForm.password 
@@ -61,7 +95,10 @@ export default function SignUpForm() {
           text: "모든 필수 정보를 입력하세요.",
         });
       } else {
-        const res = await fetch(`${process.env.BASE_API_URL}/api/v1/users/join`,{
+        const res = await fetch(
+          // `${process.env.BASE_API_URL}/api/v1/users/join`
+        `http://localhost:65316/api/v1/users/join`
+        ,{
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -84,8 +121,9 @@ export default function SignUpForm() {
         // //   router.push("/signup/complete")
         // }
       }
-  
 
+
+      
   useEffect(()=>{
     if (addressInfo?.address && addressInfo?.sigunguCode){
       const localCodeset:number = parseInt(addressInfo.sigunguCode);
@@ -153,6 +191,7 @@ export default function SignUpForm() {
           <button
             className="box-border rounded-[8px] min-h-[35px] min-w-[10vh] bg-black text-white
       dark:bg-slate-700 dark:text-slate-200"
+      onClick={handleNickNameCheck}
           >
             중복 확인
           </button>
