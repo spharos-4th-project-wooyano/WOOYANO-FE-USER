@@ -1,9 +1,14 @@
 'use client'
-import ProgressBar from "@/components/ui/progressBar";
 import Link from "next/link";
 import React, { useState } from "react";
+import { useRouter } from 'next/router';
 
 function SignUpCompleteForm() {
+  const router = useRouter();
+  const email = router.query.email;
+  const username = router.query.username;
+  const phone = router.query.phone; 
+  const address = `${router.query.localAddress} + ${router.query.extraAddress}`
 
   return (
     <div className="flex flex-col my-[4vh]">
@@ -11,20 +16,20 @@ function SignUpCompleteForm() {
       </div>
       <div className="box-border flex flex-col mb-10 gap-3">
         <div>
-          <p>닉네임({"스**스"})님</p>
+          <p>${username}님</p>
           <p>회원가입이 완료되었습니다.</p>
         </div>
         <div>
           <p className="text-[20px] font-bold">이메일</p>
-          <p>{"sojunyeong301@gmail.com"}</p>
+          <p>${email}</p>
         </div>
         <div>
           <p className="text-[20px] font-bold">주소</p>
-          <p>{"부산광역시 해운대구 우동 스파로스 아카데미"}</p>
+          <p>${address}</p>
         </div>
         <div>
           <p className="text-[20px] font-bold">전화번호</p>
-          <p>{"010-1111-2222"}</p>
+          <p>${phone}</p>
         </div>
       </div>
       <Link href="/login">
