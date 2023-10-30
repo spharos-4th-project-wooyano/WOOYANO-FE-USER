@@ -25,6 +25,12 @@ function FindIdForm() {
     })
   }
 
+  // const handleFindId = () => {
+  //   try {
+  //     const res = await fetch("fetch url")
+  //   }
+  // }
+
   return (
     <div className="flex flex-col my-[4vh]">
       <div className="box-border mt-[2vh]">
@@ -54,14 +60,12 @@ function FindIdForm() {
           onChange={handleOnChange}
         />
       </div>
-      <Link href="/findidresult">
         <button
           className="box-border rounded-[8px] min-h-[35px] w-full bg-black text-white
           dark:bg-slate-700 dark:text-slate-200"
         >
           확인
         </button>
-      </Link>
     </div>
   );
 }

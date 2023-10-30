@@ -4,11 +4,12 @@ import PostCodeDaum from "@/components/widget/postCodeDaum";
 import { DaumAddressType } from "@/types/DaumAddrssType";
 import Link from "next/link";
 import React, { ChangeEvent,useEffect,useState } from "react";
+import Swal from "sweetalert2";
 
 interface signUpform{
   name : string,
-  id : string,
-  passWord : string,
+  email : string,
+  password : string,
   nickName : string,
   birth : string,
   phoneNumber : string,
@@ -17,14 +18,14 @@ interface signUpform{
   extraAddress : string,
 }
 
-function SignUpForm() {
+export default function SignUpForm() {
   const [isView, setIsView] = useState<boolean>(false);
   const [addressInfo, setAddressInfo] = useState<DaumAddressType>();
   const [signUpForm,setSignUpForm] = useState<signUpform>(
     {
       name : "",
-      id : "",
-      passWord : "",
+      email : "",
+      password : "",
       nickName : "",
       birth : "",
       phoneNumber : "",
@@ -48,10 +49,46 @@ function SignUpForm() {
     setIsView(true);
   };
 
-  //주소 검색결과가 인지되면 변수값 대입 및 스트링 형태 시군구 코드 앞 2자리 숫자인 시코드로 변경
+  //회원가입 입력 유효성 검사 및 POST 요청
+  const handleSignUpPost = async () => {
+    if(!signUpForm.name || !signUpForm.email || !signUpForm.password 
+      ||!signUpForm.birth ||!signUpForm.nickName || !signUpForm.birth
+      ||!signUpForm.phoneNumber || !signUpForm.address || !signUpForm.extraAddress
+      ||signUpForm.localCode === 0) {
+        Swal.fire({
+          icon: "error",
+          title: "오류",
+          text: "모든 필수 정보를 입력하세요.",
+        });
+      } else {
+        const res = await fetch(`${process.env.BASE_API_URL}/api/v1/users/join`,{
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            "email": `${signUpForm.email}`,
+            "password": `${signUpForm.password}`,
+            "username": `${signUpForm.name}`,
+            "nickname": `${signUpForm.nickName}`,
+            "birthday": `${signUpForm.birth}`,
+            "phone": `${signUpForm.phoneNumber}`,
+            "localAddress": `${signUpForm.address}`,
+            "extraAddress": `${signUpForm.extraAddress}`,
+            "localCode": signUpForm.localCode
+          }),
+        })
+        // // if(res.ok) {
+        // //   const userDataResponse = await res.json();
+        // //   setUserData(userDataResponse);
+        // //   router.push("/signup/complete")
+        // }
+      }
+  
+
   useEffect(()=>{
     if (addressInfo?.address && addressInfo?.sigunguCode){
-      const localCodeset:number = parseInt(addressInfo.sigunguCode.substring(0, 2), 10);
+      const localCodeset:number = parseInt(addressInfo.sigunguCode);
       setSignUpForm((prevForm) => (
         {
           ...prevForm,
@@ -61,7 +98,7 @@ function SignUpForm() {
         }
       ))
     }
-  },[addressInfo])
+  },[addressInfo])}
 
   return (
     <div className="flex flex-col my-[4vh] gap-2">
@@ -70,11 +107,11 @@ function SignUpForm() {
           이메일(ID)
         </p>
         <input
-        id="id"
+        id="email"
           type="text"
           className="box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
           placeholder="아이디로 사용할 이메일을 작성해주세요."
-          value={signUpForm.id}
+          value={signUpForm.email}
           onChange={handleOnChange}
         />
       </div>
@@ -83,11 +120,11 @@ function SignUpForm() {
           비밀번호
         </p>
         <input
-        id='passWord'
+        id='password'
           type="text"
           className="box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
           placeholder="비밀번호 작성해주세요."
-          value={signUpForm.passWord}
+          value={signUpForm.password}
           onChange={handleOnChange}
         />
       </div>
@@ -187,17 +224,14 @@ function SignUpForm() {
         <p>약관 내용</p>
       </div>
 
-      <Link href="/signup/complete">
         <button
           className="box-border rounded-[8px] min-h-[35px] w-full bg-black text-white
         dark:bg-slate-700 dark:text-slate-200"
-        onClick={()=>{console.log(signUpForm)}}
+        onClick={handleSignUpPost}
         >
           가입하기
         </button>
-      </Link>
       {/* 알럿 추가 */}
     </div>
   );
 }
-export default SignUpForm;

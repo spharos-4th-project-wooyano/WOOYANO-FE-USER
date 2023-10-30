@@ -16,8 +16,8 @@ export const options: NextAuthOptions = {
         console.log("step3 credentials.enmail", credentials?.email, "|", "credentials.password", credentials?.password);
 
         if (!credentials?.email || !credentials?.password) return null;
-        const res = await fetch("http://localhost:54887/api/v1/users/login", {
-            //todo : 로그인 API URL 변경 필요 △
+        const res = await fetch(`${process.env.BASE_API_URL}/api/v1/users/login`, {
+            //todo: 로그인 API URL 변경 필요 △
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -27,7 +27,7 @@ export const options: NextAuthOptions = {
             "password" : `${credentials?.password}`,
           }), 
         })
-        // todo:에러 처리
+        // todo: 에러 처리
         const user = await res.json();
         if (res.ok && user) {
             console.log("step 4 user", user);

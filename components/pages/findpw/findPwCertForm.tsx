@@ -4,7 +4,7 @@ import Link from "next/link";
 
 function FindPwCertForm() {
   const [name, setName] = useState("");
-  const [id, setId] = useState("");
+  const [email, setEmail] = useState("");
   const [certNumber, setCertNumber] = useState("");
 
   const [timeOut, setTimeOut] = useState(150);
@@ -52,8 +52,8 @@ function FindPwCertForm() {
           type="text"
           className="box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
           placeholder="이메일 형식에 맞게 입력해주세요."
-          value={id}
-          onChange={(e) => setId(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </div>
       <div className="flex box-border mt-[1vh] mb-10">

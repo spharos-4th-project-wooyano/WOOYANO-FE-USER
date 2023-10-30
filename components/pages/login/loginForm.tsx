@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 
 // 각 타입 지정
 interface LoginForm {
-  loginId: string;
+  email: string;
   password: string;
 }
 
@@ -17,14 +17,14 @@ function LoginForm() {
 
   //로그인 폼 기본 설정
   const [loginForm, setLoginForm] = useState<LoginForm>({
-    loginId: "",
+    email: "",
     password: "",
   });
 
   //비밀번호 표시 여부 설정을 위한 타입 선택
   const [pwType, setPwType] = useState<boolean>(true);
 
-  //loginId, password 값 실시간 적용, 자동로그인 적용, 에러 텍스트 표시
+  //email, password 값 실시간 적용, 자동로그인 적용, 에러 텍스트 표시
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const value = e.target.value;
@@ -38,17 +38,17 @@ function LoginForm() {
 
   //자동로그인 연동 여부 확인 및 로그인 패칭
   const handleLoginFetch = async () => {
-    if (!loginForm.loginId || !loginForm.password) {
+    if (!loginForm.email || !loginForm.password) {
       Swal.fire({
         icon: "error",
         title: "입력 필요",
         text: "이메일과 비밀번호를 모두 입력하세요.",
       });
     } else {
-      console.log("step2 email", loginForm.loginId ,"password", loginForm.password);
+      console.log("step2 email", loginForm.email ,"password", loginForm.password);
 
       const result = await signIn("credentials", {
-        email: loginForm.loginId,
+        email: loginForm.email,
         password: loginForm.password,
         redirect: true,
         callbackUrl: callBackUrl ? callBackUrl : "/",
@@ -74,7 +74,7 @@ function LoginForm() {
         type="text"
         className="text-[14px] mb-[15px] pl-2 border-box border-[1px] border-black rounded-[8px] w-full min-h-[45px]"
         placeholder="아이디(이메일)를 입력해주세요."
-        id="loginId"
+        id="email"
         onChange={handleOnChange}
       />
       <p
