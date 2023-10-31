@@ -127,17 +127,17 @@ export default function SignUpForm() {
           .then((signUpresult) => {
             console.log(signUpresult)
             //router.query를 통해 URL 파라미터로 데이터 전달
-            router.push({
-              pathname: '/signup/complete',
-              query: {
-                email: signUpresult.email,
-                username: signUpresult.username,
-                nickname:signUpresult.nickname,
-                phone:signUpresult.phone,
-                localAddress:signUpresult.localAddress,
-                extraAddress:signUpresult.extraAddress,
-              },
-            });
+            // router.push({
+            //   pathname: '/signup/complete',
+            //   query: {
+            //     email: signUpresult.email,
+            //     username: signUpresult.username,
+            //     nickname:signUpresult.nickname,
+            //     phone:signUpresult.phone,
+            //     localAddress:signUpresult.localAddress,
+            //     extraAddress:signUpresult.extraAddress,
+            //   },
+            // });
           })
           .catch((error) => {
             console.error("Error parsing response:", error);

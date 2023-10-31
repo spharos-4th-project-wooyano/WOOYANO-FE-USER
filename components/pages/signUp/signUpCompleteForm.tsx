@@ -1,18 +1,18 @@
 'use client'
 import Link from "next/link";
 import React, { useState } from "react";
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 
 function SignUpCompleteForm() {
-  const router = useRouter();
-  const email = router.query.email;
-  const username = router.query.username;
-  const phone = router.query.phone; 
-  const address = `${router.query.localAddress} + ${router.query.extraAddress}`
+  // const router = useRouter();
+  // const email = router.query.email;
+  // const username = router.query.username;
+  // const phone = router.query.phone; 
+  // const address = `${router.query.localAddress} + ${router.query.extraAddress}`
 
   return (
     <div className="flex flex-col my-[4vh]">
-      <div className="pb-10">
+      {/* <div className="pb-10">
       </div>
       <div className="box-border flex flex-col mb-10 gap-3">
         <div>
@@ -31,7 +31,7 @@ function SignUpCompleteForm() {
           <p className="text-[20px] font-bold">전화번호</p>
           <p>${phone}</p>
         </div>
-      </div>
+      </div> */}
       <Link href="/login">
         <button
           className="box-border rounded-[8px] min-h-[35px] w-full bg-black text-white
