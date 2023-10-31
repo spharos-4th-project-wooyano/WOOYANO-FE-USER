@@ -25,11 +25,21 @@ function FindIdForm() {
     })
   }
 
-  // const handleFindId = () => {
-  //   try {
-  //     const res = await fetch("fetch url")
-  //   }
-  // }
+  const handleFindId = async () => {
+    try {
+      const res = await fetch(
+        `http://localhost:8000/api/v1/users/email/find?username=${findIdForm.name}&phone=${findIdForm.phoneNumber}`
+        );
+        if (res.ok) {
+          console.log(res);
+          const data = await res.json()
+          console.log('data:' , data);
+          //to-do: 응답처리 수정 후 데이터 받아 결과 페이지에 표시하도록 수정
+        }
+    } catch (error) {
+      console.error("오류 발생:", error);
+    }
+  }
 
   return (
     <div className="flex flex-col my-[4vh]">
@@ -63,6 +73,7 @@ function FindIdForm() {
         <button
           className="box-border rounded-[8px] min-h-[35px] w-full bg-black text-white
           dark:bg-slate-700 dark:text-slate-200"
+          onClick={handleFindId}
         >
           확인
         </button>

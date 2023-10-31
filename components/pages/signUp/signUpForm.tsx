@@ -51,7 +51,7 @@ export default function SignUpForm() {
     try {
       const res = await fetch(
         // `${process.env.BASE_API_URL}/api/v1/users/certnum/check?email=${signUpCertForm.email}&code=${certNumber}`
-        `http://localhost:65316/api/v1/users/nickname/check?nickname=${signUpForm.nickname}`
+        `http://10.10.10.150:8000/api/v1/users/nickname/check?nickname=${signUpForm.nickname}`
       );
       if (res.ok) {
         const data = await res.json();
@@ -101,8 +101,7 @@ export default function SignUpForm() {
       });
     } else {
       const res = await fetch(
-        // `${process.env.BASE_API_URL}/api/v1/users/join`
-        `http://localhost:65316/api/v1/users/join`,
+        `http://10.10.10.150:8000/api/v1/users/join`,
         {
           method: "POST",
           headers: {
@@ -126,18 +125,10 @@ export default function SignUpForm() {
           .json()
           .then((signUpresult) => {
             console.log(signUpresult)
-            //router.query를 통해 URL 파라미터로 데이터 전달
-            // router.push({
-            //   pathname: '/signup/complete',
-            //   query: {
-            //     email: signUpresult.email,
-            //     username: signUpresult.username,
-            //     nickname:signUpresult.nickname,
-            //     phone:signUpresult.phone,
-            //     localAddress:signUpresult.localAddress,
-            //     extraAddress:signUpresult.extraAddress,
-            //   },
-            // });
+            // router.query를 통해 URL 파라미터로 데이터 전달
+            router.push({
+
+            });
           })
           .catch((error) => {
             console.error("Error parsing response:", error);

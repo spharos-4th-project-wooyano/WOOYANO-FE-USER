@@ -1,11 +1,31 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import Link from "next/link";
+//to-do: 비밀번호 찾기 인증단계에서 회원인지 아닌지 탐색하는 로직 완성된후 마저 진행
 
-function FindPwCertForm() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [certNumber, setCertNumber] = useState("");
+interface findPwCertform {
+  name : string,
+  email : string,
+  certNumber : string,
+}
+
+export default function FindPwCertForm() {
+  const [findPwCertForm, setFindPwCertForm] = useState<findPwCertform>({
+    name: "",
+    email: "",
+    certNumber: ""
+  })
+
+  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const value = e.target.value;
+    const id = e.target.id;
+    setFindPwCertForm({
+      ...findPwCertForm,
+      [id]: value,
+    });
+    console.log(findPwCertForm);
+  };
 
   const [timeOut, setTimeOut] = useState(150);
   const [timeOutMessage, setTimeOutMessage] = useState(false);
@@ -39,8 +59,9 @@ function FindPwCertForm() {
           type="text"
           className="box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
           placeholder="이름을 입력해주세요."
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          id="name"
+          value={findPwCertForm.name}
+          onChange={handleOnChange}
         />
       </div>
 
@@ -52,8 +73,9 @@ function FindPwCertForm() {
           type="text"
           className="box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
           placeholder="이메일 형식에 맞게 입력해주세요."
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          id="email"
+          value={findPwCertForm.email}
+          onChange={handleOnChange}
         />
       </div>
       <div className="flex box-border mt-[1vh] mb-10">
@@ -62,8 +84,9 @@ function FindPwCertForm() {
             type="text"
             className="box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
             placeholder="이메일 인증번호"
-            value={certNumber}
-            onChange={(e) => setCertNumber(e.target.value)}
+            id="certNumber"
+            value={findPwCertForm.certNumber}
+            onChange={handleOnChange}
           />
           <button
             className="box-border border-[1px] border-black rounded-[8px] min-w-[8vh] bg-black text-white text-[12px]
@@ -98,4 +121,4 @@ function formatTime(seconds: number) {
   return `${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
 }
 
-export default FindPwCertForm;
+
