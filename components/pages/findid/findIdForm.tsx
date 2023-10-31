@@ -42,14 +42,14 @@ function FindIdForm() {
   }
 
   return (
-    <div className="flex flex-col my-[4vh]">
-      <div className="box-border mt-[2vh]">
-        <p className="after:content-['*'] after:ml-0.5 after:text-red-500 text-[13px] leading-[3vh] pl-[4px]">
+    <div className="">
+      <div className="">
+        <p className="">
           이름
         </p>
         <input
           type="text"
-          className="box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
+          className=""
           placeholder="이름을 입력해주세요."
           id = "name"
           value = {findIdForm.name}
@@ -57,13 +57,13 @@ function FindIdForm() {
         />
       </div>
 
-      <div className="box-border mt-[2vh] mb-10 ">
-        <p className="after:content-['*'] after:ml-0.5 after:text-red-500 text-[13px] leading-[3vh] pl-[4px]">
+      <div className="">
+        <p className="">
           전화번호
         </p>
         <input
           type="text"
-          className="box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
+          className=""
           placeholder='"-"없이 전화번호 11자리를 입력해주세요.'
           id = "phoneNumber"
           value = {findIdForm.phoneNumber}
@@ -71,8 +71,7 @@ function FindIdForm() {
         />
       </div>
         <button
-          className="box-border rounded-[8px] min-h-[35px] w-full bg-black text-white
-          dark:bg-slate-700 dark:text-slate-200"
+          className="box-border border-1 border-black"
           onClick={handleFindId}
         >
           확인

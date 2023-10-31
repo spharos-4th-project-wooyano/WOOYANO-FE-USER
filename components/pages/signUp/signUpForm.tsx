@@ -151,58 +151,57 @@ export default function SignUpForm() {
   }, [addressInfo]);
 
   return (
-    <div className="flex flex-col my-[4vh] gap-2">
-      <div className="box-border mt-[2vh]">
-        <p className="after:content-['*'] after:ml-0.5 after:text-red-500 text-[13px] leading-[3vh] pl-[4px]">
+    <div className="">
+      <div className="">
+        <p className="">
           이메일(ID)
         </p>
         <input
           id="email"
           type="text"
-          className="box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
+          className=""
           placeholder="아이디로 사용할 이메일을 작성해주세요."
           value={signUpForm.email}
           onChange={handleOnChange}
         />
       </div>
       <div className="box-border">
-        <p className="after:content-['*'] after:ml-0.5 after:text-red-500 text-[13px] leading-[3vh] pl-[4px]">
+        <p className="">
           비밀번호
         </p>
         <input
           id="password"
           type="text"
-          className="box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
+          className=""
           placeholder="비밀번호 작성해주세요."
           value={signUpForm.password}
           onChange={handleOnChange}
         />
       </div>
       <div className="box-border">
-        <p className="after:content-['*'] after:ml-0.5 after:text-red-500 text-[13px] leading-[3vh] pl-[4px]">이름</p>
+        <p className="">이름</p>
         <input
           id="username"
           type="text"
-          className="box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
+          className=""
           placeholder="이름을 작성해주세요"
           value={signUpForm.username}
           onChange={handleOnChange}
         />
       </div>
       <div>
-        <p className="after:content-['*'] after:ml-0.5 after:text-red-500 text-[13px] leading-[3vh] pl-[4px]">닉네임</p>
-        <div className="flex gap-2">
+        <p className="">닉네임</p>
+        <div className="">
           <input
             id="nickname"
             type="text"
-            className="box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
+            className=""
             placeholder="서비스에서 표시할 이름을 작성해주세요."
             value={signUpForm.nickname}
             onChange={handleOnChange}
           />
           <button
-            className="box-border rounded-[8px] min-h-[35px] min-w-[10vh] bg-black text-white
-      dark:bg-slate-700 dark:text-slate-200"
+            className=""
             onClick={handleNickNameCheck}
           >
             중복 확인
@@ -210,38 +209,38 @@ export default function SignUpForm() {
         </div>
       </div>
       <div>
-        <p className="after:content-['*'] after:ml-0.5 after:text-red-500 text-[13px] leading-[3vh] pl-[4px]">
+        <p className="">
           생년월일
         </p>
         <input
           id="birthday"
           type="text"
-          className="box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
+          className=""
           placeholder="생년월일 6자리를 작성해주세요."
           value={signUpForm.birthday}
           onChange={handleOnChange}
         />
       </div>
       <div>
-        <p className="after:content-['*'] after:ml-0.5 after:text-red-500 text-[13px] leading-[3vh] pl-[4px]">
+        <p className="">
           전화번호
         </p>
         <input
           id="phone"
           type="text"
-          className="box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
+          className=""
           placeholder="'-'없이 전화번호를 작성해주세요"
           value={signUpForm.phone}
           onChange={handleOnChange}
         />
       </div>
-      <div className="flex flex-col">
-        <p className="after:content-['*'] after:ml-0.5 after:text-red-500 text-[13px] leading-[3vh] pl-[4px]">주소</p>
-        <div className="flex gap-2">
+      <div className="">
+        <p className="">주소</p>
+        <div className="">
           <input
             id="localAddress"
             type="text"
-            className="box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
+            className=""
             placeholder="주소찾기 버튼을 사용해 주세요."
             value={addressInfo?.address || ""} //addressInfo.address = undefined 에러 처리
             onChange={handleOnChange}
@@ -252,8 +251,7 @@ export default function SignUpForm() {
           <PostCodeDaum isView={isView} setIsView={setIsView} setAddressInfo={setAddressInfo} />
 
           <button
-            className="box-border rounded-[8px] min-h-[35px] min-w-[10vh] bg-black text-white
-      dark:bg-slate-700 dark:text-slate-200"
+            className=""
             onClick={() => {
               handleOpenModal();
             }}
@@ -264,22 +262,20 @@ export default function SignUpForm() {
         <input
           id="extraAddress"
           type="text"
-          className="mt-1 box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
+          className=""
           placeholder="상세 주소입력"
           value={signUpForm.extraAddress}
           onChange={handleOnChange}
         />
       </div>
       <div
-        className="mb-10 flex box-border min-h-[20vh] rounded-[8px] bg-slate-200 justify-center items-center
-      dark:bg-slate-700 dark:text-slate-200"
+        className=""
       >
         <p>약관 내용</p>
       </div>
 
       <button
-        className="box-border rounded-[8px] min-h-[35px] w-full bg-black text-white
-        dark:bg-slate-700 dark:text-slate-200"
+        className="box-border border-1 border-black"
         onClick={handleSignUpPost}
       >
         가입하기

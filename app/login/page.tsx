@@ -1,4 +1,4 @@
-import Logo from "@/components/pages/login/logo";
+// import Logo from "@/components/pages/login/logo";
 import Findinfo from "@/components/pages/login/findinfo";
 import LoginForm from "@/components/pages/login/loginForm";
 import SnsLoginForm from "@/components/pages/login/snsLoginForm";
@@ -12,7 +12,7 @@ async function Loginpage() {
   
   return (
     <div className="mx-[30px] pt-[10vh]">
-      <Logo />
+      {/* <Logo /> */}
       <LoginForm />
       <Findinfo />
       <SnsLoginForm />

@@ -62,30 +62,26 @@ function LoginForm() {
   };
 
   return (
-    <div className="text-center font-Gmarket-mid">
+    <div className="">
       <p
-        className="text-left pl-1 text-[14px] mb-[4px] after:content-['*'] 
-        after:ml-0.5 after:text-red-500 block font-medium text-slate-700 dark:text-white
-        "
+        className=""
       >
         아이디(이메일)
       </p>
       <input
         type="text"
-        className="text-[14px] mb-[15px] pl-2 border-box border-[1px] border-black rounded-[8px] w-full min-h-[45px]"
+        className=""
         placeholder="아이디(이메일)를 입력해주세요."
         id="email"
         onChange={handleOnChange}
       />
       <p
-        className="text-left pl-1 text-[14px] mb-[4px] after:content-['*'] 
-        after:ml-0.5 after:text-red-500 block font-medium text-slate-700 dark:text-white"
-      >
+        className="">
         비밀번호
       </p>
       <input
         type={pwType ? "password" : "text"}
-        className="text-[14px] mb-[15px] pl-2 border-box border-[1px] border-black rounded-[8px] w-full min-h-[45px]"
+        className=""
         placeholder="비밀번호를 입력해주세요."
         id="password"
         onChange={handleOnChange}
@@ -95,18 +91,16 @@ function LoginForm() {
         view password
       </button>
 
-      <div className="flex flex-col font-Omyu_pretty font-bold items-center mt-10">
+      <div className="">
         <button
-          className="box-border mb-3 border-[1px] min-h-[40px] min-w-[30vh] max-w-[50vh] mt-2 rounded-[8px] bg-gradient-to-r from-cyan-300 to-blue-400
-        dark:text-black dark:border-black dark:bg-gradient-to-r dark:from-green-300 dark:to-green-400"
+          className="box-border border-1 border-black"
           onClick={handleLoginFetch}
         >
           로그인
         </button>
         <Link href="/signup/process">
           <button
-            className="box-border border-[1px] min-h-[40px] min-w-[30vh] max-w-[50vh] rounded-[8px] bg-gradient-to-r from-cyan-300 to-blue-400 mb-3
-          dark:text-black dark:border-black dark:bg-gradient-to-r dark:from-green-300 dark:to-green-400"
+          className="box-border border-1 border-black"
           >
             회원가입
           </button>

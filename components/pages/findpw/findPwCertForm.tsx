@@ -52,12 +52,12 @@ export default function FindPwCertForm() {
   }, [timeOutMessage, timeOut]);
 
   return (
-    <div className="flex flex-col my-[4vh]">
-      <div className="box-border mt-[2vh]">
-        <p className="after:content-['*'] after:ml-0.5 after:text-red-500 text-[13px] leading-[3vh] pl-[4px]">이름</p>
+    <div className="">
+      <div className="">
+        <p className="">이름</p>
         <input
           type="text"
-          className="box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
+          className=""
           placeholder="이름을 입력해주세요."
           id="name"
           value={findPwCertForm.name}
@@ -65,38 +65,37 @@ export default function FindPwCertForm() {
         />
       </div>
 
-      <div className="box-border mt-[2vh]">
-        <p className="after:content-['*'] after:ml-0.5 after:text-red-500 text-[13px] leading-[3vh] pl-[4px]">
+      <div className="">
+        <p className="">
           이메일(ID)
         </p>
         <input
           type="text"
-          className="box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
+          className=""
           placeholder="이메일 형식에 맞게 입력해주세요."
           id="email"
           value={findPwCertForm.email}
           onChange={handleOnChange}
         />
       </div>
-      <div className="flex box-border mt-[1vh] mb-10">
-        <div className="relation flex gap-2 w-full">
+      <div className="">
+        <div className="">
           <input
             type="text"
-            className="box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
+            className=""
             placeholder="이메일 인증번호"
             id="certNumber"
             value={findPwCertForm.certNumber}
             onChange={handleOnChange}
           />
           <button
-            className="box-border border-[1px] border-black rounded-[8px] min-w-[8vh] bg-black text-white text-[12px]
-      dark:bg-slate-700 dark:text-slate-200"
+          className="box-border border-1 border-black"
             onClick={handleVerification}
           >
             인증 확인
           </button>
           {timeOutMessage && (
-            <p className="absolute pl-1 pt-[40px] text-[12px] text-red-500 dark:text-blue-700">
+            <p className="">
               입력 제한 시간: {formatTime(timeOut)}
             </p>
           )}
@@ -105,8 +104,7 @@ export default function FindPwCertForm() {
 
       <Link href="/chgpw">
         <button
-          className="box-border rounded-[8px] min-h-[35px] w-full bg-black text-white
-      dark:bg-slate-700 dark:text-slate-200"
+          className="box-border border-1 border-black"
         >
           확인
         </button>

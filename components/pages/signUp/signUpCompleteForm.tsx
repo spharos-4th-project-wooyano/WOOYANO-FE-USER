@@ -11,31 +11,30 @@ function SignUpCompleteForm() {
   // const address = `${router.query.localAddress} + ${router.query.extraAddress}`
 
   return (
-    <div className="flex flex-col my-[4vh]">
-      {/* <div className="pb-10">
+    <div className="">
+      {/* <div className="">
       </div>
-      <div className="box-border flex flex-col mb-10 gap-3">
+      <div className="">
         <div>
           <p>${username}님</p>
           <p>회원가입이 완료되었습니다.</p>
         </div>
         <div>
-          <p className="text-[20px] font-bold">이메일</p>
+          <p className="">이메일</p>
           <p>${email}</p>
         </div>
         <div>
-          <p className="text-[20px] font-bold">주소</p>
+          <p className="">주소</p>
           <p>${address}</p>
         </div>
         <div>
-          <p className="text-[20px] font-bold">전화번호</p>
+          <p className="">전화번호</p>
           <p>${phone}</p>
         </div>
       </div> */}
       <Link href="/login">
         <button
-          className="box-border rounded-[8px] min-h-[35px] w-full bg-black text-white
-          dark:bg-slate-700 dark:text-slate-200"
+          className="border-box border-1 border-black"
         >
           WOOYANO 로그인 하러가기
         </button>

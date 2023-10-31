@@ -98,12 +98,12 @@ export default function SignUpCertForm() {
   };
 
   return (
-    <div className="flex flex-col my-[4vh]">
-      <div className="box-border mt-[2vh]">
-        <p className="after:content-['*'] after:ml-0.5 after:text-red-500 text-[13px] leading-[3vh] pl-[4px]">이름</p>
+    <div className="">
+      <div className="">
+        <p className="">이름</p>
         <input
           type="text"
-          className="box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
+          className=""
           placeholder="이름을 작성해주세요."
           id="name"
           value={signUpCertForm.name}
@@ -111,13 +111,13 @@ export default function SignUpCertForm() {
         />
       </div>
 
-      <div className="box-border mt-[2vh]">
-        <p className="after:content-['*'] after:ml-0.5 after:text-red-500 text-[13px] leading-[3vh] pl-[4px]">
+      <div className="]">
+        <p className="">
           이메일(ID)
         </p>
         <input
           type="text"
-          className="box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
+          className=""
           placeholder="본 서비스에서 사용할 이메일을 입력해주세요"
           id="email"
           value={signUpCertForm.email}
@@ -126,24 +126,22 @@ export default function SignUpCertForm() {
       </div>
 
       <button
-        className="mt-2 box-border rounded-[8px] min-h-[35px] max-w-[140px] bg-black text-white
-      dark:bg-slate-700 dark:text-slate-200"
+        className=""
         onClick={handleEmailCheckCert}
       >
         인증번호 전송
       </button>
 
-      <div className="flex gap-2 mb-10">
+      <div className="">
         <input
           type="text"
-          className="mt-2 box-border border-[1px] border-black rounded-[8px] min-h-[35px] w-full pl-2"
+          className=""
           placeholder="인증번호 입력"
           value={certNumber}
           onChange={(e) => setCertNumber(e.target.value)}
         />
         <button
-          className="mt-2 box-border rounded-[8px] min-h-[35px] min-w-[10vh] bg-black text-white
-      dark:bg-slate-700 dark:text-slate-200"
+          className=""
           onClick={handleEmailNumCheck}
         >
           인증 확인
@@ -151,8 +149,7 @@ export default function SignUpCertForm() {
       </div>
       <Link href="/signup/agree">
         <button
-          className="box-border rounded-[8px] min-h-[35px] w-full bg-black text-white
-      dark:bg-slate-700 dark:text-slate-200"
+          className="box-border border-1 border-black"
         >
           다음
         </button>
