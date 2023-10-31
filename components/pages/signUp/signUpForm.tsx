@@ -50,8 +50,7 @@ export default function SignUpForm() {
   const handleNickNameCheck = async () => {
     try {
       const res = await fetch(
-        // `${process.env.BASE_API_URL}/api/v1/users/certnum/check?email=${signUpCertForm.email}&code=${certNumber}`
-        `http://10.10.10.150:8000/api/v1/users/nickname/check?nickname=${signUpForm.nickname}`
+        `http://localhost:8000/api/v1/users/nickname/check?nickname=${signUpForm.nickname}`
       );
       if (res.ok) {
         const data = await res.json();
