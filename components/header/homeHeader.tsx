@@ -1,15 +1,16 @@
-import { useRouter } from 'next/navigation';
 import React from 'react'
+import TextLogo from './textLogo';
+import HeaderTopRight from './HeaderTopRight';
+import HeaderTopLeft from './HeaderTopLeft';
 
 function HomeHeader() {
-  const router=useRouter();
+  
   
   return (
-    <div>
-      <div className='flex gap-3'>
-        <div onClick={()=>router.push('/')}>채팅</div>
-        <div className='text-slate-500' onClick={()=>router.push('/selectstore')}>업체찾기</div>
-      </div>
+    <div className='flex justify-between px-4 py-9 rounded-b-2xl shadow-md fixed w-full bg-[#020405] z-[9]'>
+      <HeaderTopLeft />
+      <TextLogo/>
+      <HeaderTopRight/>
     </div>
   )
 }
