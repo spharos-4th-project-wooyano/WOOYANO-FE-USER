@@ -2,7 +2,7 @@
 
 import React, { Fragment, useState } from 'react'
 import Image from 'next/image'
-import DropDownMenu from '@/components/button/dropDownMenu'
+// import DropDownMenu from '@/components/button/dropDownMenu'
   
 function serviceHistoryList() {
   return (
@@ -18,7 +18,7 @@ function serviceHistoryList() {
         </p>
       </div>
 
-      <DropDownMenu/>
+      {/* <DropDownMenu/> */}
       
       <div className='flex flex-col max-w-[800px] mt-5'>
         <div className ='border w-full h-[200px] border-black rounded-lg flex flex-col pl-2 pr-2 pt-1'>
