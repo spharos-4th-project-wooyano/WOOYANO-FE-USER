@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.0.18",
     "@nextui-org/react": "^2.1.13",
     "ai": "^2.2.14",
     "framer-motion": "^10.16.4",
@@ -23,6 +25,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.17.0",
     "sweetalert2": "^11.7.32"
+
   },
   "devDependencies": {
     "@types/node": "^20",
