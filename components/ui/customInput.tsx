@@ -11,8 +11,9 @@ interface CustomInputProps {
 function CustomTextField({ id, placeholder, type, label, onChange }: CustomInputProps) {
   return (
     <div className="relative">
-      <label className="absolute left-3 -top-3 text-[#4A5F73] font-sans text-[14px] font-semibold leading-[20.4px] uppercase bg-white px-2
-      dark:bg-black dark:text-slate-300 ">
+      <label className="absolute left-3 -top-3 text-[#4A5F73] text-[14px] font-semibold leading-[20.4px] uppercase bg-white px-2
+      dark:bg-black dark:text-slate-300
+      font-baloo-da ">
         {label || ""}
       </label>
       <input
@@ -21,7 +22,7 @@ function CustomTextField({ id, placeholder, type, label, onChange }: CustomInput
         type={type}
         onChange={onChange}
         className="border border-[#DBE9F5] rounded-md pl-4 h-[50px] w-full align-middle
-        focus:outline-[black]
+        focus:outline-blue-500
         dark:bg-black"
       />
     </div>
