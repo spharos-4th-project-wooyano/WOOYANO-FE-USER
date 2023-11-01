@@ -21,18 +21,10 @@ const config: Config = {
           'background2':'#2D3748',
           'background3':'#3C4B5A'
         },
-        fontFamily: {
-          sans: [
-            '"Inter var", sans-serif',
-            {
-              fontFeatureSettings: '"clig", "liga"',
-              fontVariationSettings: '"opsz" 32'
-            },
-          ],
-          BalooDa:[
-            '"Baloo Da"'
-          ]
-        },
+      fontFamily:{
+        'baloo-da':['baloo-da']
+      }
+
     },
   },
   darkMode: "class",

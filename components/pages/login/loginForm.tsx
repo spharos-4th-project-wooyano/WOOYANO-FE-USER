@@ -1,71 +1,112 @@
-'use client'
-import React, { useState,ChangeEvent } from "react";
-import Link from 'next/link'
+"use client";
+import React, { useState, ChangeEvent } from "react";
+import { signIn } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import Swal from "sweetalert2";
 
-interface loginForm{
-  id : string,
-  passWord : string
+import CustomInput from "@/components/ui/customInput";
+import PasswordViewButton from "@/components/ui/passwordViewButton";
+import CheckEmailForm from "@/components/ui/checkEmailForm";
+import CustomButton from "@/components/ui/customButton";
+
+// 각 타입 지정
+interface LoginForm {
+  email: string;
+  password: string;
 }
 
 function LoginForm() {
-  const [loginIdForm,setLoginIdForm] = useState<loginForm>(
-    {
-      id : "",
-      passWord : "",
-    }
-  )
+  const query = useSearchParams();
+  const callBackUrl = query.get("callbackUrl");
 
-  const handleOnChange=(e:ChangeEvent<HTMLInputElement>)=>{
+  //로그인 폼 기본 설정
+  const [loginForm, setLoginForm] = useState<LoginForm>({
+    email: "",
+    password: "",
+  });
+
+  //비밀번호 표시 여부 설정을 위한 타입 선택
+  const [pwType, setPwType] = useState<boolean>(true);
+
+  //이메일 유효성 검사 변수
+  const [checkEmail, setCheckEmail] = useState<boolean>(false);
+
+  //email, password 값 실시간 적용, 자동로그인 적용, 에러 텍스트 표시
+  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const value = e.target.value;
     const id = e.target.id;
-    setLoginIdForm({
-      ...loginIdForm,
-      [id]:value
-    })
-  }
+    // 이메일 유효성 검사 정규식
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    //이메일 유효성 검사
+    if (id === "email") {
+      const checkedEmail = emailRegex.test(value);
+      setCheckEmail(checkedEmail);
+    }
+    setLoginForm({
+      ...loginForm,
+      [id]: value,
+    });
+    console.log("step1 loginForm", loginForm);
+  };
+
+  //자동로그인 연동 여부 확인 및 로그인 패칭
+  const handleLoginFetch = async () => {
+    if (!loginForm.email || !loginForm.password) {
+      Swal.fire({
+        icon: "error",
+        title: "입력 필요",
+        text: "이메일과 비밀번호를 모두 입력하세요.",
+      });
+    } else {
+      console.log("step2 email", loginForm.email, "password", loginForm.password);
+
+      const result = await signIn("credentials", {
+        email: loginForm.email,
+        password: loginForm.password,
+        redirect: true,
+        callbackUrl: callBackUrl ? callBackUrl : "/",
+      });
+    }
+  };
+
+  //비밀번호 표시 여부
+  const handlePwType = () => {
+    setPwType(!pwType);
+  };
+
   return (
-    <div className="text-center font-Gmarket-mid">
-      <p
-        className="text-left pl-1 text-[14px] mb-[4px] after:content-['*'] 
-        after:ml-0.5 after:text-red-500 block font-medium text-slate-700 dark:text-white
-        "
-      >
-        아이디(이메일)
-      </p>
-      <input
-        type="text"
-        className="text-[14px] mb-[15px] pl-2 border-box border-[1px] border-black rounded-[8px] w-full min-h-[45px]"
-        placeholder="아이디(이메일)를 입력해주세요."
-        id ="id"
-        value={loginIdForm.id}
-        onChange={handleOnChange}
-      />
-      <p
-        className="text-left pl-1 text-[14px] mb-[4px] after:content-['*'] 
-        after:ml-0.5 after:text-red-500 block font-medium text-slate-700 dark:text-white"
-      >
-        비밀번호
-      </p>
-      <input
-        type="text"
-        className="text-[14px] mb-[15px] pl-2 border-box border-[1px] border-black rounded-[8px] w-full min-h-[45px]"
-        placeholder="비밀번호를 입력해주세요."
-        id ="passWord"
-        value={loginIdForm.passWord}
-        onChange={handleOnChange}
-      />
-      <div className="flex flex-col font-Omyu_pretty font-bold items-center mt-20">
-        <button className="box-border border-[1px] min-h-[40px] min-w-[30vh] max-w-[50vh] mt-2 rounded-[8px] bg-gradient-to-r from-cyan-300 to-blue-400
-        dark:text-black dark:border-black dark:bg-gradient-to-r dark:from-green-300 dark:to-green-400">
-          로그인
-        </button>
-        <Link href="/signup/process">
-          <button className="box-border border-[1px] min-h-[40px] min-w-[30vh] max-w-[50vh] mt-2 rounded-[8px] bg-gradient-to-r from-cyan-300 to-blue-400 mb-3
-          dark:text-black dark:border-black dark:bg-gradient-to-r dark:from-green-300 dark:to-green-400">
-            회원가입
-          </button>
-        </Link>
+    <div className="flex flex-col">
+      <div className="flex flex-col gap-8">
+        <div className="relative">
+          <CustomInput
+            id="email"
+            label="EMAIL"
+            placeholder="예시) woooyano@email.com"
+            type="text"
+            onChange={handleOnChange}
+          />
+          <div className="absolute right-3 top-1/4">
+            <CheckEmailForm checked={checkEmail} />
+          </div>
+        </div>
+
+        <div className="relative">
+          <CustomInput
+            id="password"
+            label="PASSWORD"
+            placeholder="예시) 비밀번호를 입력해주세요."
+            type={pwType ? "password" : "text"}
+            onChange={handleOnChange}
+          />
+          <div className="absolute right-3 top-4">
+            <PasswordViewButton pwType={pwType} onClick={handlePwType} />
+          </div>
+          <div className="mt-10">
+          <CustomButton text={"SIGN UP"} onClick={handleLoginFetch}/>
+          </div>
+        </div>
       </div>
     </div>
   );

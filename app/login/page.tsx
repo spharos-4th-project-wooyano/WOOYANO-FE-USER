@@ -1,17 +1,20 @@
-"use client";
-import Logo from "@/components/pages/login/logo";
+// import Logo from "@/components/pages/login/logo";
 import Findinfo from "@/components/pages/login/findinfo";
 import LoginForm from "@/components/pages/login/loginForm";
 import SnsLoginForm from "@/components/pages/login/snsLoginForm";
-import React from "react"
-// import { signIn, signOut, useSession } from "next-auth/react";
 
-// const { data: session } = useSess ion();
+import React from "react";
+import { getServerSession } from 'next-auth'
+import { options } from '../api/auth/[...nextauth]/options'
 
-function Loginpage() {
+
+async function Loginpage() {
+  const session = await getServerSession(options)
+  console.log("session", session || "no session")
+  
   return (
     <div className="mx-[30px] pt-[10vh]">
-      <Logo />
+      {/* <Logo /> */}
       <LoginForm />
       <Findinfo />
       <SnsLoginForm />

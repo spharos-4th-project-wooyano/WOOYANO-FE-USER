@@ -5,10 +5,10 @@ import React,{useState} from "react";
 function SignUpAgreeForm() {
 
   return (
-    <div className="flex flex-col my-[4vh]">
-      <div className="box-border mt-[2vh]">
-        <p className="text-[13px] leading-[3vh] pl-[4px]">약관 내용</p>
-        <div className="flex flex-col mb-10 gap-2 box-border bg-slate-200 min-h-[30vh] rounded-[8px] justify-center items-center dark:bg-slate-700 dark:text-slate-200">
+    <div className="">
+      <div className="">
+        <p className="">약관 내용</p>
+        <div className="">
           <p>1. 약관 내용 1</p>
           <p>2. 약관 내용 2</p>
           <p>3. 약관 내용 3</p>
@@ -18,7 +18,7 @@ function SignUpAgreeForm() {
       </div>
       <Link href="/signup/form">
         <button
-          className="box-border rounded-[8px] min-h-[35px] w-full bg-black text-white dark:bg-slate-700 dark:text-slate-200"
+          className="box-border border-1 border-black"
         >
           다음
         </button>
