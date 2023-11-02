@@ -2,11 +2,11 @@
 import Findinfo from "@/components/pages/login/findinfo";
 import LoginForm from "@/components/pages/login/loginForm";
 import SnsLoginForm from "@/components/pages/login/snsLoginForm";
+import Logo from "@/components/pages/login/logo";
 
 import React from "react";
 import { getServerSession } from 'next-auth'
 import { options } from '../api/auth/[...nextauth]/options'
-
 
 async function Loginpage() {
   const session = await getServerSession(options)
@@ -14,7 +14,7 @@ async function Loginpage() {
   
   return (
     <div className="mx-[30px] pt-[10vh]">
-      {/* <Logo /> */}
+      <Logo />
       <LoginForm />
       <Findinfo />
       <SnsLoginForm />

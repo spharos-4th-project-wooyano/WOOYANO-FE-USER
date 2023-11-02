@@ -104,7 +104,7 @@ function LoginForm() {
             <PasswordViewButton pwType={pwType} onClick={handlePwType} />
           </div>
           <div className="mt-10">
-          <CustomButton text={"SIGN UP"} onClick={handleLoginFetch}/>
+          <CustomButton text={"SIGN IN"} onClick={handleLoginFetch}/>
           </div>
         </div>
       </div>
