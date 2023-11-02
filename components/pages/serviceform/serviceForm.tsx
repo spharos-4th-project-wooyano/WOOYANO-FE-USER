@@ -1,7 +1,7 @@
 import React from 'react'
 import ServiceCalender from './serviceCalender'
 import Link from 'next/link'
-
+import Image from 'next/image'
 
 
 const Product=[
@@ -41,10 +41,14 @@ interface productType{
 
 function ServiceForm() {
   return (
-    <div className='p-2 bg-slate-200 dark:bg-background1'>
+    <div className='pt-1 bg-slate-200 dark:bg-background1'>
       {/* 기사이름 */}
       <div className='text-xl font-semibold mb-2 border-y-1 border-b-slate-200 leading-10 pl-2 bg-white dark:bg-background2 rounded-lg'>
-        <p>임찬섭 기사</p>
+        <div className=' bg-white'>
+          <p>임찬섭 기사</p>
+          <p className='text-[13px] px-1'>기사 간단한 소개글</p>
+        </div>
+        
       </div>
 
       {/* 주소지 */}
@@ -129,7 +133,7 @@ function ServiceForm() {
       </div>
       
       {/* 반려동물 여부 */}
-      <div className='bg-white rounded-lg dark:bg-background2 h-auto mb-[300px] pb-2'>
+      <div className='bg-white rounded-lg dark:bg-background2 h-auto mb-[80px] pb-2'>
         <p className='text-xl font-semibold my-2 border-b-1 leading-10 pl-2'>반려동물 여부</p>
         <ul className='flex justify-between p-2'>
           <li className='w-[47%]'><button className='border border-slate-400 rounded-lg w-full leading-[48px]'>예</button></li>
