@@ -7,7 +7,7 @@ interface CustomButtonProps {
 }
 
 export default function CustomButton({ text, onClick }: CustomButtonProps) {
-  console.log(onClick);
+  // console.log(onClick);
   return (
     <button
       className="border rounded-md pl-2 h-[50px] w-full align-middle

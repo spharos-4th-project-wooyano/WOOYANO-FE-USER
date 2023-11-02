@@ -46,8 +46,8 @@ function FindIdForm() {
   const handleFindId = async () => {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/email/find?username=${findIdForm.name}&phone=${findIdForm.phoneNumber}`
-      );
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/email/find?username=${findIdForm.name}&phone=${findIdForm.phoneNumber}`
+      );console.log(process.env.NEXT_PUBLIC_API_BASE_URL)
       if (res.ok) {
         console.log(res);
         const data = await res.json();

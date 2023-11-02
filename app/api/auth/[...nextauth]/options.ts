@@ -16,7 +16,7 @@ export const options: NextAuthOptions = {
         console.log("step3 credentials.enmail", credentials?.email, "|", "credentials.password", credentials?.password);
 
         if (!credentials?.email || !credentials?.password) return null;
-        const res = await fetch(`http://localhost:8000/api/v1/users/login`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/login`, {
             //todo: 로그인 API URL 변경 필요 △
           method: "POST",
           headers: {

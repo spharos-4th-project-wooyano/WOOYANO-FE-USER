@@ -50,7 +50,7 @@ export default function SignUpForm() {
   const handleNickNameCheck = async () => {
     try {
       const res = await fetch(
-        `http://localhost:8000/api/v1/users/nickname/check?nickname=${signUpForm.nickname}`
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/nickname/check?nickname=${signUpForm.nickname}`
       );
       if (res.ok) {
         const data = await res.json();
@@ -100,7 +100,7 @@ export default function SignUpForm() {
       });
     } else {
       const res = await fetch(
-        `http://10.10.10.150:8000/api/v1/users/join`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/join`,
         {
           method: "POST",
           headers: {
