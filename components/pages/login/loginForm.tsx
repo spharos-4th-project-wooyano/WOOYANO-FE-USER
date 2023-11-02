@@ -51,7 +51,7 @@ function LoginForm() {
     console.log("step1 loginForm", loginForm);
   };
 
-  //자동로그인 연동 여부 확인 및 로그인 패칭
+  //로그인 유효성 확인 및 로그인 패칭
   const handleLoginFetch = async () => {
     if (!loginForm.email || !loginForm.password) {
       Swal.fire({
@@ -60,7 +60,7 @@ function LoginForm() {
         text: "이메일과 비밀번호를 모두 입력하세요.",
       });
     } else {
-      console.log("step2 email", loginForm.email, "password", loginForm.password);
+      console.log("email", loginForm.email, "password", loginForm.password);
 
       const result = await signIn("credentials", {
         email: loginForm.email,
@@ -85,9 +85,10 @@ function LoginForm() {
             label="EMAIL"
             placeholder="예시) woooyano@email.com"
             type="text"
+            value = {loginForm.email}
             onChange={handleOnChange}
           />
-          <div className="absolute right-3 top-1/4">
+          <div className="absolute right-3.5 top-1/4">
             <CheckEmailForm checked={checkEmail} />
           </div>
         </div>
@@ -98,6 +99,7 @@ function LoginForm() {
             label="PASSWORD"
             placeholder="예시) 비밀번호를 입력해주세요."
             type={pwType ? "password" : "text"}
+            value = {loginForm.password}
             onChange={handleOnChange}
           />
           <div className="absolute right-3 top-4">

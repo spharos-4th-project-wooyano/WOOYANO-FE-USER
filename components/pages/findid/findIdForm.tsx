@@ -1,81 +1,89 @@
-'use client'
-import React, { useState,ChangeEvent } from "react";
-import Link from 'next/link'
+"use client";
+import React, { useState, ChangeEvent } from "react";
+import CustomButton from "@/components/ui/customButton";
+import CustomInput from "@/components/ui/customInput";
+import { useRouter } from 'next/navigation';
 
-interface findIdform{
-  name : string,
-  phoneNumber : string
+interface findIdform {
+  name: string;
+  phoneNumber: string;
 }
 
 function FindIdForm() {
-  const [findIdForm,setFindIdForm] = useState<findIdform>(
-    {
-      name : "",
-      phoneNumber : "",
-    }
-  )
+  const router = useRouter()
+  const [findIdForm, setFindIdForm] = useState<findIdform>({
+    name: "",
+    phoneNumber: "",
+  });
 
-  const handleOnChange=(e:ChangeEvent<HTMLInputElement>)=>{
+  const [checkedPhoneNumber, setCheckPhoneNumber] = useState<boolean>(false);
+  const [viewPhoneNumber, setViewPhoneNumber] = useState<string>("");
+
+  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const value = e.target.value;
     const id = e.target.id;
+    const intPattern = /^-?\d+$/;
+
+    if (id === "phoneNumber") {
+      const checkedPhoneNumber = intPattern.test(value);
+      setCheckPhoneNumber(checkedPhoneNumber);
+      if (checkedPhoneNumber) {
+        // 전화번호를 원하는 형식으로 표시하고 저장
+        const formPhoneNumber = checkedPhoneNumber ? value.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3") : value;
+        setViewPhoneNumber(formPhoneNumber);
+      } else {
+
+      }
+    }
     setFindIdForm({
       ...findIdForm,
-      [id]:value
-    })
-  }
+      [id]: value,
+    });
+    console.log(findIdForm);
+  };
 
   const handleFindId = async () => {
     try {
       const res = await fetch(
-        `http://localhost:8000/api/v1/users/email/find?username=${findIdForm.name}&phone=${findIdForm.phoneNumber}`
-        );
-        if (res.ok) {
-          console.log(res);
-          const data = await res.json()
-          console.log('data:' , data);
-          //to-do: 응답처리 수정 후 데이터 받아 결과 페이지에 표시하도록 수정
-        }
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/email/find?username=${findIdForm.name}&phone=${findIdForm.phoneNumber}`
+      );
+      if (res.ok) {
+        console.log(res);
+        const data = await res.json();
+        console.log("data:", data);
+        router.push('/findidresult')
+        //to-do: 응답처리 수정 후 데이터 받아 결과 페이지에 표시하도록 수정
+      }
     } catch (error) {
       console.error("오류 발생:", error);
+      router.push('/findidresult')
+      // △ 에러처리 후 삭제 
     }
-  }
+  };
 
   return (
-    <div className="">
-      <div className="">
-        <p className="">
-          이름
-        </p>
-        <input
+    <div>
+      <div className="flex flex-col gap-6 mb-8">
+        <CustomInput
+          id="name"
+          label="name"
+          placeholder="예시) 홍길동"
           type="text"
-          className=""
-          placeholder="이름을 입력해주세요."
-          id = "name"
-          value = {findIdForm.name}
+          value={findIdForm.name}
           onChange={handleOnChange}
         />
-      </div>
 
-      <div className="">
-        <p className="">
-          전화번호
-        </p>
-        <input
+        <CustomInput
+          id="phoneNumber"
+          label="PHONENUMBER"
+          placeholder='"-"없이 입력해주세요.'
           type="text"
-          className=""
-          placeholder='"-"없이 전화번호 11자리를 입력해주세요.'
-          id = "phoneNumber"
-          value = {findIdForm.phoneNumber}
+          value={viewPhoneNumber}
           onChange={handleOnChange}
         />
       </div>
-        <button
-          className="box-border border-1 border-black"
-          onClick={handleFindId}
-        >
-          확인
-        </button>
+        <CustomButton text={"다음"} onClick={handleFindId} />
     </div>
   );
 }

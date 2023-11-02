@@ -1,4 +1,3 @@
-// import Logo from "@/components/pages/login/logo";
 import Findinfo from "@/components/pages/login/findinfo";
 import LoginForm from "@/components/pages/login/loginForm";
 import SnsLoginForm from "@/components/pages/login/snsLoginForm";

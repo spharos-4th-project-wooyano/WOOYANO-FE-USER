@@ -11,6 +11,9 @@ function Findinfo() {
         <Link href="/findpwcert">
           <p>비밀번호 찾기</p>
         </Link>
+        <Link href="/signup/process">
+          <p>회원가입</p>
+        </Link>
       </div>
     </div>
   );
