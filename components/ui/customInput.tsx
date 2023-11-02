@@ -9,7 +9,7 @@ interface CustomInputProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function CustomTextField({ id, placeholder, type, label, value, onChange }: CustomInputProps) {
+export default function CustomInput({ id, placeholder, type, label, value, onChange }: CustomInputProps) {
   return (
     <div className="relative">
       <label className="absolute left-3 -top-3 text-[#4A5F73] text-[14px] font-semibold leading-[20.4px] uppercase bg-white px-2
@@ -31,4 +31,3 @@ function CustomTextField({ id, placeholder, type, label, value, onChange }: Cust
   );
 }
 
-export default CustomTextField;
