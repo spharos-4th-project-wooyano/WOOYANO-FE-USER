@@ -6,9 +6,9 @@ interface CheckEmailFormProps {
 
 export default function CheckEmailForm({ checked }: CheckEmailFormProps) {
   return (
-    <div className="text-[20px]">
-      {checked ? <span className="text-blue-600">&#10004;</span>
-       : <span className="text-slate-500">&#10004;</span>}
+    <div className="text-[18px]">
+      {checked ? <p className="text-blue-600">&#10004;</p>
+       : <p className="text-slate-400">&#10004;</p>}
     </div>
   );
 }

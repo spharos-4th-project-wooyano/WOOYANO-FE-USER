@@ -5,10 +5,11 @@ interface CustomInputProps {
   placeholder: string;
   type: string;
   label: string; 
+  value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function CustomTextField({ id, placeholder, type, label, onChange }: CustomInputProps) {
+export default function CustomInput({ id, placeholder, type, label, value, onChange }: CustomInputProps) {
   return (
     <div className="relative">
       <label className="absolute left-3 -top-3 text-[#4A5F73] text-[14px] font-semibold leading-[20.4px] uppercase bg-white px-2
@@ -20,6 +21,7 @@ function CustomTextField({ id, placeholder, type, label, onChange }: CustomInput
         id={id}
         placeholder={placeholder || ""}
         type={type}
+        value={value||""}
         onChange={onChange}
         className="border border-[#DBE9F5] rounded-md pl-4 h-[50px] w-full align-middle
         focus:outline-blue-500
@@ -29,4 +31,3 @@ function CustomTextField({ id, placeholder, type, label, onChange }: CustomInput
   );
 }
 
-export default CustomTextField;

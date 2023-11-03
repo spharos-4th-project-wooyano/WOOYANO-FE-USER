@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face{
-  font-family: baloo-da;
-  src: url('https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;500;600;700;800&display=swap')
-}
-
 .postmodal {
   position: relative;
   z-index: 9999;
