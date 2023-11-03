@@ -21,6 +21,10 @@ const config: Config = {
           'background2':'#2D3748',
           'background3':'#3C4B5A'
         },
+      fontFamily:{
+        'baloo-da':['baloo-da']
+      }
+
     },
   },
   darkMode: "class",

@@ -3,7 +3,7 @@ import React from 'react'
 
 function page() {
   return (
-    <div><ServiceCheck/></div>
+    <div className='pt-[60px]'><ServiceCheck/></div>
   )
 }
 

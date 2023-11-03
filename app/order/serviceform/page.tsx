@@ -4,7 +4,7 @@ import React from 'react'
 
 function page() {
   return (
-    <div className='pt-12'>
+    <div className='pt-14'>
       <ServiceForm/>
       {/* <ServiceCheck/> */}
     </div>

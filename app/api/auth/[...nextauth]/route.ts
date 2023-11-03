@@ -1,23 +1,6 @@
-import NextAuth from "next-auth/next";
-import NaverProvider from "next-auth/providers/naver";
-import KakaoProvider from "next-auth/providers/kakao";
-import GoogleProvider from "next-auth/providers/google";
+import NextAuth from "next-auth"
+import { options } from "./options"
 
-const handler = NextAuth({
-  providers: [
-    NaverProvider({
-      clientId: process.env.NAVER_CLIENT_ID || "",
-      clientSecret: process.env.NAVER_CLIENT_SECRET || "",
-    }),
-    KakaoProvider({
-      clientId: process.env.KAKAO_CLIENT_ID || "",
-      clientSecret: process.env.KAKAO_CLIENT_SECRET || "",
-    }),
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
-    }),
-  ],
-});
+const handler = NextAuth(options)
 
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST }

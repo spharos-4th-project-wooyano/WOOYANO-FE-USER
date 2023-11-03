@@ -3,9 +3,8 @@ import React from "react";
 
 function SignUpProcess() {
   return (
-    <div className="flex flex-col my-16 gap-10">
-      <div className="box-border flex flex-col justify-center items-center gap-3 min-h-[30vh] bg-slate-200 rounded-[8px] text-black
-      dark:bg-slate-700 dark:text-white">
+    <div className="">
+      <div className="">
         <p>1. 회원가입</p>
         <p>2. 약관동의</p>
         <p>3. 정보입력</p>
@@ -13,8 +12,7 @@ function SignUpProcess() {
       </div>
       <Link href="/signup/cert">
         <button
-          className="box-border rounded-[8px] min-h-[35px] w-full bg-black text-white
-      dark:bg-slate-700 dark:text-white"
+          className="box-border border-1 border-black"
         >
           확인
         </button>

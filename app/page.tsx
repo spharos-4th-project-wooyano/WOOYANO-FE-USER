@@ -1,11 +1,11 @@
-import ChatComponent from '@/components/chatComponent'
+import ChatComponent from '@/components/pages/chat/chatComponent'
 import React from 'react'
 
 function Home() {
   
   return (
-    <main className='pt-10'>
-        <ChatComponent />
+    <main className=''>
+      <ChatComponent/>
     </main>
     
   )
