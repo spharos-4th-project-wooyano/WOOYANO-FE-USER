@@ -93,7 +93,7 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
               defaultZoom={12}
               defaultCenter={DEMO_EXPERIENCES[0].map}
             >
-              {DEMO_EXPERIENCES.map((item) => (
+              {DEMO_EXPERIENCES.map((item:any) => (
                 <AnyReactComponent
                   isSelected={currentHoverID === item.id}
                   key={item.id}

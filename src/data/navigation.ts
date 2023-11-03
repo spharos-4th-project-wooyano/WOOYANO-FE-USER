@@ -67,18 +67,6 @@ const demoChildMenus: NavItemType[] = [
     href: "/",
     name: "Online booking",
   },
-  {
-    id: ncNanoId(),
-    href: "/home-2",
-    name: "Real estate",
-    isNew: true,
-  },
-  {
-    id: ncNanoId(),
-    href: "/home-3",
-    name: "Home 3",
-    isNew: true,
-  },
 ];
 
 const otherPageChildMenus: NavItemType[] = [

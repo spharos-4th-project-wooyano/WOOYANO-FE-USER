@@ -8,7 +8,7 @@ import ExperiencesCard from "@/components/ExperiencesCard";
 
 export interface SectionGridFilterCardProps {
   className?: string;
-  data?: StayDataType[];
+  data?: any;
 }
 
 const DEMO_DATA: ExperiencesDataType[] = DEMO_EXPERIENCES_LISTINGS.filter(
@@ -37,7 +37,7 @@ const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
         <TabFilters />
       </div>
       <div className="grid grid-cols-1 gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-        {data.map((stay) => (
+        {data.map((stay:any) => (
           <ExperiencesCard key={stay.id} data={stay} />
         ))}
       </div>
