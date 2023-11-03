@@ -11,12 +11,12 @@ export interface PageLoginProps {}
 
 const loginSocials = [
   {
-    name: "Continue with Facebook",
+    name: "Continue with Kakao",
     href: "#",
     icon: facebookSvg,
   },
   {
-    name: "Continue with Twitter",
+    name: "Continue with Naver",
     href: "#",
     icon: twitterSvg,
   },
