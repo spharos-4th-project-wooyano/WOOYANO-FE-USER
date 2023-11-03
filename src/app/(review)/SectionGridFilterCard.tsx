@@ -9,33 +9,33 @@ export interface SectionGridFilterCardProps {
 }
 
 const DEMO_DATA: FlightCardProps["data"][] = [
-  {
-    id: "1",
-    res: "다음에도 이용할게요:)",
-    review: {
-      img: "https://t1.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/2Er3/image/lcMcrwOiQTui8T0gzba33lrqlhI.jpg",
-      name: "업체 이름 1",
-      workername : "이하늘"
-    },
-  },
-  {
-    id: "2",
-    res: "이번에만 이용할게요:(",
-    review: {
-      img: "https://www.gstatic.com/flights/airline_logos/70px/SQ.png",
-      name: "업체 이름 2",
-      workername : "임찬섭"
-    },
-  },
-  {
-    id: "3",
-    res: "다음에도 이용할게요:)",
-    review: {
-      img: "https://www.gstatic.com/flights/airline_logos/70px/multi.png",
-      name: "업체 이름 3",
-      workername : "소준영"
-    },
-  },
+  // {
+  //   id: "1",
+  //   res: "다음에도 이용할게요:)",
+  //   review: {
+  //     img: "https://t1.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/2Er3/image/lcMcrwOiQTui8T0gzba33lrqlhI.jpg",
+  //     name: "업체 이름 1",
+  //     workername : "이하늘"
+  //   },
+  // },
+  // {
+  //   id: "2",
+  //   res: "이번에만 이용할게요:(",
+  //   review: {
+  //     img: "https://www.gstatic.com/flights/airline_logos/70px/SQ.png",
+  //     name: "업체 이름 2",
+  //     workername : "임찬섭"
+  //   },
+  // },
+  // {
+  //   id: "3",
+  //   res: "다음에도 이용할게요:)",
+  //   review: {
+  //     img: "https://www.gstatic.com/flights/airline_logos/70px/multi.png",
+  //     name: "업체 이름 3",
+  //     workername : "소준영"
+  //   },
+  // },
   // {
   //   id: "1",
   //   price: "$4,100",
@@ -80,7 +80,7 @@ const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
     >
       <Heading2
         className="mt-10"
-        heading="OOO님이 작성한 리뷰"
+        // heading="OOO님이 작성한 리뷰"
         subHeading={
           <span className="block text-neutral-500 dark:text-neutral-400 mt-3">
             최근 작성한 리뷰 순으로 표시됩니다.

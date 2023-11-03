@@ -7,12 +7,12 @@ export interface FlightCardProps {
   className?: string;
   data: {
     id: string;
-    review: {
-      img: string;
+    price:string;
+    airlines: {
+      logo: string;
       name: string;
-      workername: string;
+      
     };
-    res: string;
   };
 }
 
@@ -26,14 +26,14 @@ const FlightCard: FC<FlightCardProps> = ({ className = "", data }) => {
         <div className="flex flex-col md:flex-row ">
 
           <div className="w-24 md:w-20 lg:w-24 flex-shrink-0 md:pt-7">
-            <Image
+            {/* <Image
               src={data.review.img}
               className="w-10"
               alt="review"
               sizes="40px"
               width={200}
               height={200}
-            />
+            /> */}
           </div>
           {/* <div className="flex my-5 md:my-0"> */}
             {/* <div className="flex-shrink-0 flex flex-col items-center py-2">
@@ -116,21 +116,21 @@ const FlightCard: FC<FlightCardProps> = ({ className = "", data }) => {
         <div className="flex  flex-col sm:flex-row sm:items-center space-y-6 sm:space-y-0">
           {/* LOGO IMG */}
           <div className="w-24 lg:w-32 flex-shrink-0">
-            <Image
+            {/* <Image
               src={data.review.img}
               width={1000}
               height={1000}
               className="w-10"
               alt="air-logo"
               sizes="40px"
-            />
+            /> */}
           </div>
 
           {/* FOR MOBILE RESPONSIVE */}
           <div className="block space-y-1">
             <div className="flex font-semibold">
               <div className="flex flex-col">
-                <span>{data.review.name}</span>
+                {/* <span>{data.review.name}</span> */}
                 <span>서비스명</span>
                 {/* <span className="flex items-center text-sm text-neutral-500 font-normal mt-0.5">
                   HND
@@ -145,7 +145,7 @@ const FlightCard: FC<FlightCardProps> = ({ className = "", data }) => {
             </div>
 
             <div className="text-sm text-neutral-500 font-normal mt-0.5">
-              <span className="VG3hNb">{data.review.workername} 기사</span>
+              {/* <span className="VG3hNb">{data.review.workername} 기사</span> */}
               <span className="mx-2">·</span>
               <span>서비스 일자</span>
               {/* <span className="mx-2">·</span>
@@ -181,7 +181,7 @@ const FlightCard: FC<FlightCardProps> = ({ className = "", data }) => {
           <div className="flex-[4] whitespace-nowrap sm:text-right">
             <div>
               <span className="text-xl font-semibold text-secondary-6000">
-                {data.res}
+                {/* {data.res} */}
               </span>
             </div>
             <div className="text-xs sm:text-sm text-neutral-500 font-normal mt-0.5">

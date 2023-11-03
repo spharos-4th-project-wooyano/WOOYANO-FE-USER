@@ -28,18 +28,18 @@ const solutions: SolutionItem[] = [
     href: "/moving-clean",
     icon: IconTwo,
   },
-  {
-    name: "사무실 청소",
-    description: "Office Clean",
-    href: "/office-clean",
-    icon: IconThree,
-  },
-  {
-    name: "가전 청소",
-    description: "Electronics Clean",
-    href: "/electronics-clean",
-    icon: IconFour,
-  },
+  // {
+  //   name: "사무실 청소",
+  //   description: "Office Clean",
+  //   href: "/office-clean",
+  //   icon: IconThree,
+  // },
+  // {
+  //   name: "가전 청소",
+  //   description: "Electronics Clean",
+  //   href: "/electronics-clean",
+  //   icon: IconFour,
+  // },
 ];
 
 export default function DropdownTravelers() {

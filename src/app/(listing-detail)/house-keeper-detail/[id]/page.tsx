@@ -27,7 +27,7 @@ export interface ListingStayDetailPageProps {}
 const ListingStayDetailPage = ({ params }: { params: { slug: string } }) => {
   //
 
-  console.log("params", params.id);
+  // console.log("params", params.id);
   let [isOpenModalAmenities, setIsOpenModalAmenities] = useState(false);
 
   const thisPathname = usePathname();
@@ -50,7 +50,7 @@ const ListingStayDetailPage = ({ params }: { params: { slug: string } }) => {
   useEffect(() => {
     const getData = async () => {
       const res = await fetch(
-        `https://jsonplaceholder.typicode.com/photos/${params.id}`
+        `https://jsonplaceholder.typicode.com/photos/${params.slug}`
       );
       const data = await res.json();
       console.log("data", data);

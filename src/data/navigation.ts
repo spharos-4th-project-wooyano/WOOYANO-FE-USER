@@ -308,7 +308,7 @@ export const NAVIGATION_DEMO_2: NavItemType[] = [
         name: "리뷰 관리",
       },
       { id: ncNanoId(), 
-        href: "servicehistory", 
+        href: "/servicehistory", 
         name: "서비스 내역 관리" },
 
       //

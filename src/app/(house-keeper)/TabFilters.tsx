@@ -35,8 +35,8 @@ const TabFilters = () => {
     return (
       <form className="relative z-50">
         <select name="정렬" id="sort" className="flex px-6 py-2 text-sm rounded-full border border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-6000 focus:outline-none">
-          {typeOfPaces.map((type) => (
-            <option value={type.name}>{type.name}</option>
+          {typeOfPaces.map((type,idx) => (
+            <option key={idx} value={type.name}>{type.name}</option>
           ))}
         </select>
       </form>
