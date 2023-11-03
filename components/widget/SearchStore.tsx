@@ -107,9 +107,8 @@ function SearchStore(props:{isOpened:Boolean,setIsOpened:React.Dispatch<React.Se
               </div>
             ))
           }
-          {homeAppliances(clickValue)
-          ?
-          <div className='flex flex-wrap w-full gap-2 justify-center items-center border rounded-xl border-t-white duration-700 '>
+  
+          <div className={`w-full gap-2 justify-center items-center border rounded-xl border-t-white duration-300 ${homeAppliances(clickValue)?"flex flex-wrap":"hidden"}`}>
             {
               homeAppiance.map((item:homeAppianceType)=>(
                 <div id={item.content} key={item.id} className='flex flex-col w-[45%] justify-center items-center border rounded-xl hover:bg-slate-100 p-2'>
@@ -128,9 +127,7 @@ function SearchStore(props:{isOpened:Boolean,setIsOpened:React.Dispatch<React.Se
               ))
             }
           </div>
-          :
-          null
-          }
+          
         </div>
       </div>
 
