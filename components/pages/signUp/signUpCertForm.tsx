@@ -29,7 +29,7 @@ export default function SignUpCertForm() {
   const handleEmailCheckCert = async () => {
     try {
       console.log(process.env)
-      const res = await fetch(`http://localhost:8000/api/v1/users/email/check?email=${signUpCertForm.email}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/email/check?email=${signUpCertForm.email}`);
       if (res.ok) {
         const data = await res.json();
         if (data === true) {
@@ -40,7 +40,7 @@ export default function SignUpCertForm() {
           });
         } else if (data === false) {
           const certres = await fetch(
-            `http://localhost:8000/api/v1/users/email/auth?name=${signUpCertForm.name}&email=${signUpCertForm.email}`
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/email/auth?name=${signUpCertForm.name}&email=${signUpCertForm.email}`
           );
           if (certres.ok === true) {
             //인증번호 요청 성공 유무에 대한 서버측 응답 없음
@@ -67,7 +67,7 @@ export default function SignUpCertForm() {
   const handleEmailNumCheck = async () => {
     try {
       const res = await fetch(
-        `http://localhost:8000/api/v1/users/certnum/check?email=${signUpCertForm.email}&code=${certNumber}`
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/certnum/check?email=${signUpCertForm.email}&code=${certNumber}`
       );
       if (res.ok) {
         const data = await res.json();

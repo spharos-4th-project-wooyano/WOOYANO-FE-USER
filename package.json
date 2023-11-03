@@ -12,7 +12,10 @@
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
     "@nextui-org/react": "^2.1.13",
+    "@tosspayments/payment-widget-sdk": "^0.10.0",
     "ai": "^2.2.14",
+    "axios": "^1.6.0",
+    "date-fns": "^2.30.0",
     "framer-motion": "^10.16.4",
     "moment": "^2.29.4",
     "next": "13.5.4",
@@ -25,8 +28,9 @@
     "react-dom": "^18.2.0",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.17.0",
+
     "sweetalert2": "^11.7.32",
-    "swiper": "^11.0.3"
+    "swiper": "^11.0.3",
   },
   "devDependencies": {
     "@types/node": "^20",

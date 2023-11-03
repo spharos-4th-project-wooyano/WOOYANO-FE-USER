@@ -48,7 +48,7 @@ function HomePage() {
         
         <div className='flex flex-col items-center justify-center gap-4 mb-10'>
           <div className='w-[75%]'>
-            <button className='border border-primary-500 w-full bg-primary-500 text-white font-bold text-[17px] leading-[50px] rounded-md' onClick={()=>{router.push('/chat')}}>GPT에게 질문하기</button>
+            <button className='border border-primary-500 w-full bg-primary-500 text-white font-bold text-[17px] leading-[50px] rounded-md' onClick={()=>{router.push('/')}}>GPT에게 질문하기</button>
           </div>
         </div>
       </div>

@@ -1,19 +1,19 @@
 'use client'
 import React, { useState } from 'react'
 import Sidebar from '../widget/Sidebar';
-import { useTheme } from 'next-themes';
-import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
+
 
 function HeaderTopRight() {
   const [isOpened,setIsOpened]=useState<Boolean>(false);
-  const {theme,setTheme}=useTheme();
-  const router=useRouter();
+  const pathname=usePathname();
   
   const hadleOpened=()=>{
     setIsOpened(!isOpened);
   }
 
-  
+  if(pathname==="/marketing") return null
+
   return (
     <>
       <div className='flex gap-6'>

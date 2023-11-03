@@ -12,7 +12,7 @@ function RouterBack() {
   return (
     <div className='flex justify-between px-5 py-4 rounded-b-lg fixed w-full bg-white z-[9]'>
       {
-        pathname==='/'?
+        pathname==='/'||pathname==='/marketing'?
         <TextLogo/>
         :
         <div className='w-2 ' onClick={()=>router.back()}>

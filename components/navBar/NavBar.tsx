@@ -10,7 +10,7 @@ function NavBar() {
   const router=useRouter()
   return (
     <>
-    {pathname=='/chat' || pathname==="/" || pathname==="/order/serviceform"?null:
+    {pathname=='/chat' || pathname==="/" || pathname==="/order/serviceform" || pathname==="/order/servicecheck" || pathname==="/marketing"?null:
     <div className='border h-[55px]  bottom-0 w-full bg-white rounded-t-lg shadow-inner flex justify-around gap-10 items-end text-xs fixed'>
       <div className='flex w-full justify-around'>
         <div 
