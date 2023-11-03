@@ -14,8 +14,8 @@ export interface LocationInputProps {
 
 const LocationInput: FC<LocationInputProps> = ({
   autoFocus = false,
-  placeHolder = "Location",
-  desc = "Where are you going?",
+  placeHolder = "Address",
+  desc = "주소를 입력해주세요.",
   className = "nc-flex-1.5",
   divHideVerticalLineClass = "left-10 -right-0.5",
 }) => {

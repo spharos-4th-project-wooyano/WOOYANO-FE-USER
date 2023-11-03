@@ -157,15 +157,15 @@ function PageHome() {
         <SectionHero className="pt-10 lg:pt-16 lg:pb-16" />
 
         {/* SECTION 1 */}
-        <SectionSliderNewCategories categories={DEMO_CATS} />
+        {/* <SectionSliderNewCategories categories={DEMO_CATS} /> */}
 
-        <SectionOurFeatures />
+        {/* <SectionOurFeatures /> */}
 
-        <SectionGridFeaturePlaces cardType="card2" />
+        {/* <SectionGridFeaturePlaces cardType="card2" /> */}
 
-        <SectionHowItWork />
+        {/* <SectionHowItWork /> */}
 
-        <div className="relative py-16">
+        {/* <div className="relative py-16">
           <BackgroundSection className="bg-orange-50 dark:bg-black/20" />
           <SectionSliderNewCategories
             categories={DEMO_CATS_2}
@@ -175,9 +175,9 @@ function PageHome() {
             subHeading="Popular places to stay that Chisfis recommends for you"
             sliderStyle="style2"
           />
-        </div>
+        </div> */}
 
-        <SectionSubscribe2 />
+        {/* <SectionSubscribe2 />
 
         <div className="relative py-16">
           <BackgroundSection className="bg-orange-50 dark:bg-black dark:bg-opacity-20 " />
@@ -189,21 +189,21 @@ function PageHome() {
         <div className="relative py-16">
           <BackgroundSection />
           <SectionBecomeAnAuthor />
-        </div>
+        </div> */}
 
-        <SectionSliderNewCategories
+        {/* <SectionSliderNewCategories
           heading="Explore by types of stays"
           subHeading="Explore houses based on 10 types of stays"
           categoryCardType="card5"
           itemPerRow={5}
-        />
+        /> */}
 
-        <SectionVideos />
+        {/* <SectionVideos />
 
         <div className="relative py-16">
           <BackgroundSection />
           <SectionClientSay />
-        </div>
+        </div> */}
       </div>
     </main>
   );

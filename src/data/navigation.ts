@@ -94,7 +94,7 @@ const templatesChildrenMenus: NavItemType[] = [
   {
     id: ncNanoId(),
     href: "/add-listing/1" as Route,
-    name: "Add listing",
+    name: "FAQ",
     type: "dropdown",
     children: [
       {
@@ -296,41 +296,35 @@ export const NAVIGATION_DEMO_2: NavItemType[] = [
   //
   {
     id: ncNanoId(),
-    href: "/listing-stay",
-    name: "Listing pages",
+    href: "/mypage",
+    name: "마이페이지",
     children: [
-      { id: ncNanoId(), href: "/listing-stay", name: "Stay listings" },
+      { id: ncNanoId(), 
+        href: "/", 
+        name: "회원정보 관리" },
       {
         id: ncNanoId(),
-        href: "/listing-stay-map",
-        name: "Stay listings (map)",
+        href: "/review",
+        name: "리뷰 관리",
       },
-      { id: ncNanoId(), href: "/listing-stay-detail", name: "Stay detail" },
+      { id: ncNanoId(), 
+        href: "servicehistory", 
+        name: "서비스 내역 관리" },
 
       //
       {
         id: ncNanoId(),
         href: "/listing-experiences",
-        name: "Experiences listings",
-      },
-      {
-        id: ncNanoId(),
-        href: "/listing-experiences-map",
-        name: "Experiences (map)",
-      },
-      {
-        id: ncNanoId(),
-        href: "/listing-experiences-detail",
-        name: "Experiences detail",
-      },
+        name: "찜 업체 조회",
+      }
     ],
   },
   {
     id: ncNanoId(),
     href: "/listing-car",
-    name: "Listing pages",
+    name: "공지사항",
     children: [
-      { id: ncNanoId(), href: "/listing-car", name: "Cars listings" },
+      { id: ncNanoId(), href: "/listing-car", name: "공지사항" },
       { id: ncNanoId(), href: "/listing-car-map", name: "Cars listings (map)" },
       { id: ncNanoId(), href: "/listing-car-detail", name: "Car detail" },
 
@@ -358,7 +352,7 @@ export const NAVIGATION_DEMO_2: NavItemType[] = [
   {
     id: ncNanoId(),
     href: "/author",
-    name: "Templates",
+    name: "고객센터",
     type: "dropdown",
     children: templatesChildrenMenus,
   },

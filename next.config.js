@@ -33,6 +33,10 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol:"https",
+        hostname:"t1.daumcdn.net"
+      }
     ],
   },
 };

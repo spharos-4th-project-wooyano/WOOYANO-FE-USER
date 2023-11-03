@@ -39,7 +39,7 @@ export default function TemplatesDropdown() {
                 ${open ? "" : "text-opacity-80"}
                 group h-10 sm:h-12 px-3 py-1.5 inline-flex items-center text-sm text-gray-800 dark:text-slate-300 font-medium hover:text-opacity-100 focus:outline-none `}
             >
-              <span className="">menu</span>
+              <span className="">Templates</span>
               <ChevronDownIcon
                 className={`${open ? "-rotate-180" : ""}
                   ml-1 h-4 w-4 transition ease-in-out duration-150 `}
@@ -73,9 +73,9 @@ export default function TemplatesDropdown() {
                           </div>
                         ))}
                       </div>
-                      {/* <div className="w-[35%] xl:w-[30%]">
+                      <div className="w-[35%] xl:w-[30%]">
                         <Collection />
-                      </div> */}
+                      </div>
                     </div>
                   </div>
                 </div>

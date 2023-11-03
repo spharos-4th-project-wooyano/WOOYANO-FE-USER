@@ -16,17 +16,22 @@ import Input from "@/shared/Input";
 // DEMO DATA
 const typeOfPaces = [
   {
-    name: "정렬"
+    name: "Entire place",
+    description: "Have a place to yourself",
   },
   {
-    name: "최신순"
+    name: "Private room",
+    description: "Have your own room and share some common spaces",
   },
   {
-    name: "인기순"
+    name: "Hotel room",
+    description:
+      "Have a private or shared room in a boutique hotel, hostel, and more",
   },
   {
-    name: "찜순"
-  }
+    name: "Shared room",
+    description: "Stay in a shared space, like a common room",
+  },
 ];
 
 const TabFilters = () => {
@@ -34,7 +39,7 @@ const TabFilters = () => {
   const renderTabsTypeOfPlace = () => {
     return (
       <form className="relative z-50">
-        <select name="정렬" id="sort" className="flex px-6 py-2 text-sm rounded-full border border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-6000 focus:outline-none">
+        <select name="typeOfPlace" id="typeOfPlace" className="flex items-center justify-center px-5 py-2 text-sm rounded-full border border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-6000 focus:outline-none">
           {typeOfPaces.map((type) => (
             <option value={type.name}>{type.name}</option>
           ))}

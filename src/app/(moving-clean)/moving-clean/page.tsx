@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import SectionGridFilterCard from "../SectionGridFilterCard";
+import SectionGridFilterCard from "../SectionGridFilterCard"
 
 export interface ListingStayPageProps {}
 
