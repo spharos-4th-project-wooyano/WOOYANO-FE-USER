@@ -16,9 +16,9 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Chisfis - Booking online React Next Template",
-  description: "Booking online & rental online React Next Template",
-  keywords: "Chisfis, Booking online, React Next Template",
+  title: "WOOYANO",
+  description: "우리들의 문제를 야무지게 해결해준 노련한 전문가를 찾습니다.",
+  keywords: "청소, 가사도우미, 이사/입주 청소, 사무실 청소, 가전제품 청소, Clean",
   viewport:
     "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no",
 };

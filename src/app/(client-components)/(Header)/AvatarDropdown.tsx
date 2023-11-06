@@ -31,11 +31,12 @@ export default function AvatarDropdown({ className = "" }: Props) {
                 <div className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5">
                   <div className="relative grid grid-cols-1 gap-6 bg-white dark:bg-neutral-800 py-7 px-6">
                     <div className="flex items-center space-x-3">
+                      {/* 프로필 사진 */}
                       <Avatar sizeClass="w-12 h-12" />
 
                       <div className="flex-grow">
-                        <h4 className="font-semibold">Eden Smith</h4>
-                        <p className="text-xs mt-0.5">Los Angeles, CA</p>
+                        <h4 className="font-semibold">임찬섭</h4>
+                        <p className="text-xs mt-0.5">부산광역시 수영구 민락동</p>
                       </div>
                     </div>
 
@@ -72,7 +73,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
                         </svg>
                       </div>
                       <div className="ml-4">
-                        <p className="text-sm font-medium ">{"My Account"}</p>
+                        <p className="text-sm font-medium ">{"마이페이지"}</p>
                       </div>
                     </Link>
 
@@ -124,7 +125,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
                         </svg>
                       </div>
                       <div className="ml-4">
-                        <p className="text-sm font-medium ">{"My bookings"}</p>
+                        <p className="text-sm font-medium ">{"예약정보"}</p>
                       </div>
                     </Link>
 
@@ -151,7 +152,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
                         </svg>
                       </div>
                       <div className="ml-4">
-                        <p className="text-sm font-medium ">{"Wishlist"}</p>
+                        <p className="text-sm font-medium ">{"찜"}</p>
                       </div>
                     </Link>
 
@@ -192,7 +193,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
                           </svg>
                         </div>
                         <div className="ml-4">
-                          <p className="text-sm font-medium ">{"Dark theme"}</p>
+                          <p className="text-sm font-medium ">{"다크모드"}</p>
                         </div>
                       </div>
                       <SwitchDarkMode2 />
@@ -257,7 +258,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
                         </svg>
                       </div>
                       <div className="ml-4">
-                        <p className="text-sm font-medium ">{"Help"}</p>
+                        <p className="text-sm font-medium ">{"고객센터"}</p>
                       </div>
                     </Link>
 
@@ -299,7 +300,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
                         </svg>
                       </div>
                       <div className="ml-4">
-                        <p className="text-sm font-medium ">{"Log out"}</p>
+                        <p className="text-sm font-medium ">{"로그아웃"}</p>
                       </div>
                     </Link>
                   </div>
