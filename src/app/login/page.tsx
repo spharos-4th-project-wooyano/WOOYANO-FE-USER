@@ -11,11 +11,9 @@ async function Loginpage() {
 
   return (
     <div className="container mb-24 lg:mb-32">
-      <div className="max-w-md mx-auto space-y-6">
         <LoginLogo />
         <LoginForm />
         <SnsLoginForm />
-      </div>
     </div>
   );
 }

@@ -98,13 +98,14 @@ const loginSocials = [
 function snsLogin() {
   
   return (
-    <div className="grid gap-3">
+    <div className="max-w-md  mx-auto grid gap-3">
     {loginSocials.map((item, index) => (
       <button
         key={index}
         onClick={()=>signIn( item.rootName , {redirect: item.redirect, callbackUrl : item.callbackUrl})}
-        className="flex w-full rounded-lg bg-primary-50 dark:bg-neutral-800 px-4 py-3 transform transition-transform sm:px-6 hover:translate-y-[-2px]"
+        className="w-full rounded-lg bg-primary-50 dark:bg-neutral-800 px-4 py-3 transform transition-transform sm:px-6 hover:translate-y-[-2px]"
       >
+        <div className='flex'>
         <Image
           className="flex-shrink-0 dark:invert"
           src={item.icon}
@@ -113,6 +114,7 @@ function snsLogin() {
         <h3 className="flex-grow text-center text-sm font-medium text-neutral-700 dark:text-neutral-300 sm:text-sm">
           {item.name}
         </h3>
+        </div>
       </button>
     ))}
   </div>
