@@ -16,7 +16,7 @@ let OBSERVER: IntersectionObserver | null = null;
 const PAGES_HIDE_HEADER_BORDER: PathName[] = [
   "/listing-car-detail",
   "/listing-experiences-detail",
-  "/listing-stay-detail",
+  "/house-keeper-detail",
 ];
 
 const SiteHeader = () => {

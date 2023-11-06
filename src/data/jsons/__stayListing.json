@@ -2,9 +2,9 @@
   {
     "id": "1",
     "authorId": 10,
-    "href": "/listing-stay-detail",
+    "href": "/house-keeper-detail?storeid=1",
     "listingCategoryId": 17,
-    "title": "꼼꼼한 가사도우미",
+    "title": "업체 이름 1",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/1268871/pexels-photo-1268871.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -17,7 +17,7 @@
     "like": false,
     "address": "1 Anzinger Court",
     "reviewStart": 4.8,
-    "reviewCount": 28,
+    "reviewCount": 999,
     "price": "$26",
     "maxGuests": 6,
     "bedrooms": 10,
@@ -32,7 +32,7 @@
     "date": "May 20, 2021",
     "href": "/listing-stay-detail",
     "listingCategoryId": 9,
-    "title": "Bell by Greene King Inns ",
+    "title": "업체 이름 2",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/6434634/pexels-photo-6434634.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -60,7 +60,7 @@
     "date": "May 20, 2021",
     "href": "/listing-stay-detail",
     "listingCategoryId": 11,
-    "title": "Half Moon, Sherborne by Marston's Inns ",
+    "title": "업체 이름 3",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/4186560/pexels-photo-4186560.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",

@@ -7,7 +7,7 @@ import SectionSubscribe2 from "@/components/SectionSubscribe2";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { ReactNode } from "react";
 import MobileFooterSticky from "./(components)/MobileFooterSticky";
-import { imageGallery as listingStayImageGallery } from "./listing-stay-detail/constant";
+import { imageGallery as listingStayImageGallery } from "./house-keeper-detail/constant";
 import { imageGallery as listingCarImageGallery } from "./listing-car-detail/constant";
 import { imageGallery as listingExperienceImageGallery } from "./listing-experiences-detail/constant";
 import { Route } from "next";
