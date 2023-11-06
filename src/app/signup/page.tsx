@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import facebookSvg from "@/images/Facebook.svg";
-import twitterSvg from "@/images/Twitter.svg";
+import KakaoTalksvg from "@/images/KakaoTalk.svg";
+import Naversvg from "@/images/Naver.svg";
 import googleSvg from "@/images/Google.svg";
 import Input from "@/shared/Input";
 import ButtonPrimary from "@/shared/ButtonPrimary";
@@ -13,12 +13,12 @@ const loginSocials = [
   {
     name: "Continue with Facebook",
     href: "#",
-    icon: facebookSvg,
+    icon: KakaoTalksvg,
   },
   {
     name: "Continue with Twitter",
     href: "#",
-    icon: twitterSvg,
+    icon: Naversvg,
   },
   {
     name: "Continue with Google",
