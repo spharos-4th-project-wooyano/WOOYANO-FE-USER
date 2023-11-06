@@ -10,8 +10,9 @@ import { useThemeMode } from "@/utils/useThemeMode";
 let OPTIONS = {
   root: null,
   rootMargin: "0px",
-  threshold: 1.0,
+  threshold: 0.1,
 };
+
 let OBSERVER: IntersectionObserver | null = null;
 const PAGES_HIDE_HEADER_BORDER: PathName[] = [
   "/listing-car-detail",
@@ -33,8 +34,10 @@ const SiteHeader = () => {
   const pathname = usePathname();
 
   const intersectionCallback = (entries: IntersectionObserverEntry[]) => {
+    
     entries.forEach((entry) => {
       setIsTopOfPage(entry.isIntersecting);
+      
     });
   };
 

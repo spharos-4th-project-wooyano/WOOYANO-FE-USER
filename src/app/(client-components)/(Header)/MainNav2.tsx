@@ -7,7 +7,6 @@ import AvatarDropdown from "./AvatarDropdown";
 import DropdownTravelers from "./DropdownTravelers";
 import HeroSearchForm2MobileFactory from "../(HeroSearchForm2Mobile)/HeroSearchForm2MobileFactory";
 import Link from "next/link";
-import TemplatesDropdown from "./TemplatesDropdown";
 import { Route } from "@/routers/types";
 
 export interface MainNav2Props {
@@ -33,7 +32,7 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
         </div>
         <div className="flex flex-shrink-0 justify-end flex-1 lg:flex-none text-neutral-700 dark:text-neutral-100">
           <div className="hidden lg:flex space-x-5">
-            <TemplatesDropdown />
+            {/* <TemplatesDropdown /> */}
             <AvatarDropdown />
           </div>
           <div className="flex space-x-2 lg:hidden">
