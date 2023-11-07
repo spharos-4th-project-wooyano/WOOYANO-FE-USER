@@ -1,3 +1,4 @@
+//회원정보 수정 페이지 -> 주소 관리 페이지를 기존처럼 따로 뺼것인가?
 import React, { FC } from "react";
 import Label from "@/components/Label";
 import Avatar from "@/shared/Avatar";
