@@ -1,7 +1,7 @@
 "use client";
 
 import { ClockIcon, MapPinIcon } from "@heroicons/react/24/outline";
-import React, { useState, useRef, useEffect, FC } from "react";
+import React, { useState, useRef, useEffect, FC, ReactEventHandler, ReactNode } from "react";
 import ClearDataButton from "./ClearDataButton";
 
 export interface LocationInputProps {
@@ -10,6 +10,7 @@ export interface LocationInputProps {
   className?: string;
   divHideVerticalLineClass?: string;
   autoFocus?: boolean;
+  handleSearchForm: (e:string,type:string)=>void | null
 }
 
 const LocationInput: FC<LocationInputProps> = ({
@@ -18,6 +19,7 @@ const LocationInput: FC<LocationInputProps> = ({
   desc = "서비스 위치",
   className = "nc-flex-1.5",
   divHideVerticalLineClass = "left-10 -right-0.5",
+  handleSearchForm
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -29,6 +31,12 @@ const LocationInput: FC<LocationInputProps> = ({
     setShowPopover(autoFocus);
   }, [autoFocus]);
 
+  useEffect(() => {
+    handleSearchForm(value,"위치");
+
+  }, [value]);
+  // console.log(value);
+  
   useEffect(() => {
     if (eventClickOutsideDiv) {
       document.removeEventListener("click", eventClickOutsideDiv);

@@ -31,12 +31,12 @@ const CardAuthorBox2: FC<CardAuthorBox2Props> = ({
             sizes="(max-width: 400px) 100vw, 400px"
           />
         </div>
-        <div className="absolute top-3 inset-x-3 flex">
+        {/* <div className="absolute top-3 inset-x-3 flex">
           <div className="py-1 px-4 bg-neutral-100 dark:bg-neutral-800 rounded-full flex items-center justify-center leading-none text-xs font-medium">
             {convertNumbThousand(count)}{" "}
             <ArrowRightIcon className="w-5 h-5 text-yellow-600 ml-3" />
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="pt-[1px] px-6 text-center flex flex-col items-center relative -translate-y-7">
         <svg

@@ -10,6 +10,7 @@ export interface ServiceInputProps {
   className?: string;
   divHideVerticalLineClass?: string;
   autoFocus?: boolean;
+  handleSearchForm: (e:string,type:string)=>void
 }
 
 const ServiceInput: FC<ServiceInputProps> = ({
@@ -18,6 +19,7 @@ const ServiceInput: FC<ServiceInputProps> = ({
   desc = "Where are you going?",
   className = "nc-flex-1.5",
   divHideVerticalLineClass = "left-10 -right-0.5",
+  handleSearchForm
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -28,6 +30,11 @@ const ServiceInput: FC<ServiceInputProps> = ({
   useEffect(() => {
     setShowPopover(autoFocus);
   }, [autoFocus]);
+
+  useEffect(() => {
+    handleSearchForm(value,'서비스')
+
+  }, [value]);
 
   useEffect(() => {
     if (eventClickOutsideDiv) {

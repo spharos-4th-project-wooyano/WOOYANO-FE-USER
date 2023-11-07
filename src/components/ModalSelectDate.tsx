@@ -27,7 +27,7 @@ const ModalSelectDate: FC<ModalSelectDateProps> = ({ renderChildren }) => {
   };
 
   // FOR RESET ALL DATA WHEN CLICK CLEAR BUTTON
-  //
+  // 
   function closeModal() {
     setShowModal(false);
   }

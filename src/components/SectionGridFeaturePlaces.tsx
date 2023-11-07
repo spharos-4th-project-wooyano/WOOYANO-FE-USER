@@ -24,7 +24,7 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
   stayListings = DEMO_DATA,
   gridClass = "",
   heading = "우수 서비스 업체",
-  subHeading = "우수 서비스 업체",
+  subHeading = "이번달 우수 업체",
   headingIsCenter,
   tabs = ["가사도우미", "이사/입주", "사무실", "가전제품"],
   cardType = "card2",

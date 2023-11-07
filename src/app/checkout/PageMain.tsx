@@ -16,6 +16,7 @@ import converSelectedDateToString from "@/utils/converSelectedDateToString";
 import ModalSelectGuests from "@/components/ModalSelectGuests";
 import Image from "next/image";
 import { GuestsObject } from "../(client-components)/type";
+import imageURL from "@/images/avatars/Image-1.png"
 
 export interface CheckOutPagePageMainProps {
   className?: string;
@@ -35,6 +36,8 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
     guestInfants: 1,
   });
 
+  // const storeData = JSON.parse(localStorage.getItem("searchData") as string);
+
   const renderSidebar = () => {
     return (
       <div className="w-full flex flex-col sm:rounded-2xl lg:border border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-8 px-0 sm:p-6 xl:p-8">
@@ -44,29 +47,27 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
               <Image
                 alt=""
                 fill
-                sizes="200px"
-                src="https://images.pexels.com/photos/6373478/pexels-photo-6373478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                sizes="100px"
+                src={imageURL}
               />
             </div>
           </div>
           <div className="py-5 sm:px-5 space-y-3">
             <div>
               <span className="text-sm text-neutral-500 dark:text-neutral-400 line-clamp-1">
-                Hotel room in Tokyo, Jappan
+              {/* {storeData.service} */}
+              asadsd
               </span>
               <span className="text-base font-medium mt-1 block">
-                The Lounge & Bar
+                {"임찬섭 가사도우미"}
               </span>
             </div>
-            <span className="block  text-sm text-neutral-500 dark:text-neutral-400">
-              2 beds · 2 baths
-            </span>
             <div className="w-10 border-b border-neutral-200  dark:border-neutral-700"></div>
-            <StartRating />
+            {/* <StartRating /> */}
           </div>
         </div>
         <div className="flex flex-col space-y-4">
-          <h3 className="text-2xl font-semibold">Price detail</h3>
+          <h3 className="text-2xl font-semibold">가격</h3>
           <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
             <span>$19 x 3 day</span>
             <span>$57</span>
@@ -90,23 +91,23 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
     return (
       <div className="w-full flex flex-col sm:rounded-2xl sm:border border-neutral-200 dark:border-neutral-700 space-y-8 px-0 sm:p-6 xl:p-8">
         <h2 className="text-3xl lg:text-4xl font-semibold">
-          Confirm and payment
+          서비스 신청
         </h2>
         <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
         <div>
           <div>
-            <h3 className="text-2xl font-semibold">Your trip</h3>
+            <h3 className="text-2xl font-semibold">날짜 및 서비스</h3>
             <NcModal
               renderTrigger={(openModal) => (
                 <span
                   onClick={() => openModal()}
                   className="block lg:hidden underline  mt-1 cursor-pointer"
                 >
-                  View booking details
+                  서비스 내역 상세보기
                 </span>
               )}
               renderContent={renderSidebar}
-              modalTitle="Booking details"
+              modalTitle="서비스 상세 내역"
             />
           </div>
           <div className="mt-6 border border-neutral-200 dark:border-neutral-700 rounded-3xl flex flex-col sm:flex-row divide-y sm:divide-x sm:divide-y-0 divide-neutral-200 dark:divide-neutral-700 overflow-hidden z-10">
