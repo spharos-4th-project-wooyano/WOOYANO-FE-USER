@@ -25,7 +25,7 @@ const solutions: SolutionItem[] = [
   {
     name: "입주/이사 청소",
     description: "Move in",
-    href: "/listing-real-estate",
+    href: "/moving-clean",
     icon: IconTwo,
   },
   {
