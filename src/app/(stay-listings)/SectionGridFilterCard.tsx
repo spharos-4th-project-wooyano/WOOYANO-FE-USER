@@ -4,8 +4,10 @@ import { StayDataType } from "@/data/types";
 import Pagination from "@/shared/Pagination";
 import TabFilters from "./TabFilters";
 import Heading2 from "@/shared/Heading2";
-import StayCard2 from "@/components/StayCard2";
+
+
 import DropDownOption from "@/components/button/dropDownoption";
+import StayCard2 from "@/components/StayCard2";
 
 export interface SectionGridFilterCardProps {
   className?: string;
