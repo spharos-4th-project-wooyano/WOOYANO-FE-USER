@@ -8,7 +8,7 @@ interface chgPwform {
   newPassword: string;
   passwordCheck: string;}
 
-export default function chgPwForm() {
+export default function ChgPwForm() {
   const [chgPwform, setChgPwform] = useState<chgPwform>({
     newPassword: "",
     passwordCheck: "",
