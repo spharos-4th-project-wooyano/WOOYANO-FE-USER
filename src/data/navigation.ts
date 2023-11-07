@@ -175,17 +175,17 @@ export const NAVIGATION_DEMO: NavItemType[] = [
     children: [
       {
         id: ncNanoId(),
-        href: "/listing-stay",
-        name: "Stay listings",
+        href: "/house-keeper",
+        name: "house-keeper",
         type: "dropdown",
         children: [
-          { id: ncNanoId(), href: "/listing-stay", name: "Stay page" },
+          { id: ncNanoId(), href: "/house-keeper", name: "house-keeper page" },
           {
             id: ncNanoId(),
             href: "/listing-stay-map",
             name: "Stay page (map)",
           },
-          { id: ncNanoId(), href: "/listing-stay-detail", name: "Stay Detail" },
+          { id: ncNanoId(), href: "/house-keeper-detail", name: "house-keeper Detail" },
         ],
       },
 
@@ -284,16 +284,16 @@ export const NAVIGATION_DEMO_2: NavItemType[] = [
   //
   {
     id: ncNanoId(),
-    href: "/listing-stay",
+    href: "/house-keeper",
     name: "Listing pages",
     children: [
-      { id: ncNanoId(), href: "/listing-stay", name: "Stay listings" },
+      { id: ncNanoId(), href: "/house-keeper", name: "Stay listings" },
       {
         id: ncNanoId(),
         href: "/listing-stay-map",
         name: "Stay listings (map)",
       },
-      { id: ncNanoId(), href: "/listing-stay-detail", name: "Stay detail" },
+      { id: ncNanoId(), href: "/house-keeper-detail", name: "Stay detail" },
 
       //
       {
