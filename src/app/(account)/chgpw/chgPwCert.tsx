@@ -1,3 +1,5 @@
+import ButtonPrimary from "@/shared/ButtonPrimary";
+import Input from "@/shared/Input";
 import React from "react";
 
 export default function ChgPwCert() {
