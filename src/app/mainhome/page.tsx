@@ -153,7 +153,7 @@ function MaintHome() {
 
         {/* SECTION 1 */}
         {/* 우수 서비스 업체 */}
-        <SectionGridFeaturePlaces cardType="card1" />
+        <SectionGridFeaturePlaces cardType="card2" />
         
         {/* 우수 서비스 업체 기사목록 */}
         <div className="relative py-16">
