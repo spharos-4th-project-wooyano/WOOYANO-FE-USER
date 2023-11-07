@@ -1,8 +1,31 @@
+"use client";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import Input from "@/shared/Input";
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 
-export default function ChgPwCert() {
+//todo : 비밀번호 형식 유효성 검사, 비밀번호 확인 검사, 새 비밀번호 post fetch, 에러처리, 변경 결과 alert
+interface chgPwform {
+  newPassword: string;
+  passwordCheck: string;}
+
+export default function chgPwForm() {
+  const [chgPwform, setChgPwform] = useState<chgPwform>({
+    newPassword: "",
+    passwordCheck: "",
+  });
+
+  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const value = e.target.value;
+    const id = e.target.id;
+    setChgPwform({
+      ...chgPwform,
+      [id]: value,
+    });
+    console.log(chgPwform);
+  };
+
+
   return (
     <div className="container mb-6 lg:mb-12">
       <div className="max-w-md mx-auto space-y-6">
@@ -18,33 +41,35 @@ export default function ChgPwCert() {
         <form className="grid grid-cols-1 gap-6" action="#" method="post">
           <label className="block">
             <span className="flex justify-between items-center text-neutral-800 dark:text-neutral-200">
-              Name
+              New Password
             </span>
             <Input
-              id="name"
+              id="newPassword"
               type="text"
-              placeholder="서비스에 가입된 이름을 입력해주세요."
+              placeholder="새 비밀번호를 입력하세요."
               className="mt-1"
-              // value={findIdForm.name}
-              // onChange={handleOnChange}
+              value={chgPwform.newPassword}
+              onChange={handleOnChange}
             />
           </label>
           <label className="block">
             <span className="flex justify-between items-center text-neutral-800 dark:text-neutral-200">
-              Phone Number
+              Password Check
             </span>
             <Input
-              id="phoneNumber"
+              id="passwordCheck"
               type="text"
-              placeholder="'-'없이 전부 입력해주세요."
+              placeholder="한번 더 입력해주세요."
               className="mt-1 mb-6"
-              // value={findIdForm.phoneNumber}
-              // onChange={handleOnChange}
+              value={chgPwform.passwordCheck}
+              onChange={handleOnChange}
             />
           </label>
-          <ButtonPrimary>Continue</ButtonPrimary>
+          <ButtonPrimary
+          // onClick={}
+          href="/"
+          >Continue</ButtonPrimary>
         </form>
       </div>
     </div>
-  );
-}
+  );}

@@ -1,5 +1,4 @@
 import React from "react";
-import ChgPwForm from "./chgPwForm";
 import ChgPwCert from "./chgPwCert";
 
 export default function ChgPwPage() {
