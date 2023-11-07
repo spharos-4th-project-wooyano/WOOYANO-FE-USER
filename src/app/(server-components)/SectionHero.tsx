@@ -14,8 +14,8 @@ const SectionHero: FC<SectionHeroProps> = ({ className = "" }) => {
     <div
       className={`nc-SectionHero flex flex-col-reverse lg:flex-col relative ${className}`}
     >
-      <div className="absolute z-0 "
-        style={{left: '50%', bottom: "60px", transform: 'translateX(-50%)'}}
+      <div className="absolute z-0 xl:bottom-[60px] lg:bottom-[40px] md:bottom-[107px] sm:bottom-[95px] max-sm:hidden"
+        style={{left: '50%',  transform: 'translateX(-50%)'}}
       >
         <Charactor />
       </div>

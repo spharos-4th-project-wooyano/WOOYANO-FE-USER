@@ -1,4 +1,4 @@
-import { StarIcon } from "@heroicons/react/24/solid";
+import { StarIcon,HandThumbUpIcon } from "@heroicons/react/24/solid";
 import React, { FC } from "react";
 
 export interface StartRatingProps {
@@ -18,9 +18,8 @@ const StartRating: FC<StartRatingProps> = ({
       data-nc-id="StartRating"
     >
       <div className="pb-[2px]">
-        <StarIcon className="w-[18px] h-[18px] text-orange-500" />
+        <HandThumbUpIcon className="w-[18px] h-[18px] text-cyan-500" />
       </div>
-      <span className="font-medium ">{point}</span>
       <span className="text-neutral-500 dark:text-neutral-400">
         ({reviewCount})
       </span>

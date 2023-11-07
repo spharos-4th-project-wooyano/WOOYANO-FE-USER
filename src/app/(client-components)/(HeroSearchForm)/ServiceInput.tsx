@@ -1,10 +1,10 @@
 "use client";
 
-import { ClockIcon, MapPinIcon } from "@heroicons/react/24/outline";
+import { ClockIcon, MapPinIcon,HomeIcon } from "@heroicons/react/24/outline";
 import React, { useState, useRef, useEffect, FC } from "react";
 import ClearDataButton from "./ClearDataButton";
 
-export interface LocationInputProps {
+export interface ServiceInputProps {
   placeHolder?: string;
   desc?: string;
   className?: string;
@@ -12,10 +12,10 @@ export interface LocationInputProps {
   autoFocus?: boolean;
 }
 
-const LocationInput: FC<LocationInputProps> = ({
+const ServiceInput: FC<ServiceInputProps> = ({
   autoFocus = false,
-  placeHolder = "위치",
-  desc = "서비스 위치",
+  placeHolder = "서비스 선택",
+  desc = "Where are you going?",
   className = "nc-flex-1.5",
   divHideVerticalLineClass = "left-10 -right-0.5",
 }) => {
@@ -23,7 +23,7 @@ const LocationInput: FC<LocationInputProps> = ({
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [value, setValue] = useState("");
-  const [showPopover, setShowPopover] = useState(autoFocus);  // Prpover을 true면 열기 false면 닫기
+  const [showPopover, setShowPopover] = useState(autoFocus);
 
   useEffect(() => {
     setShowPopover(autoFocus);
@@ -48,7 +48,7 @@ const LocationInput: FC<LocationInputProps> = ({
 
   const eventClickOutsideDiv = (event: MouseEvent) => {
     if (!containerRef.current) return;
-    // 마우스 이벤트가 안에 있을때는 그냥 return한다.
+    // CLICK IN_SIDE
     if (!showPopover || containerRef.current.contains(event.target as Node)) {
       return;
     }
@@ -65,14 +65,14 @@ const LocationInput: FC<LocationInputProps> = ({
     return (
       <>
         <h3 className="block mt-2 sm:mt-0 px-4 sm:px-8 font-semibold text-base sm:text-lg text-neutral-800 dark:text-neutral-100">
-          Recent searches
+          Service Type
         </h3>
         <div className="mt-2">
           {[
-            "부산 해운대구 우동 스파로스 아카데미",
-            "부산 수영구 민락동 우리집",
-            "부산 해운대구 벡스코 착한정식",
-            "부산 해운대구 와",
+            "가사도우미 청소",
+            "이사/입주 청소",
+            "사무실 청소",
+            "가전제품 청소",
           ].map((item) => (
             <span
               onClick={() => handleSelectLocation(item)}
@@ -80,7 +80,7 @@ const LocationInput: FC<LocationInputProps> = ({
               className="flex px-4 sm:px-8 items-center space-x-3 sm:space-x-4 py-4 hover:bg-neutral-100 dark:hover:bg-neutral-700 cursor-pointer"
             >
               <span className="block text-neutral-400">
-                <ClockIcon className="h-4 sm:h-6 w-4 sm:w-6" />
+                <HomeIcon className="h-4 sm:h-6 w-4 sm:w-6" />
               </span>
               <span className=" block font-medium text-neutral-700 dark:text-neutral-200">
                 {item}
@@ -96,10 +96,10 @@ const LocationInput: FC<LocationInputProps> = ({
     return (
       <>
         {[
-          "부산 해운대구 우동 스파로스 아카데미",
-          "부산 수영구 민락동 우리집",
-          "부산 해운대구 벡스코 착한정식",
-          "부산 해운대구 와",
+          "가사도우미 청소",
+          "이사/입주 청소",
+          "사무실 청소",
+          "가전제품 청소",
         ].map((item) => (
           <span
             onClick={() => handleSelectLocation(item)}
@@ -107,7 +107,7 @@ const LocationInput: FC<LocationInputProps> = ({
             className="flex px-4 sm:px-8 items-center space-x-3 sm:space-x-4 py-4 hover:bg-neutral-100 dark:hover:bg-neutral-700 cursor-pointer"
           >
             <span className="block text-neutral-400">
-              <ClockIcon className="h-4 w-4 sm:h-6 sm:w-6" />
+              <HomeIcon className="h-4 w-4 sm:h-6 sm:w-6" />
             </span>
             <span className="block font-medium text-neutral-700 dark:text-neutral-200">
               {item}
@@ -168,4 +168,4 @@ const LocationInput: FC<LocationInputProps> = ({
   );
 };
 
-export default LocationInput;
+export default ServiceInput;

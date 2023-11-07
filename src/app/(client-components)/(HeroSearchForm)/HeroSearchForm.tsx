@@ -16,7 +16,7 @@ export interface HeroSearchFormProps {
 
 const HeroSearchForm: FC<HeroSearchFormProps> = ({
   className = "",
-  currentTab = "Stays",
+  currentTab = "Experiences",
   currentPage,
 }) => {
 
@@ -24,7 +24,10 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
     <div
       className={`nc-HeroSearchForm w-full max-w-6xl py-5 lg:py-0 ${className}`}
     >
+      {/* <ExperiencesSearchForm/> */}
       <StaySearchForm />
+      {/* <RentalCarSearchForm/> */}
+      {/* <FlightSearchForm /> */}
     </div>
   );
 };
