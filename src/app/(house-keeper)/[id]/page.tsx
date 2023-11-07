@@ -19,8 +19,9 @@ import { usePathname, useRouter } from "next/navigation";
 import { Amenities_demos, PHOTOS } from "./constant";
 import StayDatesRangeInput from "./StayDatesRangeInput";
 import GuestsInput from "./GuestsInput";
-import SectionDateRange from "../SectionDateRange";
+// import SectionDateRange from "/SectionDateRange";
 import { Route } from "next";
+import SectionDateRange from "@/app/(listing-detail)/SectionDateRange";
 
 export interface ListingStayDetailPageProps {}
 

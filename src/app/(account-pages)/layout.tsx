@@ -1,3 +1,4 @@
+//사용자 세이브 리스트 -> 찜 리스트로 활용
 import React, { FC } from "react";
 import { Nav } from "./(components)/Nav";
 

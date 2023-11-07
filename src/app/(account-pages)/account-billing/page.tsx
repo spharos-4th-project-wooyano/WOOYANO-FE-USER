@@ -1,3 +1,4 @@
+// 사용자 결제 방법 추가 페이지 -> 필요없어 보임
 import React from "react";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 

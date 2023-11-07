@@ -87,6 +87,7 @@ export interface StayDataType {
     lat: number;
     lng: number;
   };
+  favorite: number;
 }
 
 //

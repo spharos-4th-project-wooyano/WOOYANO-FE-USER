@@ -2,11 +2,12 @@ import React, { FC } from "react";
 import GallerySlider from "@/components/GallerySlider";
 import { DEMO_STAY_LISTINGS } from "@/data/listings";
 import { StayDataType } from "@/data/types";
-import StartRating from "@/components/StartRating";
 import BtnLikeIcon from "@/components/BtnLikeIcon";
-import SaleOffBadge from "@/components/SaleOffBadge";
 import Badge from "@/shared/Badge";
 import Link from "next/link";
+import Image from "next/image";
+import { FaThumbsUp, FaHeart } from "react-icons/fa";
+
 
 export interface StayCard2Props {
   className?: string;
@@ -23,18 +24,19 @@ const StayCard2: FC<StayCard2Props> = ({
 }) => {
   const {
     galleryImgs,
-    listingCategory,
-    address,
+    // listingCategory,
+    // address,
     title,
-    bedrooms,
+    // bedrooms,
     href,
     like,
-    saleOff,
+    // saleOff,
     isAds,
-    price,
+    // price,
     reviewStart,
     reviewCount,
     id,
+    favorite,
   } = data;
 
   const renderSliderGallery = () => {
@@ -49,8 +51,8 @@ const StayCard2: FC<StayCard2Props> = ({
           href={href}
         />
         <BtnLikeIcon isLiked={like} className="absolute right-3 top-3 z-[1]" />
-
         {/* 세일표시 */}
+
         {/* {saleOff && <SaleOffBadge className="absolute left-3 top-3" />} */}
       </div>
     );
@@ -72,6 +74,7 @@ const StayCard2: FC<StayCard2Props> = ({
               <span className="line-clamp-1">{title}</span>
             </h2>
           </div>
+
           <div className="flex items-center justify-between text-neutral-500 dark:text-neutral-400 text-sm space-x-1.5">
 
             <div className="flex">
@@ -98,25 +101,21 @@ const StayCard2: FC<StayCard2Props> = ({
               )}
               <span className="">{address}</span>
             </div>
-            {!!reviewStart && (
-              <StartRating reviewCount={reviewCount} point={reviewStart} />
-            )}
+            
+          <div className="flex justify-between items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-1.5">
+            <div className="flex gap-3">
+              <FaThumbsUp className="fill-sky-500"/>
+              <span className="">{reviewCount}</span>
+            </div>
+            
+            <div className="flex gap-2">
+            <FaHeart className="fill-red-600"/>
+            <p>{favorite}</p>
+            </div>
           </div>
-
-        </div>
+      </div>
         <div className="w-14 border-b border-neutral-100 dark:border-neutral-800"></div>
-        <div className="flex justify-between items-center">
-          {/* <span className="text-base font-semibold">
-            {price}
-            {` `}
-            {size === "default" && (
-              <span className="text-sm text-neutral-500 dark:text-neutral-400 font-normal">
-                /night
-              </span>
-            )}
-          </span> */}
-
-        </div>
+        
       </div>
     );
   };
