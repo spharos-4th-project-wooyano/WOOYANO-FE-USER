@@ -9,6 +9,14 @@ import DatePickerCustomHeaderTwoMonth from "@/components/DatePickerCustomHeaderT
 import DatePickerCustomDay from "@/components/DatePickerCustomDay";
 import DatePicker from "react-datepicker";
 import ClearDataButton from "../ClearDataButton";
+import Calendar from 'react-calendar';
+import moment from 'moment';
+import './serviceCalenderModule.css';
+
+
+// type ValuePiece = Date | null;
+
+// type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 export interface StayDatesRangeInputProps {
   className?: string;
@@ -23,16 +31,14 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
   buttonSubmitHref = "/listing-stay-map",
   hasButtonSubmit = true,
 }) => {
-  const [startDate, setStartDate] = useState<Date | null>(
-    new Date("2023/02/06")
-  );
-  const [endDate, setEndDate] = useState<Date | null>(new Date("2023/02/23"));
-  //
 
-  const onChangeDate = (dates: [Date | null, Date | null]) => {
-    const [start, end] = dates;
-    setStartDate(start);
-    setEndDate(end);
+
+
+  const [date, setDate] = useState<Date | null>(new Date());
+
+  const onChangeDate = (dates:Date|null) => {
+    const date = dates;
+    setDate(date)
   };
 
   const renderInput = () => {
@@ -43,20 +49,14 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
         </div>
         <div className="flex-grow text-left">
           <span className="block xl:text-lg font-semibold">
-            {startDate?.toLocaleDateString("en-US", {
+            {date?.toLocaleDateString("ko-kr", {
               month: "short",
               day: "2-digit",
-            }) || "Add dates"}
-            {endDate
-              ? " - " +
-                endDate?.toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "2-digit",
-                })
-              : ""}
+            }) || "날짜 선택"}
+
           </span>
           <span className="block mt-1 text-sm text-neutral-400 leading-none font-light">
-            {"Check in - Check out"}
+            {"Service Day"}
           </span>
         </div>
       </>
@@ -67,23 +67,21 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
     <Popover className={`StayDatesRangeInput z-10 relative flex ${className}`}>
       {({ open }) => (
         <>
-        <div
-            className={`flex-1 z-10 flex items-center focus:outline-none ${
-              open ? "nc-hero-field-focused" : ""
-            }`}
+          <div
+            className={`flex-1 z-10 flex items-center focus:outline-none ${open ? "nc-hero-field-focused" : ""
+              }`}
           >
-          <Popover.Button
-            className={`flex-1 z-10 flex relative ${fieldClassName} items-center space-x-3 focus:outline-none ${
-              open ? "nc-hero-field-focused" : ""
-            }`}
-          >
-            {renderInput()}
-            {startDate && open && (
-              <ClearDataButton onClick={() => onChangeDate([null, null])} />
-            )}
-          </Popover.Button>
-           {/* BUTTON SUBMIT OF FORM */}
-           {hasButtonSubmit && (
+            <Popover.Button
+              className={`flex-1 z-10 flex relative ${fieldClassName} items-center space-x-3 focus:outline-none ${open ? "nc-hero-field-focused" : ""
+                }`}
+            >
+              {renderInput()}
+              {date && open && (
+                <ClearDataButton onClick={() => onChangeDate(null)} />
+              )}
+            </Popover.Button>
+            {/* BUTTON SUBMIT OF FORM */}
+            {hasButtonSubmit && (
               <div className="pr-2 xl:pr-4">
                 <ButtonSubmit href={buttonSubmitHref} />
               </div>
@@ -102,24 +100,19 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
             leaveFrom="opacity-100 translate-y-0"
             leaveTo="opacity-0 translate-y-1"
           >
-            <Popover.Panel className="absolute left-1/2 z-10 mt-3 top-full w-screen max-w-sm -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl">
-              <div className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5 bg-white dark:bg-neutral-800 p-8">
-                <DatePicker
-                  selected={startDate}
-                  onChange={onChangeDate}
-                  startDate={startDate}
-                  endDate={endDate}
-                  selectsRange
-                  monthsShown={2}
-                  showPopperArrow={false}
-                  inline
-                  renderCustomHeader={(p) => (
-                    <DatePickerCustomHeaderTwoMonth {...p} />
-                  )}
-                  renderDayContents={(day, date) => (
-                    <DatePickerCustomDay dayOfMonth={day} date={date} />
-                  )}
-                />
+            <Popover.Panel className="absolute xl:left-1/2 z-10 mt-3 top-full min-w-[350px] -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl">
+              <div className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5 bg-white dark:bg-neutral-800 p-6">
+                <div className='w-full'>
+                  <Calendar
+                    onChange={onChangeDate as any}
+                    formatMonthYear={(locale, date) => moment(date).format('YYYY.MM')}
+                    value={date}
+                    calendarType='gregory'
+                    formatDay={(locale, date) => moment(date).format('D')}
+                  />
+
+                </div>
+                {/* <div className='mt-[40px]'>{date?.toLocaleString()}</div> */}
               </div>
             </Popover.Panel>
           </Transition>

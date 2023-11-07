@@ -1,10 +1,10 @@
 import React, { FC, ReactNode } from "react";
 import { DEMO_STAY_LISTINGS } from "@/data/listings";
 import { StayDataType } from "@/data/types";
-import ButtonPrimary from "@/shared/ButtonPrimary";
 import HeaderFilter from "./HeaderFilter";
 import StayCard from "./StayCard";
 import StayCard2 from "./StayCard2";
+import StayCardH from "./StayCardH";
 
 // OTHER DEMO WILL PASS PROPS
 const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 8);
@@ -23,10 +23,10 @@ export interface SectionGridFeaturePlacesProps {
 const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
   stayListings = DEMO_DATA,
   gridClass = "",
-  heading = "Featured places to stay",
-  subHeading = "Popular places to stay that Chisfis recommends for you",
+  heading = "우수 서비스 업체",
+  subHeading = "우수 서비스 업체",
   headingIsCenter,
-  tabs = ["New York", "Tokyo", "Paris", "London"],
+  tabs = ["가사도우미", "이사/입주", "사무실", "가전제품"],
   cardType = "card2",
 }) => {
   const renderCard = (stay: StayDataType) => {
@@ -38,7 +38,7 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
       case "card2":
         CardName = StayCard2;
         break;
-
+      
       default:
         CardName = StayCard;
     }
@@ -59,9 +59,9 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
       >
         {stayListings.map((stay) => renderCard(stay))}
       </div>
-      <div className="flex mt-16 justify-center items-center">
+      {/* <div className="flex mt-16 justify-center items-center">
         <ButtonPrimary loading>Show me more</ButtonPrimary>
-      </div>
+      </div> */}
     </div>
   );
 };

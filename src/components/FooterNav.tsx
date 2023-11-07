@@ -50,6 +50,7 @@ const FooterNav = () => {
 
   const pathname = usePathname();
 
+  
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.addEventListener("scroll", handleEvent);
@@ -57,6 +58,7 @@ const FooterNav = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  
   const handleEvent = () => {
     if (typeof window !== "undefined") {
       window.requestAnimationFrame(showHideHeaderMenu);
@@ -126,7 +128,7 @@ const FooterNav = () => {
       </div>
     );
   };
-
+  if (pathname==='/') return null
   return (
     <div
       ref={containerRef}
