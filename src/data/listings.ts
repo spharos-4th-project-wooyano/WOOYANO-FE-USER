@@ -57,6 +57,7 @@ const DEMO_STAY_LISTINGS = __stayListing.map((post, index): StayDataType => {
     author: DEMO_AUTHORS.filter((user) => user.id === post.authorId)[0],
     listingCategory: category,
     href: post.href as Route,
+    favorite: post.favorite
   };
 });
 

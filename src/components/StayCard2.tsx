@@ -2,13 +2,12 @@ import React, { FC } from "react";
 import GallerySlider from "@/components/GallerySlider";
 import { DEMO_STAY_LISTINGS } from "@/data/listings";
 import { StayDataType } from "@/data/types";
-import StartRating from "@/components/StartRating";
 import BtnLikeIcon from "@/components/BtnLikeIcon";
-import SaleOffBadge from "@/components/SaleOffBadge";
 import Badge from "@/shared/Badge";
 import Link from "next/link";
 import Image from "next/image";
-import Good from "@/images/ui/good";
+import { FaThumbsUp, FaHeart } from "react-icons/fa";
+
 
 export interface StayCard2Props {
   className?: string;
@@ -32,11 +31,12 @@ const StayCard2: FC<StayCard2Props> = ({
     href,
     like,
     // saleOff,
-    // isAds,
+    isAds,
     // price,
     reviewStart,
     reviewCount,
     id,
+    favorite,
   } = data;
 
   const renderSliderGallery = () => {
@@ -63,7 +63,7 @@ const StayCard2: FC<StayCard2Props> = ({
             {listingCategory.name} · {bedrooms} beds
           </span> */}
           <div className="flex items-center space-x-2">
-            {/* {isAds && <Badge name="ADS" color="green" />} */}
+            {isAds && <Badge name="ADS" color="green" />}
             <h2
               className={`font-semibold capitalize text-neutral-900 dark:text-white ${
                 size === "default" ? "text-base" : "text-base"
@@ -72,18 +72,20 @@ const StayCard2: FC<StayCard2Props> = ({
               <span className="line-clamp-1">{title}</span>
             </h2>
           </div>
-          <div className="flex items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-1.5">
-            <div>
-            <Good/>
+          <div className="flex justify-between items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-1.5">
+            <div className="flex gap-3">
+              <FaThumbsUp className="fill-sky-500"/>
+              <span className="">{reviewCount}</span>
             </div>
-            <span className="">{reviewCount}</span>
-        </div>
+            
+            <div className="flex gap-2">
+            <FaHeart className="fill-red-600"/>
+            <p>{favorite}</p>
+            </div>
+          </div>
       </div>
         <div className="w-14 border-b border-neutral-100 dark:border-neutral-800"></div>
         <div className="flex justify-between items-center">
-          <div>
-            찜 수
-          </div>
           {/* <span className="text-base font-semibold"> */}
             {/* {price} */}
             {/* {` `}

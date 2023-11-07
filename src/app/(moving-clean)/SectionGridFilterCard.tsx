@@ -25,7 +25,7 @@ const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
     >
       <Heading2 />
       
-      <div className = "flex justify-end mb-8 lg:mb-11">
+      <div className="mb-8 lg:mb-11">
         {/* <TabFilters /> */}
         <DropDownOption/>
       </div>
