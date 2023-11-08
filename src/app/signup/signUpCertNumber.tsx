@@ -1,8 +1,11 @@
 'use client'
 import Input from '@/shared/Input';
+import { SignUpType } from '@/types/SignUpType';
 import React, { useRef, useState, ChangeEvent } from 'react';
 
-export default function SignUpCertNumber() {
+export default function SignUpCertNumber(props: {signUpData: SignUpType, setSignUpData: React.Dispatch<React.SetStateAction<SignUpType>>}) {
+  const {signUpData,setSignUpData}=props;
+  
   const inputRefs = [useRef<HTMLInputElement | null>(null), useRef<HTMLInputElement | null>(null), useRef<HTMLInputElement | null>(null), useRef<HTMLInputElement | null>(null)];
   const [values, setValues] = useState<string[]>(['', '', '', '']);
   const certNumber = values.join('');
@@ -14,11 +17,12 @@ export default function SignUpCertNumber() {
       newValues[index] = value;
       return newValues;
     });
-
-    // 자동으로 포커스를 다음 입력칸으로 이동
     if (value && index < inputRefs.length - 1) {
       inputRefs[index + 1].current?.focus();
     }
+    setSignUpData({
+      ...signUpData, emailCertNumber:certNumber
+    })
   };
 
 
@@ -52,6 +56,7 @@ export default function SignUpCertNumber() {
                 />
               ))}
             </div>
+            {/* <ButtonPrimary onClick={()=>{console.log('certNumber:'+certNumber)}}>Test</ButtonPrimary> */}
           </div>
 
           <p>

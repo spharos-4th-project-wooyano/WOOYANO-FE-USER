@@ -6,35 +6,15 @@ import Input from "@/shared/Input";
 import { DaumAddressType } from "@/types/DaumAddrssType";
 import Swal from "sweetalert2";
 import PostCodeDaum from "@/components/widget/postCodeDaum";
+import { SignUpType } from "@/types/SignUpType";
 
 //todo : 이전단계에서 이름과 이메일 받아오기, 비밀번호 재입력 및 확인 , 각 입력에 대한 유효성 검사
-
-interface signUpform {
-  email: string;
-  password: string;
-  username: string;
-  nickname: string;
-  birthday: string;
-  phone: string;
-  localAddress: string;
-  extraAddress: string;
-  localCode: number;
-}
-
-const SingUpForm = () => {
+const SingUpForm = (props: {signUpData: SignUpType, setSignUpData: React.Dispatch<React.SetStateAction<SignUpType>>}) => {
+  
   const [isView, setIsView] = useState<boolean>(false);
   const [addressInfo, setAddressInfo] = useState<DaumAddressType>();
-  const [signUpForm, setSignUpForm] = useState<signUpform>({
-    email: "",
-    password: "",
-    username: "",
-    nickname: "",
-    birthday: "",
-    phone: "",
-    localAddress: "",
-    extraAddress: "",
-    localCode: 0,
-  });
+  const {signUpData, setSignUpData} = props;
+
   //회원가입 정보 업데이트
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -43,13 +23,13 @@ const SingUpForm = () => {
     if (id === "birthday") {
       // 생년월일 필드인 경우 입력값에서 하이픈을 제거하여 "YYMMDD" 형식으로 변환
       const birthdayForm = value.replace(/-/g, "").substring(2);
-      setSignUpForm({
-        ...signUpForm,
-        [id]: birthdayForm,
+      setSignUpData({
+        ...signUpData,
+        birthday:birthdayForm,
       });
     } else {
-      setSignUpForm({
-        ...signUpForm,
+      setSignUpData({
+        ...signUpData,
         [id]: value,
       });
     }
@@ -64,7 +44,7 @@ const SingUpForm = () => {
   const handleNickNameCheck = async () => {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/nickname/check?nickname=${signUpForm.nickname}`
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/nickname/check?nickname=${signUpData.nickname}`
       );
       if (res.ok) {
         const data = await res.json();
@@ -92,67 +72,11 @@ const SingUpForm = () => {
     }
   };
 
-  //회원가입 입력 유효성 검사 및 POST 요청
-  const handleSignUpPost = async () => {
-    console.log(signUpForm);
-
-    if (
-      !signUpForm.username ||
-      !signUpForm.email ||
-      !signUpForm.password ||
-      !signUpForm.birthday ||
-      !signUpForm.nickname ||
-      !signUpForm.phone ||
-      !signUpForm.localAddress ||
-      !signUpForm.extraAddress ||
-      signUpForm.localCode === 0
-    ) {
-      Swal.fire({
-        icon: "error",
-        title: "오류",
-        text: "모든 필수 정보를 입력하세요.",
-      });
-    } else {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/join`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: `${signUpForm.email}`,
-            password: `${signUpForm.password}`,
-            username: `${signUpForm.username}`,
-            nickname: `${signUpForm.nickname}`,
-            birthday: `${signUpForm.birthday}`,
-            phone: `${signUpForm.phone}`,
-            localAddress: `${signUpForm.localAddress}`,
-            extraAddress: `${signUpForm.extraAddress}`,
-            localCode: signUpForm.localCode,
-          }),
-        }
-      );
-      if (res.ok) {
-        res
-          .json()
-          .then((signUpresult) => {
-            console.log(signUpresult);
-          })
-          .catch((error) => {
-            console.error("Error parsing response:", error);
-          });
-      } else {
-        console.error("Request failed with status:", res.status);
-      }
-    }
-  };
-
   //주소 검색결과 두 값이 모두 있을 경우 지역주소와 시군구 코드 업데이트
   useEffect(() => {
     if (addressInfo?.address && addressInfo?.sigunguCode) {
       const localCodeset: number = parseInt(addressInfo.sigunguCode);
-      setSignUpForm((prevForm) => ({
+      setSignUpData((prevForm) => ({
         ...prevForm,
         localCode: localCodeset,
         localAddress: addressInfo.address,
@@ -170,7 +94,7 @@ const SingUpForm = () => {
               className="mt-1.5 bg-slate-300"
               id="username"
               type="text"
-              value={signUpForm.username}
+              value={signUpData.username}
               onChange={handleOnChange}
               readOnly
             />
@@ -181,7 +105,7 @@ const SingUpForm = () => {
               className="mt-1.5 bg-slate-300"
               id="email"
               type="text"
-              value={signUpForm.email}
+              value={signUpData.email}
               onChange={handleOnChange}
               readOnly
             />
@@ -193,7 +117,7 @@ const SingUpForm = () => {
               placeholder="사용하실 비밀번호를 입력해주세요."
               id="password"
               type="text"
-              value={signUpForm.password}
+              value={signUpData.password}
               onChange={handleOnChange}
             />
           </div>
@@ -214,7 +138,7 @@ const SingUpForm = () => {
                 placeholder="최대 8자리까지 가능합니다."
                 id="nickname"
                 type="text"
-                value={signUpForm.nickname}
+                value={signUpData.nickname}
                 onChange={handleOnChange}
               />
               <ButtonPrimary
@@ -232,7 +156,7 @@ const SingUpForm = () => {
               placeholder="'-' 빼고 전부 입력해주세요."
               id="phone"
               type="text"
-              value={signUpForm.phone}
+              value={signUpData.phone}
               onChange={handleOnChange}
             />
           </div>
@@ -261,7 +185,7 @@ const SingUpForm = () => {
                 placeholder="Find 버튼을 통해 주소를 검색해주세요."
                 id="localAddress"
                 type="text"
-                value={signUpForm.localAddress}
+                value={signUpData.localAddress}
                 onChange={handleOnChange}
                 readOnly
               />
@@ -279,15 +203,9 @@ const SingUpForm = () => {
               placeholder="상세주소를 입력해주세요."
               id="extraAddress"
               type="text"
-              value={signUpForm.extraAddress}
+              value={signUpData.extraAddress}
               onChange={handleOnChange}
             />
-            <ButtonPrimary
-              className="mt-1.5 max-h-11 w-full"
-              onClick={handleSignUpPost}
-            >
-              Sign Up
-            </ButtonPrimary>
           </div>
         </div>
       </div>

@@ -1,10 +1,28 @@
 "use client";
 import Label from "@/components/Label";
-import ButtonPrimary from "@/shared/ButtonPrimary";
 import Input from "@/shared/Input";
-import React from "react";
+import { SignUpType } from "@/types/SignUpType";
+import React, { ChangeEvent, useState } from "react";
 
-export default function SignUpCert() {
+interface signUpCertForm {
+  name: string;
+  email: string;
+}
+
+export default function SignUpCertForm(props: {signUpData: SignUpType, setSignUpData: React.Dispatch<React.SetStateAction<SignUpType>>}) {
+  const { signUpData, setSignUpData } = props;
+
+  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const value = e.target.value;
+    const id = e.target.id;
+    setSignUpData({
+      ...signUpData,
+      [id]: value,
+    });
+  };
+
+  
   return (
     <div className="space-y-6 sm:space-y-8">
       <div className="flex flex-col md:flex-row justify-center">
@@ -23,8 +41,8 @@ export default function SignUpCert() {
               id="username"
               type="text"
               placeholder="이름을 입력해주세요."
-              // value={signUpForm.username}
-              // onChange={handleOnChange}
+              value={signUpData.username}
+              onChange={handleOnChange}
             />
           </div>
           <div>
@@ -34,8 +52,8 @@ export default function SignUpCert() {
               id="email"
               type="text"
               placeholder="ex) wooyano@example.com"
-              // value={signUpForm.email}
-              // onChange={handleOnChange}
+              value={signUpData.email}
+              onChange={handleOnChange}
             />
           </div>
           <p>
