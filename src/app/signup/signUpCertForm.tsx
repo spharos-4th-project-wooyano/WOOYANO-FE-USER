@@ -1,5 +1,6 @@
 "use client";
 import Label from "@/components/Label";
+import CheckEmailForm from "@/components/widget/checkEmailForm";
 import Input from "@/shared/Input";
 import { SignUpType } from "@/types/SignUpType";
 import React, { ChangeEvent, useState } from "react";
@@ -9,20 +10,32 @@ interface signUpCertForm {
   email: string;
 }
 
-export default function SignUpCertForm(props: {signUpData: SignUpType, setSignUpData: React.Dispatch<React.SetStateAction<SignUpType>>}) {
+export default function SignUpCertForm(props: {
+  signUpData: SignUpType;
+  setSignUpData: React.Dispatch<React.SetStateAction<SignUpType>>;
+}) {
   const { signUpData, setSignUpData } = props;
+
+  //이메일 유효성 검사 변수
+  const [checkEmail, setCheckEmail] = useState<boolean>(false);
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const value = e.target.value;
     const id = e.target.id;
+    // 이메일 유효성 검사 정규식
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    //이메일 유효성 검사
+    if (id === "email") {
+      const checkedEmail = emailRegex.test(value);
+      setCheckEmail(checkedEmail);
+    }
     setSignUpData({
       ...signUpData,
       [id]: value,
     });
   };
 
-  
   return (
     <div className="space-y-6 sm:space-y-8">
       <div className="flex flex-col md:flex-row justify-center">
@@ -47,14 +60,19 @@ export default function SignUpCertForm(props: {signUpData: SignUpType, setSignUp
           </div>
           <div>
             <Label>Email</Label>
-            <Input
-              className="mt-1.5"
-              id="email"
-              type="text"
-              placeholder="ex) wooyano@example.com"
-              value={signUpData.email}
-              onChange={handleOnChange}
-            />
+            <div className="relative">
+              <Input
+                className="mt-1.5"
+                id="email"
+                type="text"
+                placeholder="ex) wooyano@example.com"
+                value={signUpData.email}
+                onChange={handleOnChange}
+              />
+              <div className="absolute top-1/4 right-3">
+                <CheckEmailForm checked={checkEmail} />
+              </div>
+            </div>
           </div>
           <p>
             By signing up you agree to our Term of <strong>use </strong>and{" "}

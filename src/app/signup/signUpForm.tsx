@@ -8,24 +8,37 @@ import Swal from "sweetalert2";
 import PostCodeDaum from "@/components/widget/postCodeDaum";
 import { SignUpType } from "@/types/SignUpType";
 
-//todo : 이전단계에서 이름과 이메일 받아오기, 비밀번호 재입력 및 확인 , 각 입력에 대한 유효성 검사
-const SingUpForm = (props: {signUpData: SignUpType, setSignUpData: React.Dispatch<React.SetStateAction<SignUpType>>}) => {
-  
+const SingUpForm = (props: {
+  signUpData: SignUpType;
+  setSignUpData: React.Dispatch<React.SetStateAction<SignUpType>>;
+}) => {
   const [isView, setIsView] = useState<boolean>(false);
   const [addressInfo, setAddressInfo] = useState<DaumAddressType>();
-  const {signUpData, setSignUpData} = props;
+  const { signUpData, setSignUpData } = props;
 
   //회원가입 정보 업데이트
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const id = e.target.id;
+    //비밀번호 체크
+    if (signUpData.password === signUpData.secondPassword) {
+      setSignUpData({
+        ...signUpData,
+        passwordCheck: true,
+      });
+    } else {
+      setSignUpData({
+        ...signUpData,
+        passwordCheck: false,
+      });
+    }
 
     if (id === "birthday") {
       // 생년월일 필드인 경우 입력값에서 하이픈을 제거하여 "YYMMDD" 형식으로 변환
       const birthdayForm = value.replace(/-/g, "").substring(2);
       setSignUpData({
         ...signUpData,
-        birthday:birthdayForm,
+        birthday: birthdayForm,
       });
     } else {
       setSignUpData({
@@ -40,7 +53,7 @@ const SingUpForm = (props: {signUpData: SignUpType, setSignUpData: React.Dispatc
     setIsView(!isView);
   };
 
-  //닉네임 중복확인
+  //닉네임 중복확인 및 확인여부 업데이트
   const handleNickNameCheck = async () => {
     try {
       const res = await fetch(
@@ -49,12 +62,20 @@ const SingUpForm = (props: {signUpData: SignUpType, setSignUpData: React.Dispatc
       if (res.ok) {
         const data = await res.json();
         console.log(data);
-        if (data === true) {
+        if (data.result.checkResult === true) {
+          setSignUpData({
+            ...signUpData,
+            nicknameCheck: false,
+          });
           Swal.fire({
             icon: "warning",
             text: "이미 사용중인 닉네임입니다",
           });
-        } else if (data === false) {
+        } else if (data.result.checkResult === false) {
+          setSignUpData({
+            ...signUpData,
+            nicknameCheck: true,
+          });
           Swal.fire({
             icon: "success",
             text: "사용가능한 닉네임입니다.",
@@ -126,8 +147,10 @@ const SingUpForm = (props: {signUpData: SignUpType, setSignUpData: React.Dispatc
             <Input
               className="mt-1.5"
               placeholder="비밀번호를 한번 더 입력해주세요."
-              id="passwordCheck"
+              id="secondPassword"
               type="text"
+              value={signUpData.secondPassword}
+              onChange={handleOnChange}
             />
           </div>
           <div>

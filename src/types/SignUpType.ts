@@ -10,4 +10,6 @@ export interface SignUpType{
     extraAddress: string;
     localCode: number;
     emailCertNumber: string;
+    passwordCheck : boolean;
+    nicknameCheck : boolean;
   } 

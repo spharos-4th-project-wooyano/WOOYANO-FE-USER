@@ -1,3 +1,137 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* swal custom */
+.mySwalConfirmButton {
+    background-color: var(--ssg-point-primary) !important;
+    border: 2px solid var(--ssg-point-primary) !important;
+    border-radius: 1rem !important;
+    font-size: 0.8rem !important;
+    padding: 0.5rem 2rem !important;
+  }
+  
+  .mySwalConfirmButton {
+    justify-content: center !important;
+  }
+  
+  .mySwalConfirmButton:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 113, 255, 0.1) !important;
+  }
+  
+  .mySwal-only-confirm .mySwalConfirmButtonOnly {
+    background-color: var(--ssg-point-primary) !important;
+    border-radius: 1rem !important;
+    font-size: 0.8rem !important;
+    padding: 0.5rem 2rem !important;
+    justify-content: center !important;
+  }
+  
+  .mySwal-only-confirm .swal2-popup.swal2-toast .swal2-styled {
+    margin: 0 auto !important;
+    justify-content: center !important;
+  }
+  
+  .mySwal-only-confirm .swal2-title {
+    font-size: 0.6rem !important;
+  }
+  
+  .mySwalCancelButton {
+    background-color: var(--ssg-point-secondary) !important;
+    border-radius: 1rem !important;
+    font-size: 0.8rem !important;
+    border: 2px solid rgba(0, 0, 0, 0.20) !important;
+    padding: 0.5rem 2rem !important;
+    color: rgba(0, 0, 0, 0.20) !important;
+  }
+  
+  .swal2-html-container {
+    font-size: 0.9rem !important;
+    font-weight: normal !important;
+    font-family: var(--billita-hangul) !important;
+  }
+  
+  .swal2-popup {
+    width: 80% !important;
+    border-radius: 1rem !important;
+    padding: 0.5rem 0 1rem 0 !important;
+  }
+  
+  .my-swal {
+    font-weight: bold !important;
+    color: black !important;
+  }
+  
+  .my-swal .swal2-popup {
+    background-color: white !important;
+    border-radius: 0.8rem !important;
+  }
+  
+  .my-swal .swal2-html-container {
+    font-size: 0.8rem !important;
+    font-weight: normal !important;
+    color: black !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+  
+  .my-swal .swal2-icon.swal2-info {
+    visibility: hidden;
+    position: absolute;
+  }
+  
+  .my-swal-warning {
+    font-weight: bold !important;
+    font-family: var(--billita-hangul) !important;
+  }
+  .my-swal-warning .swal2-popup.swal2-toast .swal2-html-container {
+    color: var(--billita-secondary) !important;
+    font-size: 0.7rem !important;
+  }
+  
+  .my-swal-warning .swal2-popup {
+    border-radius: 0.3rem !important;
+    background-color: #ffffff !important;
+    font-weight: 0.8rem !important;
+    mix-blend-mode: hard-light !important;
+    padding: 0.3rem !important;
+    justify-content: center !important;
+  }
+  
+  .my-swal-warning .swal2-popup.swal2-toast .swal2-icon {
+    visibility: hidden !important;
+  }
+  
+  .mySwal-only-confirm {
+    justify-content: center !important;
+  }
+  
+  /* swal 회원 탈퇴 */
+  .mySwalTitle {
+    font-size: 0.3rem!important;
+    font-weight: 700!important;
+    font-size: 14px!important;
+    line-height: 24px!important;
+    word-break: normal!important;
+    letter-spacing: -.3px!important;
+  }
+  
+  .mySwalCancelButton_swal {
+    background-color: var(--ssg-point-primary) !important;
+    border: 2px solid var(--ssg-point-primary) !important;
+    border-radius: 0.3rem !important;
+    font-size: 0.4rem !important;
+    padding: 0.5rem 2rem !important;
+  }
+  
+  .mySwalConfirmButton_swal {
+    background-color: var(--ssg-point-secondary) !important;
+    border-radius: 0.3rem !important;
+    font-size: 0.4rem !important;
+    border: 2px solid rgba(0, 0, 0, 0.20) !important;
+    padding: 0.5rem 2rem !important;
+    color: rgba(0, 0, 0, 0.20) !important;
+  }
+  
+  
