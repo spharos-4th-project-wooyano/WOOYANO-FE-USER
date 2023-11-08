@@ -8,9 +8,45 @@ import GuestsInput from "@/app/(client-components)/(HeroSearchForm2Mobile)/Guest
 
 interface ModalSelectGuestsProps {
   renderChildren?: (p: { openModal: () => void }) => React.ReactNode;
+  setServiceItem: React.Dispatch<React.SetStateAction<any>>;
+  serviceItem: any
 }
 
-const ModalSelectGuests: FC<ModalSelectGuestsProps> = ({ renderChildren }) => {
+const Product = [
+  {
+    productnum: 1101,
+    name: "원룸",
+    min_time: "2",
+    price: 20000
+  },
+  {
+    productnum: 1102,
+    name: "빌라",
+    min_time: "2",
+    price: 30000
+  },
+  {
+    productnum: 1103,
+    name: "아파트",
+    min_time: "2",
+    price: 40000
+  },
+  {
+    productnum: 1104,
+    name: "시간추가",
+    min_time: "2",
+    price: 10000
+  }
+]
+
+interface productType {
+  productnum: number,
+  name: string,
+  min_time: string,
+  price: number
+}
+
+const ModalSelectGuests: FC<ModalSelectGuestsProps> = ({ renderChildren,setServiceItem,serviceItem }) => {
   const [showModal, setShowModal] = useState(false);
 
   // FOR RESET ALL DATA WHEN CLICK CLEAR BUTTON
@@ -23,11 +59,63 @@ const ModalSelectGuests: FC<ModalSelectGuestsProps> = ({ renderChildren }) => {
     setShowModal(true);
   }
 
+  const onClickItem = (productnum:string, price:string, service_name:string , isChecked:boolean) => {
+    if(isChecked){
+      const dict={
+        productnum:productnum,
+        price:price,
+        service_name:service_name
+      }
+      setServiceItem([...serviceItem,dict])
+    }else{
+      setServiceItem(serviceItem.filter((item: { productnum: string; })=>item.productnum !== productnum))
+    }
+    
+  }
+
+  const renderService = () => {
+    return <div className='mb-2 bg-white rounded-lg dark:bg-background2 h-auto'>
+      <p className='text-xl font-semibold mb-2 border-b-1 border-b-slate-200 leading-10 pt-2 pl-2 '>서비스 선택</p>
+      <ul className=''>
+        {
+          Product.map((item: productType) => {
+            const productnum=`${item.productnum}`;
+            const price=`${item.price}`
+            const service_name=`${item.name}`
+
+            return (
+              <li 
+              key={item.productnum} 
+              className='flex gap-3 w-full border-b-1 border-black h-[100px] py-2'
+              
+              >
+                <div className='pt-6 pl-2'>
+                  <input id={`${item.productnum}`} 
+                  type="checkbox" 
+                  className='w-[30px] h-[30px]' 
+                  checked={serviceItem.some((selected: { productnum: string; }) => `${selected.productnum}` === `${item.productnum}`)}
+                  onChange={(e)=>onClickItem(productnum,price,service_name,e.currentTarget.checked)}
+                  />
+                </div>
+                <div >
+                  <p className='text-lg font-semibold'>{item.name}</p>
+                  <p className='text-base '>최소시간: {item.min_time}시간</p>
+                  <p className='text-lg font-semibold'>{item.price}원</p>
+                </div>
+              </li>
+              )
+          })
+        }
+
+      </ul>
+    </div>
+  }
+
   const renderButtonOpenModal = () => {
     return renderChildren ? (
       renderChildren({ openModal })
     ) : (
-      <button onClick={openModal}>Select Date</button>
+      <button onClick={openModal}>Select Service</button>
     );
   };
 
@@ -68,7 +156,8 @@ const ModalSelectGuests: FC<ModalSelectGuestsProps> = ({ renderChildren }) => {
                           <div
                             className={`flex-1 relative flex z-10 overflow-hidden`}
                           >
-                            <GuestsInput />
+                            {renderService()}
+                            {/* <GuestsInput /> */}
                           </div>
                         </div>
                       </div>
@@ -77,7 +166,7 @@ const ModalSelectGuests: FC<ModalSelectGuestsProps> = ({ renderChildren }) => {
                       <button
                         type="button"
                         className="underline font-semibold flex-shrink-0"
-                        onClick={() => {}}
+                        onClick={() => {setServiceItem([])}}
                       >
                         Clear data
                       </button>

@@ -20,7 +20,7 @@ const MobileFooterSticky = () => {
               /night
             </span>
           </span>
-          <ModalSelectDate
+          {/* <ModalSelectDate
             renderChildren={({ openModal }) => (
               <span
                 onClick={openModal}
@@ -29,7 +29,7 @@ const MobileFooterSticky = () => {
                 {converSelectedDateToString([startDate, endDate])}
               </span>
             )}
-          />
+          /> */}
         </div>
         <ModalReserveMobile
           renderChildren={({ openModal }) => (

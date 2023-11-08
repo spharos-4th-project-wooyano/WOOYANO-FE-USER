@@ -85,7 +85,7 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
 
           </span>
           <span className="block mt-1 text-sm text-neutral-400 leading-none font-light">
-            {"Service Day"}
+            {"서비스 날짜"}
           </span>
         </div>
       </>

@@ -17,6 +17,7 @@ import ModalSelectGuests from "@/components/ModalSelectGuests";
 import Image from "next/image";
 import { GuestsObject } from "../(client-components)/type";
 import imageURL from "@/images/avatars/Image-1.png"
+import ModalSelectTime from "@/components/ModalSelectTime";
 
 export interface CheckOutPagePageMainProps {
   className?: string;
@@ -25,16 +26,14 @@ export interface CheckOutPagePageMainProps {
 const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
   className = "",
 }) => {
-  const [startDate, setStartDate] = useState<Date | null>(
-    new Date("2023/02/06")
-  );
-  const [endDate, setEndDate] = useState<Date | null>(new Date("2023/02/23"));
+  // const [startDate, setStartDate] = useState<Date | null>(
+  //   new Date("2023/02/06")
+  // );
+  // const [endDate, setEndDate] = useState<Date | null>(new Date("2023/02/23"));
+  const [date, setDate] = useState<Date>(new Date());
+  const [time, setTime] = useState<string>("")
+  const [serviceItem, setServiceItem] = useState<any>([]);
 
-  const [guests, setGuests] = useState<GuestsObject>({
-    guestAdults: 2,
-    guestChildren: 1,
-    guestInfants: 1,
-  });
 
   // const storeData = JSON.parse(localStorage.getItem("searchData") as string);
 
@@ -55,8 +54,8 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
           <div className="py-5 sm:px-5 space-y-3">
             <div>
               <span className="text-sm text-neutral-500 dark:text-neutral-400 line-clamp-1">
-              {/* {storeData.service} */}
-              asadsd
+                {/* {storeData.service} */}
+                asadsd
               </span>
               <span className="text-base font-medium mt-1 block">
                 {"임찬섭 가사도우미"}
@@ -112,6 +111,8 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
           </div>
           <div className="mt-6 border border-neutral-200 dark:border-neutral-700 rounded-3xl flex flex-col sm:flex-row divide-y sm:divide-x sm:divide-y-0 divide-neutral-200 dark:divide-neutral-700 overflow-hidden z-10">
             <ModalSelectDate
+              setDate={setDate}
+              date={date}
               renderChildren={({ openModal }) => (
                 <button
                   onClick={openModal}
@@ -119,9 +120,12 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
                   type="button"
                 >
                   <div className="flex flex-col">
-                    <span className="text-sm text-neutral-400">Date</span>
+                    <span className="text-sm text-neutral-400">날짜 선택</span>
                     <span className="mt-1.5 text-lg font-semibold">
-                      {converSelectedDateToString([startDate, endDate])}
+                      {date.toLocaleDateString("ko-kr", {
+                        month: "short",
+                        day: "numeric",
+                      })}
                     </span>
                   </div>
                   <PencilSquareIcon className="w-6 h-6 text-neutral-6000 dark:text-neutral-400" />
@@ -130,6 +134,8 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
             />
 
             <ModalSelectGuests
+              serviceItem={serviceItem}
+              setServiceItem={setServiceItem}
               renderChildren={({ openModal }) => (
                 <button
                   type="button"
@@ -137,14 +143,37 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
                   className="text-left flex-1 p-5 flex justify-between space-x-5 hover:bg-neutral-50 dark:hover:bg-neutral-800"
                 >
                   <div className="flex flex-col">
-                    <span className="text-sm text-neutral-400">Guests</span>
+                    <span className="text-sm text-neutral-400">서비스 선택</span>
                     <span className="mt-1.5 text-lg font-semibold">
                       <span className="line-clamp-1">
-                        {`${
-                          (guests.guestAdults || 0) +
-                          (guests.guestChildren || 0)
-                        } Guests, ${guests.guestInfants || 0} Infants`}
+                        {serviceItem.length === 0 ?
+                          '선택된 서비스 없음'
+                          :
+                          `${serviceItem.map((obj: { service_name: string; })=>obj.service_name)}`}
                       </span>
+                    </span>
+                  </div>
+                  <PencilSquareIcon className="w-6 h-6 text-neutral-6000 dark:text-neutral-400" />
+                </button>
+              )}
+            />
+
+            <ModalSelectTime
+              time={time}
+              setTime={setTime}
+              renderChildren={({ openModal }) => (
+                <button
+                  onClick={openModal}
+                  className="text-left flex-1 p-5 flex justify-between space-x-5 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  type="button"
+                >
+                  <div className="flex flex-col">
+                    <span className="text-sm text-neutral-400">시간선택</span>
+                    <span className="mt-1.5 text-lg font-semibold">
+                      {time.toString() === "" ?
+                        '선택된 시간 없음'
+                        :
+                        `${time}`}
                     </span>
                   </div>
                   <PencilSquareIcon className="w-6 h-6 text-neutral-6000 dark:text-neutral-400" />
@@ -164,11 +193,10 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
                 <Tab as={Fragment}>
                   {({ selected }) => (
                     <button
-                      className={`px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full focus:outline-none ${
-                        selected
-                          ? "bg-neutral-800 dark:bg-neutral-200 text-white dark:text-neutral-900"
-                          : "text-neutral-6000 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-                      }`}
+                      className={`px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full focus:outline-none ${selected
+                        ? "bg-neutral-800 dark:bg-neutral-200 text-white dark:text-neutral-900"
+                        : "text-neutral-6000 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                        }`}
                     >
                       Paypal
                     </button>
@@ -177,11 +205,10 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
                 <Tab as={Fragment}>
                   {({ selected }) => (
                     <button
-                      className={`px-4 py-1.5 sm:px-6 sm:py-2.5  rounded-full flex items-center justify-center focus:outline-none  ${
-                        selected
-                          ? "bg-neutral-800 dark:bg-neutral-200 text-white dark:text-neutral-900"
-                          : " text-neutral-6000 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-                      }`}
+                      className={`px-4 py-1.5 sm:px-6 sm:py-2.5  rounded-full flex items-center justify-center focus:outline-none  ${selected
+                        ? "bg-neutral-800 dark:bg-neutral-200 text-white dark:text-neutral-900"
+                        : " text-neutral-6000 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                        }`}
                     >
                       <span className="mr-2.5">Credit card</span>
                       <Image className="w-8" src={visaPng} alt="visa" />

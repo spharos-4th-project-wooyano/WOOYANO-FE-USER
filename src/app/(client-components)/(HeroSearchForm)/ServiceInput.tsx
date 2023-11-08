@@ -16,7 +16,7 @@ export interface ServiceInputProps {
 const ServiceInput: FC<ServiceInputProps> = ({
   autoFocus = false,
   placeHolder = "서비스 선택",
-  desc = "Where are you going?",
+  desc = "어떤 서비스를 원하시나요?",
   className = "nc-flex-1.5",
   divHideVerticalLineClass = "left-10 -right-0.5",
   handleSearchForm
