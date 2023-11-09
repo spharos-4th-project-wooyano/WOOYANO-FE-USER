@@ -23,7 +23,14 @@ const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
       className={`nc-SectionGridFilterCard ${className}`}
       data-nc-id="SectionGridFilterCard"
     >
-      <Heading2 />
+      <Heading2 
+      className="mt-10"
+      subHeading={
+        <span className="block text-neutral-500 dark:text-neutral-400 mt-3">
+          n개의 업체가 조회되었습니다.
+        </span>
+      }
+      />
       
       <div className = "flex justify-end mb-8 lg:mb-11">
         {/* <TabFilters /> */}
