@@ -34,7 +34,7 @@ const Product = [
   {
     productnum: 1104,
     name: "시간추가",
-    min_time: "2",
+    min_time: "1",
     price: 10000
   }
 ]
@@ -59,12 +59,13 @@ const ModalSelectGuests: FC<ModalSelectGuestsProps> = ({ renderChildren,setServi
     setShowModal(true);
   }
 
-  const onClickItem = (productnum:string, price:string, service_name:string , isChecked:boolean) => {
+  const onChagekItem = (productnum:string, price:number, service_name:string , min_time:string, isChecked:boolean) => {
     if(isChecked){
       const dict={
         productnum:productnum,
         price:price,
-        service_name:service_name
+        service_name:service_name,
+        min_time:min_time
       }
       setServiceItem([...serviceItem,dict])
     }else{
@@ -80,8 +81,9 @@ const ModalSelectGuests: FC<ModalSelectGuestsProps> = ({ renderChildren,setServi
         {
           Product.map((item: productType) => {
             const productnum=`${item.productnum}`;
-            const price=`${item.price}`
+            const price=item.price;
             const service_name=`${item.name}`
+            const min_time=`${item.min_time}`
 
             return (
               <li 
@@ -94,7 +96,7 @@ const ModalSelectGuests: FC<ModalSelectGuestsProps> = ({ renderChildren,setServi
                   type="checkbox" 
                   className='w-[30px] h-[30px]' 
                   checked={serviceItem.some((selected: { productnum: string; }) => `${selected.productnum}` === `${item.productnum}`)}
-                  onChange={(e)=>onClickItem(productnum,price,service_name,e.currentTarget.checked)}
+                  onChange={(e)=>onChagekItem(productnum,price,service_name,min_time,e.currentTarget.checked)}
                   />
                 </div>
                 <div >
