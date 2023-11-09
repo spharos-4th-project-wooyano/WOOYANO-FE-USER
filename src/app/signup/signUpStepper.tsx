@@ -5,7 +5,7 @@ import { SignUpType } from "@/types/SignUpType";
 
 import SignUpLoadMap from "./signUpLoadMap";
 import SignUpCertNumber from "./signUpCertNumber";
-import SingUpForm from "./signUpForm";
+import SignUpForm from "./signUpForm";
 import SignUpResult from "./signUpResult";
 import { StepperNumber } from "./stepperNumber";
 import StepperBtn from "./stepperBtn";
@@ -19,7 +19,7 @@ export default function SignUpStepper() {
   const [signUpData, setSignUpData] = useState<SignUpType>({
     email: "",
     password: "",
-    checkPassword: "",
+    secondPassword: "",
     username: "",
     nickname: "",
     birthday: "",
@@ -28,13 +28,15 @@ export default function SignUpStepper() {
     extraAddress: "",
     localCode: 0,
     emailCertNumber: "",
+    passwordCheck : false,
+    nicknameCheck : false
   });
 
   const stepperComponent: any = [
     { 1: <SignUpLoadMap />, btnTxt: "Sign Up" }, 
     { 2: (<SignUpCertForm signUpData={signUpData} setSignUpData={setSignUpData} />),btnTxt: "Continue"},
     { 3: (<SignUpCertNumber signUpData={signUpData} setSignUpData={setSignUpData}/>),btnTxt: "Continue"},
-    { 4: <SingUpForm signUpData={signUpData} setSignUpData={setSignUpData} />, btnTxt: "Continue"},
+    { 4: <SignUpForm signUpData={signUpData} setSignUpData={setSignUpData} />, btnTxt: "Continue"},
     { 5: <SignUpResult signUpData={signUpData} setSignUpData={setSignUpData} />, btnTxt: "Wooyano Login"}];
 
   useEffect(() => {}, [signUpData]);

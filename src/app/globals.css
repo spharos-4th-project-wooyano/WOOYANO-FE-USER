@@ -4,46 +4,12 @@
 
 
 /* swal custom */
-.mySwalConfirmButton {
-    background-color: var(--ssg-point-primary) !important;
-    border: 2px solid var(--ssg-point-primary) !important;
-    border-radius: 1rem !important;
-    font-size: 0.8rem !important;
-    padding: 0.5rem 2rem !important;
-  }
-  
   .mySwalConfirmButton {
     justify-content: center !important;
   }
   
   .mySwalConfirmButton:focus {
     box-shadow: 0 0 0 0.2rem rgba(0, 113, 255, 0.1) !important;
-  }
-  
-  .mySwal-only-confirm .mySwalConfirmButtonOnly {
-    background-color: var(--ssg-point-primary) !important;
-    border-radius: 1rem !important;
-    font-size: 0.8rem !important;
-    padding: 0.5rem 2rem !important;
-    justify-content: center !important;
-  }
-  
-  .mySwal-only-confirm .swal2-popup.swal2-toast .swal2-styled {
-    margin: 0 auto !important;
-    justify-content: center !important;
-  }
-  
-  .mySwal-only-confirm .swal2-title {
-    font-size: 0.6rem !important;
-  }
-  
-  .mySwalCancelButton {
-    background-color: var(--ssg-point-secondary) !important;
-    border-radius: 1rem !important;
-    font-size: 0.8rem !important;
-    border: 2px solid rgba(0, 0, 0, 0.20) !important;
-    padding: 0.5rem 2rem !important;
-    color: rgba(0, 0, 0, 0.20) !important;
   }
   
   .swal2-html-container {
@@ -106,32 +72,4 @@
   .mySwal-only-confirm {
     justify-content: center !important;
   }
-  
-  /* swal 회원 탈퇴 */
-  .mySwalTitle {
-    font-size: 0.3rem!important;
-    font-weight: 700!important;
-    font-size: 14px!important;
-    line-height: 24px!important;
-    word-break: normal!important;
-    letter-spacing: -.3px!important;
-  }
-  
-  .mySwalCancelButton_swal {
-    background-color: var(--ssg-point-primary) !important;
-    border: 2px solid var(--ssg-point-primary) !important;
-    border-radius: 0.3rem !important;
-    font-size: 0.4rem !important;
-    padding: 0.5rem 2rem !important;
-  }
-  
-  .mySwalConfirmButton_swal {
-    background-color: var(--ssg-point-secondary) !important;
-    border-radius: 0.3rem !important;
-    font-size: 0.4rem !important;
-    border: 2px solid rgba(0, 0, 0, 0.20) !important;
-    padding: 0.5rem 2rem !important;
-    color: rgba(0, 0, 0, 0.20) !important;
-  }
-  
   

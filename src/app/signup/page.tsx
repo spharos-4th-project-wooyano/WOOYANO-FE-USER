@@ -4,11 +4,8 @@ import SignUpStepper from "./signUpStepper";
 export default function SignUpPage() {
   return (
     <div className="container mb-24 lg:mb-32">
-      <div className="my-10">
+      <div className="max-w-3xl mx-auto">
         <SignUpStepper/>
-      </div>
-      <div>
-
       </div>
     </div>
   );

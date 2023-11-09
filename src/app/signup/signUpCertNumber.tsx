@@ -12,19 +12,25 @@ export default function SignUpCertNumber(props: {signUpData: SignUpType, setSign
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
     const { value } = e.target;
+    console.log(value, index)
     setValues((prevValues) => {
+      console.log('prevValues: ' + prevValues);
       const newValues = [...prevValues];
       newValues[index] = value;
+      if (value && index < inputRefs.length - 1) {
+        inputRefs[index + 1].current?.focus();
+      }
+      if (index === 3) {
+        newValues[index] = value;
+      }
       return newValues;
     });
-    if (value && index < inputRefs.length - 1) {
-      inputRefs[index + 1].current?.focus();
+      
+      setSignUpData((prevSignUpData) => ({
+        ...prevSignUpData,
+        emailCertNumber: certNumber
+      }));
     }
-    setSignUpData({
-      ...signUpData, emailCertNumber:certNumber
-    })
-  };
-
 
   return (
     <div className="space-y-6 sm:space-y-8">
@@ -41,27 +47,26 @@ export default function SignUpCertNumber(props: {signUpData: SignUpType, setSign
             <p>인증 코드가 {"wooyano@example.com"}으로 발송되었습니다.</p>
             <p>{"01:30"} 이후 인증코드가 만료됩니다.</p>
           </div>
-
-          <div>
-            <div className='flex gap-4'>
+            <div className='flex gap-4 max-w-2xl mx-auto'>
               {inputRefs.map((ref, index) => (
                 <Input
                   key={index}
                   ref={ref}
                   type='text'
-                  className='bg-zinc-200 text-center rounded-2xl font-bold'
+                  className='bg-gray-200 md:text-6xl text-[36px] text-center rounded-2xl md:h-40 h-20 font-bold'
                   value={values[index]}
                   onChange={(e) => handleInputChange(e, index)}
                   maxLength={1}
-                />
+                                  />
               ))}
             </div>
-            {/* <ButtonPrimary onClick={()=>{console.log('certNumber:'+certNumber)}}>Test</ButtonPrimary> */}
-          </div>
-
           <p>
             By signing up you agree to our Term of <strong>use </strong>and{" "}
             <strong>privacy notice</strong>
+            <button
+            onClick={()=>{console.log(signUpData.emailCertNumber)}}>
+              버튼
+            </button>
           </p>
         </div>
       </div>

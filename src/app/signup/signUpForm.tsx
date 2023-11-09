@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import PostCodeDaum from "@/components/widget/postCodeDaum";
 import { SignUpType } from "@/types/SignUpType";
 
-const SingUpForm = (props: {
+const SignUpForm = (props: {
   signUpData: SignUpType;
   setSignUpData: React.Dispatch<React.SetStateAction<SignUpType>>;
 }) => {
@@ -236,4 +236,4 @@ const SingUpForm = (props: {
   );
 };
 
-export default SingUpForm;
+export default SignUpForm;
