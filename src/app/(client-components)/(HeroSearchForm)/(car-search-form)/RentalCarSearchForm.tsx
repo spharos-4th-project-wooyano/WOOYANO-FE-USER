@@ -44,7 +44,7 @@ const RentalCarSearchForm: FC<RentalCarSearchFormProps> = ({}) => {
     <form className="w-full relative mt-8 rounded-[40px] xl:rounded-[49px] rounded-t-2xl xl:rounded-t-3xl shadow-xl dark:shadow-2xl bg-white dark:bg-neutral-800">
       {renderRadioBtn()}
       <div className={`relative flex flex-row`}>
-        <LocationInput
+        {/* <LocationInput
           placeHolder="City or Airport"
           desc="Pick up location"
           className="flex-1"
@@ -59,7 +59,7 @@ const RentalCarSearchForm: FC<RentalCarSearchFormProps> = ({}) => {
               divHideVerticalLineClass="-inset-x-0.5"
             />
           </>
-        )}
+        )} */}
         <div className="self-center border-r border-slate-200 dark:border-slate-700 h-8"></div>
         <RentalCarDatesRangeInput className="flex-1" />
       </div>

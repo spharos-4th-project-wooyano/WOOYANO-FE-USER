@@ -7,7 +7,9 @@ import StayCard2 from "./StayCard2";
 import StayCardH from "./StayCardH";
 
 // OTHER DEMO WILL PASS PROPS
-const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 8);
+
+const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i > 8  && i < 17);
+
 
 //
 export interface SectionGridFeaturePlacesProps {
@@ -24,7 +26,7 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
   stayListings = DEMO_DATA,
   gridClass = "",
   heading = "우수 서비스 업체",
-  subHeading = "우수 서비스 업체",
+  subHeading = "이번달 우수 업체",
   headingIsCenter,
   tabs = ["가사도우미", "이사/입주", "사무실", "가전제품"],
   cardType = "card2",
@@ -42,7 +44,8 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
       default:
         CardName = StayCard;
     }
-
+    
+    
     return <CardName key={stay.id} data={stay} />;
   };
 

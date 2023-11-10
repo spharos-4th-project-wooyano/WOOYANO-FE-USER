@@ -1,45 +1,74 @@
 "use client";
 
-import React, { Fragment, useState, FC } from "react";
+import React, { Fragment, useState, FC, useEffect, SetStateAction } from "react";
 import { PathName } from "@/routers/types";
 import { Popover, Transition } from "@headlessui/react";
 import { CalendarIcon } from "@heroicons/react/24/outline";
 import ButtonSubmit from "../ButtonSubmit";
-import DatePickerCustomHeaderTwoMonth from "@/components/DatePickerCustomHeaderTwoMonth";
-import DatePickerCustomDay from "@/components/DatePickerCustomDay";
-import DatePicker from "react-datepicker";
 import ClearDataButton from "../ClearDataButton";
 import Calendar from 'react-calendar';
 import moment from 'moment';
 import './serviceCalenderModule.css';
+import { searchFormType } from "./StaySearchForm";
 
-
-// type ValuePiece = Date | null;
-
-// type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 export interface StayDatesRangeInputProps {
   className?: string;
   fieldClassName?: string;
-  buttonSubmitHref?: PathName;
   hasButtonSubmit?: boolean;
+  handleSearchForm: (e:string,type:string)=>void;
+  searchForm:searchFormType;
 }
 
 const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
   className = "[ lg:nc-flex-2 ]",
   fieldClassName = "[ nc-hero-field-padding ]",
-  buttonSubmitHref = "/listing-stay-map",
   hasButtonSubmit = true,
+  handleSearchForm,
+  searchForm,
 }) => {
 
 
+  const [date, setDate] = useState<Date>(new Date());
+  const [url,setUrl]=useState<PathName>();
 
-  const [date, setDate] = useState<Date | null>(new Date());
-
-  const onChangeDate = (dates:Date|null) => {
+  const onChangeDate = (dates:Date) => {
     const date = dates;
     setDate(date)
   };
+  
+  useEffect(()=>{
+    handleSearchForm(date.toLocaleDateString().replace(/\s/g,"").slice(0,-1),'날짜')
+    
+  },[date])
+
+  useEffect(()=>{
+    makeUrlParam()
+  },[searchForm])
+
+  const saveLocalStorage=()=>{
+    const searchData={
+      service:searchForm.service,
+      region:searchForm.region,
+      date:searchForm.date
+    }
+    localStorage.setItem('searchData',JSON.stringify(searchData));
+  }
+
+  const makeUrlParam =()=>{
+    if (searchForm.service==="가사도우미 청소"){
+      setUrl(`/house-keeper/?region=${searchForm.region} && date=${searchForm.date}` as SetStateAction<PathName | undefined>);
+    }
+    if (searchForm.service==="이사/입주 청소"){
+      setUrl(`/moving-clean/?region=${searchForm.region} && date=${searchForm.date}` as SetStateAction<PathName | undefined>);
+    }
+    if (searchForm.service==="사무실 청소"){
+      setUrl(`/office-clean/?region=${searchForm.region} && date=${searchForm.date}` as SetStateAction<PathName | undefined>);
+    }
+    if (searchForm.service==="가전제품 청소"){
+      setUrl(`/house-keeper/?region=${searchForm.region} && date=${searchForm.date}` as SetStateAction<PathName | undefined>);
+    }
+  }
 
   const renderInput = () => {
     return (
@@ -56,7 +85,7 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
 
           </span>
           <span className="block mt-1 text-sm text-neutral-400 leading-none font-light">
-            {"Service Day"}
+            {"서비스 날짜"}
           </span>
         </div>
       </>
@@ -77,13 +106,13 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
             >
               {renderInput()}
               {date && open && (
-                <ClearDataButton onClick={() => onChangeDate(null)} />
+                <ClearDataButton onClick={() => onChangeDate(new Date())} />
               )}
             </Popover.Button>
             {/* BUTTON SUBMIT OF FORM */}
             {hasButtonSubmit && (
-              <div className="pr-2 xl:pr-4">
-                <ButtonSubmit href={buttonSubmitHref} />
+              <div className="pr-2 xl:pr-4" onClick={saveLocalStorage}>
+                <ButtonSubmit href={url} />
               </div>
             )}
           </div>

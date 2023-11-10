@@ -5,29 +5,38 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import React, { FC, Fragment, useEffect, useState } from "react";
 import ButtonPrimary from "@/shared/ButtonPrimary";
-import DatePickerCustomHeaderTwoMonth from "./DatePickerCustomHeaderTwoMonth";
-import DatePickerCustomDay from "./DatePickerCustomDay";
+import Calendar from 'react-calendar';
+import moment from 'moment';
+
 
 interface ModalSelectDateProps {
   renderChildren?: (p: { openModal: () => void }) => React.ReactNode;
+  setDate:React.Dispatch<React.SetStateAction<Date>>;
+  date:Date;
 }
 
-const ModalSelectDate: FC<ModalSelectDateProps> = ({ renderChildren }) => {
+const ModalSelectDate: FC<ModalSelectDateProps> = ({ renderChildren,setDate,date }) => {
   const [showModal, setShowModal] = useState(false);
+  
 
-  const [startDate, setStartDate] = useState<Date | null>(
-    new Date("2023/02/06")
-  );
-  const [endDate, setEndDate] = useState<Date | null>(new Date("2023/02/23"));
-
-  const onChangeDate = (dates: [Date | null, Date | null]) => {
-    const [start, end] = dates;
-    setStartDate(start);
-    setEndDate(end);
+  const onChangeDate = (dates:Date) => {
+    const date = dates;
+    setDate(date)
   };
 
+  // const [startDate, setStartDate] = useState<Date | null>(
+  //   new Date("2023/02/06")
+  // );
+  // const [endDate, setEndDate] = useState<Date | null>(new Date("2023/02/23"));
+
+  // const onChangeDate = (dates: [Date | null, Date | null]) => {
+  //   const [start, end] = dates;
+  //   setStartDate(start);
+  //   setEndDate(end);
+  // };
+
   // FOR RESET ALL DATA WHEN CLICK CLEAR BUTTON
-  //
+  // 
   function closeModal() {
     setShowModal(false);
   }
@@ -63,8 +72,14 @@ const ModalSelectDate: FC<ModalSelectDateProps> = ({ renderChildren }) => {
                 leave="ease-in transition-transform"
                 leaveFrom="opacity-100 translate-y-0"
                 leaveTo="opacity-0 translate-y-52"
+                // enter="ease-out duration-300"
+                // enterFrom="opacity-0 "
+                // enterTo="opacity-100 "
+                // leave="ease-in duration-200"
+                // leaveFrom="opacity-100 "
+                // leaveTo="opacity-0 "
               >
-                <Dialog.Panel className="relative h-full overflow-hidden flex-1 flex flex-col justify-between ">
+                <Dialog.Panel className="relative h-full overflow-hidden flex-1 flex flex-col">
                   <>
                     <div className="absolute left-4 top-4">
                       <button
@@ -77,33 +92,24 @@ const ModalSelectDate: FC<ModalSelectDateProps> = ({ renderChildren }) => {
 
                     <div className="flex-1 pt-12 p-1 flex flex-col overflow-auto">
                       <div className="flex-1 flex flex-col bg-white dark:bg-neutral-800">
-                        <div className="flex-1 flex flex-col transition-opacity animate-[myblur_0.4s_ease-in-out] overflow-auto">
+                        <div className="flex-1 flex flex-col transition-opacity animate-[myblur_0.4s_ease-in-out] overflow-auto ">
                           <div className="p-5 ">
                             <span className="block font-semibold text-xl sm:text-2xl">
-                              {` When's your trip?`}
+                              {` 언제 서비스를 원하시나요? `}
                             </span>
                           </div>
                           <div className="flex-1 relative flex z-10 ">
                             <div className="overflow-hidden rounded-3xl ">
-                              <DatePicker
-                                selected={startDate}
-                                onChange={onChangeDate}
-                                startDate={startDate}
-                                endDate={endDate}
-                                selectsRange
-                                monthsShown={2}
-                                showPopperArrow={false}
-                                inline
-                                renderCustomHeader={(p) => (
-                                  <DatePickerCustomHeaderTwoMonth {...p} />
-                                )}
-                                renderDayContents={(day, date) => (
-                                  <DatePickerCustomDay
-                                    dayOfMonth={day}
-                                    date={date}
-                                  />
-                                )}
+                              <Calendar
+                                onChange={onChangeDate as any}
+                                formatMonthYear={(locale, date) => moment(date).format('YYYY.MM')}
+                                value={date}
+                                calendarType='gregory'
+                                formatDay={(locale, date) => moment(date).format('D')}
                               />
+                              <div>
+
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -114,7 +120,7 @@ const ModalSelectDate: FC<ModalSelectDateProps> = ({ renderChildren }) => {
                         type="button"
                         className="underline font-semibold flex-shrink-0"
                         onClick={() => {
-                          onChangeDate([null, null]);
+                          onChangeDate(new Date());
                         }}
                       >
                         Clear dates

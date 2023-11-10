@@ -24,7 +24,7 @@ const HeaderFilter: FC<HeaderFilterProps> = ({
 }) => {
   const [tabActiveState, setTabActiveState] = useState(tabActive);
 
-  // console.log(tabActiveState);
+  console.log(tabActiveState);
   
   useEffect(() => {
     setTabActiveState(tabActive);
@@ -43,7 +43,7 @@ const HeaderFilter: FC<HeaderFilterProps> = ({
           className="sm:space-x-2"
           containerClassName="relative flex w-full overflow-x-auto text-sm md:text-base hiddenScrollbar"
         >
-          {tabs.map((item, index) => (
+          {/* {tabs.map((item, index) => (
             <NavItem
               key={index}
               isActive={tabActiveState === item}
@@ -51,7 +51,7 @@ const HeaderFilter: FC<HeaderFilterProps> = ({
             >
               {item}
             </NavItem>
-          ))}
+          ))} */}
         </Nav>
       </div>
     </div>

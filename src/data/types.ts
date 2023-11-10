@@ -34,6 +34,7 @@ export interface AuthorType {
   jobName: string;
   href: Route<string>;
   starRating?: number;
+  region:string;
 }
 
 export interface PostDataType {
@@ -41,13 +42,13 @@ export interface PostDataType {
   author: AuthorType;
   date: string;
   href: Route<string>;
-  categories: TaxonomyType[];
+  // categories: TaxonomyType[];
   title: string;
   featuredImage: StaticImageData | string;
   desc?: string;
   commentCount: number;
-  viewdCount: number;
-  readingTime: number;
+  // viewdCount: number;
+  // readingTime: number;
   postType?: "standard" | "video" | "gallery" | "audio";
 }
 

@@ -2,20 +2,16 @@
 
 import { Tab } from "@headlessui/react";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
-import React, { FC, Fragment, useState } from "react";
-import visaPng from "@/images/vis.png";
-import mastercardPng from "@/images/mastercard.svg";
+import React, { FC, Fragment, useEffect, useState } from "react";
 import Input from "@/shared/Input";
-import Label from "@/components/Label";
 import Textarea from "@/shared/Textarea";
-import ButtonPrimary from "@/shared/ButtonPrimary";
-import StartRating from "@/components/StartRating";
 import NcModal from "@/shared/NcModal";
 import ModalSelectDate from "@/components/ModalSelectDate";
-import converSelectedDateToString from "@/utils/converSelectedDateToString";
 import ModalSelectGuests from "@/components/ModalSelectGuests";
 import Image from "next/image";
-import { GuestsObject } from "../(client-components)/type";
+import imageURL from "@/images/avatars/Image-5.png"
+import ModalSelectTime from "@/components/ModalSelectTime";
+import TossPaymets from "./tossPayment";
 
 export interface CheckOutPagePageMainProps {
   className?: string;
@@ -24,62 +20,152 @@ export interface CheckOutPagePageMainProps {
 const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
   className = "",
 }) => {
-  const [startDate, setStartDate] = useState<Date | null>(
-    new Date("2023/02/06")
-  );
-  const [endDate, setEndDate] = useState<Date | null>(new Date("2023/02/23"));
+  const [mounted, setMounted] = useState<boolean>(false); // mounted화면 렌더링 된 후 보여주기
 
-  const [guests, setGuests] = useState<GuestsObject>({
-    guestAdults: 2,
-    guestChildren: 1,
-    guestInfants: 1,
-  });
+  const [storeData, setStoreData] = useState<any>(); // localstorage 데이터
+  const [date, setDate] = useState<Date>(new Date()); // 날짜 데이터
+  const [time, setTime] = useState<string>(""); // 시간 데이터
+  const [serviceItem, setServiceItem] = useState<any>([]); // 서비스 아이템
+  const [price, setPrice] = useState<number>(0); // 총합 가격
+  const [adress,setAdress]=useState<string>(""); // 주소
+  const [requestText,setRequestText]=useState<string>(""); // 요청사항
+
+  // console.log(adress,requestText);
+  
+
+  // console.log("asdasd",price);
+
+  useEffect(() => {
+    setMounted(true);
+  }, [])
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("searchData") as string)) {
+      setStoreData(JSON.parse(localStorage.getItem("searchData") as string))
+    }
+  }, [])
+
+  useEffect(() => {
+    setPrice(renderTotalSum("price"))
+  }, [serviceItem, price])
+
+  const renderTotalSum = (type: string) => {
+    if (type === "price") {
+      const price = serviceItem.reduce((sum: number, obj: any) => {
+        if (obj.hasOwnProperty('price')) {
+          const priceAsInt = parseInt(obj['price'], 10); // 문자열을 정수로 변환
+          if (!isNaN(priceAsInt)) { // 정수로 변환된 값이 유효한지 확인
+            return sum + priceAsInt;
+          }
+        }
+        return sum;
+      }, 0);
+      return price     
+    } else if (type === "time") {
+      const totalTime = serviceItem.reduce((sum: number, obj: any) => {
+        if (obj.hasOwnProperty('min_time')) {
+          const priceAsInt = parseInt(obj['min_time'], 10); // 문자열을 정수로 변환
+          if (!isNaN(priceAsInt)) { // 정수로 변환된 값이 유효한지 확인
+            return sum + priceAsInt;
+          }
+        }
+        return sum;
+      }, 0);
+      const startTime = parseInt(time[0] + time[1], 10)
+      if (!isNaN(startTime)) {
+        const sumTime = `${totalTime + startTime}:00`
+        return sumTime
+      }
+      return
+    }
+  }
+
+  const onChangeAdress=(e:React.ChangeEvent<HTMLInputElement>)=>{
+    const value=e.currentTarget.value;
+    setAdress(value)
+  }
+  const onChangeRequset=(e:React.ChangeEvent<HTMLTextAreaElement>)=>{
+    const value=e.currentTarget.value;
+    setRequestText(value)
+  }
+
+
 
   const renderSidebar = () => {
     return (
       <div className="w-full flex flex-col sm:rounded-2xl lg:border border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-8 px-0 sm:p-6 xl:p-8">
         <div className="flex flex-col sm:flex-row sm:items-center">
-          <div className="flex-shrink-0 w-full sm:w-40">
-            <div className=" aspect-w-4 aspect-h-3 sm:aspect-h-4 rounded-2xl overflow-hidden">
+          <div className="flex sm:w-40">
+            <div className="rounded-2xl overflow-hidden">
               <Image
                 alt=""
-                fill
-                sizes="200px"
-                src="https://images.pexels.com/photos/6373478/pexels-photo-6373478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                width={100}
+                height={100}
+                src={imageURL}
               />
             </div>
           </div>
           <div className="py-5 sm:px-5 space-y-3">
             <div>
               <span className="text-sm text-neutral-500 dark:text-neutral-400 line-clamp-1">
-                Hotel room in Tokyo, Jappan
+                {storeData != null
+                  ?
+                  `${storeData.service}`
+                  :
+                  "없음"}
+                {/* 가사도우미 서비스 */}
               </span>
               <span className="text-base font-medium mt-1 block">
-                The Lounge & Bar
+                {"임찬섭 가사도우미"}
               </span>
             </div>
-            <span className="block  text-sm text-neutral-500 dark:text-neutral-400">
-              2 beds · 2 baths
-            </span>
             <div className="w-10 border-b border-neutral-200  dark:border-neutral-700"></div>
-            <StartRating />
+            {/* <StartRating /> */}
           </div>
         </div>
         <div className="flex flex-col space-y-4">
-          <h3 className="text-2xl font-semibold">Price detail</h3>
+          <h3 className="text-2xl font-semibold">날짜 및 시간</h3>
           <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
-            <span>$19 x 3 day</span>
-            <span>$57</span>
+            <span>서비스 날짜</span>
+            <span>{date.toLocaleDateString("ko-kr", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })}
+            </span>
           </div>
           <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
-            <span>Service charge</span>
-            <span>$0</span>
+            <span>서비스 시작 시간</span>
+            <span>{time}</span>
+          </div>
+          <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
+            <span>서비스 종료 시간</span>
+            <span>{renderTotalSum('time')}</span>
           </div>
 
           <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
+
+        </div>
+
+        <div className="flex flex-col space-y-4">
+          <h3 className="text-2xl font-semibold">가격</h3>
+          <div className="flex flex-col justify-between text-neutral-6000 dark:text-neutral-300">
+            {serviceItem.map((item: any, idx: number) => (
+              <div key={idx} className="flex justify-between">
+                <span>{item.service_name}</span>
+                <span>{item.price.toLocaleString()}원</span>
+              </div>
+            ))}
+          </div>
+          {/* <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
+            <span>Service charge</span>
+            <span>$0</span>
+          </div> */}
+
+          <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
           <div className="flex justify-between font-semibold">
-            <span>Total</span>
-            <span>$57</span>
+            <span>총합</span>
+            <span>{price.toLocaleString()}원</span>
           </div>
         </div>
       </div>
@@ -90,27 +176,39 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
     return (
       <div className="w-full flex flex-col sm:rounded-2xl sm:border border-neutral-200 dark:border-neutral-700 space-y-8 px-0 sm:p-6 xl:p-8">
         <h2 className="text-3xl lg:text-4xl font-semibold">
-          Confirm and payment
+          서비스 신청
         </h2>
         <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
         <div>
+          {/* 주소 확인창 */}
           <div>
-            <h3 className="text-2xl font-semibold">Your trip</h3>
+            <h3 className="text-2xl font-semibold">주소</h3>
+            <div className="w-14 border-b border-neutral-200 dark:border-neutral-700 my-3"></div>
+            <div className=" mb-6">
+              <Input type="text" defaultValue={"대표주소"} maxLength={30} value={adress} onChange={onChangeAdress}/>
+            </div>
+          </div>
+
+          {/* 날짜 및 서비스 */}
+          <div>
+            <h3 className="text-2xl font-semibold">날짜 및 서비스</h3>
             <NcModal
               renderTrigger={(openModal) => (
                 <span
                   onClick={() => openModal()}
                   className="block lg:hidden underline  mt-1 cursor-pointer"
                 >
-                  View booking details
+                  서비스 내역 상세보기
                 </span>
               )}
               renderContent={renderSidebar}
-              modalTitle="Booking details"
+              modalTitle="서비스 상세 내역"
             />
           </div>
           <div className="mt-6 border border-neutral-200 dark:border-neutral-700 rounded-3xl flex flex-col sm:flex-row divide-y sm:divide-x sm:divide-y-0 divide-neutral-200 dark:divide-neutral-700 overflow-hidden z-10">
             <ModalSelectDate
+              setDate={setDate}
+              date={date}
               renderChildren={({ openModal }) => (
                 <button
                   onClick={openModal}
@@ -118,9 +216,12 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
                   type="button"
                 >
                   <div className="flex flex-col">
-                    <span className="text-sm text-neutral-400">Date</span>
+                    <span className="text-sm text-neutral-400">날짜 선택</span>
                     <span className="mt-1.5 text-lg font-semibold">
-                      {converSelectedDateToString([startDate, endDate])}
+                      {date.toLocaleDateString("ko-kr", {
+                        month: "short",
+                        day: "numeric",
+                      })}
                     </span>
                   </div>
                   <PencilSquareIcon className="w-6 h-6 text-neutral-6000 dark:text-neutral-400" />
@@ -129,6 +230,8 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
             />
 
             <ModalSelectGuests
+              serviceItem={serviceItem}
+              setServiceItem={setServiceItem}
               renderChildren={({ openModal }) => (
                 <button
                   type="button"
@@ -136,14 +239,37 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
                   className="text-left flex-1 p-5 flex justify-between space-x-5 hover:bg-neutral-50 dark:hover:bg-neutral-800"
                 >
                   <div className="flex flex-col">
-                    <span className="text-sm text-neutral-400">Guests</span>
+                    <span className="text-sm text-neutral-400">서비스 선택</span>
                     <span className="mt-1.5 text-lg font-semibold">
                       <span className="line-clamp-1">
-                        {`${
-                          (guests.guestAdults || 0) +
-                          (guests.guestChildren || 0)
-                        } Guests, ${guests.guestInfants || 0} Infants`}
+                        {serviceItem.length === 0 ?
+                          '선택된 서비스 없음'
+                          :
+                          `${serviceItem.map((obj: { service_name: string; }) => obj.service_name)}`}
                       </span>
+                    </span>
+                  </div>
+                  <PencilSquareIcon className="w-6 h-6 text-neutral-6000 dark:text-neutral-400" />
+                </button>
+              )}
+            />
+
+            <ModalSelectTime
+              time={time}
+              setTime={setTime}
+              renderChildren={({ openModal }) => (
+                <button
+                  onClick={openModal}
+                  className="text-left flex-1 p-5 flex justify-between space-x-5 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  type="button"
+                >
+                  <div className="flex flex-col">
+                    <span className="text-sm text-neutral-400">시간선택</span>
+                    <span className="mt-1.5 text-lg font-semibold">
+                      {time.toString() === "" ?
+                        '선택된 시간 없음'
+                        :
+                        `${time}`}
                     </span>
                   </div>
                   <PencilSquareIcon className="w-6 h-6 text-neutral-6000 dark:text-neutral-400" />
@@ -153,102 +279,30 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
           </div>
         </div>
 
+        {/* 요청사항 입력창 */}
         <div>
-          <h3 className="text-2xl font-semibold">Pay with</h3>
-          <div className="w-14 border-b border-neutral-200 dark:border-neutral-700 my-5"></div>
+          <h3 className="text-2xl font-semibold">요청 사항</h3>
+          <div className="w-14 border-b border-neutral-200 dark:border-neutral-700 my-3"></div>
 
           <div className="mt-6">
-            <Tab.Group>
-              <Tab.List className="flex my-5 gap-1">
-                <Tab as={Fragment}>
-                  {({ selected }) => (
-                    <button
-                      className={`px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full focus:outline-none ${
-                        selected
-                          ? "bg-neutral-800 dark:bg-neutral-200 text-white dark:text-neutral-900"
-                          : "text-neutral-6000 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-                      }`}
-                    >
-                      Paypal
-                    </button>
-                  )}
-                </Tab>
-                <Tab as={Fragment}>
-                  {({ selected }) => (
-                    <button
-                      className={`px-4 py-1.5 sm:px-6 sm:py-2.5  rounded-full flex items-center justify-center focus:outline-none  ${
-                        selected
-                          ? "bg-neutral-800 dark:bg-neutral-200 text-white dark:text-neutral-900"
-                          : " text-neutral-6000 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-                      }`}
-                    >
-                      <span className="mr-2.5">Credit card</span>
-                      <Image className="w-8" src={visaPng} alt="visa" />
-                      <Image
-                        className="w-8"
-                        src={mastercardPng}
-                        alt="mastercard"
-                      />
-                    </button>
-                  )}
-                </Tab>
-              </Tab.List>
+            <Textarea placeholder="최대 100자까지 작성 가능합니다" maxLength={100} value={requestText} onChange={onChangeRequset}/>
+          </div>
+        </div>
 
-              <Tab.Panels>
-                <Tab.Panel className="space-y-5">
-                  <div className="space-y-1">
-                    <Label>Card number </Label>
-                    <Input defaultValue="111 112 222 999" />
-                  </div>
-                  <div className="space-y-1">
-                    <Label>Card holder </Label>
-                    <Input defaultValue="JOHN DOE" />
-                  </div>
-                  <div className="flex space-x-5  ">
-                    <div className="flex-1 space-y-1">
-                      <Label>Expiration date </Label>
-                      <Input type="date" defaultValue="MM/YY" />
-                    </div>
-                    <div className="flex-1 space-y-1">
-                      <Label>CVC </Label>
-                      <Input />
-                    </div>
-                  </div>
-                  <div className="space-y-1">
-                    <Label>Messager for author </Label>
-                    <Textarea placeholder="..." />
-                    <span className="text-sm text-neutral-500 block">
-                      Write a few sentences about yourself.
-                    </span>
-                  </div>
-                </Tab.Panel>
-                <Tab.Panel className="space-y-5">
-                  <div className="space-y-1">
-                    <Label>Email </Label>
-                    <Input type="email" defaultValue="example@gmail.com" />
-                  </div>
-                  <div className="space-y-1">
-                    <Label>Password </Label>
-                    <Input type="password" defaultValue="***" />
-                  </div>
-                  <div className="space-y-1">
-                    <Label>Messager for author </Label>
-                    <Textarea placeholder="..." />
-                    <span className="text-sm text-neutral-500 block">
-                      Write a few sentences about yourself.
-                    </span>
-                  </div>
-                </Tab.Panel>
-              </Tab.Panels>
-            </Tab.Group>
-            <div className="pt-8">
-              <ButtonPrimary href={"/pay-done"}>Confirm and pay</ButtonPrimary>
-            </div>
+        {/* 결제 위젯 */}
+        <div>
+          <h3 className="text-2xl font-semibold">결제</h3>
+          <div className="w-14 border-b border-neutral-200 dark:border-neutral-700 my-3"></div>
+
+          <div className="">
+            <TossPaymets price={price} setPrice={setPrice} />
           </div>
         </div>
       </div>
     );
   };
+
+  if (mounted === false) return null
 
   return (
     <div className={`nc-CheckOutPagePageMain ${className}`}>
