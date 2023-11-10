@@ -29,18 +29,18 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
   const params=useSearchParams().get('storeid');
   const [ data, setData ] = useState<any>({} as any);
   useEffect(()=>{
-    console.log(DEMO_DATA)
+    // console.log(DEMO_DATA)
     const getData = async () => {
       // const data = await fetch('test api uri');
       const res = DEMO_DATA.find( item => item.id === `stayListing_${params}_`)
-      console.log(res)
+      // console.log(res)
       setData(res)
     }
     getData();
   },[params])
   
 
-  console.log(params);
+  // console.log(params);
   
 
   function closeModalAmenities() {
@@ -198,7 +198,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
           </button>
         </div>
       </header>
-
+              
       {/* MAIN */}
       <main className=" relative z-10 mt-10 flex flex-col lg:flex-row ">
         {/* CONTENT */}
@@ -211,10 +211,12 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
         </div>
         
         {/* SIDEBAR */}
+        
         <div className="hidden lg:block flex-grow mt-14 lg:mt-0">
           {/* 스크롤 시 따라다니는 사이드바 */}
           <div className="sticky top-28">{renderSidebar()}</div>
         </div>
+        
       </main>
 
     </div>

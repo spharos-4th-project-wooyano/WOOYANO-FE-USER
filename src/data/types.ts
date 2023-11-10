@@ -34,6 +34,7 @@ export interface AuthorType {
   jobName: string;
   href: Route<string>;
   starRating?: number;
+  region:string;
 }
 
 export interface PostDataType {

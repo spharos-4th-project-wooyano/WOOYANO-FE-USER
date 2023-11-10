@@ -14,7 +14,7 @@ const Heading2: React.FC<Heading2Props> = ({ className = "", subHeading }) => {
   const pathname = usePathname()
   // pathname에 따라 heading 텍스트를 설정
   useEffect(() => {
-    console.log(pathname)
+    // console.log(pathname)
     // pathname에 따라 heading 텍스트를 설정
     if (pathname === '/house-keeper') {
       setHeading('가사도우미');

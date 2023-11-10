@@ -218,7 +218,7 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({}) => {
       <form className="w-full relative mt-8 rounded-[40px] xl:rounded-[49px] rounded-t-2xl xl:rounded-t-3xl shadow-xl dark:shadow-2xl bg-white dark:bg-neutral-800">
         {renderRadioBtn()}
         <div className="flex flex-1 rounded-full">
-          <LocationInput
+          {/* <LocationInput
             placeHolder="Flying from"
             desc="Where do you want to fly from?"
             className="flex-1"
@@ -229,7 +229,7 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({}) => {
             desc="Where you want to fly to?"
             className="flex-1"
             divHideVerticalLineClass=" -inset-x-0.5"
-          />
+          /> */}
           <div className="self-center border-r border-slate-200 dark:border-slate-700 h-8"></div>
           <FlightDateRangeInput
             selectsRange={dropOffLocationType !== "oneWay"}

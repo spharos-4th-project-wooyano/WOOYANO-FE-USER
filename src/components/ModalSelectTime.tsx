@@ -11,29 +11,57 @@ import moment from 'moment';
 
 interface ModalSelectDateProps {
   renderChildren?: (p: { openModal: () => void }) => React.ReactNode;
-  setDate:React.Dispatch<React.SetStateAction<Date>>;
-  date:Date;
+  setTime: React.Dispatch<React.SetStateAction<string>>;
+  time: string;
 }
 
-const ModalSelectDate: FC<ModalSelectDateProps> = ({ renderChildren,setDate,date }) => {
+const ModalSelectDate: FC<ModalSelectDateProps> = ({ renderChildren, setTime, time }) => {
   const [showModal, setShowModal] = useState(false);
-  
 
-  const onChangeDate = (dates:Date) => {
-    const date = dates;
-    setDate(date)
+  // 백엔드에서 서비스 가능 시간 데이터
+  const availableTimes = ['11:00', '13:00','18:00'];
+  // 9시부터 18시까지 배열 만들기
+  const hours = Array.from({ length: 10 }, (_, index) => index + 9);
+
+
+  const onChangeTime = (times: string) => {
+    const time = times;
+    setTime(time)
   };
 
-  // const [startDate, setStartDate] = useState<Date | null>(
-  //   new Date("2023/02/06")
-  // );
-  // const [endDate, setEndDate] = useState<Date | null>(new Date("2023/02/23"));
+  const renderTime = () => {
+    return <div className='mb-4 p-2 gap-1'>
+      {/* 오전오후를 map으로 만든다. */}
+      {['오전', '오후'].map((period) => (
+        <div key={period}>
+          <p className="text-[20px] mt-4 font-extrabold">{period}</p>
+          <ul className='flex flex-row flex-wrap min-w-[300px] gap-2'>
+            {hours
+              .filter((hour) => (period === '오전' ? hour < 12 : hour >= 12))
+              .map((hour) => {
+                const time = `${hour}:00`;
+                // 데이터가 있으면? true 반환
+                const isAvailable = availableTimes.includes(time);
 
-  // const onChangeDate = (dates: [Date | null, Date | null]) => {
-  //   const [start, end] = dates;
-  //   setStartDate(start);
-  //   setEndDate(end);
-  // };
+                return (
+                  <li key={hour} id={`${hour}:00`} className='w-[23%] pt-3'>
+                    {/* isAvailable이 true면 클릭 가능 false면 클릭 불가능 */}
+                    <button
+                      className={`border rounded-lg w-full leading-[48px] ${isAvailable ? 'border-slate-400 hover:bg-slate-50 focus:bg-slate-200' : 'border-gray-500 bg-gray-200 text-gray-600 cursor-not-allowed'
+                        }`}
+                      onClick={() => onChangeTime(time)}
+                      disabled={!isAvailable}
+                    >
+                      {hour}:00
+                    </button>
+                  </li>
+                );
+              })}
+          </ul>
+        </div>
+      ))}
+    </div>
+  }
 
   // FOR RESET ALL DATA WHEN CLICK CLEAR BUTTON
   // 
@@ -49,7 +77,7 @@ const ModalSelectDate: FC<ModalSelectDateProps> = ({ renderChildren,setDate,date
     return renderChildren ? (
       renderChildren({ openModal })
     ) : (
-      <button onClick={openModal}>Select Date</button>
+      <button onClick={openModal}>Select Time</button>
     );
   };
 
@@ -72,12 +100,12 @@ const ModalSelectDate: FC<ModalSelectDateProps> = ({ renderChildren,setDate,date
                 leave="ease-in transition-transform"
                 leaveFrom="opacity-100 translate-y-0"
                 leaveTo="opacity-0 translate-y-52"
-                // enter="ease-out duration-300"
-                // enterFrom="opacity-0 "
-                // enterTo="opacity-100 "
-                // leave="ease-in duration-200"
-                // leaveFrom="opacity-100 "
-                // leaveTo="opacity-0 "
+              // enter="ease-out duration-300"
+              // enterFrom="opacity-0 "
+              // enterTo="opacity-100 "
+              // leave="ease-in duration-200"
+              // leaveFrom="opacity-100 "
+              // leaveTo="opacity-0 "
               >
                 <Dialog.Panel className="relative h-full overflow-hidden flex-1 flex flex-col">
                   <>
@@ -100,16 +128,9 @@ const ModalSelectDate: FC<ModalSelectDateProps> = ({ renderChildren,setDate,date
                           </div>
                           <div className="flex-1 relative flex z-10 ">
                             <div className="overflow-hidden rounded-3xl ">
-                              <Calendar
-                                onChange={onChangeDate as any}
-                                formatMonthYear={(locale, date) => moment(date).format('YYYY.MM')}
-                                value={date}
-                                calendarType='gregory'
-                                formatDay={(locale, date) => moment(date).format('D')}
-                              />
-                              <div>
 
-                              </div>
+                              {renderTime()}
+
                             </div>
                           </div>
                         </div>
@@ -120,7 +141,7 @@ const ModalSelectDate: FC<ModalSelectDateProps> = ({ renderChildren,setDate,date
                         type="button"
                         className="underline font-semibold flex-shrink-0"
                         onClick={() => {
-                          onChangeDate(new Date());
+                          onChangeTime("");
                         }}
                       >
                         Clear dates

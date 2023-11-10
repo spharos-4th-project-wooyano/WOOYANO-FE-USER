@@ -5,6 +5,7 @@ import StaySearchForm from "./(stay-search-form)/StaySearchForm";
 import ExperiencesSearchForm from "./(experiences-search-form)/ExperiencesSearchForm";
 import RentalCarSearchForm from "./(car-search-form)/RentalCarSearchForm";
 import FlightSearchForm from "./(flight-search-form)/FlightSearchForm";
+import { usePathname, useSearchParams } from "next/navigation";
 
 export type SearchTab = "Stays" | "Experiences" | "Cars" | "Flights";
 
@@ -19,6 +20,10 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
   currentTab = "Experiences",
   currentPage,
 }) => {
+  const params=useSearchParams();
+  const pathname=usePathname()
+  // console.log(pathname,params.get("region"),params.get("date"));
+  
 
   return (
     <div

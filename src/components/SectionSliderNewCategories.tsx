@@ -28,7 +28,7 @@ const DEMO_CATS: TaxonomyType[] = [
   {
     id: "1",
     href: "/listing-stay-map",
-    name: "Nature House",
+    name: "부산 해운대구 00클린",
     taxonomy: "category",
     count: 17288,
     thumbnail:
@@ -37,7 +37,7 @@ const DEMO_CATS: TaxonomyType[] = [
   {
     id: "2",
     href: "/listing-stay-map",
-    name: "Wooden house",
+    name: "부산 해운대구 00클린",
     taxonomy: "category",
     count: 2118,
     thumbnail:
@@ -46,7 +46,7 @@ const DEMO_CATS: TaxonomyType[] = [
   {
     id: "3",
     href: "/listing-stay-map",
-    name: "Houseboat",
+    name: "부산 해운대구 00클린",
     taxonomy: "category",
     count: 36612,
     thumbnail:
@@ -55,7 +55,7 @@ const DEMO_CATS: TaxonomyType[] = [
   {
     id: "4",
     href: "/listing-stay-map",
-    name: "Farm House",
+    name: "부산 해운대구 00클린",
     taxonomy: "category",
     count: 18188,
     thumbnail:
@@ -64,7 +64,7 @@ const DEMO_CATS: TaxonomyType[] = [
   {
     id: "5",
     href: "/listing-stay-map",
-    name: "Dome House",
+    name: "부산 해운대구 00클린",
     taxonomy: "category",
     count: 22288,
     thumbnail:
@@ -73,7 +73,7 @@ const DEMO_CATS: TaxonomyType[] = [
   {
     id: "6",
     href: "/listing-stay-map",
-    name: "Dome House",
+    name: "부산 해운대구 00클린",
     taxonomy: "category",
     count: 188288,
     thumbnail:
@@ -82,7 +82,7 @@ const DEMO_CATS: TaxonomyType[] = [
   {
     id: "7",
     href: "/listing-stay-map",
-    name: "Wooden house",
+    name: "부산 해운대구 00클린",
     taxonomy: "category",
     count: 2118,
     thumbnail:
@@ -91,7 +91,7 @@ const DEMO_CATS: TaxonomyType[] = [
   {
     id: "8",
     href: "/listing-stay-map",
-    name: "Wooden Dome",
+    name: "부산 해운대구 00클린",
     taxonomy: "category",
     count: 515,
     thumbnail:
@@ -106,7 +106,7 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
   itemClassName = "",
   categories = DEMO_CATS,
   itemPerRow = 5,
-  categoryCardType = "card3",
+  categoryCardType = "card5",
   sliderStyle = "style1",
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);

@@ -162,7 +162,7 @@ function MaintHome() {
         </div>
 
         {/* 최근받은 서비스 */}
-        <SectionSliderNewCategories categories={DEMO_CATS} />
+        <SectionSliderNewCategories />
 
         
 

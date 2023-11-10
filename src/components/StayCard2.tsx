@@ -50,6 +50,8 @@ const StayCard2: FC<StayCard2Props> = ({
           href={href}
         />
         <BtnLikeIcon isLiked={like} className="absolute right-3 top-3 z-[1]" />
+
+        {/* 세일표시 */}
         {/* {saleOff && <SaleOffBadge className="absolute left-3 top-3" />} */}
       </div>
     );
