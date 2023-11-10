@@ -2,6 +2,7 @@
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import Input from "@/shared/Input";
 import React, { ChangeEvent, useState } from "react";
+import Swal from "sweetalert2";
 
 //todo: 이메일, 인증번호 유효성 검사, 인증번호 전송 fetch, 인증번호 확인 fetch 각 기능에 대한 에러 처리
 interface findPwCertform {
@@ -27,6 +28,40 @@ export default function ChgPwCert() {
     });
     console.log(findPwCertForm);
   };
+
+  const handleSendEmailNumber = async () => {
+    if(!findPwCertForm.name || !findPwCertForm.email) {
+      Swal.fire({
+          text: `모든 정보를 입력해주세요`,
+          toast: false,
+          position: "center",
+          showConfirmButton: false,
+          timer: 1000,
+          timerProgressBar: false,
+          customClass: {
+            container: "my-swal",
+          },
+      });
+    } else {
+      // 이메일 인증번호 요청
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/email/exist/check?username=${findPwCertForm.name}&email=${findPwCertForm.email}`
+        );
+        if (res.ok) {
+          res.json().then((data) => {
+            console.log(data)
+          })
+        }
+    }catch (error) {
+      console.error("오류 발생:", error);
+    }
+  }
+}
+  
+  const handleCheck = async () => {
+
+  }
 
   return (
     <div className="container mb-6 lg:mb-12">
@@ -80,7 +115,7 @@ export default function ChgPwCert() {
                 />
                 <ButtonPrimary
                 className="max-h-11"
-                // onClick={}
+                onClick={handleSendEmailNumber}
                 >Send Number</ButtonPrimary>
               </div>
               <p className="absolute text-sm left-2 top-11 animate-pulse text-red-700">Remain 01:30</p>
@@ -89,7 +124,7 @@ export default function ChgPwCert() {
           </div>
 
           <ButtonPrimary 
-          // onClick={}
+          onClick={handleCheck}
           href="/chgpw/form"
           >Continue</ButtonPrimary>
         </form>

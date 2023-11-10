@@ -4,7 +4,7 @@ import KakaoTalksvg from "@/images/KakaoTalk.svg";
 import Naversvg from "@/images/Naver.svg";
 import googleSvg from "@/images/Google.svg";
 import Image from "next/image";
-import { signIn, useSession } from 'next-auth/react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 
 const loginSocials = [
   {
@@ -52,6 +52,8 @@ function snsLogin() {
         </div>
       </button>
     ))}
+    <button onClick ={() => signOut()}>로그아웃</button>
+    {/* todo:로그아웃버튼 헤더에서 생성되면 삭제 */}
   </div>
   )
 }
