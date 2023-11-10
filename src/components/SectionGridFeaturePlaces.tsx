@@ -7,7 +7,9 @@ import StayCard2 from "./StayCard2";
 import StayCardH from "./StayCardH";
 
 // OTHER DEMO WILL PASS PROPS
+
 const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i > 8  && i < 17);
+
 
 //
 export interface SectionGridFeaturePlacesProps {
@@ -42,7 +44,8 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
       default:
         CardName = StayCard;
     }
-
+    
+    
     return <CardName key={stay.id} data={stay} />;
   };
 

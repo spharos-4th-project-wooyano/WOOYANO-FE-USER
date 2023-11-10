@@ -6,8 +6,8 @@ import Link from "next/link";
 import { useSearchParams } from "next/dist/client/components/navigation";
 import Swal from "sweetalert2";
 import { signIn } from "next-auth/react";
-import CheckEmailForm from "./checkEmailForm";
-import PasswordViewButton from "./passwordViewButton";
+import CheckEmailForm from "../../components/widget/checkEmailForm";
+import PasswordViewButton from "../../components/widget/passwordViewButton";
 
 export interface LoginFormProps {
   email: string;
