@@ -8,8 +8,8 @@ import { nanoid } from "nanoid";
 import { useAsync } from "react-use";
 
 
-const clientKey = "test_ck_Z61JOxRQVE17jJlvJlyVW0X9bAqw";
-const customerKey = "YbX2HuSlsC9uVJW6NMRMj";
+const clientKey = process.env.TOSSPAYMENTS_CLIENT_KEY || ""
+const customerKey = process.env.TOSSPAYMENTS_CUSTOM_KEY || ""
 
 export default function TossPaymets({price,setPrice}:{price:number,setPrice:React.Dispatch<React.SetStateAction<number>>}) {
   const paymentWidgetRef = useRef<PaymentWidgetInstance | null>(null);
