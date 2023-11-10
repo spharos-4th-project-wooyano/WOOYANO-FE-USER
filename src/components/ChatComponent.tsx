@@ -1,5 +1,6 @@
 "use client"
 import { useChat, Message } from "ai/react"
+import { useEffect } from "react";
 
 export default function ChatComponent() {
   // Vercel AI SDK (ai package) useChat()

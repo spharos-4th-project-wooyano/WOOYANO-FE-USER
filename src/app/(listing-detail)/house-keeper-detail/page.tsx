@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, Fragment, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Squares2X2Icon } from "@heroicons/react/24/outline";
 import StartRating from "@/components/StartRating";
 import Badge from "@/shared/Badge";
@@ -14,9 +14,7 @@ import GuestsInput from "./GuestsInput";
 import { Route } from "next";
 import { FaHeart, FaThumbsUp } from "react-icons/fa";
 import { DEMO_STAY_LISTINGS } from "@/data/listings";
-import Worker from "@/components/detail/worker/worker";
-import Info from "@/components/detail/info/info";
-import Review from "@/components/detail/review/review";
+import TapMenu from "@/components/detail/tap/tapMenu";
 
 const DEMO_DATA = DEMO_STAY_LISTINGS;
 
@@ -60,342 +58,46 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
   const renderSection1 = () => (
     <div className="listingSection__wrap !space-y-6">
       {/* 1 */}
-      <div className="flex justify-between items-center">
-        <Badge name="추천" />
-
+      <div className="flex justify-between items-center px-5">
+        <div className="flex justify-start gap-5">
+          <Badge name="추천" />
+          <span className="flex justify-start items-center">
+            <i className="las la-map-marker-alt text-sm"></i>
+            <span className="ml-1 text-xs">부산광역시 서구</span>
+          </span>
+        </div>
         {/* 공유 및 즐겨찾기 버튼 */}
         <LikeSaveBtns />
       </div>
 
       {/* 2 */}
-      <div className="flex justify-center gap-3">
-        <div className="flex rounded-full border w-[75px] h-[75px] justify-center items-center border-black">
-          <p className="p-5">
-          로고
-          </p>
-        </div>
+      <div className="flex flex-col justify-center items-center gap-3 pb-5">
         <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-semibold">
-          업체 이름 1
+          삐까뻔쩍
         </h2>
+        <p className="text-sm text-gray-500 md:w-[80%] text-center">청소업체고민NO! 흔적없이 꼼꼼하고 완벽하게 - 부산입주청소, 믿고 맡겨주세요! 부산에어컨청소/입주청소/홈케어시공 꼼꼼하고 깨끗한청소는 에어홈닥터입니다. 공동구매시 추가할인 해드립니다
+확실하고 꼼꼼한청소 깔끔한청소 문의주세요</p>
       </div>
 
       {/* 3 */}
-      <div className="flex justify-around space-x-4">
-        <div className="flex gap-3">
+      <div className="flex justify-center gap-5 space-x-4">
+        <div className="flex items-center gap-3">
         {/* 좋아요 버튼 */}
         <FaThumbsUp className="fill-sky-500" />
-        <span className="">{data && data.reviewCount}</span>
+        <p className="text-gray-500">{data && data.reviewCount}</p>
         </div>
 
         {/* <StartRating /> */}
         
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2">
           <FaHeart className="fill-red-600"/>
-          {data && data.favorite}
+          <p className="text-gray-500">{data && data.favorite}</p>
         </div>
       </div>
-
-      <span>
-          <i className="las la-map-marker-alt"></i>
-          <span className="ml-1">부산광역시 서구</span>
-        </span>
-
-      {/* 5 */}
-      <div className="w-full border-b border-neutral-100 dark:border-neutral-700" />
-
-      {/* 6 */}
-
-        <div className="flex justify-around">
-          <button>기사</button>
-          <button>업체 정보</button>
-          <button>리뷰</button>
-        </div>
     </div>
   );
 
-  // const renderSection2 = () => {
-  //   return (
-  //     <div className="listingSection__wrap">
-  //       <h2 className="text-2xl font-semibold">Stay information</h2>
-  //       <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
-  //       <div className="text-neutral-6000 dark:text-neutral-300">
-  //         <span>
-  //           Providing lake views, The Symphony 9 Tam Coc in Ninh Binh provides
-  //           accommodation, an outdoor swimming pool, a bar, a shared lounge, a
-  //           garden and barbecue facilities. Complimentary WiFi is provided.
-  //         </span>
-  //         <br />
-  //         <br />
-  //         <span>
-  //           There is a private bathroom with bidet in all units, along with a
-  //           hairdryer and free toiletries.
-  //         </span>
-  //         <br /> <br />
-  //         <span>
-  //           The Symphony 9 Tam Coc offers a terrace. Both a bicycle rental
-  //           service and a car rental service are available at the accommodation,
-  //           while cycling can be enjoyed nearby.
-  //         </span>
-  //       </div>
-  //     </div>
-  //   );
-  // };
-
-  // const renderMotalAmenities = () => {
-  //   return (
-  //     <Transition appear show={isOpenModalAmenities} as={Fragment}>
-  //       <Dialog
-  //         as="div"
-  //         className="fixed inset-0 z-50 overflow-y-auto"
-  //         onClose={closeModalAmenities}
-  //       >
-  //         <div className="min-h-screen px-4 text-center">
-  //           <Transition.Child
-  //             as={Fragment}
-  //             enter="ease-out duration-300"
-  //             enterFrom="opacity-0"
-  //             enterTo="opacity-100"
-  //             leave="ease-in duration-200"
-  //             leaveFrom="opacity-100"
-  //             leaveTo="opacity-0"
-  //           >
-  //             <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-40" />
-  //           </Transition.Child>
-
-  //           {/* This element is to trick the browser into centering the modal contents. */}
-  //           <span
-  //             className="inline-block h-screen align-middle"
-  //             aria-hidden="true"
-  //           >
-  //             &#8203;
-  //           </span>
-  //           <Transition.Child
-  //             as={Fragment}
-  //             enter="ease-out duration-300"
-  //             enterFrom="opacity-0 scale-95"
-  //             enterTo="opacity-100 scale-100"
-  //             leave="ease-in duration-200"
-  //             leaveFrom="opacity-100 scale-100"
-  //             leaveTo="opacity-0 scale-95"
-  //           >
-  //             <div className="inline-block py-8 h-screen w-full max-w-4xl">
-  //               <div className="inline-flex pb-2 flex-col w-full text-left align-middle transition-all transform overflow-hidden rounded-2xl bg-white dark:bg-neutral-900 dark:border dark:border-neutral-700 dark:text-neutral-100 shadow-xl h-full">
-  //                 <div className="relative flex-shrink-0 px-6 py-4 border-b border-neutral-200 dark:border-neutral-800 text-center">
-  //                   <h3
-  //                     className="text-lg font-medium leading-6 text-gray-900"
-  //                     id="headlessui-dialog-title-70"
-  //                   >
-  //                     Amenities
-  //                   </h3>
-  //                   <span className="absolute left-3 top-3">
-  //                     <ButtonClose onClick={closeModalAmenities} />
-  //                   </span>
-  //                 </div>
-  //                 <div className="px-8 overflow-auto text-neutral-700 dark:text-neutral-300 divide-y divide-neutral-200">
-  //                   {Amenities_demos.filter((_, i) => i < 1212).map((item) => (
-  //                     <div
-  //                       key={item.name}
-  //                       className="flex items-center py-2.5 sm:py-4 lg:py-5 space-x-5 lg:space-x-8"
-  //                     >
-  //                       <i
-  //                         className={`text-4xl text-neutral-6000 las ${item.icon}`}
-  //                       ></i>
-  //                       <span>{item.name}</span>
-  //                     </div>
-  //                   ))}
-  //                 </div>
-  //               </div>
-  //             </div>
-  //           </Transition.Child>
-  //         </div>
-  //       </Dialog>
-  //     </Transition>
-  //   );
-  // };
-
-  // const renderSection4 = () => {
-  //   return (
-  //     <div className="listingSection__wrap">
-  //       {/* HEADING */}
-  //       <div>
-  //         <h2 className="text-2xl font-semibold">Room Rates </h2>
-  //         <span className="block mt-2 text-neutral-500 dark:text-neutral-400">
-  //           Prices may increase on weekends or holidays
-  //         </span>
-  //       </div>
-  //       <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
-  //       {/* CONTENT */}
-  //       <div className="flow-root">
-  //         <div className="text-sm sm:text-base text-neutral-6000 dark:text-neutral-300 -mb-4">
-  //           <div className="p-4 bg-neutral-100 dark:bg-neutral-800 flex justify-between items-center space-x-4 rounded-lg">
-  //             <span>Monday - Thursday</span>
-  //             <span>$199</span>
-  //           </div>
-  //           <div className="p-4  flex justify-between items-center space-x-4 rounded-lg">
-  //             <span>Monday - Thursday</span>
-  //             <span>$199</span>
-  //           </div>
-  //           <div className="p-4 bg-neutral-100 dark:bg-neutral-800 flex justify-between items-center space-x-4 rounded-lg">
-  //             <span>Friday - Sunday</span>
-  //             <span>$219</span>
-  //           </div>
-  //           <div className="p-4 flex justify-between items-center space-x-4 rounded-lg">
-  //             <span>Rent by month</span>
-  //             <span>-8.34 %</span>
-  //           </div>
-  //           <div className="p-4 bg-neutral-100 dark:bg-neutral-800 flex justify-between items-center space-x-4 rounded-lg">
-  //             <span>Minimum number of nights</span>
-  //             <span>1 night</span>
-  //           </div>
-  //           <div className="p-4 flex justify-between items-center space-x-4 rounded-lg">
-  //             <span>Max number of nights</span>
-  //             <span>90 nights</span>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // };
-
-  // const renderSection5 = () => {
-  //   return (
-  //     <div className="listingSection__wrap">
-  //       {/* HEADING */}
-  //       <h2 className="text-2xl font-semibold">Host Information</h2>
-  //       <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
-
-  //       {/* host */}
-  //       <div className="flex items-center space-x-4">
-  //         <Avatar
-  //           hasChecked
-  //           hasCheckedClass="w-4 h-4 -top-0.5 right-0.5"
-  //           sizeClass="h-14 w-14"
-  //           radius="rounded-full"
-  //         />
-  //         <div>
-  //           <a className="block text-xl font-medium" href="##">
-  //             Kevin Francis
-  //           </a>
-  //           <div className="mt-1.5 flex items-center text-sm text-neutral-500 dark:text-neutral-400">
-  //             <StartRating />
-  //             <span className="mx-2">·</span>
-  //             <span> 12 places</span>
-  //           </div>
-  //         </div>
-  //       </div>
-
-        {/* desc */}
-        // <span className="block text-neutral-6000 dark:text-neutral-300">
-        //   Providing lake views, The Symphony 9 Tam Coc in Ninh Binh provides
-        //   accommodation, an outdoor swimming pool, a bar, a shared lounge, a
-        //   garden and barbecue facilities...
-        // </span>
-
-        {/* info */}
-  //       <div className="block text-neutral-500 dark:text-neutral-400 space-y-2.5">
-  //         <div className="flex items-center space-x-3">
-  //           <svg
-  //             xmlns="http://www.w3.org/2000/svg"
-  //             className="h-6 w-6"
-  //             fill="none"
-  //             viewBox="0 0 24 24"
-  //             stroke="currentColor"
-  //           >
-  //             <path
-  //               strokeLinecap="round"
-  //               strokeLinejoin="round"
-  //               strokeWidth={1.5}
-  //               d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-  //             />
-  //           </svg>
-  //           <span>Joined in March 2016</span>
-  //         </div>
-  //         <div className="flex items-center space-x-3">
-  //           <svg
-  //             xmlns="http://www.w3.org/2000/svg"
-  //             className="h-6 w-6"
-  //             fill="none"
-  //             viewBox="0 0 24 24"
-  //             stroke="currentColor"
-  //           >
-  //             <path
-  //               strokeLinecap="round"
-  //               strokeLinejoin="round"
-  //               strokeWidth={1.5}
-  //               d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-  //             />
-  //           </svg>
-  //           <span>Response rate - 100%</span>
-  //         </div>
-  //         <div className="flex items-center space-x-3">
-  //           <svg
-  //             xmlns="http://www.w3.org/2000/svg"
-  //             className="h-6 w-6"
-  //             fill="none"
-  //             viewBox="0 0 24 24"
-  //             stroke="currentColor"
-  //           >
-  //             <path
-  //               strokeLinecap="round"
-  //               strokeLinejoin="round"
-  //               strokeWidth={1.5}
-  //               d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-  //             />
-  //           </svg>
-
-  //           <span>Fast response - within a few hours</span>
-  //         </div>
-  //       </div>
-
-  //       {/* == */}
-  //       <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
-  //       <div>
-  //         <ButtonSecondary href="/author">See host profile</ButtonSecondary>
-  //       </div>
-  //     </div>
-  //   );
-  // };
-
-  // const renderSection6 = () => {
-  //   return (
-  //     <div className="listingSection__wrap">
-  //       {/* HEADING */}
-  //       <h2 className="text-2xl font-semibold">Reviews (23 reviews)</h2>
-  //       <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
-
-  //       {/* Content */}
-  //       <div className="space-y-5">
-  //         <FiveStartIconForRate iconClass="w-6 h-6" className="space-x-0.5" />
-  //         <div className="relative">
-  //           <Input
-  //             fontClass=""
-  //             sizeClass="h-16 px-4 py-3"
-  //             rounded="rounded-3xl"
-  //             placeholder="Share your thoughts ..."
-  //           />
-  //           <ButtonCircle
-  //             className="absolute right-2 top-1/2 transform -translate-y-1/2"
-  //             size=" w-12 h-12 "
-  //           >
-  //             <ArrowRightIcon className="w-5 h-5" />
-  //           </ButtonCircle>
-  //         </div>
-  //       </div>
-
-        {/* comment */}
-  //       <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
-  //         <CommentListing className="py-8" />
-  //         <CommentListing className="py-8" />
-  //         <CommentListing className="py-8" />
-  //         <CommentListing className="py-8" />
-  //         <div className="pt-8">
-  //           <ButtonSecondary>View more 20 reviews</ButtonSecondary>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // };
-
+  
 // 어떤 내용 들어가면 좋을지 생각
   const renderSidebar = () => {
     return (
@@ -442,6 +144,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
   };
 
   return (
+
     <div className="nc-ListingStayDetailPage">
       {/*  HEADER */}
       <header className="rounded-md sm:rounded-xl">
@@ -497,22 +200,16 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
       </header>
               
       {/* MAIN */}
-      <main className=" relative z-10 mt-11 flex flex-col lg:flex-row ">
+      <main className=" relative z-10 mt-10 flex flex-col lg:flex-row ">
         {/* CONTENT */}
-        <div className="w-full lg:w-3/5 xl:w-2/3 space-y-8 lg:space-y-10 lg:pr-10">
+        <div className="w-full lg:w-4/5 xl:w-2/3 space-y-8 lg:space-y-10 lg:pr-10">
           {/* 상세페이지 레이아웃 */}
           {renderSection1()}
-          {/* 업체정보 */}
-          {/* {renderSection2()} */}
-          <Info/>
-          {/* 기사 리스트 */}
-          {/* {renderSection5()} */}
-          <Worker/>
-          {/* 리뷰 */}
-          {/* {renderSection6()} */}
-          <Review/>
+          <div className="flex justify-center w-full">
+            <TapMenu/>
+          </div>
         </div>
-
+        
         {/* SIDEBAR */}
         
         <div className="hidden lg:block flex-grow mt-14 lg:mt-0">
@@ -521,6 +218,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
         </div>
         
       </main>
+
     </div>
   );
 };

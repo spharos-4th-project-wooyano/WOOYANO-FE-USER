@@ -38,8 +38,9 @@ const PostCardMeta: FC<PostCardMetaProps> = ({
             userName={author.displayName}
           />
         )}
+        
         <span className="block text-neutral-6000 hover:text-black dark:text-neutral-300 dark:hover:text-white font-medium">
-          {author.displayName}
+          {author.displayName} 기사
         </span>
       </Link>
       <>
