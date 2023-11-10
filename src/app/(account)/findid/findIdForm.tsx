@@ -59,10 +59,10 @@ export default function FindIdForm() {
               Swal.fire({
                 title: `${data.code}`,
                 text: `알 수 없는 에러가 발생하였습니다.`,
-                toast: true,
+                toast: false,
                 position: "top",
                 showConfirmButton: false,
-                timer: 1500,
+                timer: 1000,
                 timerProgressBar: false,
                 customClass: {
                   container: "my-swal",
@@ -77,7 +77,7 @@ export default function FindIdForm() {
             if (code === 1040) {
               Swal.fire({
                 text: `가입된 정보가 없습니다.`,
-                toast: true,
+                toast: false,
                 position: "top",
                 showConfirmButton: false,
                 timer: 1000,
@@ -90,7 +90,7 @@ export default function FindIdForm() {
               Swal.fire({
                 title: `${data.code}`,
                 text: `알 수 없는 에러가 발생하였습니다.`,
-                toast: true,
+                toast: false,
                 position: "top",
                 showConfirmButton: false,
                 timer: 1000,
