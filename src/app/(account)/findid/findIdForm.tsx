@@ -46,6 +46,7 @@ export default function FindIdForm() {
           router.push(`/findid/result?name=${data.name}&email=${data.email}`)
         } else {
             // 패칭이후 삭제 ▽
+            
             router.push(`/findid/result?name=${"test"}&email=${"email"}`)
         }
       } catch (error) {
