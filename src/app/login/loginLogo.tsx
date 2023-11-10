@@ -4,7 +4,7 @@ import 'src/fonts/line-awesome-1.3.0/css/line-awesome.css'
 
 export default function LoginLogo() {
   return (
-      <div className="flex justify-center md:justify-center items-center w-full h-auto my-16 font-semibold text-neutral-900 dark:text-neutral-100">
+      <div className="flex justify-center md:justify-center items-center w-full h-auto mt-16 mb-6 font-semibold text-neutral-900 dark:text-neutral-100">
         <div className="h-auto">
             <Charactor/>
         </div>
