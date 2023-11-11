@@ -80,10 +80,8 @@ export default function TossPaymets({price,setPrice}:{price:number,setPrice:Reac
             await paymentWidget?.requestPayment({
               orderId: nanoid(),
               orderName: "토스 티셔츠 외 2건",
-              customerName: "김토스",
-              customerEmail: "customer123@gmail.com",
-              successUrl: `${window.location.origin}/api/success`,
-              failUrl: `${window.location.origin}/api/fail`,
+              successUrl: `${window.location.origin}/checkout/success`,
+              failUrl: `${window.location.origin}/checkout/fail`,
             });
           } catch (error) {
             // 에러 처리하기

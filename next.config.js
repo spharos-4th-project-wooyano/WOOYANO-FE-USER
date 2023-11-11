@@ -9,7 +9,8 @@ const nextConfig = {
   },
   env:{
     TOSSPAYMENTS_CLIENT_KEY:process.env.TOSSPAYMENTS_CLIENT_KEY,
-    TOSSPAYMENTS_CUSTOM_KEY:process.env.TOSSPAYMENTS_CUSTOM_KEY
+    TOSSPAYMENTS_CUSTOM_KEY:process.env.TOSSPAYMENTS_CUSTOM_KEY,
+    TOSS_PAYMENTS_SECRET_KEY:process.env.TOSS_PAYMENTS_SECRET_KEY
   },
   images: {
     remotePatterns: [
