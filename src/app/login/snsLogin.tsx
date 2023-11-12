@@ -30,7 +30,7 @@ const loginSocials = [
   },
 ];
 
-function snsLogin() {
+function SnsLogin() {
   
   return (
     <div className="max-w-md  mx-auto grid gap-3">
@@ -58,4 +58,4 @@ function snsLogin() {
   )
 }
 
-export default snsLogin
+export default SnsLogin

@@ -2,8 +2,8 @@
 import React, { SetStateAction, useState } from "react";
 import { useRouter } from "next/navigation";
 import { SignUpType } from "@/types/SignUpType";
-import ButtonPrimary from "@/shared/ButtonPrimary";
 import Swal from "sweetalert2";
+import Button from "@/shared/Button";
 
 export default function StepperBtn({
   btnText,
@@ -36,7 +36,7 @@ export default function StepperBtn({
         errorText.message = "이메일을 입력해주세요.";
       if (!signUpData.email && !signUpData.username)
         errorText.message = "모든 정보를 입력해주세요.";
-      if (signUpData.emailformcheck === false)
+      if (signUpData.email && signUpData.emailformcheck === false)
         errorText.message = "올바른 이메일 형식으로 입력해주세요.";
       if (errorText.message != "") {
         Swal.fire({
@@ -190,7 +190,23 @@ export default function StepperBtn({
             const data = await res.json();
             const result = data.result.checkResult;
             console.log("res:", data);
-            setStepId(stepId + 1);
+            console.log("signUpData.emailCertNumber:",signUpData.emailCertNumber,typeof signUpData.emailCertNumber)
+
+            if (data.result.checkResult === true) {
+              setStepId(stepId + 1);
+            } else {
+              Swal.fire({
+                text: "인증번호가 일치하지 않습니다.",
+                toast: false,
+                position: "center",
+                showConfirmButton: false,
+                timer: 1000,
+                timerProgressBar: false,
+                customClass: {
+                  container: "my-swal",
+                },
+              });
+            }
           }
           // 기타 에러
           else {
@@ -235,6 +251,19 @@ export default function StepperBtn({
           },
         });
       } else {
+        if (!signUpData.nicknameCheck) {
+          Swal.fire({
+            text: "닉네임 중복확인을 해주세요.",
+            toast: false,
+            position: "center",
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: false,
+            customClass: {
+              container: "my-swal",
+            },
+          });
+        }
         if (signUpData.password != signUpData.secondPassword) {
           Swal.fire({
             text: "입력하신 비밀번호가 서로 다릅니다.",
@@ -269,19 +298,28 @@ export default function StepperBtn({
                 }),
               }
             );
+
             if (res.ok) {
-              res
-                .json()
-                .then((signUpresult) => {
-                  console.log(signUpresult);
-                })
-                .catch((error) => {
-                  console.error("Error parsing response:", error);
-                });
+              const data = await res.json();
+              if (data.success === true) {
+                setStepId(stepId + 1)
+              } else {
+                  Swal.fire({
+                    text: "서버와의 통신 중 문제가 발생했습니다.",
+                    toast: false,
+                    position: "center",
+                    showConfirmButton: false,
+                    timer: 1000,
+                    timerProgressBar: false,
+                    customClass: {
+                      container: "my-swal",
+                    },
+                  });
+              }
             }
             // 기타 에러
             else {
-              throw new Error("서버 응답이 실패했습니다.");
+              throw new Error("서버 응답에 실패했습니다.");
             }
           } catch (error) {
             console.error("에러 발생:", error);
@@ -316,52 +354,52 @@ export default function StepperBtn({
       if (result.isConfirmed) {
         setStepId(stepId - 2);
         //모든 입력값 초기화
-        signUpData.email =  "",
-        signUpData.password =  "",
-        signUpData.secondPassword =  "",
-        signUpData.username = "",
-        signUpData.nickname =  "",
-        signUpData.birthday = "",
-        signUpData.phone = "",
-        signUpData.localAddress = "",
-        signUpData.extraAddress =  "",
-        signUpData.localCode = 0,
-        signUpData.emailCertNumber =  "",
-        signUpData.passwordCheck = false,
-        signUpData.nicknameCheck = false,
-        signUpData.emailformcheck = false
+        signUpData.email = "",
+          signUpData.password = "",
+          signUpData.secondPassword = "",
+          signUpData.username = "",
+          signUpData.nickname = "",
+          signUpData.birthday = "",
+          signUpData.phone = "",
+          signUpData.localAddress = "",
+          signUpData.extraAddress = "",
+          signUpData.localCode = 0,
+          signUpData.emailCertNumber = "",
+          signUpData.passwordCheck = false,
+          signUpData.nicknameCheck = false,
+          signUpData.emailformcheck = false
       } else {
       }
     });
   };
 
   return (
-    <div className="md:pt-20 pt-10 justify-center">
-      <div className="flex gap-3 box-border max-w-3xl mx-auto">
-        <ButtonPrimary
-          className={`w-full ${stepId === 1 ? "hidden" : " "}`}
+    <div className="pt-10 justify-center md:px-10 px-4">
+      <div className="flex gap-6 box-border w-full mx-auto">
+        <Button
+          className={`ttnc-ButtonPrimary disabled:bg-opacity-70 bg-primary-6000 hover:bg-primary-700 text-neutral-50 rounded-xl w-full ${stepId === 1 || stepId === 5 ? "hidden" : " "}`}
           onClick={
             stepId === 0
-              ? () => {}
+              ? () => { }
               : stepId === 4
-              ? hadleEmailCertAgain
-              : () => setStepId(stepId - 1)
+                ? hadleEmailCertAgain
+                : () => setStepId(stepId - 1)
           }
         >
           Back
-        </ButtonPrimary>
-        <ButtonPrimary
-          className="w-full"
+        </Button>
+        <Button
+          className="ttnc-ButtonPrimary disabled:bg-opacity-70 bg-primary-6000 hover:bg-primary-700 text-neutral-50 rounded-xl w-full"
           onClick={
             stepId === 5
               ? () => router.push("/login")
               : stepId === 2 || stepId === 3 || stepId === 4
-              ? hadnleSignUpFetch
-              : () => setStepId(stepId + 1)
+                ? hadnleSignUpFetch
+                : () => setStepId(stepId + 1)
           }
         >
           {btnText}
-        </ButtonPrimary>
+        </Button>
       </div>
     </div>
   );
