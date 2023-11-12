@@ -1,36 +1,45 @@
-'use client'
-import Input from '@/shared/Input';
-import { SignUpType } from '@/types/SignUpType';
-import React, { useRef, useState, ChangeEvent } from 'react';
+"use client";
+import Input from "@/shared/Input";
+import { SignUpType } from "@/types/SignUpType";
+import React, { useState, ChangeEvent, useRef } from "react";
 
-export default function SignUpCertNumber(props: {signUpData: SignUpType, setSignUpData: React.Dispatch<React.SetStateAction<SignUpType>>}) {
-  const {signUpData,setSignUpData}=props;
-  
-  const inputRefs = [useRef<HTMLInputElement | null>(null), useRef<HTMLInputElement | null>(null), useRef<HTMLInputElement | null>(null), useRef<HTMLInputElement | null>(null)];
-  const [values, setValues] = useState<string[]>(['', '', '', '']);
-  const certNumber = values.join('');
+export default function SignUpCertNumber(props: {
+  signUpData: SignUpType;
+  setSignUpData: React.Dispatch<React.SetStateAction<SignUpType>>;
+}) {
+  const { signUpData, setSignUpData } = props;
+  const [certNumbers, setCertNumbers] = useState(["", "", "", ""]);
+  const inputRefs = useRef<Array<HTMLInputElement | null>>([
+    null,
+    null,
+    null,
+    null,
+  ]);
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
-    const { value } = e.target;
-    console.log(value, index)
-    setValues((prevValues) => {
-      console.log('prevValues: ' + prevValues);
-      const newValues = [...prevValues];
-      newValues[index] = value;
-      if (value && index < inputRefs.length - 1) {
-        inputRefs[index + 1].current?.focus();
-      }
-      if (index === 3) {
-        newValues[index] = value;
-      }
-      return newValues;
-    });
-      
-      setSignUpData((prevSignUpData) => ({
-        ...prevSignUpData,
-        emailCertNumber: certNumber
-      }));
+  const handleInputChange = (index: number, value: string) => {
+    const newCertNumbers = [...certNumbers];
+    newCertNumbers[index] = value;
+    setCertNumbers(newCertNumbers);
+
+    if (index < 3 && value !== "") {
+      inputRefs.current[index + 1]?.focus();
     }
+
+    const certNumber = newCertNumbers.join("");
+    setSignUpData((prevData) => ({ ...prevData, emailCertNumber: certNumber }));
+  };
+
+  const handleKeyDown = (
+    index: number,
+    event: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    if (event.key === "Backspace" && index > 0 && certNumbers[index] === "") {
+      const prevInput = inputRefs.current[index - 1];
+      if (prevInput) {
+        prevInput.focus();
+      }
+    }
+  };
 
   return (
     <div className="space-y-6 sm:space-y-8">
@@ -44,29 +53,26 @@ export default function SignUpCertNumber(props: {signUpData: SignUpType, setSign
             </div>
           </div>
           <div>
-            <p>인증 코드가 {"wooyano@example.com"}으로 발송되었습니다.</p>
+            <p>인증 코드가 {signUpData.email || "error"}으로 발송되었습니다.</p>
             <p>{"01:30"} 이후 인증코드가 만료됩니다.</p>
           </div>
-            <div className='flex gap-4 max-w-2xl mx-auto'>
-              {inputRefs.map((ref, index) => (
-                <Input
-                  key={index}
-                  ref={ref}
-                  type='text'
-                  className='bg-gray-200 md:text-6xl text-[36px] text-center rounded-2xl md:h-40 h-20 font-bold'
-                  value={values[index]}
-                  onChange={(e) => handleInputChange(e, index)}
-                  maxLength={1}
-                                  />
-              ))}
-            </div>
+          <div className="flex gap-4 max-w-2xl mx-auto md:px-16 md:py-10 px-6 py-6">
+            {[0, 1, 2, 3].map((index) => (
+              <Input
+                key={index}
+                id={`certInput_${index}`}
+                type="text"
+                value={certNumbers[index]}
+                className="bg-gray-200 md:text-6xl text-[40px] text-center rounded-2xl md:h-40 h-20 w-20 font-bold"
+                maxLength={1}
+                onChange={(e) => handleInputChange(index, e.target.value)}
+                onKeyDown={(e) => handleKeyDown(index, e)}
+                ref={(el) => (inputRefs.current[index] = el)}
+              />
+            ))}
+          </div>
           <p>
-            By signing up you agree to our Term of <strong>use </strong>and{" "}
-            <strong>privacy notice</strong>
-            <button
-            onClick={()=>{console.log(signUpData.emailCertNumber)}}>
-              버튼
-            </button>
+            회원가입 시 Wooyano의 이용약관 및 개인정보 처리방침에 동의합니다.
           </p>
         </div>
       </div>

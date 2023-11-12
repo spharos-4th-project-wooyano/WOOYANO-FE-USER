@@ -29,7 +29,8 @@ export default function SignUpStepper() {
     localCode: 0,
     emailCertNumber: "",
     passwordCheck : false,
-    nicknameCheck : false
+    nicknameCheck : false,
+    emailformcheck : false,
   });
 
   const stepperComponent: any = [

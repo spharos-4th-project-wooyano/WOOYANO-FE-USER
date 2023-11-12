@@ -17,7 +17,6 @@ export const options: NextAuthOptions = {
 
         if (!credentials?.email || !credentials?.password) return null;
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/login`, {
-            //todo: 로그인 API URL 변경 필요 △
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -31,6 +30,7 @@ export const options: NextAuthOptions = {
         const user = await res.json();
         if (res.ok && user) {
             console.log("step 4 user", user);
+            // todo :  세션처리 및 이메일, 토큰 값 저장
           return user;
         }
         return null;

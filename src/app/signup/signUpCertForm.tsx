@@ -29,11 +29,27 @@ export default function SignUpCertForm(props: {
     if (id === "email") {
       const checkedEmail = emailRegex.test(value);
       setCheckEmail(checkedEmail);
+      if (checkedEmail) {
+        setSignUpData((prevData) => ({
+          ...prevData,
+          emailformcheck: true,
+          [id]: value,
+        }));
+      } else {
+        setSignUpData((prevData) => ({
+          ...prevData,
+          emailformcheck: false,
+          [id]: value,
+        }));
+      }
+      console.log("Email Form Check:", checkedEmail);
+    } else {
+      setSignUpData({
+        ...signUpData,
+        [id]: value,
+      });
     }
-    setSignUpData({
-      ...signUpData,
-      [id]: value,
-    });
+
   };
 
   return (
@@ -41,10 +57,10 @@ export default function SignUpCertForm(props: {
       <div className="flex flex-col md:flex-row justify-center">
         <div className="flex-grow mt-2 md:mt-0 p-4 md:p-0 max-w-3xl space-y-6 ">
           <div className="flex flex-col font-semibold gap-3">
-            <h2 className="text-3xl">이메일 인증</h2>
+            <h2 className="text-3xl pt-10">이메일 인증</h2>
             <div>
-              <p className="text-xl">Sign up and</p>
-              <p className="text-xl">staring Wooyano</p>
+              <p className="text-xl">이메일 인증을 진행하기 위해</p>
+              <p className="text-xl">아래의 정보를 입력해주세요.</p>
             </div>
           </div>
           <div>
@@ -75,8 +91,7 @@ export default function SignUpCertForm(props: {
             </div>
           </div>
           <p>
-            By signing up you agree to our Term of <strong>use </strong>and{" "}
-            <strong>privacy notice</strong>
+            아래의 Continue 를 통해 인증을 진행해주세요.
           </p>
         </div>
       </div>
