@@ -183,30 +183,45 @@ export default function StepperBtn({
         try {
           //이메일 인증번호 확인
           const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/email/check?email=${signUpData.email}`
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/auth/confirm/code?email=${signUpData.email}&code=${signUpData.emailCertNumber}`
           );
           // to-do 이메일 인증 fetch 추가 및 에러처리
           if (res.ok) {
-            const data = await res.json();
-            const result = data.result.checkResult;
-            console.log("res:", data);
-            console.log("signUpData.emailCertNumber:",signUpData.emailCertNumber,typeof signUpData.emailCertNumber)
-
-            if (data.result.checkResult === true) {
-              setStepId(stepId + 1);
-            } else {
-              Swal.fire({
-                text: "인증번호가 일치하지 않습니다.",
-                toast: false,
-                position: "center",
-                showConfirmButton: false,
-                timer: 1000,
-                timerProgressBar: false,
-                customClass: {
-                  container: "my-swal",
-                },
-              });
-            }
+              res.json().then((data) => {
+                if (data.success === true) {
+                  setStepId(stepId + 1);
+                }
+              })
+            } else if (!res.ok) {
+              res.json().then((data) => {
+                if (data.code === 9020) {
+                  Swal.fire({
+                    text: `인증번호가 일치하지 않습니다.`,
+                    toast: false,
+                    position: "center",
+                    showConfirmButton: false,
+                    timer: 1000,
+                    timerProgressBar: false,
+                    customClass: {
+                      container: "my-swal",
+                    },
+                  });
+                }else {
+                  Swal.fire({
+                    title: `${data.code}`,
+                    text: `알 수 없는 에러가 발생하였습니다.`,
+                    toast: false,
+                    position: "center",
+                    showConfirmButton: false,
+                    timer: 1000,
+                    timerProgressBar: false,
+                    customClass: {
+                      container: "my-swal",
+                    },
+                  });
+                }
+            
+            })
           }
           // 기타 에러
           else {
@@ -304,17 +319,17 @@ export default function StepperBtn({
               if (data.success === true) {
                 setStepId(stepId + 1)
               } else {
-                  Swal.fire({
-                    text: "서버와의 통신 중 문제가 발생했습니다.",
-                    toast: false,
-                    position: "center",
-                    showConfirmButton: false,
-                    timer: 1000,
-                    timerProgressBar: false,
-                    customClass: {
-                      container: "my-swal",
-                    },
-                  });
+                Swal.fire({
+                  text: "서버와의 통신 중 문제가 발생했습니다.",
+                  toast: false,
+                  position: "center",
+                  showConfirmButton: false,
+                  timer: 1000,
+                  timerProgressBar: false,
+                  customClass: {
+                    container: "my-swal",
+                  },
+                });
               }
             }
             // 기타 에러

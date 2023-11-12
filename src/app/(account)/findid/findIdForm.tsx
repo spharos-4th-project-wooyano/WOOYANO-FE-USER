@@ -76,9 +76,9 @@ export default function FindIdForm() {
             console.log(data.code);
             if (code === 1040) {
               Swal.fire({
-                text: `가입된 정보가 없습니다.`,
+                text: "가입된 정보가 없습니다.",
                 toast: false,
-                position: "top",
+                position: "center",
                 showConfirmButton: false,
                 timer: 1000,
                 timerProgressBar: false,
@@ -88,10 +88,9 @@ export default function FindIdForm() {
               });
             } else {
               Swal.fire({
-                title: `${data.code}`,
-                text: `알 수 없는 에러가 발생하였습니다.`,
+                text: "서버통신에 문제가 발생하였습니다.",
                 toast: false,
-                position: "top",
+                position: "center",
                 showConfirmButton: false,
                 timer: 1000,
                 timerProgressBar: false,

@@ -2,11 +2,13 @@
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import Input from "@/shared/Input";
 import React, { ChangeEvent, useState } from "react";
+import Swal from "sweetalert2";
 
 //todo : 비밀번호 형식 유효성 검사, 비밀번호 확인 검사, 새 비밀번호 post fetch, 에러처리, 변경 결과 alert
 interface chgPwform {
   newPassword: string;
-  passwordCheck: string;}
+  passwordCheck: string;
+}
 
 export default function ChgPwForm() {
   const [chgPwform, setChgPwform] = useState<chgPwform>({
@@ -24,6 +26,44 @@ export default function ChgPwForm() {
     });
     console.log(chgPwform);
   };
+
+  const handleChangePw = async () => {
+    if (!chgPwform.newPassword || !chgPwform.passwordCheck) {
+      Swal.fire({
+        text: "빈칸없이 입력해주세요.",
+        toast: false,
+        position: "center",
+        showConfirmButton: false,
+        timer: 1000,
+        timerProgressBar: false,
+        customClass: {
+          container: "my-swal",
+        },
+      });
+    } else {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/user/password`,
+          {method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            // email : 
+            password: `${chgPwform.newPassword}`,}),
+          }
+        )
+        //todo.이메일 넘겨 받기 및 응답처리
+        if (res.ok) {
+          const data = await res.json()
+        } else if (!res.ok) {
+          const data = await res.json()
+        }
+      } catch(error) {
+        throw new Error("서버 응답에 실패했습니다.");
+      }
+    }
+  }
 
 
   return (
@@ -66,10 +106,10 @@ export default function ChgPwForm() {
             />
           </label>
           <ButtonPrimary
-          // onClick={}
-          href="/"
+            onClick={handleChangePw}
           >Continue</ButtonPrimary>
         </form>
       </div>
     </div>
-  );}
+  );
+}
