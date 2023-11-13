@@ -357,7 +357,7 @@ export default function StepperBtn({
 
   const hadleEmailCertAgain = async () => {
     Swal.fire({
-      text: "현재 단계에서 이전 단계로 이동시, 이메일 재인증이 필요합니다.",
+      text: "현재 단계에서 벗어나시면, 이메일 재인증이 필요합니다.",
       toast: false,
       position: "center",
       showConfirmButton: true,

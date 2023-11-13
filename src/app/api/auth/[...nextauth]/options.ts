@@ -30,8 +30,12 @@ export const options: NextAuthOptions = {
         const user = await res.json();
         if (res.ok && user) {
             console.log("step 4 user", user);
-            // todo :  세션처리 및 이메일, 토큰 값 저장
-          return user;
+
+           // 세션 처리 및 이메일, 토큰 값 저장
+           return {
+            ...user,  // 사용자 정보를 토큰에 추가
+            email: credentials?.email, // 세션에 이메일 추가
+          }  
         }
         return null;
       },

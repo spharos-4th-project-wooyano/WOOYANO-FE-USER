@@ -1,7 +1,7 @@
 'use client'
-import ButtonPrimary from "@/shared/ButtonPrimary";
 import React from "react";
 import { useSearchParams } from "next/navigation";
+import Button from "@/shared/Button";
 
 export default function FindIdResult() {
   const SearchParams = useSearchParams();
@@ -26,7 +26,9 @@ export default function FindIdResult() {
               <p className="leading-[28px]">입니다.</p>
             </div>
           </div>
-          <ButtonPrimary href="/login">Sign In</ButtonPrimary>
+          <Button
+           className="rounded-xl ttnc-ButtonPrimary disabled:bg-opacity-70 bg-primary-6000 hover:bg-primary-700 text-neutral-50 "
+           href="/login">Sign In</Button>
         </div>
       </div>
     </div>

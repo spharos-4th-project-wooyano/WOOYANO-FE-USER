@@ -3,18 +3,22 @@ import CheckEmailForm from "@/components/widget/checkEmailForm";
 import Button from "@/shared/Button";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import Input from "@/shared/Input";
+import { ChgPwType } from "@/types/ChgPwType";
 import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useState } from "react";
 import Swal from "sweetalert2";
 
-//todo: 이메일, 인증번호 유효성 검사, 인증번호 전송 fetch, 인증번호 확인 fetch 각 기능에 대한 에러 처리
 interface findPwCertform {
   name: string;
   email: string;
   emailCertNumber: string;
 }
 
-export default function ChgPwCert() {
+export default function ChgPwCert(props: {
+  chgPwData: ChgPwType;
+  setChgPwData: React.Dispatch<React.SetStateAction<ChgPwType>>;
+}) {
+  const { chgPwData, setChgPwData } = props;
   const router = useRouter();
   const [findPwCertForm, setFindPwCertForm] = useState<findPwCertform>({
     name: "",
@@ -24,6 +28,7 @@ export default function ChgPwCert() {
 
   //이메일 유효성 검사 변수
   const [checkEmail, setCheckEmail] = useState<boolean>(false);
+  const [sendEmail, setSendEmail] = useState<boolean>(false);
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -36,14 +41,18 @@ export default function ChgPwCert() {
       const checkedEmail = emailRegex.test(value);
       setCheckEmail(checkedEmail);
     }
+    if (id === "emailCertNumber") {
+      setChgPwData({ ...chgPwData, emailCertNumber: value });
+    }
     setFindPwCertForm({
       ...findPwCertForm,
       [id]: value,
     });
-    console.log("step1 loginForm", findPwCertForm);
   };
 
   const handleSendEmailNumber = async () => {
+    setSendEmail(false);
+    setChgPwData({ ...chgPwData, email: "" });
     if (!findPwCertForm.name || !findPwCertForm.email) {
       Swal.fire({
         text: `모든 정보를 입력해주세요`,
@@ -73,7 +82,12 @@ export default function ChgPwCert() {
                 if (res.ok) {
                   res.json().then(async (data) => {
                     if (data.success === true) {
-                      startCountdown()
+                      setSendEmail(true);
+                      startCountdown();
+                      setChgPwData({
+                        ...chgPwData,
+                        email: findPwCertForm.email,
+                      });
                       Swal.fire({
                         text: `인증코드가 발송되었습니다.`,
                         toast: false,
@@ -124,10 +138,11 @@ export default function ChgPwCert() {
     }
   };
 
-  const handleCheck = async () => {
-    if (!findPwCertForm.emailCertNumber) {
+  const handleEmailCertCheck = async () => {
+    setChgPwData({ ...chgPwData, emailChecked: false });
+    if (chgPwData.emailCertNumber.length !== 4) {
       Swal.fire({
-        text: `인증번호를 입력해주세요.`,
+        text: `인증코드를 입력해주세요.`,
         toast: false,
         position: "center",
         showConfirmButton: false,
@@ -139,17 +154,27 @@ export default function ChgPwCert() {
       });
     } else {
       try {
+        //이메일 인증번호 확인
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/auth/confirm/code?email=${findPwCertForm.email}&code=${findPwCertForm.emailCertNumber}`
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/auth/confirm/code?email=${chgPwData.email}&code=${chgPwData.emailCertNumber}`
         );
         if (res.ok) {
           res.json().then((data) => {
             if (data.success === true) {
-              router.push(
-                `/chgpw/form`
-              );
+              setChgPwData({ ...chgPwData, emailChecked: true });
+              Swal.fire({
+                text: `인증이 완료되었습니다.`,
+                toast: false,
+                position: "center",
+                showConfirmButton: false,
+                timer: 1000,
+                timerProgressBar: false,
+                customClass: {
+                  container: "my-swal",
+                },
+              });
             }
-          })
+          });
         } else if (!res.ok) {
           res.json().then((data) => {
             if (data.code === 9020) {
@@ -166,10 +191,9 @@ export default function ChgPwCert() {
               });
             } else {
               Swal.fire({
-                title: `${data.code}`,
                 text: `알 수 없는 에러가 발생하였습니다.`,
                 toast: false,
-                position: "top",
+                position: "center",
                 showConfirmButton: false,
                 timer: 1000,
                 timerProgressBar: false,
@@ -178,14 +202,26 @@ export default function ChgPwCert() {
                 },
               });
             }
-          })
+          });
+        } else {
+          throw new Error("서버 응답이 실패했습니다.");
         }
       } catch (error) {
-        console.error("오류 발생:", error);
+        console.error("에러 발생:", error);
+        Swal.fire({
+          text: "서버와의 통신 중 문제가 발생했습니다.",
+          toast: false,
+          position: "center",
+          showConfirmButton: false,
+          timer: 1000,
+          timerProgressBar: false,
+          customClass: {
+            container: "my-swal",
+          },
+        });
       }
     }
   };
-
   //제한시간 관련
   const [countdown, setCountdown] = useState(180);
   const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
@@ -205,7 +241,12 @@ export default function ChgPwCert() {
           // 0:00 형식으로 시각화
           const minutes = Math.floor(prevCountdown / 60);
           const seconds = prevCountdown % 60 > 0 ? prevCountdown % 60 : 0;
-          const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds == 0 ? "00" : String(seconds);
+          const formattedSeconds =
+            seconds < 10
+              ? `0${seconds}`
+              : seconds == 0
+              ? "00"
+              : String(seconds);
           setFormTime(`${minutes}:${formattedSeconds}`);
           return prevCountdown - 1;
         });
@@ -262,8 +303,9 @@ export default function ChgPwCert() {
                   <Input
                     id="emailCertNumber"
                     type="text"
-                    placeholder="인증코드 4자리 입력"
+                    placeholder="인증코드 4자리"
                     className=""
+                    maxLength={4}
                     value={findPwCertForm.emailCertNumber}
                     onChange={handleOnChange}
                   />
@@ -273,24 +315,28 @@ export default function ChgPwCert() {
                   >
                     Send Number
                   </Button>
+                  {sendEmail ? (
+                    <Button
+                      className="max-h-11 rounded-xl ttnc-ButtonPrimary disabled:bg-opacity-70 bg-primary-6000 hover:bg-primary-700 text-neutral-50 "
+                      onClick={handleEmailCertCheck}
+                    >
+                      Check
+                    </Button>
+                  ) : null}
                 </div>
-                {showTimer ?
-                  <p className={`absolute text-[12px] left-2 top-12 ${countdown <= 59 ? 'text-red-500 animate-blink' : ''}`}>
+                {showTimer ? (
+                  <p
+                    className={`absolute text-[12px] left-2 top-12 ${
+                      countdown <= 59 ? "text-red-500 animate-blink" : ""
+                    }`}
+                  >
                     {formTime} 이후 인증코드가 만료됩니다.
                   </p>
-                  : null
-                }
+                ) : null}
               </div>
-
-
             </label>
+            <button onClick={() => console.log(chgPwData)}>확인용</button>
           </div>
-
-          <Button
-            className="rounded-xl ttnc-ButtonPrimary disabled:bg-opacity-70 bg-primary-6000 hover:bg-primary-700 text-neutral-50 "
-            onClick={handleCheck} >
-            Continue
-          </Button>
         </form>
       </div>
     </div>
