@@ -13,5 +13,4 @@ export interface SignUpType{
   passwordCheck : boolean;
   nicknameCheck : boolean;
   emailformcheck: boolean;
-
 } 
