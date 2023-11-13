@@ -1,11 +1,62 @@
+'use client'
 import StartRating from "@/components/StartRating";
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 
 export interface PayPageProps {}
 
 const PayDone: FC<PayPageProps> = () => {
+  const searchParams = useSearchParams()
+  const paymentKey = searchParams.get('paymentKey')
+  const orderId = searchParams.get('orderId')
+  const amount = searchParams.get('amount')
+
+  const getData = async () => {
+    try {
+      const response = await fetch(
+        "https://api.tosspayments.com/v1/payments/confirm",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Basic ${Buffer.from(
+              `${process.env.TOSS_PAYMENTS_SECRET_KEY}:`
+            ).toString("base64")}`,
+          },
+          body: JSON.stringify({ paymentKey, orderId, amount }),
+        }
+      );
+
+      if (!response.ok) {
+        // Handle non-successful responses here
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const payment = await response.json();
+
+      console.log(payment);
+
+      return payment
+    } catch (err: any) {
+      console.error("err", err);
+
+      return {
+        redirect: {
+          destination: `/fail?code=${err.code}&message=${err.message}`,
+          permanent: false,
+        },
+      };
+    }
+
+  };
+
+  useEffect(() => {
+    
+    getData()
+  },[])
+
   const renderContent = () => {
     return (
       <div className="w-full flex flex-col sm:rounded-2xl space-y-10 px-0 sm:p-6 xl:p-8">
