@@ -3,7 +3,6 @@ import React from "react";
 import { getServerSession } from "next-auth";
 import { options } from "../api/auth/[...nextauth]/options";
 import LoginLogo from "@/app/login/loginLogo";
-import SnsLoginForm from "@/app/login/snsLogin";
 
 async function Loginpage() {
   const session = await getServerSession(options);
@@ -13,7 +12,6 @@ async function Loginpage() {
     <div className="container mb-24 lg:mb-32">
         <LoginLogo />
         <LoginForm email={""} password={""} />
-        <SnsLoginForm />
     </div>
   );
 }

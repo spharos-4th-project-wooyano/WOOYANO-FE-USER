@@ -1,30 +1,34 @@
 "use client";
-import ButtonPrimary from "@/shared/ButtonPrimary";
-import Input from "@/shared/Input";
 import React, { ChangeEvent, useState } from "react";
+import Input from "@/shared/Input";
+import { ChgPwType } from "@/types/ChgPwType";
+import PasswordViewButton from "@/components/widget/passwordViewButton";
 
-//todo : 비밀번호 형식 유효성 검사, 비밀번호 확인 검사, 새 비밀번호 post fetch, 에러처리, 변경 결과 alert
-interface chgPwform {
-  newPassword: string;
-  passwordCheck: string;}
+interface newPwform {
+  newpassword: string;
+  checkPassword: string;
+}
 
-export default function ChgPwForm() {
-  const [chgPwform, setChgPwform] = useState<chgPwform>({
-    newPassword: "",
-    passwordCheck: "",
-  });
+export default function ChgPwForm(props: {
+  chgPwData: ChgPwType;
+  setChgPwData: React.Dispatch<React.SetStateAction<ChgPwType>>;
+}) {
+  const { chgPwData, setChgPwData } = props;
+  const [pwType, setPwType] = useState<boolean>(true);
+
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
     const value = e.target.value;
     const id = e.target.id;
-    setChgPwform({
-      ...chgPwform,
+    setChgPwData({
+      ...chgPwData,
       [id]: value,
     });
-    console.log(chgPwform);
   };
 
+  const handleHiddenPw = () => {
+    setPwType(!pwType);
+  };
 
   return (
     <div className="container mb-6 lg:mb-12">
@@ -43,33 +47,35 @@ export default function ChgPwForm() {
             <span className="flex justify-between items-center text-neutral-800 dark:text-neutral-200">
               New Password
             </span>
-            <Input
-              id="newPassword"
-              type="text"
-              placeholder="새 비밀번호를 입력하세요."
-              className="mt-1"
-              value={chgPwform.newPassword}
-              onChange={handleOnChange}
-            />
+            <div className="relative">
+              <Input
+                id="newpassword"
+                type={pwType ? "password" : "text"}
+                placeholder="새 비밀번호를 입력해주세요."
+                className="mt-1"
+                value={chgPwData.newpassword}
+                onChange={handleOnChange}
+              />
+              <div className="absolute right-3 top-3">
+                <PasswordViewButton pwType={pwType} onClick={handleHiddenPw} />
+              </div>
+            </div>
           </label>
           <label className="block">
             <span className="flex justify-between items-center text-neutral-800 dark:text-neutral-200">
               Password Check
             </span>
             <Input
-              id="passwordCheck"
-              type="text"
+              id="checkPassword"
+              type="password"
               placeholder="한번 더 입력해주세요."
               className="mt-1 mb-6"
-              value={chgPwform.passwordCheck}
+              value={chgPwData.checkPassword}
               onChange={handleOnChange}
             />
           </label>
-          <ButtonPrimary
-          // onClick={}
-          href="/"
-          >Continue</ButtonPrimary>
         </form>
       </div>
     </div>
-  );}
+  );
+}

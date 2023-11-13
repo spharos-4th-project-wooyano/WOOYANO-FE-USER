@@ -9,10 +9,10 @@ export default function LoginLogo() {
             <Charactor/>
         </div>
         <div className="flex flex-col items-end font-bold">
-          <h2 className="text-2xl leading-[115%] md:text-3xl md:leading-[115%]">
+          <h2 className="text-2xl md:text-3xl leading-[115%] font-medium">
             Welcome To
           </h2>
-          <h2 className="text-4xl leading-[115%] md:text-5xl md:leading-[115%]">
+          <h2 className="text-3xl md:text-5xl leading-[115%]">
             WooYaNo!
           </h2>
         </div>
