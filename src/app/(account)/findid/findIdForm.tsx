@@ -1,9 +1,9 @@
 "use client";
-import ButtonPrimary from "@/shared/ButtonPrimary";
 import Input from "@/shared/Input";
 import React, { useState, ChangeEvent } from "react";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import Button from "@/shared/Button";
 
 interface findIdForm {
   name: string;
@@ -145,7 +145,9 @@ export default function FindIdForm() {
               onChange={handleOnChange}
             />
           </label>
-          <ButtonPrimary onClick={handleFindId}>Continue</ButtonPrimary>
+          <Button
+          className="rounded-xl ttnc-ButtonPrimary disabled:bg-opacity-70 bg-primary-6000 hover:bg-primary-700 text-neutral-50 "
+          onClick={handleFindId}>Continue</Button>
         </form>
       </div>
     </div>
