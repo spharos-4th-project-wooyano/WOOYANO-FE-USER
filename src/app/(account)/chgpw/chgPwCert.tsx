@@ -335,6 +335,7 @@ export default function ChgPwCert(props: {
                 ) : null}
               </div>
             </label>
+            <button onClick={() => console.log(chgPwData)}>확인용</button>
           </div>
         </form>
       </div>
