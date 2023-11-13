@@ -28,6 +28,8 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
   const router = useRouter();
   const params=useSearchParams().get('storeid');
   const [ data, setData ] = useState<any>({} as any);
+  console.log(thisPathname);
+  
   useEffect(()=>{
     // console.log(DEMO_DATA)
     const getData = async () => {

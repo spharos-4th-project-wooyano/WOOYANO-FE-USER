@@ -8,8 +8,8 @@ import { nanoid } from "nanoid";
 import { useAsync } from "react-use";
 
 
-const clientKey = "test_ck_Z61JOxRQVE17jJlvJlyVW0X9bAqw";
-const customerKey = "YbX2HuSlsC9uVJW6NMRMj";
+const clientKey = process.env.TOSSPAYMENTS_CLIENT_KEY
+const customerKey = process.env.TOSSPAYMENTS_CUSTOM_KEY 
 
 export default function TossPaymets({price,setPrice}:{price:number,setPrice:React.Dispatch<React.SetStateAction<number>>}) {
   const paymentWidgetRef = useRef<PaymentWidgetInstance | null>(null);
@@ -19,7 +19,7 @@ export default function TossPaymets({price,setPrice}:{price:number,setPrice:Reac
   useAsync(async () => {
     // ------  결제위젯 초기화 ------
     // 비회원 결제에는 customerKey 대신 ANONYMOUS를 사용하세요.
-    const paymentWidget = await loadPaymentWidget(clientKey, customerKey); // 회원 결제
+    const paymentWidget = await loadPaymentWidget(clientKey as string, customerKey as string); // 회원 결제
     // const paymentWidget = await loadPaymentWidget(clientKey, ANONYMOUS); // 비회원 결제
     // console.log(paymentWidget);
 
@@ -80,10 +80,8 @@ export default function TossPaymets({price,setPrice}:{price:number,setPrice:Reac
             await paymentWidget?.requestPayment({
               orderId: nanoid(),
               orderName: "토스 티셔츠 외 2건",
-              customerName: "김토스",
-              customerEmail: "customer123@gmail.com",
-              successUrl: `${window.location.origin}/api/success`,
-              failUrl: `${window.location.origin}/api/fail`,
+              successUrl: `${window.location.origin}/checkout/success`,
+              failUrl: `${window.location.origin}/checkout/fail`,
             });
           } catch (error) {
             // 에러 처리하기

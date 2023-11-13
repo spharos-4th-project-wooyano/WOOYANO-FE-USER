@@ -7,6 +7,12 @@ const nextConfig = {
   experimental: {
     typedRoutes: true,
   },
+  env:{
+    TOSSPAYMENTS_CLIENT_KEY:process.env.TOSSPAYMENTS_CLIENT_KEY,
+    TOSSPAYMENTS_CUSTOM_KEY:process.env.TOSSPAYMENTS_CUSTOM_KEY,
+    TOSS_PAYMENTS_SECRET_KEY:process.env.TOSS_PAYMENTS_SECRET_KEY,
+    NEXT_PUBLIC_API_BASE_URL:process.env.NEXT_PUBLIC_API_BASE_URL
+  },
   images: {
     remotePatterns: [
       {
