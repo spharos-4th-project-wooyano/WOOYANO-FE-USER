@@ -12,4 +12,6 @@ export interface SignUpType{
     emailCertNumber: string;
     passwordCheck : boolean;
     nicknameCheck : boolean;
+    emailformcheck: boolean;
+
   } 

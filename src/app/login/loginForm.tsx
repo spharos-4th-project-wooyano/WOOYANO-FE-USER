@@ -8,13 +8,15 @@ import Swal from "sweetalert2";
 import { signIn } from "next-auth/react";
 import CheckEmailForm from "../../components/widget/checkEmailForm";
 import PasswordViewButton from "../../components/widget/passwordViewButton";
+import Button from "@/shared/Button";
+import SnsLogin from "./snsLogin";
 
 export interface LoginFormProps {
   email: string;
   password: string;
 }
 
-const LoginForm: FC<LoginFormProps> = ({}) => {
+const LoginForm: FC<LoginFormProps> = ({ }) => {
   const query = useSearchParams();
   const callBackUrl = query.get("callbackUrl");
 
@@ -85,6 +87,8 @@ const LoginForm: FC<LoginFormProps> = ({}) => {
     setPwType(!pwType);
   };
 
+  const [showSnsLogin, setShowSnsLogin] = useState(false);
+
   return (
     <div className={`nc-LoginForm`}>
       <div className="container mb-6 lg:mb-12">
@@ -118,7 +122,7 @@ const LoginForm: FC<LoginFormProps> = ({}) => {
             <label className="block">
               <span className="flex justify-between items-center text-neutral-800 dark:text-neutral-200">
                 Password
-                <Link href="/chgpw" className="text-sm underline font-medium">
+                <Link href="/chgpw/cert" className="text-sm underline font-medium">
                   Forgot password?
                 </Link>
               </span>
@@ -135,9 +139,11 @@ const LoginForm: FC<LoginFormProps> = ({}) => {
                 </div>
               </div>
             </label>
-            <ButtonPrimary className="w-full" onClick={handleLoginFetch}>
+            <Button
+              className="w-full rounded-xl ttnc-ButtonPrimary disabled:bg-opacity-70 bg-primary-6000 hover:bg-primary-700 text-neutral-50"
+              onClick={handleLoginFetch}>
               Sign In
-            </ButtonPrimary>
+            </Button>
           </form>
           {/* ==== */}
           <div>
@@ -151,10 +157,18 @@ const LoginForm: FC<LoginFormProps> = ({}) => {
 
           {/* OR */}
           <div className="relative text-center">
-            <span className="relative z-10 inline-block px-4 font-medium text-sm bg-white dark:text-neutral-400 dark:bg-neutral-900">
-              Sign in with social networks
-            </span>
+            <button className="relative z-10 inline-block px-4 font-medium text-sm bg-white dark:text-neutral-400 dark:bg-neutral-900"
+              onClick={() => setShowSnsLogin(!showSnsLogin)}>
+              다른 방법으로 로그인하기
+            </button>
             <div className="absolute left-0 w-full top-1/2 transform -translate-y-1/2 border border-neutral-100 dark:border-neutral-800"></div>
+          </div>
+          <div className={`transition-all duration-700 ease-in-out ${showSnsLogin ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[-8px]'}`}>
+            {showSnsLogin && (
+              <div>
+                <SnsLogin />
+              </div>
+            )}
           </div>
         </div>
       </div>

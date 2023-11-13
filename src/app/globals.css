@@ -156,7 +156,7 @@ abbr[title] {
   color: white;
 }
 
-
+/* swiper css */
 .swiper-button-prev,
 .swiper-button-next {
   background-color: none;
@@ -165,7 +165,6 @@ abbr[title] {
   border-radius: 20px;
   color: black !important;
 }
-
 
 /* swal custom */
   .mySwalConfirmButton {
