@@ -157,9 +157,16 @@ abbr[title] {
 }
 
 
+.swiper-button-prev,
+.swiper-button-next {
+  background-color: none;
+  opacity: 0.5;
+  padding: 15px 5px;
+  border-radius: 20px;
+  color: black !important;
+}
 
 
-=======
 /* swal custom */
   .mySwalConfirmButton {
     justify-content: center !important;
