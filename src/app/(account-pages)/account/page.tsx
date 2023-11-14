@@ -18,7 +18,7 @@ const AccountPage = () => {
       <div className="flex flex-col md:flex-row">
         <div className="flex-shrink-0 flex items-start">
           <div className="relative rounded-full overflow-hidden flex">
-            <Avatar sizeClass="w-32 h-32" />
+            {/* <Avatar sizeClass="w-32 h-32" /> */}
             <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-neutral-50 cursor-pointer">
               <svg
                 width="30"
