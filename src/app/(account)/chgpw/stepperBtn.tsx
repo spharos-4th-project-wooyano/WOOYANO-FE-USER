@@ -71,9 +71,9 @@ export default function StepperBtn({
         });
       } else {
         try {
-          console.log(
-            `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/password`
-          );
+          // console.log(
+          //   `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/password`
+          // );
           const res = await fetch(
             `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/password`,
             {
@@ -125,7 +125,7 @@ export default function StepperBtn({
 
   return (
     <div className="pt-10 justify-center md:px-10 px-4">
-      <div className="flex gap-6 box-border w-full mx-auto">
+      <div className="flex gap-6 box-border max-w-xl mx-auto">
         <Button
           className={`ttnc-ButtonPrimary disabled:bg-opacity-70 bg-primary-6000 hover:bg-primary-700 text-neutral-50 rounded-xl w-full`}
           onClick={

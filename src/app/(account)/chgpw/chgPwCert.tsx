@@ -1,7 +1,6 @@
 "use client";
 import CheckEmailForm from "@/components/widget/checkEmailForm";
 import Button from "@/shared/Button";
-import ButtonPrimary from "@/shared/ButtonPrimary";
 import Input from "@/shared/Input";
 import { ChgPwType } from "@/types/ChgPwType";
 import { useRouter } from "next/navigation";
@@ -335,7 +334,6 @@ export default function ChgPwCert(props: {
                 ) : null}
               </div>
             </label>
-            <button onClick={() => console.log(chgPwData)}>확인용</button>
           </div>
         </form>
       </div>
