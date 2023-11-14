@@ -145,7 +145,7 @@ const SignUpForm = (props: {
                 <h2 className="text-3xl font-semibold">회원정보 입력</h2>
                 <p className="md:text-xl text-md font-normal pb-6">회원정보를 입력해주세요.</p>
               </div>
-              <div className="hidden md:block pl-[24vh] dark:invert">
+              <div className="hidden md:block pl-[200px] dark:invert">
                 <svg fill="#000000" height="85px" width="85px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 458.018 458.018" >
                   <g>

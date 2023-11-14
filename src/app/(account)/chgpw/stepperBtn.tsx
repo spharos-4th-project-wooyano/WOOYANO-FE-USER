@@ -125,7 +125,7 @@ export default function StepperBtn({
 
   return (
     <div className="pt-10 justify-center md:px-10 px-4">
-      <div className="flex gap-6 box-border max-w-xl mx-auto">
+      <div className="flex gap-6 box-border w-full mx-auto">
         <Button
           className={`ttnc-ButtonPrimary disabled:bg-opacity-70 bg-primary-6000 hover:bg-primary-700 text-neutral-50 rounded-xl w-full`}
           onClick={

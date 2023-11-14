@@ -255,7 +255,7 @@ export default function ChgPwCert(props: {
 
   return (
     <div className="container mb-6 lg:mb-12">
-      <div className="max-w-md mx-auto space-y-6">
+      <div className="w-full mx-auto space-y-6">
         {/* HEADING */}
         <div className="flex flex-col font-semibold gap-3 mt-16">
           <h2 className="text-3xl">Change Password</h2>
@@ -272,7 +272,7 @@ export default function ChgPwCert(props: {
               id="name"
               type="text"
               placeholder="서비스에 가입된 이름을 입력해주세요."
-              className="mt-1"
+              className="mt-1 w-full"
               value={findPwCertForm.name}
               onChange={handleOnChange}
             />
@@ -287,7 +287,7 @@ export default function ChgPwCert(props: {
                   id="email"
                   type="text"
                   placeholder="ex) wooyano@example.com"
-                  className="mt-1"
+                  className="mt-1 w-full"
                   value={findPwCertForm.email}
                   onChange={handleOnChange}
                 />
