@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useEffect, useState } from "react";
+import React, { ChangeEvent, FC, useEffect, useState } from "react";
 import Label from "@/components/Label";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import Input from "@/shared/Input";
@@ -11,9 +11,54 @@ export default function AccountInfo() {
     setShowEmailVerification(true);
   }, []);
 
+  const [changeInfo, setChangeInfo] = useState<boolean>(false);
+
+  const [defaultInfoData] = useState<AccountInfoType>({
+    username: "소준영", //서버에서 받아오는 값으로 변경
+    email: "so@gmail.com", //서버에서 받아오는 값으로 변경
+    birthday: "970425",
+    nickname: "도우애비",
+    phone: "01012341234",
+  });
+
+  const [accountInfoEditForm, setAccountInfoEditForm] =
+    useState<AccountInfoType>({
+      username: defaultInfoData.username,
+      email: defaultInfoData.email,
+      birthday: "",
+      nickname: "",
+      phone: "",
+    });
+
+  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const value = e.target.value;
+    const id = e.target.id;
+    console.log("default:", defaultInfoData[id as keyof AccountInfoType]);
+    console.log("edit:", accountInfoEditForm[id as keyof AccountInfoType]);
+    if (
+      defaultInfoData[id as keyof AccountInfoType] ===
+      accountInfoEditForm[id as keyof AccountInfoType]
+    ) {
+      setChangeInfo(false);
+    } else {
+      setChangeInfo(true);
+    }
+    console.log(changeInfo);
+
+    setAccountInfoEditForm({
+      ...accountInfoEditForm,
+      [id]: value,
+    });
+  };
+
   return (
     <div
-      className={`space-y-6 transition-all duration-500 ease-in-out transform ${showEmailVerification ? "opacity-100 translate-x-0" : "opacity-0 translate-x-[-8px]"}`}
+      className={`space-y-6 transition-all duration-500 ease-in-out transform ${
+        showEmailVerification
+          ? "opacity-100 translate-x-0"
+          : "opacity-0 translate-x-[-8px]"
+      }`}
     >
       <h2 className="text-3xl font-semibold">Account infomation</h2>
       <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
@@ -48,31 +93,61 @@ export default function AccountInfo() {
         <div className="flex-grow mt-0 max-w-3xl space-y-6">
           <div>
             <Label>Name</Label>
-            <Input className="mt-1.5" defaultValue="" readOnly />
+            <Input
+              className="mt-1.5"
+              defaultValue={defaultInfoData.username}
+              readOnly
+              id="username"
+              onChange={handleOnChange}
+            />
           </div>
           {/* ---- */}
           <div>
             <Label>Email</Label>
-            <Input className="mt-1.5" defaultValue="" readOnly />
+            <Input
+              className="mt-1.5"
+              defaultValue={defaultInfoData.email}
+              readOnly
+              id="email"
+              onChange={handleOnChange}
+            />
           </div>
           {/* ---- */}
           <div>
             <Label>Nickname</Label>
-            <Input className="mt-1.5" defaultValue="" />
+            <Input
+              className="mt-1.5"
+              defaultValue={defaultInfoData.nickname}
+              id="nickname"
+              onChange={handleOnChange}
+            />
           </div>
           {/* ---- */}
           <div>
             <Label>Date of birth</Label>
-            <Input className="mt-1.5" type="date" />
+            <Input
+              className="mt-1.5"
+              defaultValue={defaultInfoData.birthday}
+              type="date"
+              id="birthday"
+              onChange={handleOnChange}
+            />
           </div>
           {/* ---- */}
           <div>
             <Label>Phone number</Label>
-            <Input className="mt-1.5" />
+            <Input
+              className="mt-1.5"
+              defaultValue={defaultInfoData.phone}
+              id="phone"
+              onChange={handleOnChange}
+            />
           </div>
-          <div className="pt-2">
-            <ButtonPrimary>Update info</ButtonPrimary>
-          </div>
+          {changeInfo ? (
+            <div className="pt-2">
+              <ButtonPrimary>Update info</ButtonPrimary>
+            </div>
+          ) : null}
         </div>
       </div>
     </div>

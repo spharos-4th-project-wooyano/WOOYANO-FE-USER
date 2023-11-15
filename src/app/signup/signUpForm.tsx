@@ -36,8 +36,8 @@ const SignUpForm = (props: {
     }
 
     if (id === "birthday") {
-      // 생년월일 필드인 경우 입력값에서 하이픈을 제거하여 "YYMMDD" 형식으로 변환
-      const birthdayForm = value.replace(/-/g, "").substring(2);
+      // 생년월일 필드인 경우 입력값에서 하이픈을 제거하여 "YYYYMMDD" 형식으로 변환
+      const birthdayForm = value.replace(/-/g, "");
       setSignUpData({
         ...signUpData,
         birthday: birthdayForm,
