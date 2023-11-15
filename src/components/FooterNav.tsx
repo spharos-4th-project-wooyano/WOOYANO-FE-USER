@@ -30,8 +30,8 @@ const NAV: NavItem[] = [
     icon: MagnifyingGlassIcon,
   },
   {
-    name: "Wishlists",
-    link: "/account-savelists",
+    name: "찜 목록",
+    link: "/favorite",
     icon: HeartIcon,
   },
   {
