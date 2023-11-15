@@ -24,7 +24,7 @@ function Worker() {
       </div>
 
       {/* desc */}
-      <span className="block text-neutral-6000 dark:text-neutral-300">
+      <span className="block text-neutral-6000 dark:text-neutral-300 mt-5">
         투룸, 쓰리룸 전문 가사도우미. 고객 만족율 99% !
       </span>
     </div>

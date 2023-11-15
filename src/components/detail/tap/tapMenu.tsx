@@ -74,7 +74,6 @@ function TapMenu() {
             <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
             
             {/* host */}
-            
             <Worker/>
             </div>
           </Tab.Panel>
