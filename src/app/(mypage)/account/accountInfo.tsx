@@ -5,7 +5,6 @@ import Input from "@/shared/Input";
 import { AccountInfoType } from "@/types/AccountInfoType";
 import { useSession } from "next-auth/react";
 import Swal from "sweetalert2";
-import ButtonPrimary from "@/shared/ButtonPrimary";
 import Button from "@/shared/Button";
 
 export default function AccountInfo({
@@ -28,8 +27,7 @@ export default function AccountInfo({
   });
 
   //입력된 정보
-  const [accountInfoEditForm, setAccountInfoEditForm] =
-    useState<AccountInfoType>({
+  const [accountInfoEditForm, setAccountInfoEditForm] = useState<AccountInfoType>({
       username: accountInfo.username,
       email: accountInfo.email,
       birthday: "" || accountInfo.birthday,
@@ -40,14 +38,15 @@ export default function AccountInfo({
   //정보 변경 여부
   const [changeInfo, setChangeInfo] = useState<boolean>(false);
 
+  //입력값 업데이트
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const value = e.target.value;
     const id = e.target.id;
     if (id == "nickname") {
-      if(accountInfo.nickname !== accountInfoEditForm.nickname){
+      if (defaultInfoData.nickname !== accountInfoEditForm.nickname) {
         setNicknameChecked(false);
-      } 
+      }
     }
     if (
       defaultInfoData[id as keyof AccountInfoType] ===
@@ -62,8 +61,10 @@ export default function AccountInfo({
     });
   };
 
+  //닉네임 중복 검사 여부 
   const [nicknameCheked, setNicknameChecked] = useState<boolean>(true);
 
+  //닉네임 중복 검사
   const handleNicknameCheck = async () => {
     if (accountInfo.nickname === accountInfoEditForm.nickname) {
       setNicknameChecked(true);
@@ -82,7 +83,7 @@ export default function AccountInfo({
       setNicknameChecked(false);
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/nickname/check?nickname=${accountInfoEditForm.nickname}`,
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/nickname/check?nickname=${accountInfoEditForm.nickname}`
         );
         if (res.ok) {
           const data = await res.json();
@@ -93,7 +94,7 @@ export default function AccountInfo({
               toast: false,
               position: "center",
               showConfirmButton: false,
-              timer: 1500,
+              timer: 1000,
               timerProgressBar: false,
               customClass: {
                 container: "my-swal",
@@ -106,7 +107,7 @@ export default function AccountInfo({
               toast: false,
               position: "center",
               showConfirmButton: false,
-              timer: 1500,
+              timer: 1000,
               timerProgressBar: false,
               customClass: {
                 container: "my-swal",
@@ -141,6 +142,7 @@ export default function AccountInfo({
     }
   };
 
+  //비밀번호 인증 및 수정사항 적용 fetch
   const handleEditAccountInfo = async () => {
     if (!nicknameCheked) {
       Swal.fire({
@@ -155,7 +157,7 @@ export default function AccountInfo({
         },
       });
     } else {
-      if (defaultInfoData === accountInfoEditForm) {
+      if (accountInfo === accountInfoEditForm) {
         setChangeInfo(false);
         Swal.fire({
           text: "수정사항이 없습니다.",
@@ -169,32 +171,115 @@ export default function AccountInfo({
           },
         });
       } else {
-        if(accountInfoEditForm.birthday.length === 8 && accountInfoEditForm.phone.length === 11) {
-          try {
-            const res = await fetch(
-              `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/mypage/info`,
-              {
-                method: "PUT",
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${usertoken}`,
-                  Email: `${useremail}`,
-                },
-                body: JSON.stringify({
-                  username: `${accountInfoEditForm.username}`,
-                  birthday: `${accountInfoEditForm.birthday}`,
-                  nickname: `${accountInfoEditForm.nickname}`,
-                  phone: `${accountInfoEditForm.phone}`,
-                }),
+        if (
+          accountInfoEditForm.birthday.length === 8 &&
+          accountInfoEditForm.phone.length === 11
+        ) {
+          //비밀번호 입력
+          const { value: password } = await Swal.fire({
+            input: "password",
+            inputPlaceholder: "비밀번호를 입력해주세요.",
+            toast: false,
+            position: "center",
+            showConfirmButton: true,
+            showCancelButton: true,
+            customClass: {
+              container: "my-swal",
+            },
+            inputValidator: (value) => {
+              if (!value) {
+                return "Password is required!";
               }
-            );
+            },
+          });
+          if (password) {
+            const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/mypage/password/check`;
+            const res = await fetch(url, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${usertoken}`,
+                Email: `${useremail}`,
+              },
+              body: JSON.stringify({
+                password: `${password}`,
+              }),
+            });
             if (res.ok) {
               const data = await res.json();
-              if (data.success === true) {
-                console.log(data);
-                setChangeInfo(false);
+              if (data.result.checkResult === true) {
+                try {
+                  const res = await fetch(
+                    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/mypage/info`,
+                    {
+                      method: "PUT",
+                      headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${usertoken}`,
+                        Email: `${useremail}`,
+                      },
+                      body: JSON.stringify({
+                        username: `${accountInfoEditForm.username}`,
+                        birthday: `${accountInfoEditForm.birthday}`,
+                        nickname: `${accountInfoEditForm.nickname}`,
+                        phone: `${accountInfoEditForm.phone}`,
+                      }),
+                    }
+                  );
+                  if (res.ok) {
+                    const data = await res.json();
+                    if (data.success === true) {
+                      console.log(data);
+                      setChangeInfo(false);
+                      Swal.fire({
+                        text: "수정이 완료되었습니다.",
+                        toast: false,
+                        position: "center",
+                        showConfirmButton: false,
+                        timer: 1000,
+                        timerProgressBar: false,
+                        customClass: {
+                          container: "my-swal",
+                        },
+                      }).then(() => {
+                        //정보 반영을 위한 새로고침
+                        window.location.reload();
+                      });
+                    } else {
+                      Swal.fire({
+                        text: "서버와의 통신 중 문제가 발생했습니다.",
+                        toast: false,
+                        position: "center",
+                        showConfirmButton: false,
+                        timer: 1000,
+                        timerProgressBar: false,
+                        customClass: {
+                          container: "my-swal",
+                        },
+                      });
+                    }
+                  }
+                  // 기타 에러
+                  else {
+                    throw new Error("서버 응답에 실패했습니다.");
+                  }
+                } catch (error) {
+                  console.error("에러 발생:", error);
+                  Swal.fire({
+                    text: "서버와의 통신 중 문제가 발생했습니다.",
+                    toast: false,
+                    position: "center",
+                    showConfirmButton: false,
+                    timer: 1000,
+                    timerProgressBar: false,
+                    customClass: {
+                      container: "my-swal",
+                    },
+                  });
+                }
+              } else if (data.result.checkResult === false) {
                 Swal.fire({
-                  text: "수정이 완료되었습니다.",
+                  text: "비밀번호가 일치하지않습니다",
                   toast: false,
                   position: "center",
                   showConfirmButton: false,
@@ -203,13 +288,10 @@ export default function AccountInfo({
                   customClass: {
                     container: "my-swal",
                   },
-                }).then(() => {
-                  //정보 반영을 위한 새로고침
-                  window.location.reload();
                 });
               } else {
                 Swal.fire({
-                  text: "서버와의 통신 중 문제가 발생했습니다.",
+                  text: "서버와 통신실패하였습니다.",
                   toast: false,
                   position: "center",
                   showConfirmButton: false,
@@ -220,24 +302,10 @@ export default function AccountInfo({
                   },
                 });
               }
+            } else {
+              const data = res.json();
+              console.log(data);
             }
-            // 기타 에러
-            else {
-              throw new Error("서버 응답에 실패했습니다.");
-            }
-          } catch (error) {
-            console.error("에러 발생:", error);
-            Swal.fire({
-              text: "서버와의 통신 중 문제가 발생했습니다.",
-              toast: false,
-              position: "center",
-              showConfirmButton: false,
-              timer: 1000,
-              timerProgressBar: false,
-              customClass: {
-                container: "my-swal",
-              },
-            });
           }
         } else {
           Swal.fire({
@@ -257,7 +325,6 @@ export default function AccountInfo({
   };
 
   const [showAnimation, setShowAnimation] = useState(false);
-
   useEffect(() => {
     setShowAnimation(true);
   }, []);
@@ -316,10 +383,8 @@ export default function AccountInfo({
               defaultValue={defaultInfoData.username}
               readOnly
               id="username"
-              onChange={handleOnChange}
             />
           </div>
-          {/* ---- */}
           <div>
             <Label>Email</Label>
             <Input
@@ -327,11 +392,8 @@ export default function AccountInfo({
               defaultValue={defaultInfoData.email}
               readOnly
               id="email"
-              onChange={handleOnChange}
             />
           </div>
-          {/* ---- */}
-
           <div>
             <div>
               <Label>Nickname</Label>
@@ -352,8 +414,6 @@ export default function AccountInfo({
               </Button>
             </div>
           </div>
-
-          {/* ---- */}
           <div>
             <Label>Date of birth</Label>
             <Input
@@ -366,7 +426,6 @@ export default function AccountInfo({
               minLength={8}
             />
           </div>
-          {/* ---- */}
           <div>
             <Label>Phone number</Label>
             <Input
