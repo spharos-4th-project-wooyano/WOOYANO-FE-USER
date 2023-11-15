@@ -107,40 +107,39 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
         {/* PRICE */}
         <div className="flex justify-between">
           <span className="text-3xl font-semibold">
-            $119
+            임찬섭
             <span className="ml-1 text-base font-normal text-neutral-500 dark:text-neutral-400">
-              /night
+              기사
             </span>
           </span>
-          <StartRating />
         </div>
 
         {/* FORM */}
-        <form className="flex flex-col border border-neutral-200 dark:border-neutral-700 rounded-3xl ">
+        {/* <form className="flex flex-col border border-neutral-200 dark:border-neutral-700 rounded-3xl ">
           <StayDatesRangeInput className="flex-1 z-[11]" />
           <div className="w-full border-b border-neutral-200 dark:border-neutral-700"></div>
           <GuestsInput className="flex-1" />
-        </form>
+        </form> */}
 
         {/* SUM */}
         <div className="flex flex-col space-y-4">
           <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
-            <span>$119 x 3 night</span>
-            <span>$357</span>
+            <span>투룸, 쓰리룸 <br/> 
+              전문 가사도우미</span>
           </div>
           <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
-            <span>Service charge</span>
-            <span>$0</span>
+            <span>최소 이용시간</span>
+            <span>2시간</span>
           </div>
           <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
-          <div className="flex justify-between font-semibold">
+          {/* <div className="flex justify-between font-semibold">
             <span>Total</span>
             <span>$199</span>
-          </div>
+          </div> */}
         </div>
 
         {/* SUBMIT */}
-        <ButtonPrimary href={"/checkout"}>Reserve</ButtonPrimary>
+        <ButtonPrimary href={"/serviceform"}>예약하기</ButtonPrimary>
       </div>
     );
   };

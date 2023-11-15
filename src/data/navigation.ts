@@ -138,7 +138,7 @@ const templatesChildrenMenus: NavItemType[] = [
     ],
   },
   //
-  { id: ncNanoId(), href: "/checkout", name: "Checkout" },
+  { id: ncNanoId(), href: "/serviceform", name: "ServiceForm" },
   { id: ncNanoId(), href: "/pay-done", name: "Pay done" },
   //
   { id: ncNanoId(), href: "/author", name: "Author page" },
