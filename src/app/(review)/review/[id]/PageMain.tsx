@@ -37,15 +37,23 @@ function ReviewDetail() {
                 2023.11.05
               </div>
             </div>
-          </div>
 
-          {/* 날짜 및 서비스 */}
-          <div className="flex gap-[200px]">
             <div>
               <h3 className="text-2xl font-semibold">날짜</h3>
               <div className="w-14 border-b border-neutral-200 dark:border-neutral-700 my-3"></div>
                 <p>
                   2023.10.30
+                </p>
+            </div>
+          </div>
+
+          {/* 서비스 및 기사 */}
+          <div className="flex gap-[200px]">
+            <div>
+              <h3 className="text-2xl font-semibold">기사명</h3>
+              <div className="w-14 border-b border-neutral-200 dark:border-neutral-700 my-3"></div>
+                <p>
+                 이하늘
                 </p>
             </div>
             <div>

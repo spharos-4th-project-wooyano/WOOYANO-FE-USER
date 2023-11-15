@@ -31,13 +31,13 @@ const solutions: SolutionItem[] = [
   {
     name: "사무실 청소",
     description: "Office",
-    href: "/listing-car",
+    href: "/office-clean",
     icon: IconThree,
   },
   {
     name: "가전 청소",
     description: "Home Appliances",
-    href: "/listing-experiences",
+    href: "/electronics-clean",
     icon: IconFour,
   },
 ];
