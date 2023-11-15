@@ -139,7 +139,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
         </div>
 
         {/* SUBMIT */}
-        <ButtonPrimary href={"/checkout"}>예약하기</ButtonPrimary>
+        <ButtonPrimary href={"/serviceform"}>예약하기</ButtonPrimary>
       </div>
     );
   };

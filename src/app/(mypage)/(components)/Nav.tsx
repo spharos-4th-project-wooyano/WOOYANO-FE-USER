@@ -10,7 +10,7 @@ export const Nav = () => {
 
   const listNav: Route[] = [
     "/account",
-    "/account-savelists",
+    "/favorite",
     "/account-password",
     "/account-billing",
   ];
