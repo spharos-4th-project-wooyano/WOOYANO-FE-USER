@@ -5,7 +5,7 @@ import Input from "@/shared/Input";
 import { ChgPwType } from "@/types/ChgPwType";
 import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useState } from "react";
-import Swal from "sweetalert2";
+import Swal from "sweetalert2"
 
 interface findPwCertform {
   name: string;

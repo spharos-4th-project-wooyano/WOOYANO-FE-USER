@@ -5,20 +5,21 @@ import ButtonPrimary from "@/shared/ButtonPrimary";
 import Input from "@/shared/Input";
 import { AccountInfoType } from "@/types/AccountInfoType";
 
-export default function AccountInfo() {
-  const [showEmailVerification, setShowEmailVerification] = useState(false);
-  useEffect(() => {
-    setShowEmailVerification(true);
-  }, []);
+export default function AccountInfo({
+  accountInfo,
+}: {
+  accountInfo: AccountInfoType;
+}) {
 
   const [changeInfo, setChangeInfo] = useState<boolean>(false);
 
+  //기존 정보
   const [defaultInfoData] = useState<AccountInfoType>({
-    username: "소준영", //서버에서 받아오는 값으로 변경
-    email: "so@gmail.com", //서버에서 받아오는 값으로 변경
-    birthday: "970425",
-    nickname: "도우애비",
-    phone: "01012341234",
+    username: accountInfo.username, //서버에서 받아오는 값으로 변경
+    email: accountInfo.email, //서버에서 받아오는 값으로 변경
+    birthday: accountInfo.birthday,
+    nickname: accountInfo.nickname,
+    phone: accountInfo.phone,
   });
 
   const [accountInfoEditForm, setAccountInfoEditForm] =
@@ -51,6 +52,13 @@ export default function AccountInfo() {
       [id]: value,
     });
   };
+
+  const [showEmailVerification, setShowEmailVerification] = useState(false);
+
+  useEffect(() => {
+    setShowEmailVerification(true);
+  }, []);
+
 
   return (
     <div
