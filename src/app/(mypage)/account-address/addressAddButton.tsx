@@ -7,6 +7,8 @@ import Button from "@/shared/Button";
 import Swal from "sweetalert2";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Checkbox from "@/shared/Checkbox";
+import Label from "@/components/Label";
 
 export interface addressType {
   localAddress: string;
@@ -20,7 +22,6 @@ export default function AddressAddButton() {
   const usertoken = session.data?.user.result.token;
   const useremail = session.data?.user.result.email;
   const router = useRouter();
-
 
   // 버튼 클릭 여부
   const [isView, setIsView] = useState<boolean>(false);
@@ -48,21 +49,16 @@ export default function AddressAddButton() {
     });
   };
 
-  //주소 검색결과 두 값이 모두 있을 경우 지역주소와 시군구 코드 업데이트
-  useEffect(() => {
-    if (addressInfo?.address && addressInfo?.sigunguCode) {
-      const localCodeset: number = parseInt(addressInfo.sigunguCode);
-      setAddressForm((prevForm) => ({
-        ...prevForm,
-        localCode: localCodeset,
-        localAddress: addressInfo.address,
-      }));
-    }
-  }, [addressInfo]);
+  const handleDefaultAddressSet = () => {
+    setAddressForm((prevAddressForm) => ({
+      ...prevAddressForm,
+      defaultAddress: !prevAddressForm.defaultAddress,
+    }));
+  };
 
   //주소 추가 요청
   const handleAddaddress = async () => {
-    if(!useremail || !usertoken) {
+    if (!useremail || !usertoken) {
       Swal.fire({
         text: "로그인 정보가 없습니다.",
         toast: false,
@@ -72,7 +68,7 @@ export default function AddressAddButton() {
         timerProgressBar: false,
         customClass: {
           container: "my-swal",
-          popup: 'my-swal-position'
+          popup: "my-swal-position",
         },
       });
       router.push("/login");
@@ -91,61 +87,77 @@ export default function AddressAddButton() {
           timerProgressBar: false,
           customClass: {
             container: "my-swal",
-            popup: 'my-swal-position'
+            popup: "my-swal-position",
           },
         });
       } else {
-          try {
-            //주소 추가 fetch
-            const addAddressURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/address`;
-            const res = await fetch(addAddressURL, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${usertoken}`,
-                Email: `${useremail}`,
-              },
-              body: JSON.stringify({
-                localAddress: addressForm.localAddress,
-                extraAddress: addressForm.extraAddress,
-                defaultAddress: addressForm.defaultAddress,
-                localCode: addressForm.localCode,
-              }),
-            });
-            //통신 성공
-            if (res.ok) {
-              const data = await res.json();
-              //주소 등록 완료
-              if (data.success) {
-                Swal.fire({
-                  text: "주소가 추가되었습니다.",
-                  toast: false,
-                  position: "center",
-                  showConfirmButton: false,
-                  customClass: {
-                    container: "my-swal",
-                    popup: 'my-swal-position'
-                  },
-                });
-              } else {
-              }
+        try {
+          //주소 추가 fetch
+          const addAddressURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/address`;
+          const res = await fetch(addAddressURL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${usertoken}`,
+              Email: `${useremail}`,
+            },
+            body: JSON.stringify({
+              localAddress: addressForm.localAddress,
+              extraAddress: addressForm.extraAddress,
+              defaultAddress: addressForm.defaultAddress,
+              localCode: addressForm.localCode,
+            }),
+          });
+          //통신 성공
+          if (res.ok) {
+            const data = await res.json();
+            //주소 등록 완료
+            if (data.success) {
+              Swal.fire({
+                text: "주소가 추가되었습니다.",
+                toast: false,
+                position: "center",
+                showConfirmButton: false,
+                timer: 1000,
+                customClass: {
+                  container: "my-swal",
+                  popup: "my-swal-position",
+                },
+              }).then(() => {
+                //정보 반영을 위한 새로고침
+                window.location.reload();
+              });
+            } else {
             }
-          } catch (error) {
-            console.error("에러 발생:", error);
-            Swal.fire({
-              text: "통신에 실패하였습니다.",
-              toast: false,
-              position: "center",
-              showConfirmButton: false,
-              customClass: {
-                container: "my-swal",
-                popup: 'my-swal-position'
-              },
-            });
           }
+        } catch (error) {
+          console.error("에러 발생:", error);
+          Swal.fire({
+            text: "통신에 실패하였습니다.",
+            toast: false,
+            position: "center",
+            showConfirmButton: false,
+            customClass: {
+              container: "my-swal",
+              popup: "my-swal-position",
+            },
+          });
+        }
       }
     }
   };
+
+  //주소 검색결과 두 값이 모두 있을 경우 지역주소와 시군구 코드 업데이트
+  useEffect(() => {
+    if (addressInfo?.address && addressInfo?.sigunguCode) {
+      const localCodeset: number = parseInt(addressInfo.sigunguCode);
+      setAddressForm((prevForm) => ({
+        ...prevForm,
+        localCode: localCodeset,
+        localAddress: addressInfo.address,
+      }));
+    }
+  }, [addressInfo]);
 
   return (
     <div className="bg-white rounded-xl dark:bg-neutral-900 px-2 py-2">
@@ -186,6 +198,17 @@ export default function AddressAddButton() {
             Add
           </Button>
         </div>
+        <div className="flex mt-3">
+          <Checkbox
+            name={"defaultAddressSelector"}
+            className="ml-2 font-bold rounded-full"
+            onChange={handleDefaultAddressSet}
+          />
+          <p className="pt-1 pl-2 md:text-sm text-xs text-gray-500">
+            대표 주소지로 설정하실건가요?
+          </p>
+        </div>
+
         <div className="pt-1.5 dark:invert">
           <PostCodeDaum
             isView={isView}

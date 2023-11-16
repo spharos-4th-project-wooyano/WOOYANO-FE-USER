@@ -35,11 +35,7 @@ async function AccountPage() {
       ) : (
         <div className="flex flex-col">
           <p className="text-center font-bold py-20">로그인 정보가 없습니다.</p>
-          <ButtonPrimary
-          href="/login"
-          >
-            Sign In
-          </ButtonPrimary>
+          <ButtonPrimary href="/login">Sign In</ButtonPrimary>
         </div>
       )}
     </div>

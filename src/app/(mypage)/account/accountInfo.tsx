@@ -7,10 +7,7 @@ import { useSession } from "next-auth/react";
 import Swal from "sweetalert2";
 import Button from "@/shared/Button";
 
-export default function AccountInfo({
-  accountInfo,
-}: {
-  accountInfo: AccountInfoType;
+export default function AccountInfo({ accountInfo }: { accountInfo: AccountInfoType;
 }) {
   //세션정보 불러오기
   const session = useSession();
