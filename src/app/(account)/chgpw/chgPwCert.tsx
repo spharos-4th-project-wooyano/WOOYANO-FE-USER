@@ -3,7 +3,6 @@ import CheckEmailForm from "@/components/widget/checkEmailForm";
 import Button from "@/shared/Button";
 import Input from "@/shared/Input";
 import { ChgPwType } from "@/types/ChgPwType";
-import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useState } from "react";
 import Swal from "sweetalert2"
 
@@ -18,7 +17,6 @@ export default function ChgPwCert(props: {
   setChgPwData: React.Dispatch<React.SetStateAction<ChgPwType>>;
 }) {
   const { chgPwData, setChgPwData } = props;
-  const router = useRouter();
   const [findPwCertForm, setFindPwCertForm] = useState<findPwCertform>({
     name: "",
     email: "",

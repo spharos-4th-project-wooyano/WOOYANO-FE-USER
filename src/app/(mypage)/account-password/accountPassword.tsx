@@ -1,19 +1,13 @@
 "use client";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import Label from "@/components/Label";
-import ButtonPrimary from "@/shared/ButtonPrimary";
 import Input from "@/shared/Input";
-import { useSession } from "next-auth/react";
 import PasswordViewButton from "@/components/widget/passwordViewButton";
-import Button from "@/shared/Button";
-
-export interface AccountPasswordType {
-  currentPassword: string;
-  newPassword: string;
-  confirmPassword: string;
-}
+import AccountPasswordButton from "./accountPasswordButton";
+import { AccountPasswordType } from "@/types/AccountInfoType";
 
 export default function AccountPassword() {
+
   const [pwType, setPwType] = useState<boolean>(true);
   const handlePwType = () => {
     setPwType(!pwType);
@@ -95,12 +89,7 @@ export default function AccountPassword() {
             />
           </div>
           <div className="pt-2">
-            <button
-                className="py-3 px-8 w-full md:w-2xl rounded-3xl ttnc-ButtonPrimary disabled:bg-opacity-70 bg-primary-6000 hover:bg-primary-700 text-neutral-50 w-2xl"
-                // onClick={handleChangePassword}
-              >
-                Update password
-              </button>
+            <AccountPasswordButton changePasswordForm={changePasswordForm} />
           </div>
         </div>
       </div>
