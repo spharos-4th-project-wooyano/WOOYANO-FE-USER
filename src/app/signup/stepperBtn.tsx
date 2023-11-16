@@ -48,6 +48,7 @@ export default function StepperBtn({
           timerProgressBar: false,
           customClass: {
             container: "my-swal",
+            popup: 'my-swal-position'
           },
         });
       }
@@ -92,6 +93,7 @@ export default function StepperBtn({
                     timerProgressBar: false,
                     customClass: {
                       container: "my-swal",
+                      popup: 'my-swal-position'
                     },
                   });
                 }
@@ -107,6 +109,7 @@ export default function StepperBtn({
                   timerProgressBar: false,
                   customClass: {
                     container: "my-swal",
+                    popup: 'my-swal-position'
                   },
                 });
               }
@@ -122,6 +125,7 @@ export default function StepperBtn({
                 timerProgressBar: false,
                 customClass: {
                   container: "my-swal",
+                  popup: 'my-swal-position'
                 },
               });
             }
@@ -136,6 +140,7 @@ export default function StepperBtn({
                 timerProgressBar: false,
                 customClass: {
                   container: "my-swal",
+                  popup: 'my-swal-position'
                 },
               });
             }
@@ -155,6 +160,7 @@ export default function StepperBtn({
             timerProgressBar: false,
             customClass: {
               container: "my-swal",
+              popup: 'my-swal-position'
             },
           });
         }
@@ -177,6 +183,7 @@ export default function StepperBtn({
           timerProgressBar: false,
           customClass: {
             container: "my-swal",
+            popup: 'my-swal-position'
           },
         });
       } else {
@@ -204,6 +211,7 @@ export default function StepperBtn({
                     timerProgressBar: false,
                     customClass: {
                       container: "my-swal",
+                      popup: 'my-swal-position'
                     },
                   });
                 }else {
@@ -217,6 +225,7 @@ export default function StepperBtn({
                     timerProgressBar: false,
                     customClass: {
                       container: "my-swal",
+                      popup: 'my-swal-position'
                     },
                   });
                 }
@@ -263,6 +272,7 @@ export default function StepperBtn({
           timerProgressBar: false,
           customClass: {
             container: "my-swal",
+            popup: 'my-swal-position'
           },
         });
       } else {
@@ -276,6 +286,7 @@ export default function StepperBtn({
             timerProgressBar: false,
             customClass: {
               container: "my-swal",
+              popup: 'my-swal-position'
             },
           });
         }
@@ -289,6 +300,7 @@ export default function StepperBtn({
             timerProgressBar: false,
             customClass: {
               container: "my-swal",
+              popup: 'my-swal-position'
             },
           });
         } else {
@@ -328,6 +340,7 @@ export default function StepperBtn({
                   timerProgressBar: false,
                   customClass: {
                     container: "my-swal",
+                    popup: 'my-swal-position'
                   },
                 });
               }
@@ -347,6 +360,7 @@ export default function StepperBtn({
               timerProgressBar: false,
               customClass: {
                 container: "my-swal",
+                popup: 'my-swal-position'
               },
             });
           }
@@ -364,6 +378,7 @@ export default function StepperBtn({
       showCancelButton: true,
       customClass: {
         container: "my-swal",
+        popup: 'my-swal-position'
       },
     }).then((result) => {
       if (result.isConfirmed) {

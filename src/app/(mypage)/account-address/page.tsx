@@ -4,7 +4,9 @@ import AccountAddress from './accountAddress'
 export default function AccountAddresspage() {
   return (
     <div>
-        <AccountAddress /> 
+      <div className='relative'>
+      <AccountAddress /> 
+      </div>
     </div>
   )
 }

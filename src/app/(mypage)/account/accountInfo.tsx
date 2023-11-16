@@ -77,6 +77,7 @@ export default function AccountInfo({
         timerProgressBar: false,
         customClass: {
           container: "my-swal",
+          popup: 'my-swal-position'
         },
       });
     } else if (accountInfo.nickname !== accountInfoEditForm.nickname) {
@@ -98,6 +99,7 @@ export default function AccountInfo({
               timerProgressBar: false,
               customClass: {
                 container: "my-swal",
+                popup: 'my-swal-position'
               },
             });
           } else if (data.result.checkResult === false) {
@@ -111,6 +113,7 @@ export default function AccountInfo({
               timerProgressBar: false,
               customClass: {
                 container: "my-swal",
+                popup: 'my-swal-position'
               },
             });
           } else {
@@ -136,6 +139,7 @@ export default function AccountInfo({
           timerProgressBar: false,
           customClass: {
             container: "my-swal",
+            popup: 'my-swal-position'
           },
         });
       }
@@ -154,6 +158,7 @@ export default function AccountInfo({
         timerProgressBar: false,
         customClass: {
           container: "my-swal",
+          popup: 'my-swal-position'
         },
       });
     } else {
@@ -168,6 +173,7 @@ export default function AccountInfo({
           timerProgressBar: false,
           customClass: {
             container: "my-swal",
+            popup: 'my-swal-position'
           },
         });
       } else {
@@ -184,11 +190,15 @@ export default function AccountInfo({
             showConfirmButton: true,
             showCancelButton: true,
             customClass: {
-              container: "my-swal",
+              container: "my-swal-input-container",
+              confirmButton: "my-swal-input-ConfirmButton",
+              cancelButton:"my-swal-input-CancelButton",
+              input: 'my-swal-input dark',
+              popup: 'my-swal-position'
             },
             inputValidator: (value) => {
               if (!value) {
-                return "Password is required!";
+                return "비밀번호 입력은 필수입니다.";
               }
             },
           });
@@ -240,6 +250,7 @@ export default function AccountInfo({
                         timerProgressBar: false,
                         customClass: {
                           container: "my-swal",
+                          popup: 'my-swal-position'
                         },
                       }).then(() => {
                         //정보 반영을 위한 새로고침
@@ -255,6 +266,7 @@ export default function AccountInfo({
                         timerProgressBar: false,
                         customClass: {
                           container: "my-swal",
+                          popup: 'my-swal-position'
                         },
                       });
                     }
@@ -274,6 +286,7 @@ export default function AccountInfo({
                     timerProgressBar: false,
                     customClass: {
                       container: "my-swal",
+                      popup: 'my-swal-position'
                     },
                   });
                 }
@@ -287,6 +300,7 @@ export default function AccountInfo({
                   timerProgressBar: false,
                   customClass: {
                     container: "my-swal",
+                    popup: 'my-swal-position'
                   },
                 });
               } else {
@@ -299,6 +313,7 @@ export default function AccountInfo({
                   timerProgressBar: false,
                   customClass: {
                     container: "my-swal",
+                    popup: 'my-swal-position'
                   },
                 });
               }
@@ -317,6 +332,7 @@ export default function AccountInfo({
             timerProgressBar: false,
             customClass: {
               container: "my-swal",
+              popup: 'my-swal-position'
             },
           });
         }

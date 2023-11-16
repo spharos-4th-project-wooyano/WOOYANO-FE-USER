@@ -60,6 +60,7 @@ export default function ChgPwCert(props: {
         timerProgressBar: false,
         customClass: {
           container: "my-swal",
+          popup: 'my-swal-position'
         },
       });
     } else {
@@ -94,6 +95,7 @@ export default function ChgPwCert(props: {
                         timerProgressBar: false,
                         customClass: {
                           container: "my-swal",
+                          popup: 'my-swal-position'
                         },
                       });
                     } else {
@@ -106,6 +108,7 @@ export default function ChgPwCert(props: {
                         timerProgressBar: false,
                         customClass: {
                           container: "my-swal",
+                          popup: 'my-swal-position'
                         },
                       });
                     }
@@ -124,6 +127,7 @@ export default function ChgPwCert(props: {
                 timerProgressBar: false,
                 customClass: {
                   container: "my-swal",
+                  popup: 'my-swal-position'
                 },
               });
             }
@@ -147,6 +151,7 @@ export default function ChgPwCert(props: {
         timerProgressBar: false,
         customClass: {
           container: "my-swal",
+          popup: 'my-swal-position'
         },
       });
     } else {
@@ -168,6 +173,7 @@ export default function ChgPwCert(props: {
                 timerProgressBar: false,
                 customClass: {
                   container: "my-swal",
+                  popup: 'my-swal-position'
                 },
               });
             }
@@ -184,6 +190,7 @@ export default function ChgPwCert(props: {
                 timerProgressBar: false,
                 customClass: {
                   container: "my-swal",
+                  popup: 'my-swal-position'
                 },
               });
             } else {
@@ -196,6 +203,7 @@ export default function ChgPwCert(props: {
                 timerProgressBar: false,
                 customClass: {
                   container: "my-swal",
+                  popup: 'my-swal-position'
                 },
               });
             }
@@ -214,6 +222,7 @@ export default function ChgPwCert(props: {
           timerProgressBar: false,
           customClass: {
             container: "my-swal",
+            popup: 'my-swal-position'
           },
         });
       }

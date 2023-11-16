@@ -41,6 +41,7 @@ export default function AccountPasswordButton({
           timerProgressBar: false,
           customClass: {
             container: "my-swal",
+            popup: 'my-swal-position'
           },
         });
         router.push("/login");
@@ -57,6 +58,7 @@ export default function AccountPasswordButton({
             timerProgressBar: false,
             customClass: {
               container: "my-swal",
+              popup: 'my-swal-position'
             },
           });
         } else {
@@ -105,6 +107,7 @@ export default function AccountPasswordButton({
                   timerProgressBar: false,
                   customClass: {
                     container: "my-swal",
+                    popup: 'my-swal-position'
                   },
                 }).then(() => {
                   //정보 반영을 위한 새로고침
@@ -127,6 +130,7 @@ export default function AccountPasswordButton({
                 timerProgressBar: false,
                 customClass: {
                   container: "my-swal",
+                  popup: 'my-swal-position'
                 },
               });
             }
