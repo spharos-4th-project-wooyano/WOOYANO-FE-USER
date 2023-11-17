@@ -237,3 +237,14 @@ abbr[title] {
   }
   
 
+.header_view {
+  position: fixed;
+  top: 0;
+  transition: top 0.5s ease-in-out;
+}
+
+.header_view.close {
+  position: absolute;
+  top: -100px;
+  transition: top 0.5s ease-in-out;
+}

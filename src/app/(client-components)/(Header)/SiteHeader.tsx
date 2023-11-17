@@ -23,7 +23,42 @@ const PAGES_HIDE_HEADER_BORDER: PathName[] = [
 const SiteHeader = () => {
   const anchorRef = useRef<HTMLDivElement>(null);
 
-  const [isTopOfPage, setIsTopOfPage] = useState(true);
+  const [isTopOfPage, setIsTopOfPage] = useState<boolean>(true);
+  const [isActive, setIsActive] = useState<boolean>(true);
+
+  // useEffect(() => {
+  //   const handleTouch = (e: TouchEvent) => {
+  //     if (e.touches[0].clientY > 100) {
+  //       setIsActive(true);
+  //     }
+  //   };
+  //   window.addEventListener("touchmove", handleTouch);
+  //   return () => {
+  //     window.removeEventListener("touchmove", handleTouch);
+  //   };
+  // }, []);
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setIsActive(false);
+  //   }, 2000);
+  //   return () => clearInterval(interval);
+  // }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setIsActive(false);
+      } else {
+        setIsActive(true);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
 
   useEffect(() => {
     setIsTopOfPage(window.pageYOffset < 5);
@@ -40,6 +75,7 @@ const SiteHeader = () => {
       
     });
   };
+  
 
   useEffect(() => {
     // disconnect the observer
@@ -62,13 +98,16 @@ const SiteHeader = () => {
         ? ""
         : "shadow-sm dark:border-b dark:border-neutral-700";
     }
-      return <Header className={headerClassName}  />;
+      return <Header className={headerClassName}  
+      isActive={isActive}
+      />;
       
     };
 
   return (
     <>
-      {renderHeader()}
+     
+        {renderHeader()}
       <div ref={anchorRef} className="h-1 absolute invisible"></div>
     </>
   );
