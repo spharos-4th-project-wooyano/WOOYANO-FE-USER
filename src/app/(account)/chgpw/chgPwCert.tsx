@@ -3,9 +3,8 @@ import CheckEmailForm from "@/components/widget/checkEmailForm";
 import Button from "@/shared/Button";
 import Input from "@/shared/Input";
 import { ChgPwType } from "@/types/ChgPwType";
-import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useState } from "react";
-import Swal from "sweetalert2";
+import Swal from "sweetalert2"
 
 interface findPwCertform {
   name: string;
@@ -18,7 +17,6 @@ export default function ChgPwCert(props: {
   setChgPwData: React.Dispatch<React.SetStateAction<ChgPwType>>;
 }) {
   const { chgPwData, setChgPwData } = props;
-  const router = useRouter();
   const [findPwCertForm, setFindPwCertForm] = useState<findPwCertform>({
     name: "",
     email: "",
@@ -62,6 +60,7 @@ export default function ChgPwCert(props: {
         timerProgressBar: false,
         customClass: {
           container: "my-swal",
+          popup: 'my-swal-position'
         },
       });
     } else {
@@ -96,6 +95,7 @@ export default function ChgPwCert(props: {
                         timerProgressBar: false,
                         customClass: {
                           container: "my-swal",
+                          popup: 'my-swal-position'
                         },
                       });
                     } else {
@@ -108,6 +108,7 @@ export default function ChgPwCert(props: {
                         timerProgressBar: false,
                         customClass: {
                           container: "my-swal",
+                          popup: 'my-swal-position'
                         },
                       });
                     }
@@ -126,6 +127,7 @@ export default function ChgPwCert(props: {
                 timerProgressBar: false,
                 customClass: {
                   container: "my-swal",
+                  popup: 'my-swal-position'
                 },
               });
             }
@@ -149,6 +151,7 @@ export default function ChgPwCert(props: {
         timerProgressBar: false,
         customClass: {
           container: "my-swal",
+          popup: 'my-swal-position'
         },
       });
     } else {
@@ -170,6 +173,7 @@ export default function ChgPwCert(props: {
                 timerProgressBar: false,
                 customClass: {
                   container: "my-swal",
+                  popup: 'my-swal-position'
                 },
               });
             }
@@ -186,6 +190,7 @@ export default function ChgPwCert(props: {
                 timerProgressBar: false,
                 customClass: {
                   container: "my-swal",
+                  popup: 'my-swal-position'
                 },
               });
             } else {
@@ -198,6 +203,7 @@ export default function ChgPwCert(props: {
                 timerProgressBar: false,
                 customClass: {
                   container: "my-swal",
+                  popup: 'my-swal-position'
                 },
               });
             }
@@ -216,6 +222,7 @@ export default function ChgPwCert(props: {
           timerProgressBar: false,
           customClass: {
             container: "my-swal",
+            popup: 'my-swal-position'
           },
         });
       }

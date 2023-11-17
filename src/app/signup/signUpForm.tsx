@@ -36,6 +36,7 @@ const SignUpForm = (props: {
     }
 
     if (id === "birthday") {
+      console.log("birth:"+value, "type:"+typeof value)
       // 생년월일 필드인 경우 입력값에서 하이픈을 제거하여 "YYYYMMDD" 형식으로 변환
       const birthdayForm = value.replace(/-/g, "");
       setSignUpData({
@@ -89,6 +90,7 @@ const SignUpForm = (props: {
             timerProgressBar: false,
             customClass: {
               container: "my-swal",
+              popup: 'my-swal-position'
             },
           });
         } else if (data.result.checkResult === false) {
@@ -105,6 +107,7 @@ const SignUpForm = (props: {
             timerProgressBar: false,
             customClass: {
               container: "my-swal",
+              popup: 'my-swal-position'
             },
           });
         } else {

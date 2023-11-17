@@ -31,6 +31,7 @@ export const options: NextAuthOptions = {
         const user = await res.json();
         console.log(user)
         if (res.ok && user) {
+          console.log(user)
           return user
         } else {
           return null;
