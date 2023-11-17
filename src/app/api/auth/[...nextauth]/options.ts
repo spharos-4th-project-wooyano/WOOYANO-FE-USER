@@ -3,6 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import NaverProvider from "next-auth/providers/naver";
 import KakaoProvider from "next-auth/providers/kakao";
 import GoogleProvider from "next-auth/providers/google";
+import Swal from "sweetalert2";
 
 export const options: NextAuthOptions = {
   providers: [
@@ -28,16 +29,13 @@ export const options: NextAuthOptions = {
         })
         // todo: 에러 처리
         const user = await res.json();
+        console.log(user)
         if (res.ok && user) {
-            console.log("step 4 user", user);
-
-           // 세션 처리 및 이메일, 토큰 값 저장
-           return {
-            ...user,  // 사용자 정보를 토큰에 추가
-            email: credentials?.email, // 세션에 이메일 추가
-          }  
+          console.log(user)
+          return user
+        } else {
+          return null;
         }
-        return null;
       },
     }),
     NaverProvider({

@@ -43,6 +43,7 @@ export default function StepperBtn({
           timerProgressBar: false,
           customClass: {
             container: "my-swal",
+            popup: 'my-swal-position'
           },
         });
       } else {
@@ -67,13 +68,11 @@ export default function StepperBtn({
           showConfirmButton: false,
           customClass: {
             container: "my-swal",
+            popup: 'my-swal-position'
           },
         });
       } else {
         try {
-          console.log(
-            `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/password`
-          );
           const res = await fetch(
             `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/password`,
             {
@@ -89,11 +88,25 @@ export default function StepperBtn({
           );
           if (res.ok) {
             const data = await res.json();
-            console.log(data);
-            
+            if (data.success) {
+              Swal.fire({
+                text: "변경이 완료되었습니다.",
+                toast: false,
+                position: "center",
+                showConfirmButton: true,
+                showCancelButton: false,
+                customClass: {
+                  container: "my-swal",
+                  popup: 'my-swal-position'
+                },
+              }).then((result) => {
+                if (result) {
+                  router.push("/login");
+                }
+              });
+            }
           }
         } catch (error) {
-          // 에러 처리 코드를 추가하세요
           console.error("에러 발생:", error);
         }
       }
@@ -109,6 +122,7 @@ export default function StepperBtn({
       showCancelButton: true,
       customClass: {
         container: "my-swal",
+        popup: 'my-swal-position'
       },
     }).then((result) => {
       if (result.isConfirmed) {

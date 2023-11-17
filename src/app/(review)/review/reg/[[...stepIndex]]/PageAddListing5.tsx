@@ -1,8 +1,13 @@
 import React, { FC } from "react";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import Input from "@/shared/Input";
+import { useSession } from "next-auth/react";
 
 export interface PageAddListing5Props {}
+
+// const session = useSession();
+// const userToken = session.data?.user.result.token;
+
 
 const PageAddListing5: FC<PageAddListing5Props> = () => {
   const renderRadio = (

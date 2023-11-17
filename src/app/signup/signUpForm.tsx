@@ -36,8 +36,9 @@ const SignUpForm = (props: {
     }
 
     if (id === "birthday") {
-      // 생년월일 필드인 경우 입력값에서 하이픈을 제거하여 "YYMMDD" 형식으로 변환
-      const birthdayForm = value.replace(/-/g, "").substring(2);
+      console.log("birth:"+value, "type:"+typeof value)
+      // 생년월일 필드인 경우 입력값에서 하이픈을 제거하여 "YYYYMMDD" 형식으로 변환
+      const birthdayForm = value.replace(/-/g, "");
       setSignUpData({
         ...signUpData,
         birthday: birthdayForm,
@@ -89,6 +90,7 @@ const SignUpForm = (props: {
             timerProgressBar: false,
             customClass: {
               container: "my-swal",
+              popup: 'my-swal-position'
             },
           });
         } else if (data.result.checkResult === false) {
@@ -105,6 +107,7 @@ const SignUpForm = (props: {
             timerProgressBar: false,
             customClass: {
               container: "my-swal",
+              popup: 'my-swal-position'
             },
           });
         } else {
@@ -145,7 +148,7 @@ const SignUpForm = (props: {
                 <h2 className="text-3xl font-semibold">회원정보 입력</h2>
                 <p className="md:text-xl text-md font-normal pb-6">회원정보를 입력해주세요.</p>
               </div>
-              <div className="hidden md:block pl-[24vh] dark:invert">
+              <div className="hidden md:block pl-[200px] dark:invert">
                 <svg fill="#000000" height="85px" width="85px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 458.018 458.018" >
                   <g>

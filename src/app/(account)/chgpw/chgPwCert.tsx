@@ -1,12 +1,10 @@
 "use client";
 import CheckEmailForm from "@/components/widget/checkEmailForm";
 import Button from "@/shared/Button";
-import ButtonPrimary from "@/shared/ButtonPrimary";
 import Input from "@/shared/Input";
 import { ChgPwType } from "@/types/ChgPwType";
-import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useState } from "react";
-import Swal from "sweetalert2";
+import Swal from "sweetalert2"
 
 interface findPwCertform {
   name: string;
@@ -19,7 +17,6 @@ export default function ChgPwCert(props: {
   setChgPwData: React.Dispatch<React.SetStateAction<ChgPwType>>;
 }) {
   const { chgPwData, setChgPwData } = props;
-  const router = useRouter();
   const [findPwCertForm, setFindPwCertForm] = useState<findPwCertform>({
     name: "",
     email: "",
@@ -63,6 +60,7 @@ export default function ChgPwCert(props: {
         timerProgressBar: false,
         customClass: {
           container: "my-swal",
+          popup: 'my-swal-position'
         },
       });
     } else {
@@ -97,6 +95,7 @@ export default function ChgPwCert(props: {
                         timerProgressBar: false,
                         customClass: {
                           container: "my-swal",
+                          popup: 'my-swal-position'
                         },
                       });
                     } else {
@@ -109,6 +108,7 @@ export default function ChgPwCert(props: {
                         timerProgressBar: false,
                         customClass: {
                           container: "my-swal",
+                          popup: 'my-swal-position'
                         },
                       });
                     }
@@ -127,6 +127,7 @@ export default function ChgPwCert(props: {
                 timerProgressBar: false,
                 customClass: {
                   container: "my-swal",
+                  popup: 'my-swal-position'
                 },
               });
             }
@@ -150,6 +151,7 @@ export default function ChgPwCert(props: {
         timerProgressBar: false,
         customClass: {
           container: "my-swal",
+          popup: 'my-swal-position'
         },
       });
     } else {
@@ -171,6 +173,7 @@ export default function ChgPwCert(props: {
                 timerProgressBar: false,
                 customClass: {
                   container: "my-swal",
+                  popup: 'my-swal-position'
                 },
               });
             }
@@ -187,6 +190,7 @@ export default function ChgPwCert(props: {
                 timerProgressBar: false,
                 customClass: {
                   container: "my-swal",
+                  popup: 'my-swal-position'
                 },
               });
             } else {
@@ -199,6 +203,7 @@ export default function ChgPwCert(props: {
                 timerProgressBar: false,
                 customClass: {
                   container: "my-swal",
+                  popup: 'my-swal-position'
                 },
               });
             }
@@ -217,6 +222,7 @@ export default function ChgPwCert(props: {
           timerProgressBar: false,
           customClass: {
             container: "my-swal",
+            popup: 'my-swal-position'
           },
         });
       }
@@ -256,7 +262,7 @@ export default function ChgPwCert(props: {
 
   return (
     <div className="container mb-6 lg:mb-12">
-      <div className="max-w-md mx-auto space-y-6">
+      <div className="w-full mx-auto space-y-6">
         {/* HEADING */}
         <div className="flex flex-col font-semibold gap-3 mt-16">
           <h2 className="text-3xl">Change Password</h2>
@@ -273,7 +279,7 @@ export default function ChgPwCert(props: {
               id="name"
               type="text"
               placeholder="서비스에 가입된 이름을 입력해주세요."
-              className="mt-1"
+              className="mt-1 w-full"
               value={findPwCertForm.name}
               onChange={handleOnChange}
             />
@@ -288,7 +294,7 @@ export default function ChgPwCert(props: {
                   id="email"
                   type="text"
                   placeholder="ex) wooyano@example.com"
-                  className="mt-1"
+                  className="mt-1 w-full"
                   value={findPwCertForm.email}
                   onChange={handleOnChange}
                 />
@@ -335,7 +341,6 @@ export default function ChgPwCert(props: {
                 ) : null}
               </div>
             </label>
-            <button onClick={() => console.log(chgPwData)}>확인용</button>
           </div>
         </form>
       </div>
