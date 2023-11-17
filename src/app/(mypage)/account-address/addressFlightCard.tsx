@@ -2,15 +2,12 @@
 import React from "react";
 import { HomeIcon } from "@heroicons/react/24/solid";
 import { AddressLsitType } from "@/types/addressListType";
-import Swal from "sweetalert2";
 import AddressDeleteButton from "./addressDeleteButton";
-import AddressEditButton from "./addressEditButton";
-
-import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { PencilSquareIcon } from "@heroicons/react/24/outline";
 
 const AddressFlightCard: React.FC<AddressLsitType> = ({ addressList }) => {
-
-
+  const router = useRouter();
 
   //대표주소지 최상위로 표시
   const sortedAddressList = [...addressList].sort((a, b) => {
@@ -34,9 +31,15 @@ const AddressFlightCard: React.FC<AddressLsitType> = ({ addressList }) => {
             <div className={`relative`}>
               <div className="absolute right-0 flex justify-end gap-5 md:gap-3 text-slate-400 z-50">
                 {/* 주소 삭제 버튼 */}
-                <AddressDeleteButton address ={address}/>
+                <AddressDeleteButton address={address} />
                 {/* 주소 수정 버튼 */}
-                <AddressEditButton address = {address}/>
+                <button
+                  onClick={() => {
+                    router.push(`/account-address/edit?id=${address.id}`);
+                  }}
+                >
+                  <PencilSquareIcon className="md:h-4 md:w-4 h-6 w-6" />
+                </button>
               </div>
               <div className="flex relative">
                 <div className="absolute md:top-3 top-2 md:-left-2 -left-[5px]">
