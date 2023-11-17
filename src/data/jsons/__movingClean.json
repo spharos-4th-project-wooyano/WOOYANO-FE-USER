@@ -1,9 +1,9 @@
 [
   {
-    "id": "id_9",
+    "id": "1",
     "authorId": 1,
     "date": "May 20, 2021",
-    "href": "/house-keeper-detail/?storeid=9",
+    "href": "/storelist-detail-2/?storeid=1",
     "listingCategoryId": 8,
     "title": "이사/입주 업체 1",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",

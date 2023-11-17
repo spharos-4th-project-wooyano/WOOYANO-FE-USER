@@ -5,3 +5,9 @@ export interface AccountInfoType {
     nickname : string,
     phone : string
 }
+
+export interface AccountPasswordType {
+    currentPassword: string;
+    newPassword: string;
+    confirmPassword: string;
+}

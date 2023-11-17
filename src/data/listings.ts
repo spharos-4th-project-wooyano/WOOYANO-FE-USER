@@ -70,7 +70,7 @@ const DEMO_MOVING_LISTINGS = __movingClean.map((post, index): StayDataType => {
 
   return {
     ...post,
-    id: `stayListing_${index}_`,
+    id: `movingListing_${index}_`,
     saleOff: !index ? "-20% today" : post.saleOff,
     isAds: !index ? true : post.isAds,
     author: DEMO_AUTHORS.filter((user) => user.id === post.authorId)[0],
