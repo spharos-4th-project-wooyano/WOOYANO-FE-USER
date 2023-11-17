@@ -56,15 +56,28 @@ const LoginForm: FC<LoginFormProps> = ({ }) => {
     try {
       if (!loginForm.email || !loginForm.password) {
         Swal.fire({
-          icon: "error",
-          title: "입력 필요",
-          text: "이메일과 비밀번호를 모두 입력하세요.",
+          text: `이메일, 비밀번호를 입력해주세요`,
+          toast: false,
+          position: "center",
+          showConfirmButton: false,
+          timer: 1000,
+          timerProgressBar: false,
+          customClass: {
+            container: "my-swal",
+          },
         });
       } else {
         if (checkEmail === false) {
           Swal.fire({
-            icon: "error",
-            text: "이메일형식을 지켜주세요.",
+            text: `이메일형식을 지켜주세요.`,
+            toast: false,
+            position: "center",
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: false,
+            customClass: {
+              container: "my-swal",
+            },
           });
         } else {
           console.log("email", loginForm.email, "password", loginForm.password);
