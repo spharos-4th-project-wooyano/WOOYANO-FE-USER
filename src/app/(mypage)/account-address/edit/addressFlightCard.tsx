@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { AddressEditGetType } from "@/types/addressListType";
+import { PencilIcon, PencilSquareIcon } from "@heroicons/react/24/solid";
+
 
 export default function AddressFlightCard({addressId}: {addressId: number;}) {
   const session = useSession();
@@ -11,7 +13,7 @@ export default function AddressFlightCard({addressId}: {addressId: number;}) {
     localAddress: "",
     extraAddress: ""
   })
-  
+
   const fetchData = async () => {
     try {
       const addressURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/address/${addressId}`;
@@ -45,15 +47,16 @@ export default function AddressFlightCard({addressId}: {addressId: number;}) {
           <div className={`relative`}>
             <div className="flex relative">
               <div className="absolute md:top-3 top-2 md:-left-2 -left-[5px]"></div>
-              <div className="md:pl-6 pl-8">
+              <div className="md:pl-6 pl-4">
                 <div className="flex flex-col space-y-6 sm:space-y-0">
                   <div className="font-semibold">
                     <div className="flex justify-between md:mb-2 mb-1">
                       {/* localAddress */}
-                      <div className="whitespace-nowrap overflow-hidden overflow-ellipsis max-w-[180px] md:max-w-full line-clamp-1">
-                        <p className="text-sm md:text-lg">
+                      <div className="whitespace-nowrap overflow-hidden overflow-ellipsis md:max-w-full line-clamp-1">
+                        <p className="relative text-sm md:text-lg">
                           {addressData.localAddress}
                         </p>
+                        <PencilSquareIcon className="absolute md:w-7 md:-right-2 md:-top-2 w-6 -right-1 -top-1"/>
                       </div>
                     </div>
                   </div>
