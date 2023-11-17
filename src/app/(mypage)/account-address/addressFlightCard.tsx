@@ -1,10 +1,17 @@
 "use client";
 import React from "react";
-import { TrashIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 import { HomeIcon } from "@heroicons/react/24/solid";
 import { AddressLsitType } from "@/types/addressListType";
+import Swal from "sweetalert2";
+import AddressDeleteButton from "./addressDeleteButton";
+import AddressEditButton from "./addressEditButton";
+
+import { useSession } from "next-auth/react";
 
 const AddressFlightCard: React.FC<AddressLsitType> = ({ addressList }) => {
+
+
+
   //대표주소지 최상위로 표시
   const sortedAddressList = [...addressList].sort((a, b) => {
     if (a.defaultAddress && !b.defaultAddress) {
@@ -16,14 +23,6 @@ const AddressFlightCard: React.FC<AddressLsitType> = ({ addressList }) => {
     }
   });
 
-  const handleDeleteAddress = async () => {
-
-  }
-
-  const handleEditAddress = async () => {
-
-  }
-
   return (
     <>
       {sortedAddressList.map((address, index) => (
@@ -33,18 +32,11 @@ const AddressFlightCard: React.FC<AddressLsitType> = ({ addressList }) => {
      dark:border-neutral-800 rounded-2xl overflow-hidden hover:shadow-lg transition-shadow space-y-6`}
           >
             <div className={`relative`}>
-              <div className="absolute right-0 flex justify-end gap-5 md:gap-3 text-slate-400">
+              <div className="absolute right-0 flex justify-end gap-5 md:gap-3 text-slate-400 z-50">
                 {/* 주소 삭제 버튼 */}
-                <button
-                onClick={handleDeleteAddress}>
-                  <TrashIcon className="md:h-4 md:w-4 h-6 w-6" />
-                </button>
-
-                  {/* 주소 수정 버튼 */}
-                <button
-                onClick={handleEditAddress}>
-                  <PencilSquareIcon className="md:h-4 md:w-4 h-6 w-6" />
-                </button>
+                <AddressDeleteButton address ={address}/>
+                {/* 주소 수정 버튼 */}
+                <AddressEditButton address = {address}/>
               </div>
               <div className="flex relative">
                 <div className="absolute md:top-3 top-2 md:-left-2 -left-[5px]">
@@ -64,7 +56,9 @@ const AddressFlightCard: React.FC<AddressLsitType> = ({ addressList }) => {
                       <div className="flex justify-between md:mb-2 mb-1">
                         {/* localAddress */}
                         <div className="whitespace-nowrap overflow-hidden overflow-ellipsis max-w-[220px] md:max-w-full line-clamp-1">
-                          <p className="text-sm md:text-lg">{address.localAddress}</p>
+                          <p className="text-sm md:text-lg">
+                            {address.localAddress}
+                          </p>
                         </div>
                       </div>
                     </div>
