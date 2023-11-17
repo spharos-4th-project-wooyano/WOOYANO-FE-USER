@@ -10,20 +10,15 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { PHOTOS } from "./constant";
 import { Route } from "next";
 import { FaHeart, FaThumbsUp } from "react-icons/fa";
-import { DEMO_STAY_LISTINGS } from "@/data/listings";
+import { DEMO_MOVING_LISTINGS } from "@/data/listings";
 import TapMenu from "@/components/detail/tap/tapMenu";
+import DetailTap2 from "./DetailTap2";
 
-const DEMO_DATA = DEMO_STAY_LISTINGS;
+const DEMO_DATA = DEMO_MOVING_LISTINGS;
 
 export interface ListingStayDetailPageProps {}
 
 const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
-
-  const [onClickData,setOnClickData]=useState<any>({
-    workername:"",
-    service:"",
-    desc:"",
-  });
 
   let [isOpenModalAmenities, setIsOpenModalAmenities] = useState(false);
 
@@ -31,7 +26,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
   const router = useRouter();
   const params=useSearchParams().get('storeid');
   const [ data, setData ] = useState<any>({} as any);
-  console.log(thisPathname);
+  // console.log(thisPathname);
   
   useEffect(()=>{
     // console.log(DEMO_DATA)
@@ -68,7 +63,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
           <Badge name="추천" />
           <span className="flex justify-start items-center">
             <i className="las la-map-marker-alt text-sm"></i>
-            <span className="ml-1 text-xs">부산광역시 서구</span>
+            <span className="ml-1 text-xs">부산광역시 해운대구</span>
           </span>
         </div>
         {/* 공유 및 즐겨찾기 버튼 */}
@@ -103,53 +98,11 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
   );
 
   
-// 어떤 내용 들어가면 좋을지 생각
   const renderSidebar = () => {
     return (
       <div className="listingSectionSidebar__wrap shadow-xl">
-        {onClickData.workername===""?
-        <div>
-          <h2>기사를 선택해 주세요.</h2>
-        </div>
-        :
-        <>
-          {/* PRICE */}
-          <div className="flex justify-between">
-            <span className="text-3xl font-semibold">
-              {onClickData.workername}
-              <span className="ml-1 text-base font-normal text-neutral-500 dark:text-neutral-400">
-                기사
-              </span>
-            </span>
-          </div>
-
-          {/* SUM */}
-          <div className="flex flex-col space-y-4">
-            <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
-              <span>투룸, 쓰리룸 <br/> 
-                전문 {onClickData.service}</span>
-            </div>
-            <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
-              <span>최소 이용시간</span>
-              <span>2시간</span>
-            </div>
-            <div>
-              {onClickData.desc}
-            </div>
-            <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
-            {/* <div className="flex justify-between font-semibold">
-              <span>Total</span>
-              <span>$199</span>
-            </div> */}
-          </div>
-
           {/* SUBMIT */}
-        <ButtonPrimary href={`/checkout?id=${onClickData.workername}`}>예약하기</ButtonPrimary>
-        </>
-        }
-
-        {/* 이름, 서비스명, 사진(기사 선택 시에만), 업체명 */}
-        
+        <ButtonPrimary href={`/checkout`}>예약하기</ButtonPrimary>
       </div>
     );
   };
@@ -217,7 +170,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
           {/* 상세페이지 레이아웃 */}
           {renderSection1()}
           <div className="flex justify-center w-full">
-            <TapMenu setOnClickData={setOnClickData}/>
+            <DetailTap2 />
           </div>
         </div>
         

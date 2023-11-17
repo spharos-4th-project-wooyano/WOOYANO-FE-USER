@@ -5,7 +5,6 @@ import { StayDataType } from "@/data/types";
 import BtnLikeIcon from "@/components/BtnLikeIcon";
 import Badge from "@/shared/Badge";
 import Link from "next/link";
-import Image from "next/image";
 import { FaThumbsUp, FaHeart } from "react-icons/fa";
 
 

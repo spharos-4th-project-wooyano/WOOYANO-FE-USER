@@ -1,4 +1,4 @@
-import SectionGridFilterCard from "@/app/(stay-listings)/SectionGridFilterCard";
+import SectionGridFilterCard from "../SectionGridFilterCard";
 import React, { FC } from "react";
 
 

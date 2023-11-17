@@ -1,25 +1,36 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, SetStateAction } from 'react'
 import { Tab } from '@headlessui/react'
-import Image from "next/image";
-import Label from '@/components/Label';
-import Input from '@/shared/Input';
-import Textarea from '@/shared/Textarea';
-import ButtonPrimary from '@/shared/ButtonPrimary';
-import visaPng from "@/images/vis.png";
-import mastercardPng from "@/images/mastercard.svg";
-import Avatar from '@/shared/Avatar';
-import StartRating from '@/components/StartRating';
 import ButtonSecondary from '@/shared/ButtonSecondary';
-import FiveStartIconForRate from '@/components/FiveStartIconForRate';
-import ButtonCircle from '@/shared/ButtonCircle';
-import { ArrowRightIcon } from '@heroicons/react/24/solid';
 import CommentListing from '@/components/CommentListing';
-import { FaStar } from 'react-icons/fa';
 import Worker from '../worker/worker';
 
 
 
-function TapMenu() {
+function TapMenu({setOnClickData}:{setOnClickData:React.Dispatch<SetStateAction<any>>}) {
+  const workerData=[
+    {
+      name:"임찬섭",
+      star:50,
+      sub_desc:"투룸,쓰리룸 전문 가사도우미. 고객 만족율 99%!",
+      desc:"20년 근속의 가사도우미 경력을 통해서 성장해 왔습니다. 정성것 모시겠습니다.",
+      service:"가사도우미"
+    },
+    {
+      name:"이하늘",
+      star:50,
+      sub_desc:"투룸,쓰리룸 전문 가사도우미. 고객 만족율 99%!",
+      desc:"20년 근속의 가사도우미 경력을 통해서 성장해 왔습니다. 정성것 모시겠습니다.",
+      service:"가사도우미"
+    },
+    {
+      name:"소준영",
+      star:50,
+      sub_desc:"투룸,쓰리룸 전문 가사도우미. 고객 만족율 99%!",
+      desc:"20년 근속의 가사도우미 경력을 통해서 성장해 왔습니다. 정성것 모시겠습니다.",
+      service:"가사도우미"
+    },
+]
+  
   const renderMain = () => {
     return (
   <>
@@ -73,8 +84,17 @@ function TapMenu() {
             <h2 className="text-2xl font-semibold">기사 리스트</h2>
             <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
             
-            {/* host */}
-            <Worker/>
+            {/* 작업자 */}
+            <div className="divide-y divide-neutral-300">
+            {
+              workerData.map((data,idx)=>(
+                <Worker key={idx} data={data} setOnClickData={setOnClickData}/>
+              ))
+            }
+            </div>
+            
+            
+            
             </div>
           </Tab.Panel>
             <Tab.Panel className="space-y-5">
@@ -82,23 +102,42 @@ function TapMenu() {
               <h2 className="text-2xl font-semibold">업체 정보</h2>
               <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
               <div className="text-neutral-6000 dark:text-neutral-300">
-                <span>
-                  Providing lake views, The Symphony 9 Tam Coc in Ninh Binh provides
-                  accommodation, an outdoor swimming pool, a bar, a shared lounge, a
-                  garden and barbecue facilities. Complimentary WiFi is provided.
-                </span>
-                <br />
-                <br />
-                <span>
-                  There is a private bathroom with bidet in all units, along with a
-                  hairdryer and free toiletries.
-                </span>
-                <br /> <br />
-                <span>
-                  The Symphony 9 Tam Coc offers a terrace. Both a bicycle rental
-                  service and a car rental service are available at the accommodation,
-                  while cycling can be enjoyed nearby.
-                </span>
+                <div>
+                  <div className='font-semibold text-2xl text-black'>
+                    업체 소개
+                  </div>
+                  <div>
+                    업체 소개말이 들어갑니다.
+                  </div>
+                </div>
+
+                <div className='mt-5'>
+                  <div className='font-semibold text-2xl text-black'>
+                    영업정보
+                  </div>
+                  <div>
+                    상호명
+                  </div>
+                  <div>
+                    서비스 가능지역
+                  </div>
+                </div>
+
+                <div className='mt-5'>
+                  <div className='font-semibold text-2xl text-black'>
+                  사업자정보
+                  </div>
+                  <div>
+                    상호명
+                  </div>
+                  <div>
+                    사업자주소
+                  </div>
+                  <div>
+                    사업자번호
+                  </div>
+                </div>
+                
               </div>
             </div>
             </Tab.Panel>
@@ -108,34 +147,15 @@ function TapMenu() {
             <h2 className="text-2xl font-semibold">Reviews</h2>
             <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
 
-            {/* Content */}
-            <div className="space-y-5 ">
-              {/* <FiveStartIconForRate iconClass="w-6 h-6" className="space-x-0.5" />
-              <div className="relative">
-                <Input
-                  fontClass=""
-                  sizeClass="h-16 px-4 py-3"
-                  rounded="rounded-3xl"
-                  placeholder="Share your thoughts ..."
-                />
-                <ButtonCircle
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2"
-                  size=" w-12 h-12 "
-                >
-                  <ArrowRightIcon className="w-5 h-5" />
-                </ButtonCircle>
-              </div> */}
-            </div>
-
-            {/* comment */}
+            {/* review */}
             <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
               <CommentListing className="py-8" />
               <CommentListing className="py-8" />
               <CommentListing className="py-8" />
               <CommentListing className="py-8" />
-              <div className="pt-8">
+              {/* <div className="pt-8">
                 <ButtonSecondary>View more 20 reviews</ButtonSecondary>
-              </div>
+              </div> */}
             </div>
             </div>
             </Tab.Panel>

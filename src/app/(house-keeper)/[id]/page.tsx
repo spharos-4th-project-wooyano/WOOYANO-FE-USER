@@ -16,12 +16,15 @@ import Input from "@/shared/Input";
 import LikeSaveBtns from "@/components/LikeSaveBtns";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { Amenities_demos, PHOTOS } from "./constant";
-import StayDatesRangeInput from "./StayDatesRangeInput";
-import GuestsInput from "./GuestsInput";
+// import { Amenities_demos, PHOTOS } from "./constant";
+// import StayDatesRangeInput from "./StayDatesRangeInput";
+// import GuestsInput from "./GuestsInput";
 // import SectionDateRange from "/SectionDateRange";
 import { Route } from "next";
 import SectionDateRange from "@/app/(listing-detail)/SectionDateRange";
+import { Amenities_demos, PHOTOS } from "@/app/(listing-detail)/house-keeper-detail/constant";
+import StayDatesRangeInput from "@/app/(listing-detail)/house-keeper-detail/StayDatesRangeInput";
+import GuestsInput from "@/app/(listing-detail)/house-keeper-detail/GuestsInput";
 
 export interface ListingStayDetailPageProps {}
 
@@ -551,7 +554,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
         </div>
 
         {/* SUBMIT */}
-        <ButtonPrimary href={"/serviceform"}>Reserve</ButtonPrimary>
+        {/* <ButtonPrimary href={"/serviceform"}>Reserve</ButtonPrimary> */}
       </div>
     );
   };

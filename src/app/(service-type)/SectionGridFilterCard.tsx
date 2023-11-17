@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+"use client"
+import React, { FC, useState } from "react";
 import { DEMO_STAY_LISTINGS } from "@/data/listings";
 import { StayDataType } from "@/data/types";
 import Pagination from "@/shared/Pagination";
@@ -6,6 +7,9 @@ import TabFilters from "./TabFilters";
 import Heading2 from "@/shared/Heading2";
 import StayCard2 from "@/components/StayCard2";
 import DropDownOption from "@/components/button/dropDownoption";
+import { usePathname, useRouter } from "next/navigation";
+import ElectroOption from "@/components/button/electroOption";
+
 
 export interface SectionGridFilterCardProps {
   className?: string;
@@ -18,6 +22,11 @@ const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
   className = "",
   data = DEMO_DATA,
 }) => {
+
+  const pathname = usePathname()
+  // console.log(pathname);
+  
+
   return (
     <div
       className={`nc-SectionGridFilterCard ${className}`}
@@ -32,10 +41,20 @@ const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
       }
       />
       
-      <div className = "flex justify-end mb-8 lg:mb-11">
-        {/* <TabFilters /> */}
-        <DropDownOption/>
+      <div className={`flex ${pathname==='/electronics-clean'?"justify-between":"justify-end"} relative mb-8 lg:mb-11`}>
+        {pathname === '/electronics-clean'?
+        <>
+          <TabFilters/>
+          <DropDownOption/>
+        </> 
+        :
+        <DropDownOption/> 
+        }
       </div>
+
+      {/* <div className = "flex justify-end relative mb-8 lg:mb-11">
+        <DropDownOption/>
+      </div> */}
       
       <div className="grid grid-cols-1 gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {data.map((stay) => (
