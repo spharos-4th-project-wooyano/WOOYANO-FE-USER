@@ -237,61 +237,68 @@ abbr[title] {
     justify-content: center !important;
   }
 
+.header_view {
+  position: fixed;
+  top: 0;
+  transition: top 0.5s ease-in-out;
+}
 
-  .my-swal-input-container {
-    font-family: var(--billita-hangul) !important;
-    padding : 0 0 0 0 !important;
-  }
-  
-  .my-swal-input {
-    font-weight: 0.8rem !important;
-    display: block !important;
-    max-width: 100%;
-    border: 1px solid #d2d6dc !important;
-    border-radius: 0.4rem !important;
-    text-align: center;
-    max-height: 30px;
-  }
+.header_view.close {
+  position: absolute;
+  top: -100px;
+  transition: top 0.5s ease-in-out;
+}
 
-  .my-swal-input:focus {
-    border-color: #3b82f6 !important;
-    outline: 0 !important;
-    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5) !important;
-  }
+.my-swal-input-container {
+  font-family: var(--billita-hangul) !important;
+  padding : 0 0 0 0 !important;
+}
 
+.my-swal-input {
+  font-weight: 0.8rem !important;
+  display: block !important;
+  max-width: 100%;
+  border: 1px solid #d2d6dc !important;
+  border-radius: 0.4rem !important;
+  text-align: center;
+  max-height: 30px;
+}
 
-  .my-swal-input-ConfirmButton {
-    border-radius: 0.4rem !important;
-    box-shadow: 0 0 0 0.2rem rgba(0, 113, 255, 0.1) !important;
-    background-color: #4F46E5 !important;
-    color: white !important;
-    border: none !important;
-    width: 100px;
-    max-height: 35px;
-    margin-left: 13px;
-    margin-right: 13px;
-    font-weight: 600 !important;
-    padding : 0 0 0 0 !important;
-  }
-
-  .my-swal-input-CancelButton {
-    border-radius: 0.4rem !important;
-    justify-content: center !important;
-    box-shadow: 0 0 0 0.2rem rgba(0, 113, 255, 0.1) !important;
-    background-color: white !important;
-    color: #000000 !important;
-    border: none !important;
-    width: 100px;
-    max-height: 30px;
-    margin-left: 13px;
-    margin-right: 13px;
-    padding : 0 0 0 0 !important;
-  }
-
-  .my-swal-position {
-    bottom: 65% !important;
-  }
+.my-swal-input:focus {
+  border-color: #3b82f6 !important;
+  outline: 0 !important;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5) !important;
+}
 
 
+.my-swal-input-ConfirmButton {
+  border-radius: 0.4rem !important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 113, 255, 0.1) !important;
+  background-color: #4F46E5 !important;
+  color: white !important;
+  border: none !important;
+  width: 100px;
+  max-height: 35px;
+  margin-left: 13px;
+  margin-right: 13px;
+  font-weight: 600 !important;
+  padding : 0 0 0 0 !important;
+}
 
-  
+.my-swal-input-CancelButton {
+  border-radius: 0.4rem !important;
+  justify-content: center !important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 113, 255, 0.1) !important;
+  background-color: white !important;
+  color: #000000 !important;
+  border: none !important;
+  width: 100px;
+  max-height: 30px;
+  margin-left: 13px;
+  margin-right: 13px;
+  padding : 0 0 0 0 !important;
+}
+
+.my-swal-position {
+  bottom: 65% !important;
+}
