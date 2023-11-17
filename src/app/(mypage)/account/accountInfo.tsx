@@ -7,7 +7,10 @@ import { useSession } from "next-auth/react";
 import Swal from "sweetalert2";
 import Button from "@/shared/Button";
 
-export default function AccountInfo({ accountInfo }: { accountInfo: AccountInfoType;
+export default function AccountInfo({
+  accountInfo,
+}: {
+  accountInfo: AccountInfoType;
 }) {
   //세션정보 불러오기
   const session = useSession();
@@ -24,7 +27,8 @@ export default function AccountInfo({ accountInfo }: { accountInfo: AccountInfoT
   });
 
   //입력된 정보
-  const [accountInfoEditForm, setAccountInfoEditForm] = useState<AccountInfoType>({
+  const [accountInfoEditForm, setAccountInfoEditForm] =
+    useState<AccountInfoType>({
       username: accountInfo.username,
       email: accountInfo.email,
       birthday: "" || accountInfo.birthday,
@@ -40,25 +44,25 @@ export default function AccountInfo({ accountInfo }: { accountInfo: AccountInfoT
     e.preventDefault();
     const value = e.target.value;
     const id = e.target.id;
-    if (id == "nickname") {
-      if (defaultInfoData.nickname !== accountInfoEditForm.nickname) {
-        setNicknameChecked(false);
-      }
-    }
-    if (
-      defaultInfoData[id as keyof AccountInfoType] ===
-      accountInfoEditForm[id as keyof AccountInfoType]
-    ) {
-    } else {
-      setChangeInfo(true);
-    }
+
     setAccountInfoEditForm({
       ...accountInfoEditForm,
       [id]: value,
     });
+
+    if (defaultInfoData[id as keyof AccountInfoType] !== value) {
+      setChangeInfo(true);
+      if (id === "nickname") {
+        if (defaultInfoData.nickname !== value) {
+          setNicknameChecked(false);
+        }
+      }
+    } else {
+      setChangeInfo(false);
+    }
   };
 
-  //닉네임 중복 검사 여부 
+  //닉네임 중복 검사 여부
   const [nicknameCheked, setNicknameChecked] = useState<boolean>(true);
 
   //닉네임 중복 검사
@@ -74,7 +78,7 @@ export default function AccountInfo({ accountInfo }: { accountInfo: AccountInfoT
         timerProgressBar: false,
         customClass: {
           container: "my-swal",
-          popup: 'my-swal-position'
+          popup: "my-swal-position",
         },
       });
     } else if (accountInfo.nickname !== accountInfoEditForm.nickname) {
@@ -96,7 +100,7 @@ export default function AccountInfo({ accountInfo }: { accountInfo: AccountInfoT
               timerProgressBar: false,
               customClass: {
                 container: "my-swal",
-                popup: 'my-swal-position'
+                popup: "my-swal-position",
               },
             });
           } else if (data.result.checkResult === false) {
@@ -110,7 +114,7 @@ export default function AccountInfo({ accountInfo }: { accountInfo: AccountInfoT
               timerProgressBar: false,
               customClass: {
                 container: "my-swal",
-                popup: 'my-swal-position'
+                popup: "my-swal-position",
               },
             });
           } else {
@@ -136,7 +140,7 @@ export default function AccountInfo({ accountInfo }: { accountInfo: AccountInfoT
           timerProgressBar: false,
           customClass: {
             container: "my-swal",
-            popup: 'my-swal-position'
+            popup: "my-swal-position",
           },
         });
       }
@@ -155,7 +159,7 @@ export default function AccountInfo({ accountInfo }: { accountInfo: AccountInfoT
         timerProgressBar: false,
         customClass: {
           container: "my-swal",
-          popup: 'my-swal-position'
+          popup: "my-swal-position",
         },
       });
     } else {
@@ -170,7 +174,7 @@ export default function AccountInfo({ accountInfo }: { accountInfo: AccountInfoT
           timerProgressBar: false,
           customClass: {
             container: "my-swal",
-            popup: 'my-swal-position'
+            popup: "my-swal-position",
           },
         });
       } else {
@@ -189,9 +193,9 @@ export default function AccountInfo({ accountInfo }: { accountInfo: AccountInfoT
             customClass: {
               container: "my-swal-input-container",
               confirmButton: "my-swal-input-ConfirmButton",
-              cancelButton:"my-swal-input-CancelButton",
-              input: 'my-swal-input dark',
-              popup: 'my-swal-position'
+              cancelButton: "my-swal-input-CancelButton",
+              input: "my-swal-input dark",
+              popup: "my-swal-position",
             },
             inputValidator: (value) => {
               if (!value) {
@@ -247,7 +251,7 @@ export default function AccountInfo({ accountInfo }: { accountInfo: AccountInfoT
                         timerProgressBar: false,
                         customClass: {
                           container: "my-swal",
-                          popup: 'my-swal-position'
+                          popup: "my-swal-position",
                         },
                       }).then(() => {
                         //정보 반영을 위한 새로고침
@@ -263,7 +267,7 @@ export default function AccountInfo({ accountInfo }: { accountInfo: AccountInfoT
                         timerProgressBar: false,
                         customClass: {
                           container: "my-swal",
-                          popup: 'my-swal-position'
+                          popup: "my-swal-position",
                         },
                       });
                     }
@@ -283,7 +287,7 @@ export default function AccountInfo({ accountInfo }: { accountInfo: AccountInfoT
                     timerProgressBar: false,
                     customClass: {
                       container: "my-swal",
-                      popup: 'my-swal-position'
+                      popup: "my-swal-position",
                     },
                   });
                 }
@@ -297,7 +301,7 @@ export default function AccountInfo({ accountInfo }: { accountInfo: AccountInfoT
                   timerProgressBar: false,
                   customClass: {
                     container: "my-swal",
-                    popup: 'my-swal-position'
+                    popup: "my-swal-position",
                   },
                 });
               } else {
@@ -310,7 +314,7 @@ export default function AccountInfo({ accountInfo }: { accountInfo: AccountInfoT
                   timerProgressBar: false,
                   customClass: {
                     container: "my-swal",
-                    popup: 'my-swal-position'
+                    popup: "my-swal-position",
                   },
                 });
               }
@@ -329,7 +333,7 @@ export default function AccountInfo({ accountInfo }: { accountInfo: AccountInfoT
             timerProgressBar: false,
             customClass: {
               container: "my-swal",
-              popup: 'my-swal-position'
+              popup: "my-swal-position",
             },
           });
         }

@@ -5,6 +5,7 @@ import { HomeIcon } from "@heroicons/react/24/solid";
 import { AddressLsitType } from "@/types/addressListType";
 
 const AddressFlightCard: React.FC<AddressLsitType> = ({ addressList }) => {
+  //대표주소지 최상위로 표시
   const sortedAddressList = [...addressList].sort((a, b) => {
     if (a.defaultAddress && !b.defaultAddress) {
       return -1; // a가 defaultAddress인 경우
@@ -14,6 +15,14 @@ const AddressFlightCard: React.FC<AddressLsitType> = ({ addressList }) => {
       return a.id - b.id; // 나머지는 id 순으로 정렬
     }
   });
+
+  const handleDeleteAddress = async () => {
+
+  }
+
+  const handleEditAddress = async () => {
+
+  }
 
   return (
     <>
@@ -26,11 +35,14 @@ const AddressFlightCard: React.FC<AddressLsitType> = ({ addressList }) => {
             <div className={`relative`}>
               <div className="absolute right-0 flex justify-end gap-5 md:gap-3 text-slate-400">
                 {/* 주소 삭제 버튼 */}
-                <button>
+                <button
+                onClick={handleDeleteAddress}>
                   <TrashIcon className="md:h-4 md:w-4 h-6 w-6" />
                 </button>
-                <button>
+
                   {/* 주소 수정 버튼 */}
+                <button
+                onClick={handleEditAddress}>
                   <PencilSquareIcon className="md:h-4 md:w-4 h-6 w-6" />
                 </button>
               </div>
