@@ -28,6 +28,7 @@ export default function AccountPasswordButton({
             timerProgressBar: false,
             customClass: {
               container: "my-swal",
+              popup: 'my-swal-position'
             },
           })
     } else {
