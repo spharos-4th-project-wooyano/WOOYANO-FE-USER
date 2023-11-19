@@ -300,5 +300,5 @@ abbr[title] {
 }
 
 .my-swal-position {
-  bottom: 65% !important;
+  top : -20% !important;
 }
