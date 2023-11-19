@@ -84,42 +84,45 @@ function LoginForm() {
         },
       });
       return;
-    }
-
-    const result = await signIn("credentials", {
-      email: loginForm.email,
-      password: loginForm.password,
-      redirect: false,
-      callbackUrl: callBackUrl ? callBackUrl : "/",
-    });
-    console.log(result);
-    if (result?.error) {
-      Swal.fire({
-        text: `아이디 비빌번호를 확인 후 다시 시도해주세요.`,
-        toast: true,
-        position: "top",
-        showConfirmButton: false,
-        timer: 1000,
-        timerProgressBar: true,
-        customClass: {
-          container: "my-swal",
-          popup: "my-swal-position",
-        },
-      });
     } else {
-      Swal.fire({
-        text: `Wooyano에 오신 것을 환영합니다.`,
-        toast: true,
-        position: "top",
-        showConfirmButton: false,
-        timer: 1000,
-        timerProgressBar: true,
-        customClass: {
-          container: "my-swal",
-          popup: "my-swal-position",
-        },
-      });
-      // router.push(callBackUrl ? callBackUrl : "/");
+      try {
+        const result = await signIn("credentials", {
+          email: loginForm.email,
+          password: loginForm.password,
+          redirect: false,
+          callbackUrl: callBackUrl ? callBackUrl : "/",
+        });
+        if (!result || !result.ok) {
+          Swal.fire({
+            text: `아이디 비밀번호 확인 후 다시 시도해주세요.`,
+            toast: false,
+            position: "center",
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: false,
+            customClass: {
+              container: "my-swal",
+              popup: 'my-swal-position'
+            },
+            });
+        } else {
+          Swal.fire({
+            text: `우야노에 오신걸 환영합니다!`,
+            toast: false,
+            position: "center",
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: false,
+            customClass: {
+              container: "my-swal",
+              popup: 'my-swal-position'
+            },
+          });
+          router.push("/")
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 
