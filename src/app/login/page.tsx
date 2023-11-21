@@ -10,8 +10,8 @@ async function Loginpage() {
 
   return (
     <div className="container mb-24 lg:mb-32">
-        <LoginLogo />
-        <LoginForm email={""} password={""} />
+        <LoginLogo/>
+        <LoginForm/>
     </div>
   );
 }

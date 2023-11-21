@@ -194,7 +194,7 @@ export default function AccountInfo({
               container: "my-swal-input-container",
               confirmButton: "my-swal-input-ConfirmButton",
               cancelButton: "my-swal-input-CancelButton",
-              input: "my-swal-input dark",
+              input: "my-swal-input",
               popup: "my-swal-position",
             },
             inputValidator: (value) => {

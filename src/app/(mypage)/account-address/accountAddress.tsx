@@ -4,7 +4,6 @@ import AddressAddButton from "./addressAddButton";
 import AddressFlightCard from "./addressFlightCard";
 import { AddressLsitType } from "@/types/addressListType";
 
-
 function AccountAddress({ addressList }: { addressList: any }) {
   const [showAnimation, setShowAnimation] = useState(false);
   useEffect(() => {
@@ -22,9 +21,7 @@ function AccountAddress({ addressList }: { addressList: any }) {
       >
         <h2 className="text-3xl font-semibold">Address</h2>
         <div className="flex md:text-sm text-xs text-gray-500">
-          <p >
-            주소를 추가하시려면&nbsp;
-          </p>
+          <p>주소를 추가하시려면&nbsp;</p>
           <p className="md:hidden block">아래</p>
           <p className="md:block hidden">오른쪽</p>
           <p>&nbsp;버튼을 눌러 추가해주세요.</p>
@@ -36,7 +33,9 @@ function AccountAddress({ addressList }: { addressList: any }) {
             <AddressAddButton />
           </div>
           <div className="md:order-1 md:w-full">
-            <AddressFlightCard addressList={addressList} />
+            <div className="overflow-y-auto md:max-h-[640px] max-h-[400px] scrollbar-hide">
+              <AddressFlightCard addressList={addressList} />
+            </div>
           </div>
         </div>
       </div>
@@ -44,4 +43,4 @@ function AccountAddress({ addressList }: { addressList: any }) {
   );
 }
 
-export default AccountAddress
+export default AccountAddress;
