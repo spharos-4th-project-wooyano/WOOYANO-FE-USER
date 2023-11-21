@@ -14,7 +14,7 @@
     "like": { "count": 3366, "isLiked": true },
     "authorId": 3,
     "categoriesId": [3, 12],
-    "postType": "standard"
+    "postType": "예약대기중"
   },
   {
     "index": 2,
@@ -31,7 +31,7 @@
     "like": { "count": 3024, "isLiked": false },
     "authorId": 4,
     "categoriesId": [4, 13],
-    "postType": "video"
+    "postType": "예약승인"
   },
   {
     "index": 3,
@@ -48,7 +48,7 @@
     "like": { "count": 222, "isLiked": false },
     "authorId": 4,
     "categoriesId": [4, 13],
-    "postType": "standard"
+    "postType": "예약대기중"
   },
   {
     "index": 4,
@@ -65,7 +65,7 @@
     "like": { "count": 3735, "isLiked": true },
     "authorId": 5,
     "categoriesId": [5, 14],
-    "postType": "standard"
+    "postType": "예약대기중"
   },
   {
     "index": 5,
@@ -82,7 +82,7 @@
     "like": { "count": 3569, "isLiked": true },
     "authorId": 10,
     "categoriesId": [10, 19],
-    "postType": "video"
+    "postType": "예약승인"
   },
   {
     "index": 6,
@@ -91,6 +91,7 @@
     "title": "How architects visualize design for world’s biggest airport",
     "desc": "Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.",
     "date": "May 20, 2021",
+    "reservationDate" : "2023.11.21",
     "href": "/blog/single",
     "commentCount": 13,
     "viewdCount": 4475,
@@ -99,7 +100,7 @@
     "like": { "count": 3052, "isLiked": true },
     "authorId": 9,
     "categoriesId": [9, 18],
-    "postType": "standard"
+    "postType": "예약대기중"
   },
   {
     "index": 7,
@@ -108,6 +109,7 @@
     "title": "Take a 3D tour through a Microsoft datacenter",
     "desc": "Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.",
     "date": "May 20, 2021",
+    "reservationDate" : "2023.11.21",
     "href": "/blog/single",
     "commentCount": 20,
     "viewdCount": 2714,
@@ -116,7 +118,8 @@
     "like": { "count": 3309, "isLiked": true },
     "authorId": 2,
     "categoriesId": [2, 11],
-    "postType": "video"
+    "postType": "예약승인",
+    "isReview": true
   },
   {
     "index": 8,
@@ -125,6 +128,7 @@
     "title": "Mind games: How gaming can play a positive role in mental health",
     "desc": "Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.",
     "date": "May 20, 2021",
+    "reservationDate" : "2023.11.16",
     "href": "/blog/single",
     "commentCount": 18,
     "viewdCount": 3800,
@@ -133,7 +137,8 @@
     "like": { "count": 1255, "isLiked": true },
     "authorId": 4,
     "categoriesId": [4, 13],
-    "postType": "audio"
+    "postType": "수행완료",
+    "isReview": false
   },
   {
     "index": 9,
@@ -142,6 +147,7 @@
     "title": "업체 이름 1",
     "desc": "서비스명",
     "date": "2023.10.30",
+    "reservationDate" : "2023.11.15",
     "href": "/servicehistory/9",
     "commentCount": 19,
     "viewdCount": 4515,
@@ -150,7 +156,8 @@
     "like": { "count": 2586, "isLiked": false },
     "authorId": 1,
     "categoriesId": [9, 18],
-    "postType": "standard"
+    "postType": "대기",
+    "isReview": true
   },
   {
     "index": 10,
@@ -159,6 +166,7 @@
     "title": "업체 이름 2",
     "desc": "서비스명",
     "date": "2023.09.15",
+    "reservationDate" : "2023.11.14",
     "href": "/blog/single",
     "commentCount": 14,
     "viewdCount": 2378,
@@ -167,7 +175,8 @@
     "like": { "count": 773, "isLiked": true },
     "authorId": 2,
     "categoriesId": [9, 18],
-    "postType": "standard"
+    "postType": "대기",
+    "isReview": false
   },
   {
     "index": 11,
@@ -176,6 +185,7 @@
     "title": "To cool datacenter servers, Microsoft turns to boiling liquid",
     "desc": "Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.",
     "date": "May 20, 2021",
+    "reservationDate" : "2023.11.21",
     "href": "/blog/single",
     "commentCount": 39,
     "viewdCount": 1460,
@@ -184,7 +194,8 @@
     "like": { "count": 1917, "isLiked": false },
     "authorId": 3,
     "categoriesId": [3, 12],
-    "postType": "video"
+    "postType": "승인",
+    "isReview": false
   },
   {
     "index": 12,
@@ -193,6 +204,7 @@
     "title": "Xbox connects people to help through Crisis Text Line",
     "desc": "Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.",
     "date": "May 20, 2021",
+    "reservationDate" : "2023.11.21",
     "href": "/blog/single",
     "commentCount": 2,
     "viewdCount": 3418,
@@ -201,7 +213,8 @@
     "like": { "count": 913, "isLiked": false },
     "authorId": 9,
     "categoriesId": [9, 18],
-    "postType": "standard"
+    "postType": "대기",
+    "isReview": false
   },
   {
     "index": 13,
@@ -210,6 +223,7 @@
     "title": "Unusual ‘machine in the woods’ taps clean energy deep underground for new Microsoft campus",
     "desc": "In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.",
     "date": "May 20, 2021",
+    "reservationDate" : "2023.11.21",
     "href": "/blog/single",
     "commentCount": 5,
     "viewdCount": 3894,
@@ -218,7 +232,8 @@
     "like": { "count": 1731, "isLiked": false },
     "authorId": 10,
     "categoriesId": [10, 19],
-    "postType": "audio"
+    "postType": "완료",
+    "isReview": false
   },
   {
     "index": 14,
@@ -227,6 +242,7 @@
     "title": "WNBA’s Sabrina Ionescu teams up with Xbox to empower young girls to pursue their hoop dreams ",
     "desc": "In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.",
     "date": "May 20, 2021",
+    "reservationDate" : "2023.11.20",
     "href": "/blog/single",
     "commentCount": 27,
     "viewdCount": 1038,
@@ -235,7 +251,8 @@
     "like": { "count": 1160, "isLiked": false },
     "authorId": 2,
     "categoriesId": [2, 11],
-    "postType": "standard"
+    "postType": "대기",
+    "isReview": false
   },
   {
     "index": 15,
@@ -252,7 +269,7 @@
     "like": { "count": 2182, "isLiked": false },
     "authorId": 3,
     "categoriesId": [3, 12],
-    "postType": "audio"
+    "postType": "완료"
   },
   {
     "index": 16,
@@ -269,7 +286,7 @@
     "like": { "count": 627, "isLiked": false },
     "authorId": 9,
     "categoriesId": [9, 18],
-    "postType": "video"
+    "postType": "승인"
   },
   {
     "index": 17,
@@ -286,7 +303,7 @@
     "like": { "count": 1277, "isLiked": false },
     "authorId": 10,
     "categoriesId": [10, 19],
-    "postType": "standard"
+    "postType": "대기"
   },
   {
     "index": 18,
@@ -303,7 +320,7 @@
     "like": { "count": 3126, "isLiked": false },
     "authorId": 4,
     "categoriesId": [4, 13],
-    "postType": "standard"
+    "postType": "대기"
   },
   {
     "index": 19,
@@ -320,7 +337,7 @@
     "like": { "count": 1642, "isLiked": false },
     "authorId": 7,
     "categoriesId": [7, 16],
-    "postType": "standard"
+    "postType": "대기"
   },
   {
     "index": 20,
@@ -337,7 +354,7 @@
     "like": { "count": 505, "isLiked": false },
     "authorId": 10,
     "categoriesId": [10, 19],
-    "postType": "standard"
+    "postType": "예약대기중"
   },
   {
     "index": 21,
@@ -354,7 +371,7 @@
     "like": { "count": 1234, "isLiked": false },
     "authorId": 3,
     "categoriesId": [3, 12],
-    "postType": "standard"
+    "postType": "예약대기중"
   },
   {
     "index": 22,
@@ -371,7 +388,7 @@
     "like": { "count": 1803, "isLiked": false },
     "authorId": 7,
     "categoriesId": [7, 16],
-    "postType": "standard"
+    "postType": "예약대기중"
   },
   {
     "index": 23,
@@ -388,7 +405,7 @@
     "like": { "count": 2811, "isLiked": true },
     "authorId": 4,
     "categoriesId": [4, 13],
-    "postType": "standard"
+    "postType": "예약대기중"
   },
   {
     "index": 24,
@@ -405,7 +422,7 @@
     "like": { "count": 507, "isLiked": true },
     "authorId": 3,
     "categoriesId": [3, 12],
-    "postType": "standard"
+    "postType": "예약대기중"
   },
   {
     "index": 25,
@@ -422,7 +439,7 @@
     "like": { "count": 3503, "isLiked": false },
     "authorId": 5,
     "categoriesId": [5, 14],
-    "postType": "video"
+    "postType": "예약승인"
   },
   {
     "index": 26,
@@ -439,7 +456,7 @@
     "like": { "count": 2125, "isLiked": false },
     "authorId": 4,
     "categoriesId": [4, 13],
-    "postType": "standard"
+    "postType": "예약대기중"
   },
   {
     "index": 27,
@@ -456,7 +473,7 @@
     "like": { "count": 2454, "isLiked": false },
     "authorId": 3,
     "categoriesId": [3, 12],
-    "postType": "standard"
+    "postType": "예약대기중"
   },
   {
     "index": 28,
@@ -473,7 +490,7 @@
     "like": { "count": 1340, "isLiked": false },
     "authorId": 5,
     "categoriesId": [5, 14],
-    "postType": "video"
+    "postType": "예약승인"
   },
   {
     "index": 29,
@@ -490,7 +507,7 @@
     "like": { "count": 2709, "isLiked": false },
     "authorId": 1,
     "categoriesId": [1, 10],
-    "postType": "standard"
+    "postType": "예약대기중"
   },
   {
     "index": 30,
@@ -507,6 +524,6 @@
     "like": { "count": 327, "isLiked": false },
     "authorId": 9,
     "categoriesId": [9, 18],
-    "postType": "audio"
+    "postType": "수행완료"
   }
 ]

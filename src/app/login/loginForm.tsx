@@ -58,7 +58,7 @@ function LoginForm() {
       Swal.fire({
         text: `이메일, 비밀번호를 입력해주세요`,
         toast: false,
-        position: "center",
+        position: "top",
         showConfirmButton: false,
         timer: 1000,
         timerProgressBar: false,
@@ -74,7 +74,7 @@ function LoginForm() {
       Swal.fire({
         text: `이메일형식을 지켜주세요.`,
         toast: false,
-        position: "center",
+        position: "top",
         showConfirmButton: false,
         timer: 1000,
         timerProgressBar: false,
@@ -96,7 +96,7 @@ function LoginForm() {
           Swal.fire({
             text: `아이디 비밀번호 확인 후 다시 시도해주세요.`,
             toast: false,
-            position: "center",
+            position: "top",
             showConfirmButton: false,
             timer: 1000,
             timerProgressBar: false,
@@ -109,7 +109,7 @@ function LoginForm() {
           Swal.fire({
             text: `우야노에 오신걸 환영합니다!`,
             toast: false,
-            position: "center",
+            position: "top",
             showConfirmButton: false,
             timer: 1000,
             timerProgressBar: false,
