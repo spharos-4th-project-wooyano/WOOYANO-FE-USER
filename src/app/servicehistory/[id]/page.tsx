@@ -54,16 +54,6 @@ const PayPage: FC<PayPageProps> = () => {
                   <p>부산광역시 해운대구</p>
                 </div>
               </span>
-              <div className="flex gap-5">
-                <div className="flex gap-2 w-10 border-b border-neutral-200 dark:border-neutral-700">
-                  <FaThumbsUp className="fill-sky-500"/>
-                  <p className="text-sm">112</p>
-                </div>
-                <div className="flex gap-2 w-15 border-b border-neutral-200 dark:border-neutral-700">
-                  <FaHeart className="fill-red-600"/>
-                  <p className="text-sm">100</p>
-                </div>
-              </div>
             </div>
           </div>
           <div className="mt-6 border border-neutral-200 dark:border-neutral-700 rounded-3xl flex flex-col sm:flex-row divide-y sm:divide-x sm:divide-y-0 divide-neutral-200 dark:divide-neutral-700">
@@ -85,7 +75,11 @@ const PayPage: FC<PayPageProps> = () => {
 
               <div className="flex flex-col">
                 <span className="text-base text-neutral-400">Time</span>
-                <span className="mt-1.5 text-lg font-semibold">10:00</span>
+                <div className="flex gap-3">
+                  <span className="mt-1.5 text-lg font-semibold">10:00</span>
+                  <span className="mt-1.5 text-lg font-semibold">-</span>
+                  <span className="mt-1.5 text-lg font-semibold">12:00</span>
+                </div>
               </div>
             </div>
 
@@ -117,22 +111,28 @@ const PayPage: FC<PayPageProps> = () => {
                 2023.10.30
               </span>
             </div>
+            <div className="flex text-neutral-6000 dark:text-neutral-300">
+              <span className="flex-1">주소</span>
+              <span className="flex-1 font-medium text-neutral-900 dark:text-neutral-100">
+                부산광역시 해운대구 리더스마크 4층 스파로스아카데미
+              </span>
+            </div>
             <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
               <span className="flex-1">기사</span>
               <span className="flex-1 font-medium text-neutral-900 dark:text-neutral-100">
                 이하늘
               </span>
             </div>
+            <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
+              <span className="flex-1">요청사항</span>
+              <span className="flex-1 font-medium text-neutral-900 dark:text-neutral-100">
+                집에 고양이가 있으니 주의해주세요 !
+              </span>
+            </div>
             <div className="flex text-neutral-6000 dark:text-neutral-300">
               <span className="flex-1">금액</span>
               <span className="flex-1 font-medium text-neutral-900 dark:text-neutral-100">
                 30,000원
-              </span>
-            </div>
-            <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
-              <span className="flex-1">결제수단</span>
-              <span className="flex-1 font-medium text-neutral-900 dark:text-neutral-100">
-                Credit card
               </span>
             </div>
             <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
@@ -145,7 +145,7 @@ const PayPage: FC<PayPageProps> = () => {
         </div>
         <div className="flex justify-center gap-8 pt-[10px]">
           <button className="w-[150px] h-10 border-none bg-sky-600 rounded-2xl text-white">다른 서비스 예약</button>
-          <button className="w-[150px] h-10 border-2 border-sky-600 rounded-2xl" onClick={()=>router.push("/review/reg/1")}>리뷰 작성</button>
+          <button className="w-[150px] h-10 border-2 border-sky-600 rounded-2xl" onClick={()=>router.push("/review/reg")}>리뷰 작성</button>
         </div>
       </div>
     );

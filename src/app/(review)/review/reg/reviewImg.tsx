@@ -3,11 +3,14 @@ import Image from "next/image";
 import React, { FC, Fragment, useRef, useState } from "react";
 import Swal from "sweetalert2";
 import AWS from "aws-sdk";
+import { ReviewType } from "@/types/ReviewType";
 
-export interface PageAddListing7Props {}
+export interface PageAddListing7Props {
+  reviewData: ReviewType;
+  setReviewData: React.Dispatch<React.SetStateAction<ReviewType>>;
+}
 
-const PageAddListing7: FC<PageAddListing7Props> = () => {
-
+const ReviewImg: FC<PageAddListing7Props> = ({reviewData,setReviewData}) => {
   AWS.config.update({
     region: process.env.AWS_REGION as string,
     accessKeyId: process.env.AWS_ACCESS_KEY_ID as string,
@@ -16,6 +19,8 @@ const PageAddListing7: FC<PageAddListing7Props> = () => {
   
   const [files, setFiles] = useState<File[]>([]);
   const imageRef = useRef<HTMLInputElement>(null);
+
+
 
   function handleFileDrop(event: React.ChangeEvent<HTMLInputElement>) {
     const uploadedFiles = (event.target as HTMLInputElement).files;
@@ -53,11 +58,20 @@ const PageAddListing7: FC<PageAddListing7Props> = () => {
     setFiles((prevFiles) => [...prevFiles, ...newFiles]);
     }
 
+    // s3에 업로드하는 함수
     const handleMuliFileUpload = async () => {
-      console.log("files", files);
+      // console.log("files", files);
       const promises = files.map((file) => uploadFile(file));
       const data = await Promise.all(promises);
-      console.log("all files uploaded", data);
+      let imgArr=[]
+      for(let i=0; i<data.length; i++){
+        imgArr.push(data[i]["Location"])
+      }
+      setReviewData({
+        ...reviewData,
+        imageUrlList:imgArr
+      })
+      // console.log("all files uploaded", data[0]["Location"]);
     }
 
     const uploadFile = async (file: File) => {
@@ -81,7 +95,7 @@ const PageAddListing7: FC<PageAddListing7Props> = () => {
           return err;
         }
       );
-    }
+      }
   return (
     <>
       <div>
@@ -156,4 +170,4 @@ const PageAddListing7: FC<PageAddListing7Props> = () => {
   );
 };
 
-export default PageAddListing7;
+export default ReviewImg;

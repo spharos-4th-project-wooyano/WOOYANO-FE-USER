@@ -7,7 +7,8 @@ import ButtonPrimary from "@/shared/ButtonPrimary";
 import WidgetTags from "./WidgetTags";
 import WidgetCategories from "./WidgetCategories";
 import WidgetPosts from "./WidgetPosts";
-import Card3 from "./Card3";
+import Card3 from "../servicehistory/Card3";
+
 
 // THIS IS DEMO FOR MAIN DEMO
 // OTHER DEMO WILL PASS PROPS
@@ -46,11 +47,6 @@ const SectionLatestPosts: FC<SectionLatestPostsProps> = ({
             <Pagination />
             {/* <ButtonPrimary loading>Show me more</ButtonPrimary> */}
           </div>
-        </div>
-        <div className="w-full space-y-7 mt-24 lg:mt-0 lg:w-2/5 lg:pl-10 xl:pl-0 xl:w-1/3 ">
-          {/* <WidgetTags />
-          <WidgetCategories />
-          <WidgetPosts /> */}
         </div>
       </div>
     </div>
