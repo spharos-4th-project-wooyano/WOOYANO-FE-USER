@@ -25,7 +25,7 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
         <div className="flex justify-start flex-1">
           <Logo className="hidden md:block w-24 self-center pr-3" />
           <div className="hidden lg:block self-center h-10 border-l border-neutral-300 dark:border-neutral-500"></div>
-          <div className="flex gap-3 md:pl-3 pl-0">
+          <div className="flex gap-3 md:pl-3 pl-0 ">
             <MainGptLink/>
             <DropdownTravelers />
           </div>

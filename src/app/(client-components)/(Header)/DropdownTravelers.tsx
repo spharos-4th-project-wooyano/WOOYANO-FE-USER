@@ -69,7 +69,7 @@ export default function DropdownTravelers() {
             leaveFrom="opacity-100 translate-y-0"
             leaveTo="opacity-0 translate-y-1"
           >
-            <Popover.Panel className="absolute z-40 w-screen max-w-xs px-4 top-full transform -translate-x-1/2 left-1/2 sm:px-0">
+            <Popover.Panel className="absolute w-screen max-w-xs px-4 top-full transform -translate-x-1/2 left-1/2 sm:px-0 z-[999]">
               <div className="overflow-hidden rounded-2xl shadow-lg ring-1 ring-black ring-opacity-5">
                 <div className="relative grid grid-cols-1 gap-7 bg-white dark:bg-neutral-800 p-7 ">
                   {solutions.map((item, index) => (

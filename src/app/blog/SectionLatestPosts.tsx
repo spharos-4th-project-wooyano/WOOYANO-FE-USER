@@ -17,7 +17,7 @@ export interface SectionLatestPostsProps {
   posts?: PostDataType[];
   className?: string;
   postCardName?: "card3";
-  data: any
+  data: any;
 }
 
 const SectionLatestPosts: FC<SectionLatestPostsProps> = ({
@@ -26,6 +26,7 @@ const SectionLatestPosts: FC<SectionLatestPostsProps> = ({
   className = "",
   data
 }) => {
+  const username = data?.username;
   const renderCard = (post: PostDataType) => {
     switch (postCardName) {
       case "card3":
@@ -42,7 +43,7 @@ const SectionLatestPosts: FC<SectionLatestPostsProps> = ({
   return (
     <div className={`nc-SectionLatestPosts relative ${className}`}>
       <div className="mb-8 flex flex-col justify-start items-start ml-4 md:ml-0 md:justify-between md:items-center md:flex-row">
-        <h1 className="text-[1.5rem] font-bold mb-3 md:mb-0">{data.username}님의 서비스 🎈</h1>
+        <h1 className="text-[1.5rem] font-bold mb-3 md:mb-0">{username}님의 서비스 🎈</h1>
         <p className="text-sm text-gray-500 text-right">
           {posts.length}개 서비스가 조회되었습니다.
         </p>
