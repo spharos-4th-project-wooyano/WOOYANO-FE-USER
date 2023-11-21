@@ -150,9 +150,9 @@ const ReviewImg: FC<PageAddListing7Props> = ({reviewData,setReviewData}) => {
             </div>
           </div>
           { files.length > 0 && (
-            files.map((file) => {
+            files.map((file,idx) => {
               return (
-                <div>
+                <div key={idx}>
                 <Image src={URL.createObjectURL(file)} alt="image" width={100} height={100} />
                 </div>
               )

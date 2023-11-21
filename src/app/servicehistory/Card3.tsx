@@ -67,7 +67,7 @@ const Card3: FC<Card3Props> = ({ className = "h-full", post }) => {
 
         </div>
         <div className="flex justify-center mt-5">
-          <Link href = "/review/reg/1">
+          <Link href = "/review/reg">
             <button className="w-[200px] h-[45px] border-none bg-sky-600 rounded-xl text-white" >
               리뷰 작성
             </button>

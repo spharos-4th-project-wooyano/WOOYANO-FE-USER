@@ -26,14 +26,14 @@ const ReviewStep = () => {
   const [stepId,setStepId]=useState<number>(0);
 
   const stepperComponent: any = [
-    <ReviewRes
+    <ReviewRes key={1}
     reviewData={reviewData} 
     setReviewData={setReviewData} />,
-    <ReviewDesc 
+    <ReviewDesc key={2}
     reviewData={reviewData}
     setReviewData={setReviewData} 
     />,
-    <ReviewImg 
+    <ReviewImg key={3}
     reviewData={reviewData}
     setReviewData={setReviewData} />
   ];
