@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import PostCardMeta from "@/components/PostCardMeta";
 import { PostDataType } from "@/data/types";
-import PostTypeFeaturedIcon from "@/components/PostTypeFeaturedIcon";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -11,7 +10,7 @@ export interface Card3Props {
 }
 
 const Card3: FC<Card3Props> = ({ className = "h-full", post }) => {
-  const { title, href, featuredImage, desc, postType } = post;
+  const { title, href, featuredImage, desc } = post;
 
   return (
     <div
@@ -20,25 +19,15 @@ const Card3: FC<Card3Props> = ({ className = "h-full", post }) => {
       <div
         className={`block flex-shrink-0 sm:w-56 sm:ml-6  overflow-hidden mb-5 sm:mb-0`}
       >
-        
-      <div className="block w-40 h-40 overflow-hidden rounded-full">
-        <Image
-        src={featuredImage}
-        alt={title}
-        width={200}
-        height={200}
-        />
-      </div>
-          
-          <span>
-            <PostTypeFeaturedIcon
-              className="absolute left-2 bottom-2"
-              postType={postType}
-              wrapSize="w-8 h-8"
-              iconSize="w-4 h-4"
-            />
-          </span>
-        
+        {/* 업체 로고 */}
+        <div className="block w-40 h-40 overflow-hidden rounded-full">
+          <Image
+          src={featuredImage}
+          alt={title}
+          width={200}
+          height={200}
+          />
+        </div>
       </div>
 
       <div className="flex flex-col flex-grow">

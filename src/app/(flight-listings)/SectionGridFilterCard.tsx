@@ -10,23 +10,21 @@ export interface SectionGridFilterCardProps {
 
 const DEMO_DATA: FlightCardProps["data"][] = [
   {
-    id: "1",
-    res: "다음에도 이용할게요:)",
-    review: {
-      img: "https://www.gstatic.com/flights/airline_logos/70px/KE.png",
-      name: "업체 이름1",
-      workername: "이하늘"
-    },
-  },
-  {
-    id: "2",
-    res: "이번에만 이용할게요:(",
-    review: {
-      img: "https://www.gstatic.com/flights/airline_logos/70px/SQ.png",
-      name: "업체 이름2",
-      workername: "임찬섭"
-    },
-  },
+    createdAt: "2023-10-15",
+    reservationNum : "20231015",
+    reuse: true,
+    reviewId: 1,
+    serviceId: 1
+  }
+  // {
+  //   id: "2",
+  //   res: "이번에만 이용할게요:(",
+  //   review: {
+  //     img: "https://www.gstatic.com/flights/airline_logos/70px/SQ.png",
+  //     name: "업체 이름2",
+  //     workername: "임찬섭"
+  //   },
+  // },
   // {
   //   id: "3",
   //   price: "$2,380",

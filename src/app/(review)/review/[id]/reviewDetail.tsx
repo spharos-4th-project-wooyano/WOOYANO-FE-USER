@@ -1,18 +1,66 @@
 "use client";
 
-import React from "react";
-import Image from "next/image";
-import Room from "@/images/test/room.png"
-import Room2 from "@/images/test/room2.png"
+import React, { FC, useEffect, useState } from "react";
 import ImgSwiper from "@/components/function/imgSwiper";
+import { ReviewListType, ReviewType } from "@/types/ReviewType";
+import { useParams } from "next/navigation";
 
-
-export interface CheckOutPagePageMainProps {
+export interface ReviewDetailProps {
   className?: string;
+  // data를 함수로 변경
+  data?: () => Promise<ReviewListType>;
 }
 
-function ReviewDetail() {
-  const renderMain = () => {
+// Fetch 함수 선언
+const jwt="eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVVNFUiIsInN1YiI6ImFiY2QxMjM0QGdtYWlsLmNvbSIsImlhdCI6MTcwMDEyMzExNywiZXhwIjoxNzAwMTI2NzE3fQ.T86ZcvgzcL4kfzjnDAXD1p4yJsNPknb9JBOBAbvQBlQ"
+async function getJSON(reviewId: number) {
+    try {
+      const response = await fetch(`http://3.35.62.185:8000/api/v1/review-bookmark/${reviewId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "email":"abcd1234@gmail.com",
+          "Authorization": `Bearer ${jwt}`
+        },
+      });
+      
+      if(response.ok){
+        const result = await response.json();
+        console.log("성공:", result);
+        return true
+      }
+    } catch (error) {
+      console.error("실패:", error);
+      return false
+    }
+    
+}
+
+const ReviewDetail: FC<ReviewDetailProps> = ({ data }) => {
+    const [reviewData, setReviewData] = useState<ReviewListType | null>(null);
+    const { reviewId } = useParams<{reviewId: string}>();
+
+    // useEffect(() => {
+    //   if (reviewId) {
+    //     // 리뷰 아이디가 존재하면 데이터 가져오기
+    //     getJSON(parseInt(reviewId, 10))
+    //     .then((result) => {
+    //       if (result) {
+    //         setReviewData(result);
+    //       }
+    //     });
+    //   }
+    // }, [reviewId]);
+
+    const renderMain = () => {
+      if (!reviewData) {
+        return null;
+      }
+
+    let date = new Date(reviewData.createdAt)
+
+    console.log('review', data);
+
     return (
       <div className="w-full flex flex-col sm:rounded-2xl sm:border border-neutral-200 dark:border-neutral-700 space-y-8 px-0 sm:p-6 xl:p-8">
         <h2 className="mt-5 text-3xl lg:text-4xl font-semibold">
@@ -34,7 +82,11 @@ function ReviewDetail() {
               <h3 className="text-2xl font-semibold">작성일자</h3>
               <div className="w-14 border-b border-neutral-200 dark:border-neutral-700 my-3"></div>
               <div className=" mb-6">
-                2023.11.05
+                {date.toLocaleDateString("ko-KR", {
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                })}
               </div>
             </div>
 
@@ -72,6 +124,7 @@ function ReviewDetail() {
             <div className="w-14 border-b border-neutral-200 dark:border-neutral-700 my-3"></div>
             <span className="text-xl font-semibold text-secondary-6000">
               다음에도 이용할게요:)
+              {/* {data && data.reuse} */}
             </span>
           </div>
         </div>

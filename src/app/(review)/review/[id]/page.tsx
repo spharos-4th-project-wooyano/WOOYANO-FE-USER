@@ -1,6 +1,7 @@
 
 import React from "react";
-import ReviewDetail from "./PageMain";
+import ReviewDetail from "./reviewDetail";
+
 
 
 const page = () => {
