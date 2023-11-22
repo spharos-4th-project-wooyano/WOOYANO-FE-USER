@@ -41,6 +41,7 @@ export interface PostDataType {
   id: string | number;
   author: AuthorType;
   date: string;
+  reservationDate?: string;
   href: Route<string>;
   // categories: TaxonomyType[];
   title: string;
@@ -49,7 +50,8 @@ export interface PostDataType {
   commentCount: number;
   // viewdCount: number;
   // readingTime: number;
-  postType?: "standard" | "video" | "gallery" | "audio";
+  postType?: string;
+  isReview?: boolean;
 }
 
 export type TwMainColor =

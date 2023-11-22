@@ -30,7 +30,7 @@ const BlogPage: React.FC = () => {
         <SectionAds />
 
         {/* === SECTION 8 === */}
-        <SectionLatestPosts className="py-16 lg:py-28" />
+        <SectionLatestPosts className="py-16 lg:py-28" data={undefined} />
 
         {/* === SECTION 1 === */}
         <SectionSubscribe2 className="pb-16 lg:pb-28" />
