@@ -10,7 +10,15 @@ import Image from 'next/image';
 import Room from '@/images/test/room.png'
 import Room2 from '@/images/test/room2.png'
 
-const ImgSwiper = () => {
+interface ImgSwiperProps {
+  reviewimg: string[]
+}
+
+const ImgSwiper : React.FC<{reviewimg: string[]}> = ({ reviewimg }) => {
+  // 만약 리뷰 이미지가 없다면 종료
+  if (!reviewimg || reviewimg.length === 0) {
+    return null;
+  }
 return (
   <div className='rounded-2xl overflow-hidden'>
   <Swiper
@@ -21,12 +29,17 @@ return (
     pagination={{ clickable: true }}
     scrollbar={{ draggable: true }}
   >
-      <SwiperSlide><Image src={Room} alt="Image 1" width={1000} height={1000} /></SwiperSlide>
-      <SwiperSlide><Image src={Room2} alt="Image 1" width={1000} height={1000} /></SwiperSlide>
-      <SwiperSlide><Image src={Room} alt="Image 1" width={1000} height={1000} /></SwiperSlide>
-      <SwiperSlide><Image src={Room2} alt="Image 1" width={1000} height={1000} /></SwiperSlide>
-    
-  </Swiper>
+    {reviewimg?.map((item, index) => (
+      <SwiperSlide key = {index}>
+        <Image 
+        src={item} 
+        alt={`Image${index + 1}`}
+        width = {1000}
+        height = {1000}
+        />
+      </SwiperSlide>
+    ))}
+    </Swiper>
   </div>
 );
 };
