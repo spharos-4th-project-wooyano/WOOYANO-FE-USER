@@ -1,5 +1,3 @@
-"use client";
-
 import { Popover, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { Fragment } from "react";
@@ -42,10 +40,11 @@ const solutions: SolutionItem[] = [
   },
 ];
 
+
 export default function DropdownTravelers() {
   return (
     <Popover className="DropdownTravelers relative flex">
-      {({ open, close }) => (
+      {({ open,close }) => (
         <>
           <Popover.Button
             className={`${open ? "" : "text-opacity-90"}
