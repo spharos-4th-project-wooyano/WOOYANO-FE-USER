@@ -11,7 +11,12 @@ const nextConfig = {
     TOSSPAYMENTS_CLIENT_KEY:process.env.TOSSPAYMENTS_CLIENT_KEY,
     TOSSPAYMENTS_CUSTOM_KEY:process.env.TOSSPAYMENTS_CUSTOM_KEY,
     TOSS_PAYMENTS_SECRET_KEY:process.env.TOSS_PAYMENTS_SECRET_KEY,
-    NEXT_PUBLIC_API_BASE_URL:process.env.NEXT_PUBLIC_API_BASE_URL
+    NEXT_PUBLIC_API_BASE_URL:process.env.NEXT_PUBLIC_API_BASE_URL,
+    AWS_REGION:process.env.AWS_REGION,
+    AWS_ACCESS_KEY_ID:process.env.AWS_ACCESS_KEY_ID,
+    AWS_SECRET_ACCESS_KEY:process.env.AWS_SECRET_ACCESS_KEY,
+    AWS_BUCKET_NAME:process.env.AWS_BUCKET_NAME,
+    NEXTAUTH_SECRET:process.env.NEXTAUTH_SECRET,
   },
   images: {
     remotePatterns: [
@@ -45,6 +50,12 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.pixabay.com",
+        port: "",
+        pathname: "/**",
+      }
     ],
   },
 };

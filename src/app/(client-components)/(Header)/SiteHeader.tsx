@@ -26,25 +26,6 @@ const SiteHeader = () => {
   const [isTopOfPage, setIsTopOfPage] = useState<boolean>(true);
   const [isActive, setIsActive] = useState<boolean>(true);
 
-  // useEffect(() => {
-  //   const handleTouch = (e: TouchEvent) => {
-  //     if (e.touches[0].clientY > 100) {
-  //       setIsActive(true);
-  //     }
-  //   };
-  //   window.addEventListener("touchmove", handleTouch);
-  //   return () => {
-  //     window.removeEventListener("touchmove", handleTouch);
-  //   };
-  // }, []);
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setIsActive(false);
-  //   }, 2000);
-  //   return () => clearInterval(interval);
-  // }, []);
-
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 100) {
@@ -78,8 +59,7 @@ const SiteHeader = () => {
   
 
   useEffect(() => {
-    // disconnect the observer
-    // observer for show the LINE bellow header
+   
     if (!PAGES_HIDE_HEADER_BORDER.includes(pathname as PathName)) {
       OBSERVER && OBSERVER.disconnect();
       OBSERVER = null;

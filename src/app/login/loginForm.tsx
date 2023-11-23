@@ -1,24 +1,24 @@
 "use client";
 import React, { FC, useState, ChangeEvent } from "react";
 import Input from "@/shared/Input";
-import ButtonPrimary from "@/shared/ButtonPrimary";
 import Link from "next/link";
-import { useSearchParams } from "next/dist/client/components/navigation";
 import Swal from "sweetalert2";
 import { signIn } from "next-auth/react";
 import CheckEmailForm from "../../components/widget/checkEmailForm";
 import PasswordViewButton from "../../components/widget/passwordViewButton";
 import Button from "@/shared/Button";
 import SnsLogin from "./snsLogin";
+import { useRouter, useSearchParams} from "next/navigation";
 
 export interface LoginFormProps {
   email: string;
   password: string;
 }
 
-const LoginForm: FC<LoginFormProps> = ({ }) => {
+function LoginForm() {
   const query = useSearchParams();
   const callBackUrl = query.get("callbackUrl");
+  const router = useRouter();
 
   //로그인 폼 기본 설정
   const [loginForm, setLoginForm] = useState<LoginFormProps>({
@@ -53,26 +53,63 @@ const LoginForm: FC<LoginFormProps> = ({ }) => {
 
   //로그인 유효성 확인 및 로그인 패칭
   const handleLoginFetch = async () => {
-    try {
-      if (!loginForm.email || !loginForm.password) {
-        Swal.fire({
-          text: `이메일, 비밀번호를 입력해주세요`,
-          toast: false,
-          position: "center",
-          showConfirmButton: false,
-          timer: 1000,
-          timerProgressBar: false,
-          customClass: {
-            container: "my-swal",
-            popup: 'my-swal-position'
-          },
+
+    if (!loginForm.email || !loginForm.password) {
+      Swal.fire({
+        text: `이메일, 비밀번호를 입력해주세요`,
+        toast: false,
+        position: "top",
+        showConfirmButton: false,
+        timer: 1000,
+        timerProgressBar: false,
+        customClass: {
+          container: "my-swal",
+          popup: "my-swal-position",
+        },
+      });
+      return;
+    }
+
+    if (checkEmail === false) {
+      Swal.fire({
+        text: `이메일형식을 지켜주세요.`,
+        toast: false,
+        position: "top",
+        showConfirmButton: false,
+        timer: 1000,
+        timerProgressBar: false,
+        customClass: {
+          container: "my-swal",
+          popup: "my-swal-position",
+        },
+      });
+      return;
+    } else {
+      try {
+        const result = await signIn("credentials", {
+          email: loginForm.email,
+          password: loginForm.password,
+          redirect: false,
+          callbackUrl: callBackUrl ? callBackUrl : "/",
         });
-      } else {
-        if (checkEmail === false) {
+        if (!result || !result.ok) {
           Swal.fire({
-            text: `이메일형식을 지켜주세요.`,
+            text: `아이디 비밀번호 확인 후 다시 시도해주세요.`,
             toast: false,
-            position: "center",
+            position: "top",
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: false,
+            customClass: {
+              container: "my-swal",
+              popup: 'my-swal-position'
+            },
+            });
+        } else {
+          Swal.fire({
+            text: `우야노에 오신걸 환영합니다!`,
+            toast: false,
+            position: "top",
             showConfirmButton: false,
             timer: 1000,
             timerProgressBar: false,
@@ -81,21 +118,13 @@ const LoginForm: FC<LoginFormProps> = ({ }) => {
               popup: 'my-swal-position'
             },
           });
-        } else {
-          console.log("email", loginForm.email, "password", loginForm.password);
-          const result = await signIn("credentials", {
-            email: loginForm.email,
-            password: loginForm.password,
-            redirect: true,
-            callbackUrl: callBackUrl ? callBackUrl : "/",
-          });
+          router.push("/")
         }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      // 에러 처리 코드를 추가하세요
-      console.error("에러 발생:", error);
     }
-  };
+  }
 
   //비밀번호 표시 여부
   const handlePwType = () => {
@@ -156,7 +185,8 @@ const LoginForm: FC<LoginFormProps> = ({ }) => {
             </label>
             <Button
               className="w-full rounded-xl ttnc-ButtonPrimary disabled:bg-opacity-70 bg-primary-6000 hover:bg-primary-700 text-neutral-50"
-              onClick={handleLoginFetch}>
+              onClick={handleLoginFetch}
+            >
               Sign In
             </Button>
           </form>
@@ -172,13 +202,21 @@ const LoginForm: FC<LoginFormProps> = ({ }) => {
 
           {/* OR */}
           <div className="relative text-center">
-            <button className="relative z-10 inline-block px-4 font-medium text-sm bg-white dark:text-neutral-400 dark:bg-neutral-900"
-              onClick={() => setShowSnsLogin(!showSnsLogin)}>
+            <button
+              className="relative z-10 inline-block px-4 font-medium text-sm bg-white dark:text-neutral-400 dark:bg-neutral-900"
+              onClick={() => setShowSnsLogin(!showSnsLogin)}
+            >
               다른 방법으로 로그인하기
             </button>
             <div className="absolute left-0 w-full top-1/2 transform -translate-y-1/2 border border-neutral-100 dark:border-neutral-800"></div>
           </div>
-          <div className={`transition-all duration-700 ease-in-out ${showSnsLogin ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[-8px]'}`}>
+          <div
+            className={`transition-all duration-700 ease-in-out ${
+              showSnsLogin
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-[-8px]"
+            }`}
+          >
             {showSnsLogin && (
               <div>
                 <SnsLogin />

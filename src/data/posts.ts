@@ -14,7 +14,7 @@ const DEMO_POSTS = __posts.map((post): PostDataType => {
     ...post,
     author: DEMO_AUTHORS.filter((user) => user.id === post.authorId)[0],
     categories: [categories[0]],
-  } as PostDataType;
+  } as any;
 });
 
 export { DEMO_POSTS };

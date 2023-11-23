@@ -7,8 +7,6 @@ import Button from "@/shared/Button";
 import Swal from "sweetalert2";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import Checkbox from "@/shared/Checkbox";
-import Label from "@/components/Label";
 
 export interface addressType {
   localAddress: string;
@@ -17,7 +15,7 @@ export interface addressType {
   defaultAddress: boolean;
 }
 
-export default function AddressAddButton() {
+export default function AddressEditButton({addressId}:{addressId : number}) {
   const session = useSession();
   const usertoken = session.data?.user.result.token;
   const useremail = session.data?.user.result.email;
@@ -49,16 +47,9 @@ export default function AddressAddButton() {
     });
   };
 
-  const handleDefaultAddressSet = () => {
-    setAddressForm((prevAddressForm) => ({
-      ...prevAddressForm,
-      defaultAddress: !prevAddressForm.defaultAddress,
-    }));
-  };
-
-  //주소 추가 요청
-  const handleAddaddress = async () => {
-    if (!useremail || !usertoken) {
+  //주소 수정 요청
+  const handleEditaddress = async () => {
+    if (!usertoken) {
       Swal.fire({
         text: "로그인 정보가 없습니다.",
         toast: false,
@@ -92,19 +83,19 @@ export default function AddressAddButton() {
         });
       } else {
         try {
-          //주소 추가 fetch
+          //주소 수정 fetch
           const addAddressURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/address`;
           const res = await fetch(addAddressURL, {
-            method: "POST",
+            method: "PUT",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${usertoken}`,
-              Email: `${useremail}`,
+              "Authorization": `Bearer ${usertoken}`,
+              "Email" : `${useremail}`
             },
             body: JSON.stringify({
+              addressId: addressId,
               localAddress: addressForm.localAddress,
               extraAddress: addressForm.extraAddress,
-              defaultAddress: addressForm.defaultAddress,
               localCode: addressForm.localCode,
             }),
           });
@@ -114,7 +105,7 @@ export default function AddressAddButton() {
             //주소 등록 완료
             if (data.success) {
               Swal.fire({
-                text: "주소가 추가되었습니다.",
+                text: "주소가 수정되었습니다.",
                 toast: false,
                 position: "center",
                 showConfirmButton: false,
@@ -125,7 +116,7 @@ export default function AddressAddButton() {
                 },
               }).then(() => {
                 //정보 반영을 위한 새로고침
-                window.location.reload();
+                router.push("/account-address")
               });
             } else {
             }
@@ -168,7 +159,7 @@ export default function AddressAddButton() {
             handleOpenModal();
           }}
         >
-          Add Address
+          Edit Address
         </Button>
       </div>
       <div>
@@ -193,20 +184,10 @@ export default function AddressAddButton() {
           <Button
             className="w-xl rounded-xl ttnc-ButtonPrimary disabled:bg-opacity-70 bg-primary-6000 hover:bg-primary-700 text-neutral-50"
             sizeClass="px-4 max-h-[42px]"
-            onClick={handleAddaddress}
+            onClick={handleEditaddress}
           >
-            Add
+            Edit
           </Button>
-        </div>
-        <div className="flex mt-3">
-          <Checkbox
-            name={"defaultAddressSelector"}
-            className="ml-2 font-bold rounded-full"
-            onChange={handleDefaultAddressSet}
-          />
-          <p className="pt-1 pl-2 md:text-sm text-xs text-gray-500">
-            대표 주소지로 설정하실건가요?
-          </p>
         </div>
 
         <div className="pt-1.5 dark:invert">

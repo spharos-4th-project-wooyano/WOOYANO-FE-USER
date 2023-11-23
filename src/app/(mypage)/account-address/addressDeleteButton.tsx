@@ -11,7 +11,7 @@ export default function AddressDeleteButton({ address }: { address: Address }) {
   const usertoken = session.data?.user.result.token;
   const useremail = session.data?.user.result.email;
 
-  const handleDeleteAddress = async () => {
+  const handleDeleteAddress = () => {
     if (address.defaultAddress) {
       Swal.fire({
         text: `대표 주소지 입니다. 대표 주소지 변경 후 삭제해주세요.`,

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export interface PostCardMetaProps {
   className?: string;
-  meta: Pick<PostDataType, "date" | "author">;
+  meta: Pick<PostDataType, "date" | "author" | "reservationDate">;
   hiddenAvatar?: boolean;
   size?: "large" | "normal";
 }
@@ -16,10 +16,20 @@ const PostCardMeta: FC<PostCardMetaProps> = ({
   hiddenAvatar = false,
   size = "normal",
 }) => {
-  const { date, author } = meta;
+  const { date, author, reservationDate} = meta;
+  
+  const dateStr = reservationDate ? new Date(reservationDate).toLocaleDateString("ko-kr", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }) : new Date().toLocaleDateString("ko-kr", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
   return (
     <div
-      className={`nc-PostCardMeta inline-flex items-center fledx-wrap text-neutral-800 dark:text-neutral-200 ${
+      className={`nc-PostCardMeta pt-6 inline-flex items-center fledx-wrap text-neutral-800 dark:text-neutral-200 ${
         size === "normal" ? "text-sm" : "text-base"
       } ${className}`}
       data-nc-id="PostCardMeta"
@@ -48,7 +58,7 @@ const PostCardMeta: FC<PostCardMetaProps> = ({
           ·
         </span>
         <span className="text-neutral-500 dark:text-neutral-400 font-normal line-clamp-1">
-          {date}
+          {dateStr}
         </span>
       </>
     </div>

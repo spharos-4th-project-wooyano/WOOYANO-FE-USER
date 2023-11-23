@@ -1,9 +1,26 @@
-import React, { FC } from "react";
+'use client'
+import React, { ChangeEvent, FC, useState } from "react";
 import Textarea from "@/shared/Textarea";
+import { ReviewType } from "@/types/ReviewType";
 
-export interface PageAddListing6Props {}
+export interface PageAddListing6Props {
+  setReviewData: React.Dispatch<React.SetStateAction<ReviewType>>;
+  reviewData:ReviewType;
+}
 
-const PageAddListing6: FC<PageAddListing6Props> = () => {
+
+const ReviewDesc: FC<PageAddListing6Props> = ({reviewData,setReviewData}) => {
+
+  const handleRadioChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
+    setReviewData({
+      ...reviewData,
+      content: e.target.value
+    });
+  };
+  
+
+  
+
   return (
     <>
       <div>
@@ -12,7 +29,9 @@ const PageAddListing6: FC<PageAddListing6Props> = () => {
         </h2>
       </div>
 
-      <Textarea placeholder="솔직하게 작성한 리뷰는 서비스 이용을 고민하는 분들께 큰 도움이 됩니다." rows={14} />
+      <Textarea placeholder="솔직하게 작성한 리뷰는 서비스 이용을 고민하는 분들께 큰 도움이 됩니다." onChange={handleRadioChange} rows={14}>
+        {reviewData.content}
+      </Textarea>
 
       <div>
         <span className="block mt-2 text-neutral-500 dark:text-neutral-400">
@@ -28,4 +47,4 @@ const PageAddListing6: FC<PageAddListing6Props> = () => {
   );
 };
 
-export default PageAddListing6;
+export default ReviewDesc;
