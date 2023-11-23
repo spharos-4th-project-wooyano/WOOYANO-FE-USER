@@ -1,9 +1,7 @@
-import SectionHeroArchivePage from "@/app/(server-components)/SectionHeroArchivePage";
 import BgGlassmorphism from "@/components/BgGlassmorphism";
-import SectionSliderNewCategories from "@/components/SectionSliderNewCategories";
-import SectionSubscribe2 from "@/components/SectionSubscribe2";
 import React, { FC } from "react";
 import SectionGridFilterCard from "../SectionGridFilterCard";
+import { getSession } from "next-auth/react";
 
 
 export interface ListingFlightsPageProps {}
@@ -23,5 +21,6 @@ const ListingFlightsPage: FC<ListingFlightsPageProps> = ({}) => {
     </div>
   );
 };
+
 
 export default ListingFlightsPage;

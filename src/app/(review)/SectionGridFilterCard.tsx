@@ -3,85 +3,78 @@ import React, { FC, useEffect, useState } from "react";
 import Heading2 from "@/shared/Heading2";
 import FlightCard, { FlightCardProps } from "@/components/FlightCard";
 import { useRouter } from "next/navigation";
-import { ReviewListType } from "@/types/ReviewType";
+import { ReviewListType, ReviewType } from "@/types/ReviewType";
+import { Session, getServerSession } from "next-auth";
+import { options } from "../api/auth/[...nextauth]/options";
+import { useSession } from "next-auth/react";
 
 export interface SectionGridFilterCardProps {
   className?: string;
+  data?: ReviewListType;
 }
-
-// const DEMO_DATA: FlightCardProps["data"][] = [
-//   {
-//     id: "1",
-//     res: "다음에도 이용할게요:)",
-//     review: {
-//       img: "https://t1.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/2Er3/image/lcMcrwOiQTui8T0gzba33lrqlhI.jpg",
-//       name: "업체 이름 1",
-//       workername : "이하늘"
-//     },
-//   },
-//   {
-//     id: "2",
-//     res: "이번에만 이용할게요:(",
-//     review: {
-//       img: "https://www.gstatic.com/flights/airline_logos/70px/SQ.png",
-//       name: "업체 이름 2",
-//       workername : "임찬섭"
-//     },
-//   },
-//   {
-//     id: "3",
-//     res: "다음에도 이용할게요:)",
-//     review: {
-//       img: "https://www.gstatic.com/flights/airline_logos/70px/multi.png",
-//       name: "업체 이름 3",
-//       workername : "소준영"
-//     },
-//   }
-// ];
 
 const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
   className = "",
 }) => {
 
-  const router = useRouter();
-
-  const [reviewData, setReviewData] = useState<ReviewListType[]>([])
-
-  console.log("reviewData:",reviewData)
-
-
-  // fetch 함수
-  const jwt="eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVVNFUiIsInN1YiI6ImFiY2QxMjM0QGdtYWlsLmNvbSIsImlhdCI6MTcwMDEyMzExNywiZXhwIjoxNzAwMTI2NzE3fQ.T86ZcvgzcL4kfzjnDAXD1p4yJsNPknb9JBOBAbvQBlQ"
-  async function getJSON() {
+  // 리뷰 리스트 fetch (작성일자, 에약번호, 리뷰 평가, 리뷰 아이디, 서비스 아이디)
+  async function getReviewList(session: Session) {
+    if (!session) {
+      console.log("세션이 만료됨")
+      return null
+    }
     try {
-      
       const response = await fetch(`http://3.35.62.185:8000/api/v1/review-bookmark/list`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "email": "abcd1234@gmail.com",
-          "Authorization": `Bearer ${jwt}`
+          Authorization: `Bearer ${session?.user.result.token}`,
+          Email: `${session?.user.result.email}`,
         },
       });
   
       if (response.ok) {
         const result = await response.json();
-        console.log("성공:", result);
-        setReviewData(result["result"])
+        console.log("리뷰 리스트 성공:", result);
+        setReviewList(result["result"])
         return true;
       }
     } catch (error) {
-      console.error("실패:", error);
-      return false;
+      console.error("리뷰 리스트 실패:", error);
     }
   }
 
+  const router = useRouter();
+  const { data: session } = useSession();
+  // 전체 리뷰 리스트를 불러오는 함수
+  const [reviewList, setReviewList] = useState<ReviewListType[]>([])
 
   useEffect(() => {
-    if (reviewData[0] === undefined ){
-      getJSON();
+    const reviewListfetch = async () => {
+      try {
+        if (session) {
+          const response = await getReviewList(session);
+          console.log("세션 존재", session)
+          if (!reviewList[0] === undefined) {
+            return null
+          }
+        }
+      } catch (error) {
+        console.log("loading error", error)
+      }
+      // if (session) {
+      //   const success = await getReviewList();
+      // if (success) {
+      //   console.log("reviewData:", reviewData);
+      // } else {
+      //   console.log("데이터 가져오기 실패");
+      // }
+      // }
     }
-  }, []);
+    reviewListfetch();
+    }, [session]);
+
+    console.log("리뷰 리스트 : ", reviewList)
 
   return (
     <div
@@ -97,8 +90,8 @@ const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
         }
       />
       <div className="lg:dark:bg-black/20 grid grid-cols-1 lg:grid-cols-2 gap-6 rounded-3xl">
-      {Array.isArray(reviewData) && reviewData.map((item, index) => (
-          <FlightCard key={index} data={item} onClick = { () => router.push(`/review/${item.reviewId}`)} />
+      {Array.isArray(reviewList) && reviewList.map((item, index) => (
+          <FlightCard key={index} data={item} onClick = { () => router.push(`/review/${item.reviewId}?serviceId=${item.serviceId}&&reservationNum=${item.reservationNum}`)} />
         ))}
       </div>
     </div>
