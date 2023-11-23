@@ -102,7 +102,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
     return (
       <div className="listingSectionSidebar__wrap shadow-xl">
           {/* SUBMIT */}
-        <ButtonPrimary href={`/checkout`}>예약하기</ButtonPrimary>
+        <ButtonPrimary href={`/serviceform`}>예약하기</ButtonPrimary>
       </div>
     );
   };
