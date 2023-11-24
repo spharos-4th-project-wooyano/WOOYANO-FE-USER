@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export interface PostCardMetaProps {
   className?: string;
-  meta: Pick<PostDataType, "date" | "author" | "reservationDate">;
+  meta:PostDataType;
   hiddenAvatar?: boolean;
   size?: "large" | "normal";
 }
@@ -16,9 +16,8 @@ const PostCardMeta: FC<PostCardMetaProps> = ({
   hiddenAvatar = false,
   size = "normal",
 }) => {
-  const { date, author, reservationDate} = meta;
   
-  const dateStr = reservationDate ? new Date(reservationDate).toLocaleDateString("ko-kr", {
+  const dateStr = meta.reservationDate ? new Date(meta.reservationDate).toLocaleDateString("ko-kr", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -35,7 +34,7 @@ const PostCardMeta: FC<PostCardMetaProps> = ({
       data-nc-id="PostCardMeta"
     >
       <Link
-        href={author.href}
+        href={`/servicehistory/${meta.serviceId}`}
         className="flex-shrink-0 relative flex items-center space-x-2"
       >
         {!hiddenAvatar && (
@@ -44,13 +43,13 @@ const PostCardMeta: FC<PostCardMetaProps> = ({
             sizeClass={
               size === "normal" ? "h-7 w-7 text-sm" : "h-10 w-10 text-xl"
             }
-            imgUrl={author.avatar}
-            userName={author.displayName}
+            imgUrl={meta.workerUrl}
+            userName={meta.workerName}
           />
         )}
         
         <span className="block text-neutral-6000 hover:text-black dark:text-neutral-300 dark:hover:text-white font-medium">
-          {author.displayName} 기사
+          {meta.workerName} 기사
         </span>
       </Link>
       <>

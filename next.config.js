@@ -55,6 +55,12 @@ const nextConfig = {
         hostname: "cdn.pixabay.com",
         port: "",
         pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "wooyano.s3.ap-northeast-2.amazonaws.com",
+        port: "",
+        pathname: "/**",
       }
     ],
   },

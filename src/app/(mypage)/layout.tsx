@@ -6,7 +6,7 @@ export interface CommonLayoutProps {
   children?: React.ReactNode;
 }
 
-const CommonLayout: FC<CommonLayoutProps> = ({ children }) => {
+const CommonLayout: FC<CommonLayoutProps> = ({ children}) => {
   return (
     <div className="nc-CommonLayoutAccount bg-neutral-50 dark:bg-neutral-900">
       <div className="border-b border-neutral-200 dark:border-neutral-700 pt-2 bg-white dark:bg-neutral-800 sticky top-0 z-[80]">
