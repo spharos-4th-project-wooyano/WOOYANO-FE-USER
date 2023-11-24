@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default function AvatarDropdown({ className = "", user }: Props) {
-  console.log(user);
+  // console.log(user);
 
   return (
     <>

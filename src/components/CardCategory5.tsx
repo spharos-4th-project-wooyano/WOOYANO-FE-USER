@@ -3,20 +3,21 @@ import { TaxonomyType } from "@/data/types";
 import convertNumbThousand from "@/utils/convertNumbThousand";
 import Link from "next/link";
 import Image from "next/image";
+import { ResentServiceImg } from "@/types/mainpage/resentServiceImg";
 
 export interface CardCategory5Props {
   className?: string;
-  taxonomy: TaxonomyType;
+  item: ResentServiceImg;
 }
 
 const CardCategory5: FC<CardCategory5Props> = ({
   className = "",
-  taxonomy,
+  item,
 }) => {
-  const { count, name, href = "/", thumbnail } = taxonomy;
+  const {  name,logoUrl  } = item;
   return (
     <Link
-      href={href}
+      href={"/"}
       className={`nc-CardCategory5 flex flex-col ${className}`}
       data-nc-id="CardCategory5"
     >
@@ -26,7 +27,7 @@ const CardCategory5: FC<CardCategory5Props> = ({
         <Image
           fill
           alt=""
-          src={thumbnail || ""}
+          src={logoUrl || ""}
           className="object-cover w-full h-full rounded-2xl"
           sizes="(max-width: 400px) 100vw, 400px"
         />

@@ -2,14 +2,12 @@ import { PathName } from "@/routers/types";
 import Link from "next/link";
 import React, { FC } from "react";
 
-interface Props {
-  href?: PathName;
-}
 
-const ButtonSubmit: FC<Props> = ({ href = "/listing-stay-map" }) => {
+
+const ButtonSubmit = ({href}:{href:any}) => {
   return (
     <Link
-      href={href}
+      href={href||"/"}
       type="button"
       className="h-14 md:h-16 w-14 md:w-16 rounded-full bg-primary-6000 hover:bg-primary-700 flex items-center justify-center text-neutral-50 focus:outline-none"
     >

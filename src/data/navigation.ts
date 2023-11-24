@@ -70,10 +70,6 @@ const demoChildMenus: NavItemType[] = [
 ];
 
 const otherPageChildMenus: NavItemType[] = [
-  { id: ncNanoId(), href: "/blog", name: "Blog page" },
-  { id: ncNanoId(), href: "/blog/single" as Route, name: "Blog single" },
-  { id: ncNanoId(), href: "/about", name: "About" },
-  { id: ncNanoId(), href: "/contact", name: "Contact us" },
   { id: ncNanoId(), href: "/login", name: "Login" },
   { id: ncNanoId(), href: "/signup", name: "Signup" },
 ];
@@ -141,7 +137,6 @@ const templatesChildrenMenus: NavItemType[] = [
   { id: ncNanoId(), href: "/serviceform", name: "ServiceForm" },
   { id: ncNanoId(), href: "/pay-done", name: "Pay done" },
   //
-  { id: ncNanoId(), href: "/author", name: "Author page" },
   { id: ncNanoId(), href: "/account", name: "Account page" },
   //
   {
@@ -180,52 +175,16 @@ export const NAVIGATION_DEMO: NavItemType[] = [
         type: "dropdown",
         children: [
           { id: ncNanoId(), href: "/house-keeper", name: "house-keeper page" },
-          {
-            id: ncNanoId(),
-            href: "/listing-stay-map",
-            name: "Stay page (map)",
-          },
+          
           { id: ncNanoId(), href: "/house-keeper-detail", name: "house-keeper Detail" },
         ],
       },
 
       //
-      {
-        id: ncNanoId(),
-        href: "/listing-experiences",
-        name: "Experiences listings",
-        type: "dropdown",
-        children: [
-          {
-            id: ncNanoId(),
-            href: "/listing-experiences",
-            name: "Experiences page",
-          },
-          {
-            id: ncNanoId(),
-            href: "/listing-experiences-map",
-            name: "Experiences page (map)",
-          },
-          {
-            id: ncNanoId(),
-            href: "/listing-experiences-detail",
-            name: "Experiences Detail",
-          },
-        ],
-      },
+      
 
       //
-      {
-        id: ncNanoId(),
-        href: "/listing-car",
-        name: "Cars listings",
-        type: "dropdown",
-        children: [
-          { id: ncNanoId(), href: "/listing-car", name: "Cars page" },
-          { id: ncNanoId(), href: "/listing-car-map", name: "Cars page (map)" },
-          { id: ncNanoId(), href: "/listing-car-detail", name: "Car Detail" },
-        ],
-      },
+      
 
       //
       {
@@ -254,13 +213,7 @@ export const NAVIGATION_DEMO: NavItemType[] = [
       },
     ],
   },
-  {
-    id: ncNanoId(),
-    href: "/author",
-    name: "Templates",
-    type: "dropdown",
-    children: templatesChildrenMenus,
-  },
+ 
 
   {
     id: ncNanoId(),
@@ -288,70 +241,13 @@ export const NAVIGATION_DEMO_2: NavItemType[] = [
     name: "Listing pages",
     children: [
       { id: ncNanoId(), href: "/house-keeper", name: "Stay listings" },
-      {
-        id: ncNanoId(),
-        href: "/listing-stay-map",
-        name: "Stay listings (map)",
-      },
+      
       { id: ncNanoId(), href: "/house-keeper-detail", name: "Stay detail" },
 
-      //
-      {
-        id: ncNanoId(),
-        href: "/listing-experiences",
-        name: "Experiences listings",
-      },
-      {
-        id: ncNanoId(),
-        href: "/listing-experiences-map",
-        name: "Experiences (map)",
-      },
-      {
-        id: ncNanoId(),
-        href: "/listing-experiences-detail",
-        name: "Experiences detail",
-      },
+      
     ],
   },
-  {
-    id: ncNanoId(),
-    href: "/listing-car",
-    name: "Listing pages",
-    children: [
-      { id: ncNanoId(), href: "/listing-car", name: "Cars listings" },
-      { id: ncNanoId(), href: "/listing-car-map", name: "Cars listings (map)" },
-      { id: ncNanoId(), href: "/listing-car-detail", name: "Car detail" },
-
-      //
-      {
-        id: ncNanoId(),
-        href: "/listing-real-estate",
-        name: "Real estate listings",
-      },
-      {
-        id: ncNanoId(),
-        href: "/listing-real-estate-map",
-        name: "Real estate (map)",
-      },
-      //
-      {
-        id: ncNanoId(),
-        href: "/listing-flights",
-        name: "Flights listings",
-      },
-    ],
-  },
-
-  //
-  {
-    id: ncNanoId(),
-    href: "/author",
-    name: "Templates",
-    type: "dropdown",
-    children: templatesChildrenMenus,
-  },
-
-  //
+  
   {
     id: ncNanoId(),
     href: "/blog",
