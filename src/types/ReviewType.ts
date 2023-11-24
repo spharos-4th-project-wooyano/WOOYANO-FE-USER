@@ -11,7 +11,7 @@ export interface ReviewType{
 export interface ReviewListType{
   createdAt:string,
   reservationNum:string,
-  reuse:boolean,
+  reuse:string,
   reviewId:number,
   serviceId:number
 }
