@@ -8,7 +8,6 @@ import DefaultAddressButton from "./defaultAddressButton";
 
 const AddressFlightCard: React.FC<AddressLsitType> = ({ addressList }) => {
   const router = useRouter();
-  console.log(addressList[1].defaultAddress)
 
   //대표주소지 최상위로 표시
   const sortedAddressList = [...addressList].sort((a, b) => {

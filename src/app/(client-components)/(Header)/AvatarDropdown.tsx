@@ -3,20 +3,20 @@ import { Fragment } from "react";
 import Avatar from "@/shared/Avatar";
 import SwitchDarkMode2 from "@/shared/SwitchDarkMode2";
 import Link from "next/link";
-import { log } from "console";
 import { signOut } from "next-auth/react";
+import { BookmarkIcon, ClipboardDocumentIcon } from "@heroicons/react/24/outline";
+
 interface Props {
   className?: string;
   user: any;
 }
 
 export default function AvatarDropdown({ className = "", user }: Props) {
-  console.log(user);
 
   return (
     <>
       <Popover className={`AvatarDropdown relative flex ${className}`}>
-        {({ open, close }) => (
+        {({ close }) => (
           <>
             <Popover.Button
               className={`self-center w-10 h-10 sm:w-12 sm:h-12 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none flex items-center justify-center`}
@@ -32,11 +32,10 @@ export default function AvatarDropdown({ className = "", user }: Props) {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel className="absolute z-10 w-screen max-w-[260px] px-4 top-full -right-10 sm:right-0 sm:px-0">
-                <div className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5">
+              <Popover.Panel className="absolute z-10 w-screen max-w-[300px] px-4 top-full -right-10 sm:right-0 sm:px-0">
+                <div className="overflow-hidden rounded-md shadow-lg shadow-transparent-5 ring-1 ring-black ring-opacity-5">
                   <div className="relative grid grid-cols-1 gap-6 bg-white dark:bg-neutral-800 py-7 px-6">
                     <div className="flex items-center space-x-3">
-                      {/* 프로필 사진 */}
                       <Avatar sizeClass="w-12 h-12" imgUrl={user.result.profileImageUrl}/>
 
                       <div className="flex-grow">
@@ -47,7 +46,6 @@ export default function AvatarDropdown({ className = "", user }: Props) {
 
                     <div className="w-full border-b border-neutral-200 dark:border-neutral-700" />
 
-                    {/* ------------------ 1 --------------------- */}
                     <Link
                       href={"/account"}
                       className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
@@ -82,7 +80,6 @@ export default function AvatarDropdown({ className = "", user }: Props) {
                       </div>
                     </Link>
 
-                    {/* ------------------ 2 --------------------- */}
                     <Link
                       href={"/servicehistory"}
                       className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
@@ -130,40 +127,34 @@ export default function AvatarDropdown({ className = "", user }: Props) {
                         </svg>
                       </div>
                       <div className="ml-4">
-                        <p className="text-sm font-medium ">{"예약정보"}</p>
+                        <p className="text-sm font-medium ">{"나의 서비스이용 이력"}</p>
                       </div>
                     </Link>
 
-                    {/* ------------------ 2 --------------------- */}
                     <Link
                       href={"/favorite"}
                       className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                       onClick={() => close()}
                     >
-                      <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                        >
-                          <path
-                            d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </div>
+                      <BookmarkIcon color="gray" width={25} height={25}/>
                       <div className="ml-4">
                         <p className="text-sm font-medium ">{"찜"}</p>
                       </div>
                     </Link>
 
+                    <Link
+                      href={"/review"}
+                      className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                      onClick={() => close()}
+                    >
+                      <ClipboardDocumentIcon color="gray" width={25} height={25}/>
+                      <div className="ml-4"> 
+                        <p className="text-sm font-medium ">{"내 리뷰"}</p>
+                      </div>
+                    </Link>
+
                     <div className="w-full border-b border-neutral-200 dark:border-neutral-700" />
 
-                    {/* ------------------ 2 --------------------- */}
                     <div className="flex items-center justify-between p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50">
                       <div className="flex items-center">
                         <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
@@ -204,7 +195,6 @@ export default function AvatarDropdown({ className = "", user }: Props) {
                       <SwitchDarkMode2 />
                     </div>
 
-                    {/* ------------------ 2 --------------------- */}
                     <Link
                       href={"/#"}
                       className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
@@ -267,7 +257,6 @@ export default function AvatarDropdown({ className = "", user }: Props) {
                       </div>
                     </Link>
 
-                    {/* ------------------ 2 --------------------- */}
                     <Link
                       href={"/#"}
                       className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"

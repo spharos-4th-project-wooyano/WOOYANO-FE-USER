@@ -2,9 +2,9 @@ import React from "react";
 import { DEMO_POSTS } from "@/data/posts";
 
 import BgGlassmorphism from "@/components/BgGlassmorphism";
-import SectionLatestPosts from "../blog/SectionLatestPosts";
+import SectionLatestPosts from "../../blog/SectionLatestPosts";
 import { getServerSession } from "next-auth";
-import { options } from "../api/auth/[...nextauth]/options";
+import { options } from "../../api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 import Swal from "sweetalert2";
 
@@ -32,9 +32,7 @@ const BlogPage = async () => {
   return (
     <div className="nc-BlogPage overflow-hidden relative">
       <BgGlassmorphism />
-      <div className="container relative">
-        <SectionLatestPosts className="py-10" data={session.user.result}/>
-      </div>
+      <SectionLatestPosts data={session.user.result}/>
     </div>
   );
 };

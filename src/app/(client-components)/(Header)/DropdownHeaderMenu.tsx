@@ -41,7 +41,7 @@ const solutions: SolutionItem[] = [
 ];
 
 
-export default function DropdownTravelers() {
+export default function DropdownHeaderMenu() {
   return (
     <Popover className="DropdownTravelers relative flex">
       {({ open,close }) => (
