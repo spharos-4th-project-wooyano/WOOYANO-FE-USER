@@ -98,7 +98,7 @@ const CommentListing: FC<CommentListingProps> = ({
         </div>
         <div className="flex justify-center items-center my-4">
           <div className="w-[500px]">
-            <ImgSwiper/>
+            {/* <ImgSwiper/> */}
           </div>
         </div>
 

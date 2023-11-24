@@ -14,11 +14,13 @@ export const Nav = () => {
     "/account-password",
     "/account-billing",
     "/account-address",
+    "/servicehistory",
+    "/review"
   ];
 
   return (
     <div className="container">
-      <div className="flex space-x-8 md:space-x-14 overflow-x-auto hiddenScrollbar">
+      <div className="flex space-x-8 md:space-x-14 overflow-x-auto ">
         {listNav.map((item) => {
           const isActive = pathname === item;
           return (
