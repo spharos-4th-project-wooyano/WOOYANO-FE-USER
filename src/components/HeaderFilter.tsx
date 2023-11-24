@@ -24,7 +24,7 @@ const HeaderFilter: FC<HeaderFilterProps> = ({
 }) => {
   const [tabActiveState, setTabActiveState] = useState(tabActive);
 
-  console.log(tabActiveState);
+  // console.log(tabActiveState);
   
   useEffect(() => {
     setTabActiveState(tabActive);

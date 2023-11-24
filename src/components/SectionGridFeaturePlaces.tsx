@@ -37,9 +37,6 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
       case "card1":
         CardName = StayCard;
         break;
-      case "card2":
-        CardName = StayCard2;
-        break;
       
       default:
         CardName = StayCard;

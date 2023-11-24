@@ -57,16 +57,16 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
 
   const makeUrlParam =()=>{
     if (searchForm.service==="가사도우미 청소"){
-      setUrl(`/house-keeper/?region=${searchForm.region} && date=${searchForm.date}` as SetStateAction<PathName | undefined>);
+      setUrl(`/house-keeper/?region=${searchForm.region_code}&type=1&date=${searchForm.date}` as SetStateAction<PathName | undefined>);
     }
     if (searchForm.service==="이사/입주 청소"){
-      setUrl(`/moving-clean/?region=${searchForm.region} && date=${searchForm.date}` as SetStateAction<PathName | undefined>);
+      setUrl(`/moving-clean/?region=${searchForm.region_code}&type=2&date=${searchForm.date}` as SetStateAction<PathName | undefined>);
     }
     if (searchForm.service==="사무실 청소"){
-      setUrl(`/office-clean/?region=${searchForm.region} && date=${searchForm.date}` as SetStateAction<PathName | undefined>);
+      setUrl(`/office-clean/?region=${searchForm.region_code}&type=3&date=${searchForm.date}` as SetStateAction<PathName | undefined>);
     }
     if (searchForm.service==="가전제품 청소"){
-      setUrl(`/house-keeper/?region=${searchForm.region} && date=${searchForm.date}` as SetStateAction<PathName | undefined>);
+      setUrl(`/house-keeper/?region=${searchForm.region_code}&type=4&date=${searchForm.date}` as SetStateAction<PathName | undefined>);
     }
   }
 

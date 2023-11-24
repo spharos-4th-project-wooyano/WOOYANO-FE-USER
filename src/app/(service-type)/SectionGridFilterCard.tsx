@@ -1,5 +1,5 @@
 "use client"
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { DEMO_STAY_LISTINGS } from "@/data/listings";
 import { StayDataType } from "@/data/types";
 import Pagination from "@/shared/Pagination";
@@ -7,24 +7,66 @@ import TabFilters from "./TabFilters";
 import Heading2 from "@/shared/Heading2";
 import StayCard2 from "@/components/StayCard2";
 import DropDownOption from "@/components/button/dropDownoption";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import ElectroOption from "@/components/button/electroOption";
+import { useSession } from "next-auth/react";
+import ErrorFunction from "../ErrorFun";
+import { GetSearchType } from "@/types/search/getSearchType";
 
 
 export interface SectionGridFilterCardProps {
   className?: string;
-  data?: StayDataType[];
+  
 }
 
 const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 8);
 
 const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
   className = "",
-  data = DEMO_DATA,
+  
 }) => {
 
   const pathname = usePathname()
-  // console.log(pathname);
+  
+  const params=useSearchParams();
+  const session = useSession();
+  const usertoken = session.data?.user.result.token;
+  const useremail = session.data?.user.result.email;
+  const regionCode=params.get("region");
+  const serviceType=params.get("type");
+  const date=params.get("date");
+  const dateFormat=date?.replace(/\./g, '-');
+
+  const [fetchData,setFetchData]=useState<GetSearchType[]>()
+
+  // console.log(regionCode,serviceType,date);
+  
+  
+  useEffect(()=>{
+    getHouseKeeper()
+  },[])
+
+  const getHouseKeeper = async () => {
+    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/client/search?region=${regionCode}&type=${serviceType}&date=${dateFormat}`;
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${usertoken}`,
+        Email: `${useremail}`,
+      },
+    });
+    if (res.ok) {
+      const data = await res.json();
+      // console.log("data:", data);
+      setFetchData(data.result)
+      return data;
+    } else {
+      ErrorFunction("검색결과가 없습니다.");
+    }
+  };
+  
+  // console.log(fetchData);
   
 
   return (
@@ -36,7 +78,7 @@ const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
       className="mt-10"
       subHeading={
         <span className="block text-neutral-500 dark:text-neutral-400 mt-3">
-          n개의 업체가 조회되었습니다.
+          {fetchData?.length}개의 업체가 조회되었습니다.
         </span>
       }
       />
@@ -57,8 +99,8 @@ const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
       </div> */}
       
       <div className="grid grid-cols-1 gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {data.map((stay) => (
-          <StayCard2 key={stay.id} data={stay} />
+        {fetchData?.map((item) => (
+          <StayCard2 key={item.serviceId} data={item} size={"default"} className={""} />
         ))}
       </div>
       <div className="flex mt-16 justify-center items-center">

@@ -48,7 +48,7 @@ function LoginForm() {
       ...loginForm,
       [id]: value,
     });
-    console.log("step1 loginForm", loginForm);
+    // console.log("step1 loginForm", loginForm);
   };
 
   //로그인 유효성 확인 및 로그인 패칭

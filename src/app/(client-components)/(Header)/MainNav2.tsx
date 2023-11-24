@@ -17,7 +17,7 @@ export interface MainNav2Props {
 
 const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
   const {data, status} = useSession();
-  console.log(data?.user, status);
+  // console.log(data?.user, status);
 
   return (
     <div className={`MainNav2 relative z-10 ${className}`}>
