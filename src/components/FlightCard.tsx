@@ -1,19 +1,10 @@
 "use client";
 
-import React, { FC, useEffect, useState } from "react";
 import { TrashIcon, PencilSquareIcon } from '@heroicons/react/24/outline'
-import { ReserveDataType, ReviewListType } from "@/types/ReviewType";
-import { Session } from "next-auth";
-import { useSession } from "next-auth/react";
+
 import { newDataType } from "@/app/(mypage)/review/page";
 
-
-export interface FlightCardProps {
-  className?: string;
-  data:newDataType;
-}
-
-const FlightCard: FC<FlightCardProps> = ({ className = "", data }) => {
+const FlightCard = ({ data }: { data:newDataType }) => {
   
   const date = new Date(data.createdAt)
   const reserveDate = new Date(data.reservationDate)
@@ -22,10 +13,9 @@ const FlightCard: FC<FlightCardProps> = ({ className = "", data }) => {
   return (
     <div
       className={`nc-FlightCardgroup p-8 md:p-6 relative bg-white dark:bg-neutral-900 border border-neutral-100
-     dark:border-neutral-800 rounded-2xl overflow-hidden hover:shadow-lg transition-shadow space-y-6 ${className}`} 
+     dark:border-neutral-800 rounded-2xl overflow-hidden hover:shadow-lg transition-shadow space-y-6`} 
     >
-      <div className={`relative  ${className}`}>
-        {/* 수정, 삭제 버튼 */}
+      <div className={`relative`}>
         <div className="flex justify-end gap-5 md:gap-3 text-slate-400">
           <button>
             <TrashIcon className="md:h-4 md:w-4 h-6 w-6"/>
@@ -38,13 +28,11 @@ const FlightCard: FC<FlightCardProps> = ({ className = "", data }) => {
         </div>
 
         <div className="flex flex-col space-y-6 sm:space-y-0">
-          {/* 에약번호 */}
           <div>
             {reservationNum}
           </div>
           <div className="font-semibold">
             <div className="flex justify-between mb-2">
-              {/* 업체명 */}
               <p>{data.serviceName}</p>
 
               <div className="text-xs sm:text-sm text-neutral-500 font-normal mt-0.5">

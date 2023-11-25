@@ -3,7 +3,7 @@
 import { Dialog } from "@headlessui/react";
 import { motion } from "framer-motion";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Dispatch, SetStateAction, useRef, useState } from "react";
+import { Dispatch, ReactNode, SetStateAction, useRef, useState } from "react";
 import useKeypress from "react-use-keypress";
 import { getNewParam } from "../ListingImageGallery";
 import type { ListingGalleryImage } from "../utils/types";
@@ -15,11 +15,13 @@ export default function ModalReview({
   onClose,
   isOpen,
   setIsOpen,
+  children
   
 }: {
-  onClose?: () => void;
-  setIsOpen?: Dispatch<SetStateAction<boolean>>;
-  isOpen?: boolean;
+  children: ReactNode;
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onClose: () => void;
 }) {
   let overlayRef = useRef<HTMLDivElement>(null);
   const searchParams = useSearchParams();

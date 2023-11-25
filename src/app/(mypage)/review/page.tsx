@@ -1,13 +1,13 @@
+//@ts-ignore
+
+
 import BgGlassmorphism from "@/components/BgGlassmorphism";
-import React, { FC } from "react";
 import SectionGridFilterCard from "../../(review)/SectionGridFilterCard";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import Swal from "sweetalert2";
 import { redirect } from "next/navigation";
 
-
-export interface ListingFlightsPageProps {}
 export interface newDataType {
   reviewId: number;
   serviceId: number;
@@ -20,7 +20,7 @@ export interface newDataType {
   workerName: string;
 }
 
-export const getData = async (token:string, email:string) => {
+export const getData = async (token:any, email:any) => {
     if (!token) {
       console.log("세션이 만료됨")
       return null
@@ -45,7 +45,7 @@ export const getData = async (token:string, email:string) => {
     }
   }
 
-export const getWorkerId = async (reservationNum: string, token:string) => {
+export const getWorkerId = async (reservationNum:any, token:any) => {
   if (!token) {
     console.error("세션이 만료됨")
     return null
@@ -70,7 +70,7 @@ export const getWorkerId = async (reservationNum: string, token:string) => {
   }
 }
 
-export const getWorkNameAndClientName = async (serviceId: number, token:string, workerId: number) => {
+export const getWorkNameAndClientName = async (serviceId:any, token:any, workerId:any) => {
   if (!token) {
     console.error("세션이 만료됨")
     return null
@@ -92,7 +92,7 @@ export const getWorkNameAndClientName = async (serviceId: number, token:string, 
     }
 }
 
-const ListingFlightsPage: FC<ListingFlightsPageProps> = async ({}) => {
+const ListingFlightsPage = async () => {
 
   const session = await getServerSession(options);
   console.log('servicehistory',session);
@@ -112,14 +112,14 @@ const ListingFlightsPage: FC<ListingFlightsPageProps> = async ({}) => {
     redirect("/");
   }
 
-  const data = await getData(session.user.result.token, session.user.result.email);
-  const userName = await session.user.result.username;
+  const data:any = await getData(session.user.result.token, session.user.result.email);
+  const userName:string = await session.user.result.username;
 
   let newData:newDataType[] = []
   
   for (let i = 0; i < data.length; i++) {
-    const workerId = await getWorkerId(data[i].reservationNum, session.user.result.token);
-    const workerName = await getWorkNameAndClientName(data[i].serviceId, session.user.result.token, workerId.workerId);
+    const workerId:any = await getWorkerId(data[i].reservationNum, session.user.result.token);
+    const workerName:any = await getWorkNameAndClientName(data[i].serviceId, session.user.result.token, workerId.workerId);
     console.log("workerName",workerName)
     newData.push({
       reviewId: data[i].reviewId,

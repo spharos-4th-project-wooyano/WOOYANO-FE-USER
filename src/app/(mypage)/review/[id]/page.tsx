@@ -1,11 +1,9 @@
 'use client'
-import React from "react";
-import ReviewDetail from "./reviewDetail";
 import ModalReview from "@/components/listing-image-gallery/components/ModalReview";
+import React from "react";
 
 
-
-const page = () => {
+const Page = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const onClose = () => setIsOpen(false);
   return  (
@@ -23,4 +21,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
