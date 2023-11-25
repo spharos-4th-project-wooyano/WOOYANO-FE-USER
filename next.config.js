@@ -55,6 +55,12 @@ const nextConfig = {
         hostname: "cdn.pixabay.com",
         port: "",
         pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "zrr.kr",
+        port: "",
+        pathname: "/**",
       }
     ],
   },

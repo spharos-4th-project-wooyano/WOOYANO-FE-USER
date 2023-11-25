@@ -8,6 +8,7 @@ import Image from "next/image";
 import room from "@/images/test/room.png"
 import room2 from "@/images/test/room2.png"
 import {Card, CardBody} from "@nextui-org/react";
+import { ReviewDataType } from "@/types/house-keeper-detail/reviewDataType";
 
 interface CommentListingDataType {
   name: string;
@@ -24,8 +25,7 @@ interface CommentListingDataType {
 
 export interface CommentListingProps {
   className?: string;
-  data?: CommentListingDataType;
-  hasListingTitle?: boolean;
+  reviewData:ReviewDataType
 }
 
 const DEMO_DATA: CommentListingDataType =
@@ -48,8 +48,7 @@ const DEMO_DATA: CommentListingDataType =
 
 const CommentListing: FC<CommentListingProps> = ({
   className = "",
-  data = DEMO_DATA,
-  hasListingTitle,
+  reviewData
 }) => {
   return (
     <div
@@ -60,7 +59,7 @@ const CommentListing: FC<CommentListingProps> = ({
         <Avatar
           // sizeClass="h-10 w-10 text-lg"
           // radius="rounded-full"
-          userName={data.name}
+          userName={"이훙훙"}
           // imgUrl={data.avatar}
         />
       </div>
@@ -69,7 +68,7 @@ const CommentListing: FC<CommentListingProps> = ({
           <div className="flex flex-col">
             <div className="text-sm font-semibold">
               {/* 작성자명 */}
-              <span>{data.name}</span>
+              <span>{""}</span>
               {/* {hasListingTitle && (
                 <>
                   <span className="text-neutral-500 dark:text-neutral-400 font-normal">
@@ -81,20 +80,13 @@ const CommentListing: FC<CommentListingProps> = ({
             </div>
             {/* 작성일자 */}
             <span className="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
-              {data.date}
+              {new Date(reviewData.createAt).toLocaleDateString().slice(0,-1)}
             </span>
           </div>
           {/* 평가 */}
           <div className="text-xl font-semibold text-secondary-6000">
-            {data.res}
+            {reviewData.reuse===true?"다음에도 이용할게요:)":"이번만 이용할게요:("}
           </div>
-          {/* <div className="flex text-yellow-500">
-            <StarIcon className="w-4 h-4" />
-            <StarIcon className="w-4 h-4" />
-            <StarIcon className="w-4 h-4" />
-            <StarIcon className="w-4 h-4" />
-            <StarIcon className="w-4 h-4" />
-          </div> */}
         </div>
         <div className="flex justify-center items-center my-4">
           <div className="w-[500px]">
@@ -105,10 +97,11 @@ const CommentListing: FC<CommentListingProps> = ({
         {/* 작업자 및 서비스 */}
         <div className="flex justify-end text-xs text-gray-500 mt-5 mb-2 gap-3">
           <div className="border border-dotted border-slate-400 rounded-2xl leading-8 px-3" style={{ borderWidth: '3px' }}>
-            {data.worker} 기사님
+            {/* {data.worker}  */}
+            기사님
           </div>
           <div className="border border-dotted border-slate-400 rounded-2xl leading-8 px-3 " style={{ borderWidth: '3px' }}>
-            {data.service}
+            {/* {data.service} */}
           </div>
         </div>
 
@@ -118,7 +111,7 @@ const CommentListing: FC<CommentListingProps> = ({
             ▲
           </span>
           <span className="block text-black dark:text-neutral-300 leading-10">
-            {data.desc}
+            {reviewData.content}
           </span>
         </div>
         
@@ -128,14 +121,14 @@ const CommentListing: FC<CommentListingProps> = ({
           <span className="text-blue-100 text-[36px] absolute bottom-[-29px] right-[3px]">
             ▼
           </span>
-          <span>
+          {/* <span>
             {DEMO_DATA.comment.map((sentence, index) => (
             <React.Fragment key = {index}>
               {sentence}
                 <br />
             </React.Fragment>
             ))}
-          </span>
+          </span> */}
         </div>
 
       </div>
