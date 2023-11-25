@@ -3,7 +3,7 @@ import React, { FC } from "react";
 
 export interface PostTypeFeaturedIconProps {
   className?: string;
-  postType?: PostDataType["postType"];
+  postType?: PostDataType;
   onClick?: () => void;
   wrapSize?: string;
   iconSize?: string;

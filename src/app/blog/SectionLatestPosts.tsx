@@ -44,7 +44,6 @@ const SectionLatestPosts: FC<SectionLatestPostsProps> = ({
     <ModalReview 
       isOpen={isOpen}
       setIsOpen={setIsOpen}
-      onClose={onClose}
     />
     <div className={`nc-SectionLatestPosts relative ${className}`}>
       <div className="mb-8 flex flex-col justify-start items-start ml-4 md:ml-0 md:justify-between md:items-center md:flex-row">

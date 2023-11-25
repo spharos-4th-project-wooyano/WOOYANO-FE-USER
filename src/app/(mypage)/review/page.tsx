@@ -20,7 +20,7 @@ export interface newDataType {
   workerName: string;
 }
 
-export const getData = async (token:any, email:any) => {
+async function getData (token:string, email:string) {
     if (!token) {
       console.log("세션이 만료됨")
       return null
@@ -45,7 +45,7 @@ export const getData = async (token:any, email:any) => {
     }
   }
 
-export const getWorkerId = async (reservationNum:any, token:any) => {
+async function getWorkerId (reservationNum:string, token:string) {
   if (!token) {
     console.error("세션이 만료됨")
     return null
@@ -70,13 +70,16 @@ export const getWorkerId = async (reservationNum:any, token:any) => {
   }
 }
 
-export const getWorkNameAndClientName = async (serviceId:any, token:any, workerId:any) => {
+async function getWorkNameAndClientName (serviceId:number, token:string, workerId:number) {
   if (!token) {
     console.error("세션이 만료됨")
     return null
   }
+
+  const serId = serviceId.toString();
+  const worId = workerId.toString();
   try {
-    const response = await fetch(`http://3.35.62.185:8000/api/v1/client/review/detail?serviceId=${serviceId}&workerId=${workerId}`, {
+    const response = await fetch(`http://3.35.62.185:8000/api/v1/client/review/detail?serviceId=${serId}&workerId=${worId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -112,14 +115,17 @@ const ListingFlightsPage = async () => {
     redirect("/");
   }
 
-  const data:any = await getData(session.user.result.token, session.user.result.email);
+  const res = getData(session.user.result.token, session.user.result.email);
+  const data = await Promise.all([res]);
   const userName:string = await session.user.result.username;
 
   let newData:newDataType[] = []
   
   for (let i = 0; i < data.length; i++) {
-    const workerId:any = await getWorkerId(data[i].reservationNum, session.user.result.token);
-    const workerName:any = await getWorkNameAndClientName(data[i].serviceId, session.user.result.token, workerId.workerId);
+    const workerIds = getWorkerId(data[i].reservationNum, session.user.result.token);
+    const [workerId] = await Promise.all([workerIds]);
+    const workerNames = getWorkNameAndClientName(data[i].serviceId, session.user.result.token, workerId.workerId);
+    const [workerName] = await Promise.all([workerNames]);
     console.log("workerName",workerName)
     newData.push({
       reviewId: data[i].reviewId,

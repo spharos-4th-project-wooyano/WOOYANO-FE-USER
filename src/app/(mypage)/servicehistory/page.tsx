@@ -13,7 +13,7 @@ import { get } from "lodash";
 // DEMO DATA
 const POSTS = DEMO_POSTS;
 
-export const getServiceData = async (token:string, email:string) => {
+async function getServiceData (token:string, email:string) {
   if(!token){
     console.error("세션이 만료됨")
     return null
@@ -37,7 +37,7 @@ export const getServiceData = async (token:string, email:string) => {
   }
 }
 
-export const getServiceDetailData = async (serviceId: number, workerId: number, token: string) => {
+async function getServiceDetailData (serviceId: number, workerId: number, token: string) {
   
   console.log("서비스 아이디 : ", serviceId)
   console.log("작업자 아이디 : ", workerId)
@@ -59,7 +59,7 @@ export const getServiceDetailData = async (serviceId: number, workerId: number, 
   }
 }
 
-export const getIsReview = async (reservationNum: string, email: string, token: string) => {
+async function getIsReview (reservationNum: string, email: string, token: string) {
   const response = await fetch(`http://3.35.62.185:8000/api/v1/review-bookmark/check/review/available/${reservationNum}`, {
     method: "GET",
     headers: {
@@ -94,7 +94,8 @@ const BlogPage = async () => {
   }
 
 
-  const postData = await getServiceData(session?.user.result.token, session?.user.result.email);
+  const postDatas = getServiceData(session?.user.result.token, session?.user.result.email);
+  const postData = await Promise.all([postDatas]);
   if(!postData){
     Swal.fire({
       text: `로그인이 필요한 페이지입니다.`,
@@ -113,8 +114,9 @@ const BlogPage = async () => {
   let newPostData:PostDataType[] = [];
   for(let i=0; i<postData.length; i++){
     try {
-      const workerData = await getServiceDetailData(postData[i].serviceId, postData[i].workerId, session?.user.result.token);
-      const isReviewRes = await getIsReview(postData[i].reservationNum, session?.user.result.email, session?.user.result.token);
+      const workerDataRes = getServiceDetailData(postData[i].serviceId, postData[i].workerId, session?.user.result.token);
+      const reviewDataRes = getIsReview(postData[i].reservationNum, session?.user.result.email, session?.user.result.token);
+      const [workerData, isReviewRes] = await Promise.all([workerDataRes, reviewDataRes])
       console.log("workerData : ", workerData, isReviewRes)
       newPostData.push({
         ...postData[i],

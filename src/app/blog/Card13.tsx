@@ -11,11 +11,11 @@ export interface Card13Props {
 }
 
 const Card13: FC<Card13Props> = ({ className = "", post }) => {
-  const { title, href, desc, featuredImage, date, postType } = post;
+  // const { title, href, desc, featuredImage, date, postType } = post;
 
   return (
     <div className={`nc-Card13 relative flex ${className}`} data-nc-id="Card13">
-      <div className="flex flex-col h-full py-2">
+      {/* <div className="flex flex-col h-full py-2">
         <h2 className={`nc-card-title block font-semibold text-base`}>
           <Link href={href} className="line-clamp-2" title={title}>
             {title}
@@ -49,7 +49,7 @@ const Card13: FC<Card13Props> = ({ className = "", post }) => {
           wrapSize="w-8 h-8"
           iconSize="w-4 h-4"
         />
-      </Link>
+      </Link> */}
     </div>
   );
 };

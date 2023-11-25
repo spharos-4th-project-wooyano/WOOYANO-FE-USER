@@ -133,7 +133,7 @@ const SignUpForm = (props: {
         localAddress: addressInfo.address,
       }));
     }
-  }, [addressInfo]);
+  }, [addressInfo?.address, addressInfo?.sigunguCode, setSignUpData]);
 
   const [showEmailVerification, setShowEmailVerification] = useState(false);
   useEffect(() => { setShowEmailVerification(true) }, []);

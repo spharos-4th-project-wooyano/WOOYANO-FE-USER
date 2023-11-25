@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export interface PostCardMetaV2Props {
   className?: string;
-  meta: Pick<PostDataType, "date" | "author" | "title">;
+  meta: PostDataType;
   hiddenAvatar?: boolean;
   size?: "large" | "normal";
 }
@@ -16,7 +16,7 @@ const PostCardMetaV2: FC<PostCardMetaV2Props> = ({
   hiddenAvatar = false,
   size = "normal",
 }) => {
-  const { date, author, title } = meta;
+  // const { date, author, title } = meta;
   return (
     <div
       className={`nc-PostCardMetaV2 inline-flex items-center flex-wrap text-neutral-800 dark:text-neutral-200 ${
@@ -24,7 +24,7 @@ const PostCardMetaV2: FC<PostCardMetaV2Props> = ({
       } ${className}`}
       data-nc-id="PostCardMetaV2"
     >
-      <Link href={author.href} className="relative flex items-center space-x-2">
+      {/* <Link href={author.href} className="relative flex items-center space-x-2">
         {!hiddenAvatar && (
           <Avatar
             radius="rounded-full"
@@ -56,7 +56,7 @@ const PostCardMetaV2: FC<PostCardMetaV2Props> = ({
             </span>
           </div>
         </div>
-      </Link>
+      </Link> */}
     </div>
   );
 };

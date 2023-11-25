@@ -1,5 +1,5 @@
 import React from "react";
-import FlightCard from "@/components/FlightCard";
+import FlightCard, { FlightCardProps } from "@/components/FlightCard";
 import { newDataType } from "../(mypage)/review/page";
 
 

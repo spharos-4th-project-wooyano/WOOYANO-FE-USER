@@ -4,6 +4,8 @@ import { TrashIcon, PencilSquareIcon } from '@heroicons/react/24/outline'
 
 import { newDataType } from "@/app/(mypage)/review/page";
 
+export interface FlightCardProps {}
+
 const FlightCard = ({ data }: { data:newDataType }) => {
   
   const date = new Date(data.createdAt)

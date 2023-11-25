@@ -73,7 +73,7 @@ export default function SignUpCertNumber(props: {
   useEffect(() => {
     setShowEmailVerification(true);
     startCountdown()
-  }, []);
+  }, [startCountdown()]);
 
   return (
     <div className="space-y-6 sm:space-y-8 md:px-10 py-6">

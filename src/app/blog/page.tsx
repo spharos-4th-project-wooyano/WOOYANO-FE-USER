@@ -23,14 +23,14 @@ const BlogPage: React.FC = () => {
       <div className="container relative">
         {/* === SECTION 1 === */}
         <div className="pt-12 pb-16 lg:pb-28">
-          <SectionMagazine5 posts={MAGAZINE1_POSTS} />
+          {/* <SectionMagazine5 posts={MAGAZINE1_POSTS} /> */}
         </div>
 
         {/* === SECTION 1 === */}
         <SectionAds />
 
         {/* === SECTION 8 === */}
-        <SectionLatestPosts className="py-16 lg:py-28" data={undefined} />
+        {/* <SectionLatestPosts className="py-16 lg:py-28" data={undefined} /> */}
 
         {/* === SECTION 1 === */}
         <SectionSubscribe2 className="pb-16 lg:pb-28" />

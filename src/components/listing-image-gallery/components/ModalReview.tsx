@@ -12,16 +12,11 @@ import { Route } from "next";
 import ReviewStep from "@/app/(mypage)/review/reg/reviewStep";
 
 export default function ModalReview({
-  onClose,
   isOpen,
   setIsOpen,
-  children
-  
 }: {
-  children: ReactNode;
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  onClose: () => void;
 }) {
   let overlayRef = useRef<HTMLDivElement>(null);
   const searchParams = useSearchParams();
@@ -35,7 +30,7 @@ export default function ModalReview({
 
 
   function handleClose() {
-    onClose && onClose();
+    setIsOpen(false);
   }
 
   return (
