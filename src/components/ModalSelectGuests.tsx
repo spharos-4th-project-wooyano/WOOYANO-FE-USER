@@ -14,25 +14,25 @@ interface ModalSelectGuestsProps {
 
 const Product = [
   {
-    productnum: 1101,
+    productnum: 11,
     name: "원룸",
     min_time: "2",
     price: 20000
   },
   {
-    productnum: 1102,
+    productnum: 12,
     name: "빌라",
     min_time: "2",
     price: 30000
   },
   {
-    productnum: 1103,
+    productnum: 13,
     name: "아파트",
     min_time: "2",
     price: 40000
   },
   {
-    productnum: 1104,
+    productnum: 14,
     name: "시간추가",
     min_time: "1",
     price: 10000
@@ -131,7 +131,7 @@ const ModalSelectGuests: FC<ModalSelectGuestsProps> = ({ renderChildren,setServi
           onClose={closeModal}
         >
           <div className="fixed inset-0 bg-neutral-100 dark:bg-neutral-900">
-            <div className="flex h-full">
+            <div className="flex h-[93%] mt-10">
               <Transition.Child
                 as={Fragment}
                 enter="ease-out transition-transform"

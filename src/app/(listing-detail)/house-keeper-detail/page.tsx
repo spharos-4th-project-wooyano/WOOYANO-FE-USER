@@ -28,13 +28,14 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({ }) => {
   const [onClickData, setOnClickData] = useState<any>({
     workername: "",
     desc: "",
+    workerImg:"",
+    workerId:-1,
   });
   //fetch를 위한 session데이터 가져오기
   const session = useSession();
   const usertoken = session.data?.user.result.token;
   const useremail = session.data?.user.result.email;
 
-  let [isOpenModalAmenities, setIsOpenModalAmenities] = useState(false);
 
   //path가져오기
   const thisPathname = usePathname();
@@ -48,7 +49,9 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({ }) => {
       description: "",
       name: "",
       registrationNumber: "",
-      serviceAreaList:[]
+      serviceAreaList:[],
+      serviceId:0,
+      serviceImgUrlList:[]
     })
   const [reviewData,setReviewData]=useState<ReviewDataType[]>([]);
   const [reviewFavoriteCount, setReviewFavoriteCount] = useState<ReviewFavoriteCount>();
@@ -59,7 +62,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({ }) => {
     getReviewFavorite()
     getStoreReview()
   }, [usertoken])
-  console.log(workerData);
+  // console.log(onClickData);
 
   const getStoreWorkerList = async () => {
     const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/client/worker/list?serviceId=${params}`;
@@ -143,18 +146,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({ }) => {
   };
   
 
-
-  function closeModalAmenities() {
-    setIsOpenModalAmenities(false);
-  }
-
-  function openModalAmenities() {
-    setIsOpenModalAmenities(true);
-  }
-
-  const handleOpenModalImageGallery = () => {
-    router.push(`${thisPathname}/?modal=PHOTO_TOUR_SCROLLABLE` as Route);
-  };
+  
 
   const renderSection1 = () => (
     <div className="listingSection__wrap !space-y-6">
@@ -198,7 +190,6 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({ }) => {
   );
 
 
-  // 어떤 내용 들어가면 좋을지 생각
   const renderSidebar = () => {
     return (
       <div className="listingSectionSidebar__wrap shadow-xl">
@@ -239,7 +230,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({ }) => {
             </div>
 
             {/* SUBMIT */}
-            <ButtonPrimary href={`/serviceform?id=${onClickData.workername}`}>예약하기</ButtonPrimary>
+            <ButtonPrimary href={`/serviceform?name=${onClickData.workername}&workerId=${onClickData.workerId}&workerImg=${onClickData.workerImg}&serviceId=${storeInfo.serviceId}`}>예약하기</ButtonPrimary>
           </>
         }
 
@@ -257,7 +248,6 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({ }) => {
         <div className="relative grid grid-cols-3 sm:grid-cols-4 gap-1 sm:gap-2">
           <div
             className="col-span-2 row-span-3 sm:row-span-2 relative rounded-md sm:rounded-xl overflow-hidden cursor-pointer"
-            onClick={handleOpenModalImageGallery}
           >
             <Image
               fill
@@ -268,7 +258,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({ }) => {
             />
             <div className="absolute inset-0 bg-neutral-900 bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity"></div>
           </div>
-          {PHOTOS.filter((_, i) => i >= 1 && i < 5).map((item, index) => (
+          {storeInfo.serviceImgUrlList.map((item, index) => (
             <div
               key={index}
               className={`relative rounded-md sm:rounded-xl overflow-hidden ${index >= 3 ? "hidden sm:block" : ""
@@ -284,23 +274,11 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({ }) => {
                 />
               </div>
 
-              {/* OVERLAY */}
-              <div
-                className="absolute inset-0 bg-neutral-900 bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity cursor-pointer"
-                onClick={handleOpenModalImageGallery}
-              />
+              
             </div>
           ))}
 
-          <button
-            className="absolute hidden md:flex md:items-center md:justify-center left-3 bottom-3 px-4 py-2 rounded-xl bg-neutral-100 text-neutral-500 hover:bg-neutral-200 z-10"
-            onClick={handleOpenModalImageGallery}
-          >
-            <Squares2X2Icon className="w-5 h-5" />
-            <span className="ml-2 text-neutral-800 text-sm font-medium">
-              Show all photos
-            </span>
-          </button>
+          
         </div>
       </header>
 

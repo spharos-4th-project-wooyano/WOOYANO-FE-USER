@@ -3,5 +3,8 @@ export interface ReviewDataType{
   content:string,
   createAt:string,
   imageUrlList:string[],
-  reuse:boolean
+  reuse:boolean,
+  reviewId:number,
+  serviceId:number,
+  userEmail:string
 }

@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 
 
 import { newDataType } from "@/app/(mypage)/review/page";
+import { useEffect, useState } from 'react';
 
 export interface FlightCardProps {}
 
@@ -42,8 +43,8 @@ async function getWorkerId(reservationNum: string, session: Session) {
 
 // 업체명과 작업자 이름을 위한 fetch 
 async function getWorkerName(serviceId: number, workerId: number, session: Session) {
-  console.log("서비스 아이디 : ", serviceId)
-  console.log("작업자 아이디 : ", workerId)
+  // console.log("서비스 아이디 : ", serviceId)
+  // console.log("작업자 아이디 : ", workerId)
   try {
     const response = await fetch(`http://3.35.62.185:8000/api/v1/client/review/detail?serviceId=${serviceId}&workerId=${workerId}`, {
       method: "GET",
@@ -64,7 +65,7 @@ async function getWorkerName(serviceId: number, workerId: number, session: Sessi
 
 
 
-const FlightCard: FC<FlightCardProps> = ({ className = "", data, onClick }) => {
+// const FlightCard: FC<FlightCardProps> = ({ className = "", data, onClick }) => {
   
   const { data: session } = useSession();
   // 작업자 아이디

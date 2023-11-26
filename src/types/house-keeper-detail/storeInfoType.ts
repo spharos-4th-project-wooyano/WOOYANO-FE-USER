@@ -4,4 +4,6 @@ export interface StoreInfoType{
   name:string,
   registrationNumber:string,
   serviceAreaList:number[],
+  serviceId:number,
+  serviceImgUrlList:string[]
 }

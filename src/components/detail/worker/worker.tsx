@@ -9,6 +9,8 @@ function Worker({setOnClickData,data}:{setOnClickData:React.Dispatch<SetStateAct
     <div onClick={()=>{setOnClickData({
       workername:data.name,
       desc:data.description,
+      workerId:data.workerId,
+      workerImg:data.imgUrl
     })}} className='py-5'>
       <div className="flex items-center">
         <Avatar
