@@ -8,64 +8,8 @@ export interface SectionGridFilterCardProps {
   className?: string;
 }
 
-// const DEMO_DATA: FlightCardProps[] = [
-//   {
-//     createdAt: "2023-10-15",
-//     reservationNum : "20231015",
-//     reuse: true,
-//     reviewId: 1,
-//     serviceId: 1
-//   }
-//   // {
-//   //   id: "2",
-//   //   res: "이번에만 이용할게요:(",
-//   //   review: {
-//   //     img: "https://www.gstatic.com/flights/airline_logos/70px/SQ.png",
-//   //     name: "업체 이름2",
-//   //     workername: "임찬섭"
-//   //   },
-//   // },
-//   // {
-//   //   id: "3",
-//   //   price: "$2,380",
-//   //   airlines: {
-//   //     logo: "https://www.gstatic.com/flights/airline_logos/70px/multi.png",
-//   //     name: "Philippine Airlines",
-//   //   },
-//   // },
-//   // {
-//   //   id: "1",
-//   //   price: "$4,100",
-//   //   airlines: {
-//   //     logo: "https://www.gstatic.com/flights/airline_logos/70px/KE.png",
-//   //     name: "Korean Air",
-//   //   },
-//   // },
-//   // {
-//   //   id: "2",
-//   //   price: "$3,380",
-//   //   airlines: {
-//   //     logo: "https://www.gstatic.com/flights/airline_logos/70px/SQ.png",
-//   //     name: "Singapore Airlines",
-//   //   },
-//   // },
-//   // {
-//   //   id: "1",
-//   //   price: "$4,100",
-//   //   airlines: {
-//   //     logo: "https://www.gstatic.com/flights/airline_logos/70px/KE.png",
-//   //     name: "Korean Air",
-//   //   },
-//   // },
-//   // {
-//   //   id: "2",
-//   //   price: "$3,380",
-//   //   airlines: {
-//   //     logo: "https://www.gstatic.com/flights/airline_logos/70px/SQ.png",
-//   //     name: "Singapore Airlines",
-//   //   },
-//   // },
-// ];
+
+
 
 const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
   className = "",

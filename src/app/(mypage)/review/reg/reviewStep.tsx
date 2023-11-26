@@ -125,7 +125,7 @@ const ReviewStep = () => {
 
   return (
     <div
-      className={`nc-PageAddListing1 px-4 max-w-3xl mx-auto pb-24 pt-14 sm:py-24 lg:pb-32`}
+      className={`nc-PageAddListing1 z-[99999] relative`}
     >
       <div className="space-y-11">
         <div>

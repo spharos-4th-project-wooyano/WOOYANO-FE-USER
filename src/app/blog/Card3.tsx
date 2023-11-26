@@ -11,11 +11,11 @@ export interface Card3Props {
 }
 
 const Card3: FC<Card3Props> = ({ className = "h-full", post }) => {
-  const { title, href, featuredImage, desc, postType } = post;
+  // const { title, href, featuredImage, desc, postType } = post;
 
   return (
     <div className={`nc-Card3 relative flex flex-col-reverse sm:flex-row sm:items-center rounded-[40px] group ${className}`}>
-      <div className={`block flex-shrink-0 sm:w-56 sm:ml-6  overflow-hidden mb-5 sm:mb-0`}>
+      {/* <div className={`block flex-shrink-0 sm:w-56 sm:ml-6  overflow-hidden mb-5 sm:mb-0`}>
         <div className="block w-40 h-40 overflow-hidden rounded-full">
           <Image
             src={featuredImage}
@@ -53,7 +53,7 @@ const Card3: FC<Card3Props> = ({ className = "h-full", post }) => {
           </div>
         </div>
         <PostCardMeta meta={{ ...post }} />
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -27,7 +27,7 @@ const WidgetPosts: FC<WidgetPostsProps> = ({
         {posts.map((post) => (
           <Card3Small
             className="p-4 xl:px-5 xl:py-6 hover:bg-neutral-200 dark:hover:bg-neutral-700"
-            key={post.id}
+            key={post.serviceId}
             post={post}
           />
         ))}

@@ -10,14 +10,14 @@ export interface Card3SmallProps {
 }
 
 const Card3Small: FC<Card3SmallProps> = ({ className = "h-full", post }) => {
-  const { title, href, featuredImage } = post;
+  // const { title, href, featuredImage } = post;
 
   return (
     <div
       className={`nc-Card3Small relative flex flex-col-reverse sm:flex-row sm:justify-between sm:items-center ${className}`}
       data-nc-id="Card3Small"
     >
-      <Link href={href} className=" absolute inset-0" title={title}></Link>
+      {/* <Link href={href} className=" absolute inset-0" title={title}></Link>
       <div className="relative space-y-2">
         <PostCardMeta meta={{ ...post }} />
         <h2 className="nc-card-title block text-base font-semibold text-neutral-900 dark:text-neutral-100">
@@ -42,7 +42,7 @@ const Card3Small: FC<Card3SmallProps> = ({ className = "h-full", post }) => {
             sizes="(max-width: 768px) 100vw, 300px"
           />
         </div>
-      </Link>
+      </Link> */}
     </div>
   );
 };

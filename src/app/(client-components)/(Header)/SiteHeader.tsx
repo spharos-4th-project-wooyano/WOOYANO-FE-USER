@@ -70,7 +70,7 @@ const SiteHeader = () => {
   }, [pathname]);
   
   const renderHeader = () => {
-    let headerClassName = "shadow-sm dark:border-b dark:border-neutral-700";
+    let headerClassName = "shadow-sm dark:border-b dark:border-neutral-700 z-[1000]";
     if (PAGES_HIDE_HEADER_BORDER.includes(pathname as PathName)) {
       headerClassName = isTopOfPage
         ? ""

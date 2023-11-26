@@ -6,9 +6,10 @@ import { ReactNode } from "react";
 export interface Heading2Props {
   subHeading?: React.ReactNode;
   className?: string;
+  userName?: string;
 }
 
-const Heading2: React.FC<Heading2Props> = ({ className = "", subHeading }) => {
+const Heading2: React.FC<Heading2Props> = ({ className = "", subHeading , userName }) => {
   const [heading, setHeading] = useState<string>("");
   // const [subheading, setSubHeading] = useState<string>("");
   const pathname = usePathname()
@@ -29,20 +30,10 @@ const Heading2: React.FC<Heading2Props> = ({ className = "", subHeading }) => {
     }
   }, [pathname]);
 
-  // useEffect(() => {
-  //   console.log(pathname)
-  //   // pathname에 따라 heading 텍스트를 설정
-  //   if (pathname === '/review') {
-  //     setSubHeading('작성한 리뷰가 최신순으로 조회됩니다.');
-  //   } else if (pathname != '/review') {
-  //     setHeading('n개의 업체가 조회되었습니다.');
-  //   }
-  // }, [pathname]);
-
   return (
     <div className={`mb-12 lg:mb-16 ${className}`}>
-      <h2 className="text-4xl font-semibold">
-        {heading}
+      <h2 className="text-2xl font-semibold">
+        { userName ? `${userName}님의 ${heading}` : heading }
       </h2>
       {subHeading}
     </div>

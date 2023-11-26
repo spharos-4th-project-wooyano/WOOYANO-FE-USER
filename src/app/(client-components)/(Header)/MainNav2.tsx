@@ -1,15 +1,12 @@
 'use client'
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import Logo from "@/shared/Logo";
 import MenuBar from "@/shared/MenuBar";
 import AvatarDropdown from "./AvatarDropdown";
-import DropdownTravelers from "./DropdownTravelers";
+import DropdownHeaderMenu from "./DropdownHeaderMenu";
 import MainGptLink from "./MainGptLink";
-import { getServerSession } from "next-auth";
-import { options } from "@/app/api/auth/[...nextauth]/options";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import { set } from "lodash";
 
 export interface MainNav2Props {
   className?: string;
@@ -17,7 +14,7 @@ export interface MainNav2Props {
 
 const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
   const {data, status} = useSession();
-  // console.log(data?.user, status);
+
 
   return (
     <div className={`MainNav2 relative z-10 ${className}`}>
@@ -27,7 +24,7 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
           <div className="hidden lg:block self-center h-10 border-l border-neutral-300 dark:border-neutral-500"></div>
           <div className="flex gap-3 md:pl-3 pl-0 ">
             <MainGptLink/>
-            <DropdownTravelers />
+            <DropdownHeaderMenu />
           </div>
         </div>
         <div className="flex justify-end text-neutral-700 dark:text-neutral-100">

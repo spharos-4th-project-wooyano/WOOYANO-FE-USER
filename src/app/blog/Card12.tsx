@@ -16,11 +16,11 @@ const Card12: FC<Card12Props> = ({
   className = "h-full",
   post = DEMO_POSTS[0],
 }) => {
-  const { title, href, featuredImage, desc, postType } = post;
+  // const { title, href, featuredImage, desc, postType } = post;
 
   return (
     <div className={`nc-Card12 group relative flex flex-col ${className}`}>
-      <Link
+      {/* <Link
         href={href}
         className="block flex-shrink-0 flex-grow relative w-full h-0 aspect-w-4 aspect-h-3 rounded-3xl overflow-hidden"
       >
@@ -54,7 +54,7 @@ const Card12: FC<Card12Props> = ({
           <span className="line-clamp-2"> {desc}</span>
         </span>
         <PostCardMeta className="mt-5" meta={post} />
-      </div>
+      </div> */}
     </div>
   );
 };

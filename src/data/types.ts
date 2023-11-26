@@ -38,20 +38,20 @@ export interface AuthorType {
 }
 
 export interface PostDataType {
-  id: string | number;
-  author: AuthorType;
-  date: string;
-  reservationDate?: string;
-  href: Route<string>;
-  // categories: TaxonomyType[];
-  title: string;
-  featuredImage: StaticImageData | string;
-  desc?: string;
-  commentCount: number;
-  // viewdCount: number;
-  // readingTime: number;
-  postType?: string;
-  isReview?: boolean;
+    reservationNum: string;
+    serviceType: string;
+    reservationState: string;
+    serviceItemNameList: string[];
+    reservationDate: Date;
+    serviceStart: string;
+    serviceEnd: string;
+    serviceId: number;
+    workerId: number;
+    workerName: string;
+    companyName: string;
+    logoUrl: string;
+    workerUrl: string;
+    isReview: boolean;
 }
 
 export type TwMainColor =
