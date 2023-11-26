@@ -63,7 +63,7 @@ const ModalSelectDate: FC<ModalSelectDateProps> = ({ renderChildren,setDate,date
           onClose={closeModal}
         >
           <div className="fixed inset-0 bg-neutral-100 dark:bg-neutral-900">
-            <div className="flex h-full">
+            <div className="flex h-[93%] mt-10 ">
               <Transition.Child
                 as={Fragment}
                 enter="ease-out transition-transform"

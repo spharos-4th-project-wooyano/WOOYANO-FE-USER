@@ -1,9 +1,13 @@
 'use client'
 import StartRating from "@/components/StartRating";
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
+import { useSession } from "next-auth/react";
+import ErrorFunction from "@/app/ErrorFun";
+
+import imgUrl from "@/images/wooyano_cha.svg"
 
 export interface PayPageProps {}
 
@@ -12,6 +16,54 @@ const PayDone: FC<PayPageProps> = () => {
   const paymentKey = searchParams.get('paymentKey')
   const orderId = searchParams.get('orderId')
   const amount = searchParams.get('amount')
+  const session = useSession();
+  const usertoken = session.data?.user.result.token;
+  const useremail = session.data?.user.result.email;
+
+  const [payDoneData,setPayDoneData]=useState({
+      reservation_num: "",
+      clientEmail:useremail,
+      paymentType:"",
+      totalAmount:0,
+      approvedAt: "",
+      paymentStatus:""
+  })
+  const [reservationData,setReservationData]=useState<any>({
+    reservationDate: "2023-11-26",
+    serviceStart: "11:00:00",
+    serviceEnd: "13:00:00",
+    serviceItemNameList: [
+        "goods test"
+    ],
+    reservationNum: "3u09mqk38i",
+    createdAt: "2023-11-26T08:24:15.29729",
+    paymentAmount: 30000,
+    reservationState: "예약대기",
+    address: "부산 수영구 민락동 143-2 일리아나파크빌 501호",
+    request: "제발 바껴라",
+    cancelDesc: null,
+    serviceId: 1,
+    workerId: 1
+})
+
+
+  useEffect(()=>{
+    setPayDoneData({
+      ...payDoneData,
+      clientEmail:useremail
+    })
+    
+  },[usertoken])
+
+  useEffect(()=>{
+    if(payDoneData.reservation_num && payDoneData.clientEmail && payDoneData.clientEmail && payDoneData.paymentStatus&& payDoneData.paymentType && payDoneData.approvedAt){
+      console.log('1212');
+      
+      payDone()
+    }
+  },[payDoneData])
+  console.log(payDoneData);
+  
 
   useEffect(() => {
     const getData = async () => {
@@ -36,8 +88,15 @@ const PayDone: FC<PayPageProps> = () => {
         }
   
         const payment = await response.json();
-  
-        console.log(payment);
+        setPayDoneData({
+          ...payDoneData,
+          reservation_num:payment.orderId,
+          paymentType:payment.method==="간편결제"?"1":"0",
+          approvedAt:payment.approvedAt,
+          paymentStatus:payment.status==="DONE"?"0":"1",
+          totalAmount:payment.totalAmount
+        })
+        // console.log(payment);
   
         return payment
       } catch (err: any) {
@@ -54,11 +113,64 @@ const PayDone: FC<PayPageProps> = () => {
     getData()
   },[])
 
+  const payDone = async () => {
+    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/reservation/change`;
+    try{
+      const res = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${usertoken}`,
+          Email: `${useremail}`,
+        },
+        body:JSON.stringify(payDoneData)
+      });
+      if (res.ok) {
+        console.log("바꾸기 완료");
+        
+        const data = await res.json();
+        console.log(data);
+        
+        return data;
+      } else {
+        ErrorFunction("결제정보가 보내지지 않았습니다.");
+      }
+    }catch(error){
+      ErrorFunction(error as string)
+    }
+  };
+
+  const getReservationData = async () => {
+    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/reservation/detail/${payDoneData.reservation_num}`;
+    try{
+      const res = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${usertoken}`,
+          Email: `${useremail}`,
+        },
+      });
+      if (res.ok) {
+        console.log("바꾸기 완료");
+        
+        const data = await res.json();
+        console.log(data);
+        
+        return data;
+      } else {
+        ErrorFunction("결제정보가 보내지지 않았습니다.");
+      }
+    }catch(error){
+      ErrorFunction(error as string)
+    }
+  };
+
   const renderContent = () => {
     return (
       <div className="w-full flex flex-col sm:rounded-2xl space-y-10 px-0 sm:p-6 xl:p-8">
         <h2 className="text-3xl lg:text-4xl font-semibold">
-          결제완료
+          {reservationData.reservationState}
         </h2>
 
         <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
@@ -70,21 +182,22 @@ const PayDone: FC<PayPageProps> = () => {
             <div className="flex-shrink-0 w-full sm:w-40">
               <div className=" aspect-w-4 aspect-h-3 sm:aspect-h-4 rounded-2xl overflow-hidden">
                 <Image
-                  fill
                   alt=""
-                  className="object-cover"
-                  src="https://images.pexels.com/photos/6373478/pexels-photo-6373478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                  className="object-cover p-8"
+                  width={300}
+                  height={300}
+                  src={"/wooyano.png"}
                 />
               </div>
             </div>
             <div className="pt-5  sm:pb-5 sm:px-5 space-y-3">
               <div>
                 <span className="text-base sm:text-lg font-medium mt-1 block">
-                  가사도우미
+                  서비스
                 </span>
               </div>
               <span className="block  text-sm text-neutral-500 dark:text-neutral-400">
-                원룸 + 시간추가
+                {reservationData.serviceItemNameList[0]}
               </span>
 
             </div>
@@ -109,7 +222,7 @@ const PayDone: FC<PayPageProps> = () => {
               <div className="flex flex-col">
                 <span className="text-sm text-neutral-400">날짜</span>
                 <span className="mt-1.5 text-lg font-semibold">
-                  2023-11-13
+                  {reservationData.reservationDate}
                 </span>
               </div>
             </div>
@@ -144,25 +257,25 @@ const PayDone: FC<PayPageProps> = () => {
             <div className="flex text-neutral-6000 dark:text-neutral-300">
               <span className="flex-1">예약 내역</span>
               <span className="flex-1 font-medium text-neutral-900 dark:text-neutral-100">
-                #222-333-111
+                {payDoneData.reservation_num}
               </span>
             </div>
             <div className="flex text-neutral-6000 dark:text-neutral-300">
               <span className="flex-1">날짜</span>
               <span className="flex-1 font-medium text-neutral-900 dark:text-neutral-100">
-                2023-11-13
+                {reservationData.reservationDate}
               </span>
             </div>
             <div className="flex text-neutral-6000 dark:text-neutral-300">
               <span className="flex-1">금액</span>
               <span className="flex-1 font-medium text-neutral-900 dark:text-neutral-100">
-                20,000원
+                {reservationData.paymentAmount.toLocaleString()}원
               </span>
             </div>
             <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
               <span className="flex-1">결제 수단</span>
               <span className="flex-1 font-medium text-neutral-900 dark:text-neutral-100">
-                토스페이
+                {payDoneData.paymentType==="1"?"간편결제":"카드결제"}
               </span>
             </div>
           </div>

@@ -1,6 +1,5 @@
 "use client";
 
-import { Tab } from "@headlessui/react";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import React, { FC, Fragment, useEffect, useState } from "react";
 import Input from "@/shared/Input";
@@ -12,6 +11,9 @@ import Image from "next/image";
 import imageURL from "@/images/avatars/Image-5.png"
 import ModalSelectTime from "@/components/ModalSelectTime";
 import TossPaymets from "./tossPayment";
+import { useSearchParams } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { ServiceForm } from "@/types/serviceform/serviceform";
 
 export interface CheckOutPagePageMainProps {
   className?: string;
@@ -25,15 +27,45 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
   const [storeData, setStoreData] = useState<any>(); // localstorage 데이터
   const [date, setDate] = useState<Date>(new Date()); // 날짜 데이터
   const [time, setTime] = useState<string>(""); // 시간 데이터
+  const [endTime,setEndTime]=useState<string>("");
   const [serviceItem, setServiceItem] = useState<any>([]); // 서비스 아이템
   const [price, setPrice] = useState<number>(0); // 총합 가격
   const [adress,setAdress]=useState<string>(""); // 주소
   const [requestText,setRequestText]=useState<string>(""); // 요청사항
 
-  // console.log(adress,requestText);
   
+  
+  const session = useSession();
+  const usertoken = session.data?.user.result.token;
+  const useremail = session.data?.user.result.email;
+  const useraddress= session.data?.user.result.address
 
-  // console.log("asdasd",price);
+  const params=useSearchParams();
+
+  const [formData,setFormData]=useState<ServiceForm>({
+    reservationGoodsId:serviceItem,
+    serviceId:params.get('serviceId')||"",
+    workerId:params.get("workerId")||"",
+    userEmail:useremail,
+    reservationDate:date.toLocaleDateString().slice(0,-1).split(". ").join("-"),
+    serviceStart:time,
+    serviceEnd:endTime,
+    paymentAmount:price,
+    request:requestText,
+    address:useraddress
+  });
+
+  // console.log(serviceItem);
+  // console.log(formData);
+  
+  useEffect(()=>{
+    setFormData({
+      ...formData,
+      address:useraddress,
+      userEmail:useremail
+    })
+  },[usertoken])
+  
 
   useEffect(() => {
     setMounted(true);
@@ -47,7 +79,19 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
 
   useEffect(() => {
     setPrice(renderTotalSum("price"))
-  }, [serviceItem, price])
+    setEndTime(renderTotalSum("time"))
+
+    setFormData({
+      ...formData,
+      paymentAmount:renderTotalSum("price"),
+      serviceStart:time,
+      serviceEnd:renderTotalSum("time"),
+      reservationDate:date.toLocaleDateString().slice(0,-1).split(". ").join("-"),
+      reservationGoodsId:serviceItem.map((item: { productnum: number }) => Number(item.productnum))
+      // reservationGoodsId:serviceItem[0]?.productnum
+    })
+    
+  }, [serviceItem, price,time,date])
 
   const renderTotalSum = (type: string) => {
     if (type === "price") {
@@ -66,6 +110,8 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
         if (obj.hasOwnProperty('min_time')) {
           const priceAsInt = parseInt(obj['min_time'], 10); // 문자열을 정수로 변환
           if (!isNaN(priceAsInt)) { // 정수로 변환된 값이 유효한지 확인
+            
+            
             return sum + priceAsInt;
           }
         }
@@ -87,6 +133,10 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
   const onChangeRequset=(e:React.ChangeEvent<HTMLTextAreaElement>)=>{
     const value=e.currentTarget.value;
     setRequestText(value)
+    setFormData({
+      ...formData,
+      request:value
+    })
   }
 
 
@@ -101,7 +151,7 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
                 alt=""
                 width={100}
                 height={100}
-                src={imageURL}
+                src={params.get('workerImg')|| imageURL}
               />
             </div>
           </div>
@@ -112,11 +162,11 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
                   ?
                   `${storeData.service}`
                   :
-                  "없음"}
+                  ""}
                 {/* 가사도우미 서비스 */}
               </span>
               <span className="text-base font-medium mt-1 block">
-                {"임찬섭 가사도우미"}
+                {params.get('name')}
               </span>
             </div>
             <div className="w-10 border-b border-neutral-200  dark:border-neutral-700"></div>
@@ -185,7 +235,7 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
             <h3 className="text-2xl font-semibold">주소</h3>
             <div className="w-14 border-b border-neutral-200 dark:border-neutral-700 my-3"></div>
             <div className=" mb-6">
-              <Input type="text" defaultValue={"대표주소"} maxLength={30} value={adress} onChange={onChangeAdress}/>
+              <Input type="text" defaultValue={"대표주소"} maxLength={30} value={useraddress} onChange={onChangeAdress}/>
             </div>
           </div>
 
@@ -295,7 +345,7 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
           <div className="w-14 border-b border-neutral-200 dark:border-neutral-700 my-3"></div>
 
           <div className="">
-            <TossPaymets price={price} setPrice={setPrice} />
+            <TossPaymets price={price} setPrice={setPrice} formData={formData}/>
           </div>
         </div>
       </div>

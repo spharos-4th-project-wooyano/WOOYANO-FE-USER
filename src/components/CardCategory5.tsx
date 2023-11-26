@@ -14,7 +14,7 @@ const CardCategory5: FC<CardCategory5Props> = ({
   className = "",
   item,
 }) => {
-  const {  name,logoUrl  } = item;
+  // const {  name,logoUrl  } = item;
   return (
     <Link
       href={"/"}
@@ -27,7 +27,7 @@ const CardCategory5: FC<CardCategory5Props> = ({
         <Image
           fill
           alt=""
-          src={logoUrl || ""}
+          src={item.logoUrl || ""}
           className="object-cover w-full h-full rounded-2xl"
           sizes="(max-width: 400px) 100vw, 400px"
         />
@@ -37,7 +37,7 @@ const CardCategory5: FC<CardCategory5Props> = ({
         <h2
           className={`text-base sm:text-lg text-neutral-900 dark:text-neutral-100 font-medium truncate`}
         >
-          {name}
+          {item.name}
         </h2>
         {/* <span
           className={`block mt-2 text-sm text-neutral-6000 dark:text-neutral-400`}
