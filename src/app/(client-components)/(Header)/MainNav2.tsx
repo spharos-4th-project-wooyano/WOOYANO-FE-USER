@@ -15,6 +15,7 @@ export interface MainNav2Props {
 const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
   const {data, status} = useSession();
 
+
   return (
     <div className={`MainNav2 relative z-10 ${className}`}>
       <div className="px-4 h-20 md:container flex justify-between items-center">

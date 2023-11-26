@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import GallerySlider from "@/components/GallerySlider";
 import { DEMO_STAY_LISTINGS } from "@/data/listings";
 import { StayDataType } from "@/data/types";
@@ -6,49 +6,80 @@ import BtnLikeIcon from "@/components/BtnLikeIcon";
 import Badge from "@/shared/Badge";
 import Link from "next/link";
 import { FaThumbsUp, FaHeart } from "react-icons/fa";
-
+import { GetSearchType } from "@/types/search/getSearchType";
+import { useSession } from "next-auth/react";
+import ErrorFunction from "@/app/ErrorFun";
+import { ReviewFavoriteCount } from "@/types/serviceList/reviewFavoriteCount";
 
 export interface StayCard2Props {
   className?: string;
-  data?: StayDataType;
+  data?: GetSearchType;
   size?: "default" | "small";
 }
 
-const DEMO_DATA = DEMO_STAY_LISTINGS[0];
 
-const StayCard2: FC<StayCard2Props> = ({
-  size = "default",
-  className = "",
-  data = DEMO_DATA,
-}) => {
+const StayCard2 = ({ size, className, data }: { size: string | "default", className: string, data: GetSearchType }) => {
   const {
-    galleryImgs,
-    // listingCategory,
-    // address,
-    title,
-    // bedrooms,
-    href,
-    like,
-    // saleOff,
-    isAds,
-    // price,
-    reviewStart,
-    reviewCount,
-    id,
-    favorite,
+    serviceId,
+    name,
+    imgUrl,
+    description,
+    address,
+    type,
   } = data;
+
+  const session = useSession();
+  const usertoken = session.data?.user.result.token;
+  const useremail = session.data?.user.result.email;
+  const [reviewFavoriteCount, setReviewFavoriteCount] = useState<ReviewFavoriteCount>();
+
+
+  useEffect(() => {
+    getReviewFavorite()
+  }, [usertoken])
+
+  const getReviewFavorite = async () => {
+    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/review-bookmark/count/review_bookmark`;
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${usertoken}`,
+        Email: `${useremail}`,
+      },
+      body: JSON.stringify([serviceId])
+    });
+    if (res.ok) {
+      const data = await res.json();
+      // console.log("data:", data);
+      setReviewFavoriteCount(data.result[0])
+      return data;
+    } else {
+      ErrorFunction("검색결과가 없습니다.");
+    }
+  };
+
+  // console.log(reviewFavoriteCount);
+
 
   const renderSliderGallery = () => {
     return (
       <div className="relative w-full">
         <GallerySlider
-          uniqueID={`StayCard2_${id}`}
+          uniqueID={`StayCard2_${serviceId}`}
           ratioClass="aspect-w-12 aspect-h-11"
-          galleryImgs={galleryImgs}
+          galleryImgs={imgUrl}
           imageClass="rounded-lg"
-          href={href}
+          href={type === "1"
+            ? `/house-keeper-detail?storeid=${serviceId}`
+            : type === "2"
+              ? `/storelist-detail-2?storeid=${serviceId}`
+              : type === "3"
+                ? `/storelist-detail-2?storeid=${serviceId}`
+                : `/house-keeper-detail?storeid=${serviceId}`
+          }
         />
-        <BtnLikeIcon isLiked={like} className="absolute right-3 top-3 z-[1]" />
+        <BtnLikeIcon isLiked={false} className="absolute right-3 top-3 z-[1]" />
 
         {/* 세일표시 */}
         {/* {saleOff && <SaleOffBadge className="absolute left-3 top-3" />} */}
@@ -64,32 +95,30 @@ const StayCard2: FC<StayCard2Props> = ({
             {listingCategory.name} · {bedrooms} beds
           </span> */}
           <div className="flex items-center space-x-2">
-            {isAds && <Badge name="ADS" color="green" />}
             <h2
-              className={`font-semibold capitalize text-neutral-900 dark:text-white ${
-                size === "default" ? "text-base" : "text-base"
-              }`}
+              className={`font-semibold capitalize text-neutral-900 dark:text-white ${size === "default" ? "text-base" : "text-base"
+                }`}
             >
-              <span className="line-clamp-1">{title}</span>
+              <span className="line-clamp-1">{name}</span>
             </h2>
           </div>
           <div className="flex justify-between items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-1.5">
             <div className="flex gap-3">
-              <FaThumbsUp className="fill-sky-500"/>
-              <span className="">{reviewCount}</span>
+              <FaThumbsUp className="fill-sky-500" />
+              <span className="">{reviewFavoriteCount?.totalReview}</span>
             </div>
-            
+
             <div className="flex gap-2">
-            <FaHeart className="fill-red-600"/>
-            <p>{favorite}</p>
+              <FaHeart className="fill-red-600" />
+              <p>{reviewFavoriteCount?.totalBookmark}</p>
             </div>
           </div>
-      </div>
+        </div>
         <div className="w-14 border-b border-neutral-100 dark:border-neutral-800"></div>
         <div className="flex justify-between items-center">
           {/* <span className="text-base font-semibold"> */}
-            {/* {price} */}
-            {/* {` `}
+          {/* {price} */}
+          {/* {` `}
             {size === "default" && (
               <span className="text-sm text-neutral-500 dark:text-neutral-400 font-normal">
                 /night
@@ -107,7 +136,7 @@ const StayCard2: FC<StayCard2Props> = ({
   return (
     <div className={`nc-StayCard2 group relative ${className}`}>
       {renderSliderGallery()}
-      <Link href={href}>{renderContent()}</Link>
+      <Link href={"/house-keeper-detail"}>{renderContent()}</Link>
     </div>
   );
 };

@@ -8,24 +8,29 @@ export interface searchFormType {
   region: string | "";
   service: string | "";
   date: string | "";
+  region_code:number | 0;
+
 }
 const StaySearchForm: FC<{}> = ({ }) => {
   const [searchForm, setSearchForm] = useState<searchFormType>({
     region: "",
     service: "",
-    date: new Date().toLocaleDateString()
+    date: new Date().toLocaleDateString(),
+    region_code:0
   });
 
 
-
+  // console.log(searchForm);
+  
   
 
-  const handleSearchForm = (e: string, type: string) => {
+  const handleSearchForm = (e: string, type: string, region_code?:number) => {
     if (e !== undefined && e !== null) {
       if (type === '위치') {
         setSearchForm({
           ...searchForm,
-          region: e
+          region: e,
+          region_code:region_code as number
         })
       } else if (type === "서비스") {
         setSearchForm({
@@ -39,8 +44,9 @@ const StaySearchForm: FC<{}> = ({ }) => {
         })
       }
     }
-
   }
+
+
 
   const renderForm = () => {
     return (
