@@ -72,10 +72,9 @@ export default function SignUpCertNumber(props: {
   
   useEffect(() => {
     setShowEmailVerification(true);
-    startCountdown();
-    return () => {
-      clearInterval(timer!);
-    };
+
+    startCountdown()
+
   }, []);
 
   return (

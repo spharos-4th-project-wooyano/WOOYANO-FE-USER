@@ -42,6 +42,7 @@ export default function SignUpCertForm(props: {
           [id]: value,
         }));
       }
+
     } else {
       setSignUpData({
         ...signUpData,

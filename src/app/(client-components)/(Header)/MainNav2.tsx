@@ -38,7 +38,7 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
             {
               status === 'authenticated' ? <AvatarDropdown user = {data?.user}/> : <LoginIcon />
             }
-            <MenuBar />
+            {/* <MenuBar /> */}
           </div>
         </div>
       </div>
