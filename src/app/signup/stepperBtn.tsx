@@ -63,12 +63,12 @@ export default function StepperBtn({
           if (res.ok) {
             const data = await res.json();
             const result = data.result.checkResult;
-            console.log("res:", data);
+            // console.log("res:", data);
             //중복이 없었을 때,
             if (result === false) {
-              console.log(
-                `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/auth/send/user/join/code?name=${signUpData.username}&email=${signUpData.email}`
-              );
+              // console.log(
+              //   `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/auth/send/user/join/code?name=${signUpData.username}&email=${signUpData.email}`
+              // );
               //인증번호 요청
               const res = await fetch(
                 `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/auth/send/user/join/code?name=${signUpData.username}&email=${signUpData.email}`
@@ -76,7 +76,7 @@ export default function StepperBtn({
               //인증번호 요청 - 응답이 있을 경우
               if (res.ok) {
                 const data = await res.json();
-                console.log("res2:", data);
+                // console.log("res2:", data);
                 //인증번호 요청 성공
                 if (data.success === true) {
                   errorText.message == "";

@@ -1,31 +1,39 @@
 "use client"
-import ErrorFunction from "@/app/ErrorFun";
+
 import { useChat, Message } from "ai/react"
 import { useSession } from "next-auth/react";
-import { redirect, useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
+import { useEffect, useRef } from "react";
 import Swal from "sweetalert2";
 
 
 
 export default function ChatComponent() {
-  // Vercel AI SDK (ai package) useChat()
-  // useChat -> handles messages for us, user input, handling user submits, etc.
+
   const { input, handleInputChange, handleSubmit, isLoading, messages } = useChat();
   // messages -> [user asks a question, gpt-4 response, user asks again, gpt-4 responds]
   const session = useSession();
   const usertoken = session.data?.user.result.token;
   const useremail = session.data?.user.result.email;
+  const username = session.data?.user.result.username;
   const router = useRouter()
-  // console.log(usertoken, useremail);
-  // console.log('input',input);
+
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const checkPrompt = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     if (usertoken && useremail) {
-      e.preventDefault()
-      if (input === '청소' || input === '가사도우미') return handleSubmit(e)
-      else alert('청소와 관련된 단어를 적어주세요')
+      handleSubmit(e)
     } else {
-      e.preventDefault()
       if (await Swal.fire({
         text: `로그인이 필요한 서비스입니다.`,
         toast: false,
@@ -40,63 +48,83 @@ export default function ChatComponent() {
       })) {
         router.push('/login');
       }
-
-
-
-
     }
-
-
   }
 
   return (
-    <div className='bg-[#DEDEDE] dark:bg-background1 p-3 w-full h-[100vh] fixed rounded-md  mx-auto pt-20'>
-
-      {messages.map((message: Message) => {
-        return (
-          <div key={message.id} className="pt-4">
-            {/*  Name of person talking */}
-            {
-              message.role === "assistant"
-                ?
-                <h3 className="text-lg font-semibold mt-2">
-                  우야노 전문가
-                </h3>
-                :
-                <h3 className="text-lg font-semibold mt-2">
-                  UserName
-                </h3>
-            }
-
-            {/* Formatting the message */}
-            {message.content.split("\n").map((currentTextBlock: string, index: number) => {
-              if (currentTextBlock === "") {
-                return <p className="border leading-[50px] text-sm rounded-full bg-[#D3AB7C] text-white pl-2" key={message.id + index}>&nbsp;</p> // " "
-              } else {
-                return <p className="border leading-[50px] text-sm rounded-full bg-[#50555C] text-white pl-2" key={message.id + index}>{currentTextBlock}</p> // "Cooper Codes is a YouTuber"
+    <div className='bg-[#DEDEDE] dark:bg-background1 p-3 w-full h-[100vh] fixed rounded-md  mx-auto pt-2'>
+      <div>
+        <span className="font-semibold text-[12px] text-center">{"업체 추천해줘"}라고 질문하시면 업체 리스트를 제공해 드립니다.</span>
+      </div>
+      <div className="overflow-y-scroll max-h-[75%] scrollbar-hide" >
+        {messages.map((message: Message) => {
+          return (
+            <div key={message.id} className="pt-4" >
+              {/*  Name of person talking */}
+              {
+                message.role === "assistant"
+                  ?
+                  <h3 className="text-lg font-semibold mt-2">
+                    우야노
+                  </h3>
+                  :
+                  <h3 className="text-lg font-semibold mt-2 flex justify-end pr-2">
+                    {username}
+                  </h3>
               }
-            })}
+
+              {/* Formatting the message */}
+              {message.content.split("\n").map((currentTextBlock: string, index: number) => {
+                if (currentTextBlock.trim() === "") {
+                  return null; // 빈 문자열이면 아무것도 렌더링하지 않음
+                }
+                const isAssistant = message.role === "assistant";
+                const containsLink = /\[.*\]\(.*\)/.test(currentTextBlock);
+
+                let linkText = "";
+                let linkUrl = "";
+
+                if (containsLink) {
+                  const linkTextMatch = currentTextBlock.match(/\[(.*?)\]/);
+                  const linkUrlMatch = currentTextBlock.match(/\((.*?)\)/);
+
+                  linkText = linkTextMatch ? linkTextMatch[1] : "";
+                  linkUrl = linkUrlMatch ? linkUrlMatch[1] : "";
 
 
-            {/*  
-              Cooper Codes is a YouTuber
+                }
+                return (
+                  <div key={message.id + index} >
+                    <p
+                      className={`border leading-[50px] text-sm rounded-lg ${isAssistant ? 'bg-[#D3AB7C]' : 'bg-[#50555C]'} text-white pl-2`}
+                    >
+                      {containsLink ? (
 
-              He makes software content
-
-              You should subscribe.
-
-              ["Cooper Codes is a YouTuber", "", "He makes software content", "", "You should subscribe."]
-
-            */}
+                        <span
+                          style={{ cursor: 'pointer', textDecoration: 'underline' }}
+                          onClick={() => router.push(linkUrl === "http://localhost:3000/house-keeper" ? "/house-keeper" : linkUrl === "http://localhost:3000/moving-clean" ? "/moving-clean" : linkUrl === "http://localhost:3000/office-clean" ? "/office-clean" : "/")}
+                        >
+                          <p className="text-blue-400">{linkText}</p>
+                        </span>
+                      ) : (
+                        currentTextBlock
+                      )}
+                    </p>
+                  </div>
+                )
+              })}
           </div>
-        )
+      )
       })}
+      </div>
+      <div ref={messagesEndRef}></div>
+      
 
       <form className="flex absolute bottom-24 w-[95vw]" onSubmit={checkPrompt}>
         <div className="w-full">
           <textarea
-            className=" w-full h-14 dark:bg-background2 border rounded-full pt-[14px] pl-[4rem]"
-            placeholder={"청소 관련 질문을 주세요."}
+            className=" w-full h-14 dark:bg-background2 border rounded-full pt-[14px] pl-[4rem] text-[12px]"
+            placeholder={`청소 관련 질문만 해주세요.`}
             value={input}
             onChange={handleInputChange}
           />

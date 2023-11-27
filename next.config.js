@@ -17,6 +17,8 @@ const nextConfig = {
     AWS_SECRET_ACCESS_KEY:process.env.AWS_SECRET_ACCESS_KEY,
     AWS_BUCKET_NAME:process.env.AWS_BUCKET_NAME,
     NEXTAUTH_SECRET:process.env.NEXTAUTH_SECRET,
+    OPENAI_API_KEY:process.env.OPENAI_API_KEY
+
   },
   images: {
     remotePatterns: [
@@ -68,6 +70,14 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "dmmj3ljielax6.cloudfront.net",
+        port: "",
+        pathname: "/**",
+      },
+
+      
     ],
   },
 };

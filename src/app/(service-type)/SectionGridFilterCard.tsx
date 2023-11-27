@@ -66,7 +66,7 @@ const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
     });
     if (res.ok) {
       const data = await res.json();
-      // console.log("data:", data);
+      console.log("data:", data);
       setFetchData(data.result)
       return data;
     } else {

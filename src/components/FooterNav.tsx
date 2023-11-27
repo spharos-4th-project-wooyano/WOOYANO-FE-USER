@@ -4,6 +4,7 @@ import {
   HeartIcon,
   MagnifyingGlassIcon,
   UserCircleIcon,
+  HomeIcon
 } from "@heroicons/react/24/outline";
 import React, { useEffect, useRef } from "react";
 import { PathName } from "@/routers/types";
@@ -11,6 +12,10 @@ import MenuBar from "@/shared/MenuBar";
 import isInViewport from "@/utils/isInViewport";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
+
+
+// const link=usertoken?"/login":"/logout"
 
 let WIN_PREV_POSITION = 0;
 if (typeof window !== "undefined") {
@@ -23,34 +28,38 @@ interface NavItem {
   icon: any;
 }
 
-const NAV: NavItem[] = [
-  {
-    name: "Explore",
-    link: "/",
-    icon: MagnifyingGlassIcon,
-  },
-  {
-    name: "찜 목록",
-    link: "/favorite",
-    icon: HeartIcon,
-  },
-  {
-    name: "Log in",
-    link: "/account",
-    icon: UserCircleIcon,
-  },
-  {
-    name: "Menu",
-    icon: MenuBar,
-  },
-];
+
 
 const FooterNav = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const session = useSession();
+  const usertoken = session.data?.user.result.token;
+  const navbarname=usertoken ? "로그아웃" : "로그인";
+
 
   const pathname = usePathname();
 
-  
+  const NAV: NavItem[] = [
+    {
+      name: "검색",
+      link: "/house-keeper",
+      icon: MagnifyingGlassIcon,
+    },
+    {
+      name: `홈`,
+      link: `/`,
+      icon: HomeIcon,
+    },
+    {
+      name: "찜 목록",
+      link: "/favorite",
+      icon: HeartIcon,
+    },
+    
+    
+  ];
+
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.addEventListener("scroll", handleEvent);
@@ -58,7 +67,7 @@ const FooterNav = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  
+
   const handleEvent = () => {
     if (typeof window !== "undefined") {
       window.requestAnimationFrame(showHideHeaderMenu);
@@ -103,15 +112,13 @@ const FooterNav = () => {
       <Link
         key={index}
         href={item.link}
-        className={`flex flex-col items-center justify-between text-neutral-500 dark:text-neutral-300/90 ${
-          isActive ? "text-neutral-900 dark:text-neutral-100" : ""
-        }`}
+        className={`flex flex-col items-center justify-between text-neutral-500 dark:text-neutral-300/90 ${isActive ? "text-neutral-900 dark:text-neutral-100" : ""
+          }`}
       >
         <item.icon className={`w-6 h-6 ${isActive ? "text-red-600" : ""}`} />
         <span
-          className={`text-[11px] leading-none mt-1 ${
-            isActive ? "text-red-600" : ""
-          }`}
+          className={`text-[11px] leading-none mt-1 ${isActive ? "text-red-600" : ""
+            }`}
         >
           {item.name}
         </span>
@@ -119,16 +126,15 @@ const FooterNav = () => {
     ) : (
       <div
         key={index}
-        className={`flex flex-col items-center justify-between text-neutral-500 dark:text-neutral-300/90 ${
-          isActive ? "text-neutral-900 dark:text-neutral-100" : ""
-        }`}
+        className={`flex flex-col items-center justify-between text-neutral-500 dark:text-neutral-300/90 ${isActive ? "text-neutral-900 dark:text-neutral-100" : ""
+          }`}
       >
         <item.icon iconClassName="w-6 h-6" className={``} />
         <span className="text-[11px] leading-none mt-1">{item.name}</span>
       </div>
     );
   };
-  if (pathname==='/') return null
+  if (pathname === '/') return null
   return (
     <div
       ref={containerRef}
