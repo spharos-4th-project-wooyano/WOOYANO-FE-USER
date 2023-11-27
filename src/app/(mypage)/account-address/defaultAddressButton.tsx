@@ -36,7 +36,6 @@ const DefaultAddressButton: React.FC<DefaultAddressButtonProps> = ({ address }) 
                 if (result.isConfirmed) {
                     const setDefaultURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/users/address/default/${address.id}`
                     try {
-                        console.log(setDefaultURL)
                         const res = await fetch(setDefaultURL, {
                             method: "PUT",
                             headers: {
@@ -45,7 +44,6 @@ const DefaultAddressButton: React.FC<DefaultAddressButtonProps> = ({ address }) 
                                 'Email': `${useremail}`,
                             }
                         }); if (res.ok) {
-                            console.log(res)
                             Swal.fire({
                                 text: "대표주소로 설정되었습니다.",
                                 toast: false,

@@ -42,7 +42,6 @@ export default function SignUpCertForm(props: {
           [id]: value,
         }));
       }
-      console.log("Email Form Check:", checkedEmail);
     } else {
       setSignUpData({
         ...signUpData,
