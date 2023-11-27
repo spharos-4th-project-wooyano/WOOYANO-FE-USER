@@ -11,7 +11,7 @@ export interface StaySearchFormProps {
 const StaySearchForm: FC<StaySearchFormProps> = ({ defaultFieldFocus }) => {
   const renderForm = () => {
     return (
-      <form className="relative flex rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800">
+      <div className="relative flex rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800">
         <LocationInput
           // onInputDone={() => setDateFocused("startDate")}
           className="flex-[1.5]"
@@ -26,7 +26,7 @@ const StaySearchForm: FC<StaySearchFormProps> = ({ defaultFieldFocus }) => {
           autoFocus={defaultFieldFocus === "guests"}
           submitLink="/listing-stay"
         />
-      </form>
+      </div>
     );
   };
 
