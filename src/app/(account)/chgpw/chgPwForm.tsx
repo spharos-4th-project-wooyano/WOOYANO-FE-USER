@@ -42,7 +42,7 @@ export default function ChgPwForm(props: {
         </div>
         <div className="w-full border-b border-neutral-200 dark:border-neutral-700"></div>
         {/* FORM */}
-        <form className="grid grid-cols-1 gap-6" action="#" method="post">
+        <div className="grid grid-cols-1 gap-6" >
           <label className="block">
             <span className="flex justify-between items-center text-neutral-800 dark:text-neutral-200">
               New Password
@@ -74,7 +74,7 @@ export default function ChgPwForm(props: {
               onChange={handleOnChange}
             />
           </label>
-        </form>
+        </div>
       </div>
     </div>
   );

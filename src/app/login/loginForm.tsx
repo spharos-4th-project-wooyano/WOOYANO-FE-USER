@@ -134,7 +134,7 @@ function LoginForm() {
       <div className="container mb-6 lg:mb-12">
         <div className="max-w-md mx-auto space-y-6">
           {/* FORM */}
-          <form className="grid grid-cols-1 gap-6" action="#" method="post">
+          <div className="grid grid-cols-1 gap-6">
             <label className="block">
               <span className="flex justify-between items-center text-neutral-800 dark:text-neutral-200">
                 Email
@@ -185,7 +185,7 @@ function LoginForm() {
             >
               Sign In
             </Button>
-          </form>
+          </div>
           {/* ==== */}
           <div>
             <span className="block text-center text-neutral-700 dark:text-neutral-300">
