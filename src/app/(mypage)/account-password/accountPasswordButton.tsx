@@ -16,7 +16,6 @@ export default function AccountPasswordButton({
 
   const router = useRouter();
 
-  console.log("changePasswordForm", changePasswordForm);
   const handleChangePassword = async () => {
     if ( changePasswordForm.confirmPassword === "" || changePasswordForm.currentPassword === "" ||changePasswordForm.newPassword === "") {
         Swal.fire({
@@ -80,7 +79,6 @@ export default function AccountPasswordButton({
           //1-b. 현재 비밀번호 fetch 성공 확인 결과
           if (res.ok) {
             const data = await res.json();
-            console.log("비밀번호 확인 결과:", data);
             //1-b-a. 현재 비밀번호와 입력값 일치.
             if (data.success == true && data.result.checkResult === true) {
               //2-a.비밀번호 변경 적용 fetch
@@ -98,7 +96,6 @@ export default function AccountPasswordButton({
               //2-a-a. fetch 성공
               if (res.ok) {
                 const data = await res.json();
-                console.log("비밀번호 변경 결과:", data);
                 Swal.fire({
                   text: "수정이 완료되었습니다.",
                   toast: false,

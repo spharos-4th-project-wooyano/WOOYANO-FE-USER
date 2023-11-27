@@ -50,7 +50,6 @@ export default function StepperBtn({
         setStepId(stepId + 1);
       }
     } else if (stepId == 2) {
-      console.log("chgPwData", chgPwData);
       if (!chgPwData.newpassword || !chgPwData.checkPassword) {
         errorText.message = "새 비밀번호를 입력해주세요.";
       }

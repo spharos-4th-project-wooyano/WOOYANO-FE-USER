@@ -17,7 +17,6 @@ const accountInfo = async (session: any) => {
   });
   if (res.ok) {
     const data = await res.json();
-    console.log("data :", data);
     return data;
   } else {
     console.error("Failed to fetch data:", res.status, res.statusText);
@@ -27,7 +26,6 @@ const accountInfo = async (session: any) => {
 async function AccountPage() {
   const session = await getServerSession(options);
   const data: BaseResDataType = await accountInfo(session);
-  console.log("data:", data);
   return (
     
     <AccountInfo accountInfo={data.result} session={session}/>

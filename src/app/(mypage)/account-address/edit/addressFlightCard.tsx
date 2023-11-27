@@ -26,7 +26,6 @@ export default function AddressFlightCard({addressId}: {addressId: number;}) {
       }); if (res.ok) {
         const data = await res.json();
         setAddressData(data.result);
-        console.log("data",data.result.localAddress);
       }
     } catch (error) {
       console.log(error);
