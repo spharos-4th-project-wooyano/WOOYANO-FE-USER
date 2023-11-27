@@ -28,7 +28,6 @@ export default function AccountPassword() {
       ...changePasswordForm,
       [id]: value,
     });
-    console.log(changePasswordForm);
   };
 
   const [showAnimation, setShowAnimation] = useState(false);

@@ -25,7 +25,6 @@ export default function FindIdForm() {
       ...findIdForm,
       [id]: value,
     });
-    console.log(findIdForm);
   };
 
   const handleFindId = async () => {
@@ -50,7 +49,6 @@ export default function FindIdForm() {
         if (res.ok) {
           res.json().then((data) => {
             const code = data.code;
-            console.log(data.code);
             if (code === 200) {
               const userEmail = data.result.email;
               router.push(
@@ -75,7 +73,6 @@ export default function FindIdForm() {
         } else if (!res.ok) {
           res.json().then((data) => {
             const code = data.code;
-            console.log(data.code);
             if (code === 1040) {
               Swal.fire({
                 text: "가입된 정보가 없습니다.",

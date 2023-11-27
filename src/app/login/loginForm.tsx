@@ -7,7 +7,6 @@ import { signIn } from "next-auth/react";
 import CheckEmailForm from "../../components/widget/checkEmailForm";
 import PasswordViewButton from "../../components/widget/passwordViewButton";
 import Button from "@/shared/Button";
-import SnsLogin from "./snsLogin";
 import { useRouter, useSearchParams} from "next/navigation";
 
 export interface LoginFormProps {
@@ -48,7 +47,6 @@ function LoginForm() {
       ...loginForm,
       [id]: value,
     });
-    // console.log("step1 loginForm", loginForm);
   };
 
   //로그인 유효성 확인 및 로그인 패칭
@@ -131,8 +129,6 @@ function LoginForm() {
     setPwType(!pwType);
   };
 
-  const [showSnsLogin, setShowSnsLogin] = useState(false);
-
   return (
     <div className={`nc-LoginForm`}>
       <div className="container mb-6 lg:mb-12">
@@ -201,7 +197,7 @@ function LoginForm() {
           </div>
 
           {/* OR */}
-          <div className="relative text-center">
+          {/* <div className="relative text-center">
             <button
               className="relative z-10 inline-block px-4 font-medium text-sm bg-white dark:text-neutral-400 dark:bg-neutral-900"
               onClick={() => setShowSnsLogin(!showSnsLogin)}
@@ -209,20 +205,20 @@ function LoginForm() {
               다른 방법으로 로그인하기
             </button>
             <div className="absolute left-0 w-full top-1/2 transform -translate-y-1/2 border border-neutral-100 dark:border-neutral-800"></div>
-          </div>
-          <div
-            className={`transition-all duration-700 ease-in-out ${
+          </div> */}
+          {/* <div */}
+            {/* className={`transition-all duration-700 ease-in-out ${
               showSnsLogin
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-[-8px]"
-            }`}
-          >
-            {showSnsLogin && (
+            }`} */}
+          {/* > */}
+            {/* {showSnsLogin && (
               <div>
                 <SnsLogin />
               </div>
-            )}
-          </div>
+            )} */}
+          {/* </div> */}
         </div>
       </div>
     </div>

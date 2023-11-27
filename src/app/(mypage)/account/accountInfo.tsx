@@ -90,7 +90,6 @@ export default function AccountInfo({
         );
         if (res.ok) {
           const data = await res.json();
-          console.log(data);
           if (data.result.checkResult === true) {
             Swal.fire({
               text: "이미 사용중입니다.",
@@ -241,7 +240,6 @@ export default function AccountInfo({
                   if (res.ok) {
                     const data = await res.json();
                     if (data.success === true) {
-                      console.log(data);
                       setChangeInfo(false);
                       Swal.fire({
                         text: "수정이 완료되었습니다.",
@@ -321,7 +319,6 @@ export default function AccountInfo({
               }
             } else {
               const data = res.json();
-              console.log(data);
             }
           }
         } else {
