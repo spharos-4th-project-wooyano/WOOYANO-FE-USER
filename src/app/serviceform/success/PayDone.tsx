@@ -26,7 +26,8 @@ const PayDone: FC<PayPageProps> = () => {
       paymentType:"",
       totalAmount:0,
       approvedAt: "",
-      paymentStatus:""
+      paymentStatus:"",
+      paymentKey:paymentKey
   })
   const [reservationData,setReservationData]=useState<any>({
     reservationDate: "2023-11-26",
@@ -140,31 +141,7 @@ const PayDone: FC<PayPageProps> = () => {
     }
   };
 
-  const getReservationData = async () => {
-    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/reservation/detail/${payDoneData.reservation_num}`;
-    try{
-      const res = await fetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${usertoken}`,
-          Email: `${useremail}`,
-        },
-      });
-      if (res.ok) {
-        console.log("바꾸기 완료");
-        
-        const data = await res.json();
-        console.log(data);
-        
-        return data;
-      } else {
-        ErrorFunction("결제정보가 보내지지 않았습니다.");
-      }
-    }catch(error){
-      ErrorFunction(error as string)
-    }
-  };
+  
 
   const renderContent = () => {
     return (
