@@ -1,15 +1,17 @@
+'use client'
 import LoginForm from "@/app/login/loginForm";
 import React from "react";
-import { getServerSession } from "next-auth";
 import LoginLogo from "@/app/login/loginLogo";
-import { options } from "../api/auth/[...nextauth]/options";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
-async function Loginpage() {
-  const session = await getServerSession(options);
-  console.log(session);
-  if(session?.user.success){
-    redirect("/");
+
+function Loginpage() {
+  const session = useSession();
+  const usertoken = session.data?.user.result.token;
+  const router = useRouter()
+  if(usertoken){
+    router.push("/");
   }
   return (
     <div className="container mb-24 lg:mb-32">

@@ -36,7 +36,6 @@ const SignUpForm = (props: {
     }
 
     if (id === "birthday") {
-      console.log("birth:"+value, "type:"+typeof value)
       // 생년월일 필드인 경우 입력값에서 하이픈을 제거하여 "YYYYMMDD" 형식으로 변환
       const birthdayForm = value.replace(/-/g, "");
       setSignUpData({
@@ -75,7 +74,6 @@ const SignUpForm = (props: {
       );
       if (res.ok) {
         const data = await res.json();
-        console.log(data);
         if (data.result.checkResult === true) {
           setSignUpData({
             ...signUpData,

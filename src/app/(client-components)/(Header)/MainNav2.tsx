@@ -54,7 +54,7 @@ export const LoginIcon = () => {
     <Link
       href={"/login"}
       className="flex items-center transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-      onClick={() => close()}
+      // onClick={() => close()}
     >
       <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
         <svg
