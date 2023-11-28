@@ -184,8 +184,8 @@ const PayDone: FC<PayPageProps> = () => {
                 <Image
                   alt=""
                   className="object-cover p-8"
-                  width={300}
-                  height={300}
+                  width={100}
+                  height={100}
                   src={"/wooyano.png"}
                 />
               </div>
@@ -244,7 +244,7 @@ const PayDone: FC<PayPageProps> = () => {
 
               <div className="flex flex-col">
                 <span className="text-sm text-neutral-400">서비스기사</span>
-                <span className="mt-1.5 text-lg font-semibold">임찬섭 가사도우미</span>
+                <span className="mt-1.5 text-lg font-semibold">최준영 가사도우미</span>
               </div>
             </div>
           </div>
